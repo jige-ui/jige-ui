@@ -1,0 +1,48 @@
+{
+  "name": "monorepo",
+  "private": true,
+  "packageManager": "pnpm@9.3.0",
+  "license": "MIT",
+  "scripts": {
+    "build": "turbo run build",
+    "pub:ui": "pnpm build && cd packages/jige-ui && pnpm publish -r",
+    "build:docs": "cd apps/docs && pnpm build",
+    "build:ui": "cd packages/jige-ui && pnpm build",
+    "clean": "turbo run clean && rimraf .turbo node_modules",
+    "dev": "turbo dev",
+    "lint": "turbo run lint",
+    "release": "commit-and-tag-version -i CHANGELOG.md --same-file",
+    "prepare": "husky"
+  },
+  "devDependencies": {
+    "@antfu/eslint-config": "^3.12.1",
+    "@commitlint/cli": "^19.6.1",
+    "@commitlint/config-conventional": "^19.6.0",
+    "commit-and-tag-version": "^12.5.0",
+    "eslint": "^9.17.0",
+    "eslint-plugin-solid": "^0.14.5",
+    "husky": "^9.1.7",
+    "rimraf": "^6.0.1",
+    "turbo": "^2.3.3"
+  },
+  "commit-and-tag-version": {
+    "packageFiles": [
+      {
+        "filename": "./packages/jige-ui/package.json",
+        "type": "json"
+      }
+    ],
+    "bumpFiles": [
+      {
+        "filename": "./packages/jige-ui/package.json",
+        "type": "json"
+      }
+    ]
+  },
+  "pnpm": {
+    "overrides": {
+      "jige-core": "^0.31.0",
+      "solid-uses": "^0.8.0"
+    }
+  }
+}

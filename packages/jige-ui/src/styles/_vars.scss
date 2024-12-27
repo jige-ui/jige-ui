@@ -1,0 +1,34 @@
+$shadow-light:(
+  shadow1: #{0 0 2px rgb(0 0 0 / 12%)},
+  shadow2: #{0 0 2px rgb(0 0 0 / 12%), 0 1px 2px rgb(0 0 0 / 14%)},
+  shadow3: #{0 1px 3px rgb(0 0 0 / 14%)},
+  shadow4: #{0 0 2px rgb(0 0 0 / 12%), 0 2px 4px rgb(0 0 0 / 14%)},
+  shadow8: #{0 0 2px rgb(0 0 0 / 12%), 0 4px 8px rgb(0 0 0 / 14%)},
+);
+$shadow-dark: (
+  shadow1: #{0 0 2px rgb(0 0 0 / 24%)},
+  shadow2: #{0 0 2px rgb(0 0 0 / 24%), 0 1px 2px rgb(0 0 0 / 28%)},
+  shadow3: #{0 1px 3px rgb(0 0 0 / 28%)},
+  shadow4: #{0 0 2px rgb(0 0 0 / 24%), 0 2px 4px rgb(0 0 0 / 28%)},
+  shadow8: #{0 0 2px rgb(0 0 0 / 24%), 0 4px 8px rgb(0 0 0 / 28%)},
+);
+$colors-light: (
+  fg1: #242424,
+  fg2: #424242,
+  fg3: #616161,
+  fg4: #707070,
+  fg-link: #115ea3,
+  fg-danger: #d32f2f,
+  fg-success: #388e3c,
+  fg-warning: #f57c00,
+);
+$colors-dark: (
+  fg1: #fff,
+  fg2: #d6d6d6,
+  fg3: #adadad,
+  fg4: #999,
+  fg-link: #479ef5,
+  fg-danger: #f44336,
+  fg-success: #4caf50,
+  fg-warning: #ff9800,
+);

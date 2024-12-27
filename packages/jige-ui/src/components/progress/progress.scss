@@ -1,0 +1,47 @@
+
+@use '../../styles/funcs';
+
+
+
+.jg-progress-circle {
+  position: relative;
+}
+
+.jg-progress-circle-fill, .jg-progress-circle-rail {
+  transition: all 0.15s ease;
+}
+
+.jg-progress-circle-content {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+.jg-progress-line {
+  border-radius: 8px;
+}
+
+.jg-progress-line-fill {
+  height: 100%;
+  border-radius: 8px;
+  transition: width 0.15s ease;
+}
+
+.jg-progress-line-fill-indeterminate {
+  position: relative;
+  opacity: .7;
+  animation: ani-slide-loading 1.5s infinite linear;
+}
+
+@keyframes ani-slide-loading {
+  0% {
+    inset-inline-start: -45%;
+  }
+
+  100% {
+    inset-inline-start: 100%;
+  }
+}

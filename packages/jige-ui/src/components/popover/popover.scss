@@ -1,0 +1,14 @@
+
+@use '../../styles/funcs';
+
+.jg-popover-content {
+  padding: 6px;
+  color: var(--jg-popover-color);
+  background: var(--jg-popover-bg);
+  filter: drop-shadow(funcs.get-var('shadow3'));
+  border-radius: 6px;
+}
+
+.jg-popover-arrow {
+  background: var(--jg-popover-bg);
+}

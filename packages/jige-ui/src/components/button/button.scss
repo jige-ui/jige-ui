@@ -1,0 +1,175 @@
+/* stylelint-disable no-descending-specificity */
+@use '../../styles/funcs';
+
+.jg-btn-bg {
+  position: absolute;
+  inset: 0;
+  transition: opacity 0.2s, background 0.2s, color 0.2s;
+}
+
+.jg-btn {
+  position: relative;
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: .25em .675em;
+  overflow: hidden;
+  color: funcs.get-var('btn-color');
+  cursor: pointer;
+  background: transparent;
+  transition:  border-color 0.2s, opacity 0.2s, color 0.2s;
+
+  &:disabled {
+    pointer-events: none;
+    opacity: 0.5;
+  }
+
+  &.jg-btn-icon-only {
+    width: 1.875em;
+    padding: .25em;
+  }
+
+  &.is-loading {
+    pointer-events: none;
+  }
+}
+
+/* solid */
+.jg-btn.jg-btn-solid {
+  color: white;
+
+  .jg-btn-bg {
+    background-color: funcs.get-var('btn-hl-color');
+  }
+
+  &:hover {
+    .jg-btn-bg  {
+      background-image: linear-gradient(rgb(255 255 255 / 8%),rgb(255 255 255 / 8%));
+    }
+  }
+
+  &:active {
+    .jg-btn-bg {
+      background-image: linear-gradient(rgb(0 0 0 / 8%),rgb(0 0 0 / 8%));
+    }
+  }
+}
+
+/* outlined */
+.jg-btn.jg-btn-outlined,  .jg-btn.jg-btn-dashed,.jg-btn.jg-btn-link  {
+  color: funcs.get-var('btn-color');
+
+  .jg-btn-bg {
+    background-color: transparent;
+  }
+
+  &:hover {
+    color: funcs.get-var('btn-hl-color');
+    border-color: funcs.get-var('btn-hl-color');
+    opacity: .7;
+  }
+
+  &:active {
+    color: funcs.get-var('btn-hl-color');
+    border-color: funcs.get-var('btn-hl-color');
+    opacity: 1;
+  }
+}
+
+.jg-btn.jg-btn-outlined {
+  border: 1px solid funcs.get-var('btn-border-color');
+}
+
+.jg-btn.jg-btn-dashed {
+  border: 1px dashed funcs.get-var('btn-border-color');
+}
+
+.jg-btn.jg-btn-text  {
+  .jg-btn-bg {
+    background-color: funcs.get-var('btn-color');
+    opacity: 0;
+  }
+
+  &:hover {
+    .jg-btn-bg {
+      opacity: 0.12;
+    }
+  }
+
+  &:active {
+    .jg-btn-bg {
+      opacity: 0.24;
+    }
+  }
+}
+
+/* link */
+.jg-btn.jg-btn-link {
+  color: funcs.get-var('btn-link-color');
+
+  &:hover,&:active {
+    text-decoration: underline;
+  }
+}
+
+/* filled */
+.jg-btn.jg-btn-filled {
+  .jg-btn-bg {
+    background-color: funcs.get-var('btn-color');
+    opacity: .12;
+  }
+
+  &:hover {
+    .jg-btn-bg {
+      opacity: .24;
+    }
+  }
+
+  &:active {
+    .jg-btn-bg {
+      opacity: .35;
+    }
+  }
+}
+
+.jg-btn-icon {
+  svg {
+    font-size: 1.3em;
+    vertical-align: -.18em;
+  }
+}
+
+.jg-btn-content {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1.3;
+  transition: opacity 250ms;
+}
+
+.jg-btn-loading {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2em;
+  opacity: 0.7;
+  animation: ani-loading 1s infinite;
+}
+
+@keyframes ani-loading {
+  0% {
+    opacity: 0.7;
+  }
+
+  50% {
+    opacity: 0.25;
+  }
+
+  100% {
+    opacity: 0.7;
+  }
+}

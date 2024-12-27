@@ -1,0 +1,81 @@
+@use '../../styles/funcs';
+
+/* content */
+.jg-modal-content-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.jg-modal-content {
+  padding: 6px;
+  margin-top: -38vh;
+  background: funcs.get-var('t-bg2');
+  border-radius: 6px;
+  box-shadow: funcs.get-var('shadow8');
+  animation-duration: 250ms;
+  animation-timing-function: funcs.get-var('bezier');
+
+  &[data-modal-status="closing"] {
+    pointer-events: none;
+    animation-name: modal-closing;
+  }
+
+  &[data-modal-status="opening"] {
+    pointer-events: none;
+    animation-name: modal-opening;
+  }
+}
+
+@keyframes modal-closing {
+  from {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  to {
+    opacity: 0;
+    transform: scale(0.2);
+  }
+}
+
+@keyframes modal-opening {
+  0% {
+    opacity: 0;
+    transform: scale(0.2);
+  }
+
+  90% {
+    opacity: 1;
+    transform: scale(1.0125);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* content end */
+
+/* mask */
+.jg-modal-mask {
+  background: rgb(0 0 0 / 10%);
+  backdrop-filter: blur(2px);
+  opacity: 0;
+  transition: opacity 250ms;
+
+  &[data-modal-status^="clos"] {
+    opacity: 0;
+  }
+
+  &[data-modal-status^="open"] {
+    opacity: 1;
+  }
+}
+
+.dark .jg-modal-mask {
+  background: rgb(255 255 255 / 10%);
+}
+
+/* mask end */

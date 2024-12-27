@@ -1,0 +1,38 @@
+
+.jg-collapse-content {
+  overflow: hidden;
+  animation-duration: 200ms;
+  animation-timing-function: cubic-bezier(.645,.045,.355,1);
+}
+
+.jg-collapse-content[data-status="closing"] {
+  animation-name: jg-collapse-close;
+}
+
+.jg-collapse-content[data-status="opening"] {
+  animation-name: jg-collapse-open;
+}
+
+@keyframes jg-collapse-close {
+  0% {
+    max-height: var(--el-height);
+    opacity: 1;
+  }
+
+  100% {
+    max-height: 0;
+    opacity: 0;
+  }
+}
+
+@keyframes jg-collapse-open {
+  0% {
+    max-height: 0;
+    opacity: 0;
+  }
+
+  100% {
+    max-height: var(--el-height);
+    opacity: 1;
+  }
+}
