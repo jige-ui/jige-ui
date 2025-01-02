@@ -48,22 +48,25 @@ export function DayPanel(props: {
   watch([
     () => state.currYear,
     () => state.currMonth,
-    () => props.disabledDates,
-    () => props.highlightDates,
   ], ([y, m]) => {
     debounceSetHlDates(y, m)
     debounceSetDsDates(y, m)
   })
 
+  watch(() => props.highlightDates, () => {
+    debounceSetHlDates(state.currYear, state.currMonth)
+  })
+
+  watch(() => props.disabledDates, () => {
+    debounceSetDsDates(state.currYear, state.currMonth)
+  })
+
   const isDsDay = (day: EsDay) => {
-    return !actions.isInDateRange(day) || state.dsDates.includes(day.format('YYYY-MM-DD'))
+    return !actions.isInDateRange(day) || state.dsDates.includes(day.format('YYYY-MM-DD')) || isLoadingDsDates()
   }
   return (
     <div
       class="jg-dp-day-panel"
-      classList={{
-        'jg-dp-panel-disabled': isLoadingDsDates(),
-      }}
     >
       <For each={list(6)}>
         {i => (<div class="jg-dp-day-panel-week">{NumberToChinese(i)}</div>)}
