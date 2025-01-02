@@ -1,8 +1,12 @@
 /* eslint-disable solid/reactivity */
 import { DatePicker } from 'jige-ui'
 import { sleep } from 'radash'
+import { createMemo, createSignal } from 'solid-js'
 
 export function Demo() {
+  const [currDates, setCurrDates] = createSignal<string[]>([])
+  const [hlDates, setHlDates] = createSignal<string[]>([])
+  const dsDates = createMemo(() => currDates().filter(d => !hlDates().includes(d)))
   return (
     <div>
       <div>
@@ -12,12 +16,16 @@ export function Demo() {
             return [start + 1, end - 1]
           }}
           highlightMonths={['2024-09', '2024-07']}
-          highlightDates={['2024-09-01', '2024-07-24']}
-          dateRange={['2024-07-01', '2024-09-30']}
-          disabledDates={async (_y, _m, dates) => {
+          highlightDates={async (_y, _m, dates) => {
+            console.log(1)
+            setCurrDates(dates)
             await sleep(1000)
-            return dates
+
+            setHlDates(['2024-07-01', '2024-07-02', '2024-07-03'])
+            return ['2024-07-01', '2024-07-02', '2024-07-03']
           }}
+          dateRange={['2024-07-01', '2024-09-30']}
+          disabledDates={dsDates()}
         />
       </div>
       {/* <div>
