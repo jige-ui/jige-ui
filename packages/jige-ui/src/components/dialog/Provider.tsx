@@ -56,7 +56,7 @@ export function Provider(props: {
               <Modal.Content>
                 <div class="jg-dialog-content">
                   <div class="jg-dialog-header">
-                    <Header type={item.type} title={item.title} />
+                    <Header type={item.type} title={item.title} onCloseClick={item.onNegativeClick} />
                   </div>
                   <div class="jg-dialog-body">
                     {item.content}

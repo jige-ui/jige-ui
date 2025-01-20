@@ -3,7 +3,11 @@ import { createMemo, Match, Switch } from 'solid-js'
 import { Button } from '../button'
 import { CheckboxCircleFill, CloseCircleFill, CloseLargeFill, WarningFill } from '../icons'
 
-export function Header(props: { type: 'error' | 'warning' | 'success', title: string }) {
+export function Header(props: {
+  type: 'error' | 'warning' | 'success'
+  title: string
+  onCloseClick?: () => void
+}) {
   const [, actions] = ModalCore.useContext()
   const color = createMemo(() => {
     switch (props.type) {
@@ -53,6 +57,7 @@ export function Header(props: { type: 'error' | 'warning' | 'success', title: st
         variant="text"
         onClick={() => {
           actions.setOpen(false)
+          props.onCloseClick?.()
         }}
         icon={<CloseLargeFill />}
         color="var(--jg-fg4)"

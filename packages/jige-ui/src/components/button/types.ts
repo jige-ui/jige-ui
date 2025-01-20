@@ -4,7 +4,6 @@ export type ButtonVariant = 'link' | 'outlined' | 'dashed' | 'filled' | 'text' |
 
 export interface ButtonProps {
   label?: string
-  href?: string
   target?: string
   icon?: JSX.Element
   onClick?: (e: MouseEvent) => void | Promise<void>

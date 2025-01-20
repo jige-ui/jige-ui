@@ -8,3 +8,9 @@ export interface DialogInst {
   onPositiveClick?: () => void | Promise<void>
   onNegativeClick?: () => void | Promise<void>
 }
+
+export interface DialogFactory {
+  error: ((conf: Omit<DialogInst, 'type' | 'id'>) => void) & ((content: string) => void)
+  success: ((conf: Omit<DialogInst, 'type' | 'id'>) => void) & ((content: string) => void)
+  warning: ((conf: Omit<DialogInst, 'type' | 'id'>) => void) & ((content: string) => void)
+}

@@ -7,7 +7,11 @@ import { ButtonWrapper } from './ButtonWrapper'
 import { context } from './context'
 import { LoadingIcon } from './LoadingIcon'
 
-export function Button(props: ButtonProps) {
+export function Button<T extends (string | undefined) = undefined>(props: ButtonProps & {
+  href?: T
+  ref?: T extends string ? (HTMLAnchorElement | ((el: HTMLAnchorElement) => void)) :
+      (HTMLButtonElement | ((el: HTMLButtonElement) => void))
+}) {
   mountStyle(css, 'jige-ui-btn')
 
   const Context = context.initial({
@@ -22,6 +26,7 @@ export function Button(props: ButtonProps) {
         href={props.href}
         onClick={props.onClick}
         style={props.style}
+        ref={props.ref as any}
         class={props.class}
         shape={props.shape}
         target={props.target}

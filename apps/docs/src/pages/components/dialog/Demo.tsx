@@ -18,6 +18,12 @@ export function Demo() {
             })
           }}
         />
+        <Button
+          label="error2"
+          onClick={() => {
+            dialog.error('simple error')
+          }}
+        />
       </div>
       <div>
         <Button
