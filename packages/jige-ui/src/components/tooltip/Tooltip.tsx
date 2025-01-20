@@ -11,6 +11,7 @@ export function Tooltip(props: {
   children: JSX.Element
   openDelay?: number
   closeDelay?: number
+  placement?: 'top' | 'bottom' | 'left' | 'right'
   zIndex?: number
   trigger?: 'hover' | 'click'
   disabled?: boolean
@@ -18,7 +19,7 @@ export function Tooltip(props: {
   mountStyle(css, 'jige-ui-tooltip')
   const [state] = RootContext.useContext()
   return (
-    <FloatingUiCore openDelay={props.openDelay} closeDelay={props.closeDelay} trigger={props.trigger} disabled={props.disabled}>
+    <FloatingUiCore placement={props.placement} openDelay={props.openDelay} closeDelay={props.closeDelay} trigger={props.trigger} disabled={props.disabled}>
       <FloatingUiCore.Trigger>{props.children}</FloatingUiCore.Trigger>
       <FloatingUiCore.Content class="jg-tooltip-content" zindex={props.zIndex || state.zIndexConfig.tooltip}>
         {props.content}
