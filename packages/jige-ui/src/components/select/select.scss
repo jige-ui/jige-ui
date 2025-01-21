@@ -1,0 +1,38 @@
+@use '../../styles/funcs';
+
+.jg-select-trigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 30px;
+  padding: 0 10px;
+  font-size: 14px;
+  color: #333;
+  cursor: pointer;
+  background: transparent;
+  border: 1px solid funcs.get-var('t-border');
+  border-radius: 4px;
+  transition: border-color 0.3s;
+}
+
+.jg-select-content {
+  display: flex;
+  flex-direction: column;
+  min-width: 100px;
+  background: funcs.get-var('t-bg1');
+  border-radius: 4px;
+  filter: drop-shadow(funcs.get-var('shadow3'));
+}
+
+.jg-select-option {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 5px 10px;
+  cursor: pointer;
+  transition: background 0.3s;
+
+  &:hover {
+    background: funcs.get-var('t-bg4');
+  }
+}
