@@ -5,7 +5,6 @@ import styles from 'sass:./collapse.scss'
 import { createMemo } from 'solid-js'
 import { mountStyle } from 'solid-uses'
 
-
 export function Arrow1(props: {
   size?: number
 }) {

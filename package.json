@@ -10,7 +10,8 @@
     "build:ui": "cd packages/jige-ui && pnpm build",
     "clean": "turbo run clean && rimraf .turbo node_modules",
     "dev": "turbo dev",
-    "lint": "turbo run lint",
+    "lint": "eslint ./packages/jige-ui",
+    "type-check": "cd packages/jige-ui && pnpm type-check",
     "release": "commit-and-tag-version -i CHANGELOG.md --same-file",
     "prepare": "husky"
   },
@@ -38,11 +39,5 @@
         "type": "json"
       }
     ]
-  },
-  "pnpm": {
-    "overrides": {
-      "jige-core": "^0.31.0",
-      "solid-uses": "^0.8.0"
-    }
   }
 }
