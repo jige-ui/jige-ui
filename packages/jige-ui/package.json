@@ -28,10 +28,11 @@
   "scripts": {
     "build": "tsup",
     "dev": "tsup --watch",
-    "serve": "vite preview"
+    "serve": "vite preview",
+    "type-check": "tsc --noEmit --skipLibCheck"
   },
   "peerDependencies": {
-    "jige-core": "^0.31.0",
+    "jige-core": "^0.32.0",
     "solid-js": "^1.9.3"
   },
   "dependencies": {
