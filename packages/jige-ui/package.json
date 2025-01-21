@@ -40,7 +40,7 @@
     "browserslist": "^4.24.0",
     "esday": "^0.4.1",
     "lightningcss": "^1.26.0",
-    "oklch-colors": "workspace:^",
+    "oklch-colors": "^0.0.1",
     "radash": "^12.1.0",
     "sass": "^1.77.8",
     "solid-uses": "^0.8.0"
