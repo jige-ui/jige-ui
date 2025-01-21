@@ -38,11 +38,5 @@
         "type": "json"
       }
     ]
-  },
-  "pnpm": {
-    "overrides": {
-      "jige-core": "^0.31.0",
-      "solid-uses": "^0.8.0"
-    }
   }
 }
