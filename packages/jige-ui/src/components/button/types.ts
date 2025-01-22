@@ -1,6 +1,6 @@
 import type { JSX } from 'solid-js/jsx-runtime'
 
-export type ButtonVariant = 'link' | 'outlined' | 'dashed' | 'filled' | 'text' | 'solid'
+export type ButtonVariant = 'link' | 'text' | 'solid'
 
 export interface ButtonProps {
   label?: string
@@ -11,7 +11,6 @@ export interface ButtonProps {
   children?: JSX.Element
   class?: string
   style?: string | JSX.CSSProperties
-  shape?: 'rounded' | 'circle' | 'squared'
   /**
    * @default solid
    */

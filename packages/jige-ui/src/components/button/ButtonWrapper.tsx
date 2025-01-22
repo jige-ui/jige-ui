@@ -11,7 +11,6 @@ export function ButtonWrapper(props: {
   style?: string | JSX.CSSProperties
   class?: string
   target?: string
-  shape?: 'rounded' | 'circle' | 'squared'
   disabled?: boolean
   ref?: HTMLAnchorElement | HTMLButtonElement | ((el: HTMLAnchorElement | HTMLButtonElement) => void)
 }) {
@@ -31,17 +30,6 @@ export function ButtonWrapper(props: {
       classes.push(props.class)
 
     return classes.join(' ')
-  })
-
-  const borderRadius = createMemo(() => {
-    switch (props.shape) {
-      case 'circle':
-        return '50%'
-      case 'squared':
-        return '0'
-      default:
-        return '0.25em'
-    }
   })
 
   return (
@@ -67,11 +55,11 @@ export function ButtonWrapper(props: {
         }
       }}
       style={combineStyle({
-        '--jg-btn-color': state.color || 'var(--jg-fg1)',
+        '--jg-btn-color': state.color ? 'white' : 'var(--jg-fg1)',
         '--jg-btn-border-color': state.color || 'var(--jg-t-border)',
         '--jg-btn-link-color': state.color || 'var(--jg-fg-link)',
-        '--jg-btn-hl-color': state.color || 'var(--jg-t-hl)',
-        'border-radius': borderRadius(),
+        '--jg-btn-hl-color': state.color || 'var(--jg-t-bg1)',
+        'border-radius': '.25em',
       }, props.style)}
       class={finalClasses()}
     >
