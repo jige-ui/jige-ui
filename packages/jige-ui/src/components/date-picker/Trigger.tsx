@@ -21,10 +21,6 @@ export function Trigger() {
     }
   })
 
-  watch(() => state.disabled, (disabled) => {
-    console.log(disabled)
-  })
-
   return (
     <Popover.Trigger>
       <div

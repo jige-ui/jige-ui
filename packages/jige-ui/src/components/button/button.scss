@@ -37,9 +37,10 @@
 
 /* solid */
 .jg-btn.jg-btn-solid {
-  color: funcs.get-var('btn-color');
-  background-color: funcs.get-var('btn-hl-color');
-  box-shadow: 0 0 0 1px funcs.get-var('t-border');
+  color: funcs.get-var('btn-fg');
+  background: funcs.get-var('btn-bg');
+  border: 1px solid funcs.get-var('t-border');
+  box-shadow: funcs.get-var('shadow1');
 
   .jg-btn-overlay {
     background-color: rgb(0 0 0);
@@ -56,6 +57,9 @@
     .jg-btn-overlay  {
       opacity: .08;
     }
+
+    box-shadow: none;
+    opacity: .7;
   }
 }
 
@@ -63,7 +67,7 @@
 
 /* link */
 .jg-btn.jg-btn-link  {
-  color: funcs.get-var('btn-link-color');
+  color: funcs.get-var('btn-link-fg');
 
   &:hover,&:active {
     text-decoration: underline;
@@ -72,26 +76,14 @@
   .jg-btn-bg {
     background-color: transparent;
   }
-
-  &:hover {
-    color: funcs.get-var('btn-hl-color');
-    border-color: funcs.get-var('btn-hl-color');
-    opacity: .7;
-  }
-
-  &:active {
-    color: funcs.get-var('btn-hl-color');
-    border-color: funcs.get-var('btn-hl-color');
-    opacity: 1;
-  }
 }
 
 
 .jg-btn.jg-btn-text  {
-  color: funcs.get-var('btn-color');
+  color: funcs.get-var('btn-text-fg');
 
   .jg-btn-overlay {
-    background-color: funcs.get-var('btn-color');
+    background-color: funcs.get-var('btn-text-fg');
     opacity: 0;
   }
 
@@ -112,6 +104,7 @@
   .jg-btn.jg-btn-solid {
     .jg-btn-overlay {
       background-color: rgb(255 255 255);
+      opacity: .02;
     }
 
     &:hover {
@@ -122,7 +115,7 @@
 
     &:active {
       .jg-btn-overlay  {
-        opacity: 0;
+        opacity: .01;
       }
     }
   }

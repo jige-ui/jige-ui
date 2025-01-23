@@ -41,10 +41,6 @@ export function Root(props: {
     actions.setCurrMonth(inst.month())
   })
 
-  watch(() => state.disabled, (disabled) => {
-    console.log(disabled)
-  })
-
   return (
     <Context.Provider>
       <Popover placement="bottom" trigger="manual" disabled={state.disabled}>

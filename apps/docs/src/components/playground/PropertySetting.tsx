@@ -20,7 +20,7 @@ export function PropertySetting<T extends InitialValue>(props: {
             <FormCore.Item name={item}>
               <Switch>
                 <Match when={typeof props.properties[item] === 'boolean'}>
-                  <div class="flex">
+                  <div class="flex justify-between items-center m-1">
                     <label>{item}</label>
                     <Switcher type="checkbox" />
                   </div>

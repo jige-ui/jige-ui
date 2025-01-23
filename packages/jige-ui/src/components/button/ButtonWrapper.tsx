@@ -55,10 +55,10 @@ export function ButtonWrapper(props: {
         }
       }}
       style={combineStyle({
-        '--jg-btn-color': state.color ? 'white' : 'var(--jg-fg1)',
-        '--jg-btn-border-color': state.color || 'var(--jg-t-border)',
-        '--jg-btn-link-color': state.color || 'var(--jg-fg-link)',
-        '--jg-btn-hl-color': state.color || 'var(--jg-t-bg1)',
+        '--jg-btn-fg': state.color ? 'white' : 'var(--jg-fg2)',
+        '--jg-btn-bg': state.color || 'var(--jg-t-bg1)',
+        '--jg-btn-link-fg': state.color || 'var(--jg-fg-link)',
+        '--jg-btn-text-fg': state.color || 'var(--jg-fg2)',
         'border-radius': '.25em',
       }, props.style)}
       class={finalClasses()}

@@ -1,8 +1,10 @@
 import { SwitcherCore } from 'jige-core'
 import styles from 'sass:./switcher.scss'
 
-import { createMemo, Match, Switch } from 'solid-js'
+import { createMemo, Match, Show, Switch } from 'solid-js'
 import { mountStyle } from 'solid-uses'
+import { setData } from '~/common/dataset'
+import { AnimatedChecked } from '../icons'
 
 export function Switcher(props: { onChange?: (checked: boolean) => void, value?: boolean, type?: 'checkbox' | 'switcher' }) {
   mountStyle(styles, 'jige-ui-switcher')
@@ -15,8 +17,13 @@ export function Switcher(props: { onChange?: (checked: boolean) => void, value?:
         <Match when={type() === 'checkbox'}>
           <SwitcherCore.Control>
             {state => (
-              <div class="jg-switcher-control jg-switcher-checkbox">
-                <div class="jg-switcher-thumb" data-checked={state.checked || undefined} />
+              <div class="jg-switcher-control jg-switcher-checkbox" {...setData('checked', state.checked)}>
+                <Show when={state.checked}>
+                  <i class="jg-switcher-icon">
+                    <AnimatedChecked />
+                  </i>
+
+                </Show>
               </div>
             )}
           </SwitcherCore.Control>
@@ -25,7 +32,7 @@ export function Switcher(props: { onChange?: (checked: boolean) => void, value?:
           <SwitcherCore.Control>
             {state => (
               <div class="jg-switcher-control jg-switcher-switcher">
-                <div class="jg-switcher-thumb" data-checked={state.checked || undefined} />
+                <div class="jg-switcher-thumb" {...setData('checked', state.checked)} />
               </div>
             )}
           </SwitcherCore.Control>
