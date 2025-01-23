@@ -1,5 +1,6 @@
 export * from '~/components/button'
 export * from '~/components/collapse'
+export * from '~/components/combo-box'
 export * from '~/components/data-table'
 export * from '~/components/date-picker'
 export * from '~/components/dialog'

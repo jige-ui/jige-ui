@@ -19,24 +19,24 @@
   }
 
   &.jg-scrollbar-vertical {
-    width: 6px;
+    width: 3px;
 
     &:hover,&.is-dragging {
-      width: 10px;
+      width: 6px;
     }
   }
 
   &.jg-scrollbar-horizontal {
-    height: 6px;
+    height: 3px;
 
     &:hover,&.is-dragging {
-      height: 10px;
+      height: 6px;
     }
   }
 }
 
 .jg-scrollbar-thumb {
   cursor: pointer;
-  border-radius: 6px;
+  border-radius: 3px;
   transition: all 30ms;
 }
