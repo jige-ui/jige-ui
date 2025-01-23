@@ -28,11 +28,10 @@ export function Button<T extends (string | undefined) = undefined>(props: Button
         style={props.style}
         ref={props.ref as any}
         class={props.class}
-        shape={props.shape}
         target={props.target}
         disabled={props.disabled}
       >
-        <div class="jg-btn-bg" />
+        <div class="jg-btn-overlay" />
         <ButtonContent icon={props.icon} label={props.label}>
           {props.children}
         </ButtonContent>
