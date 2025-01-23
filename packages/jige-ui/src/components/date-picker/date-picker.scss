@@ -12,6 +12,11 @@
     border-color: var(--jg-t-hl);
   }
 
+  &[data-disabled] {
+    pointer-events: none;
+    opacity: .6;
+  }
+
   input {
     width: 100%;
     text-align: center;

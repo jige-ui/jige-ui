@@ -21,9 +21,19 @@ export function Trigger() {
     }
   })
 
+  watch(() => state.disabled, (disabled) => {
+    console.log(disabled)
+  })
+
   return (
     <Popover.Trigger>
-      <div class="jg-dp-trigger" {...setData('focused', focused())}>
+      <div
+        class="jg-dp-trigger"
+        {...setData({
+          focused: focused(),
+          disabled: state.disabled,
+        })}
+      >
         <input
           type="text"
           value={state.value}

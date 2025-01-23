@@ -36,6 +36,7 @@ export function DatePicker(props: {
   value?: string
   valueFormat?: string
   onChange?: (value: string) => void
+  disabled?: boolean
   dateRange?: [DateTypes, DateTypes]
   highlightYears?: number[] | ((visibleYearRange: [number, number]) => MaybeAsync<number[]>)
   highlightMonths?: string[] | ((visibleYear: number) => MaybeAsync<string[]>)
@@ -48,7 +49,7 @@ export function DatePicker(props: {
       valueFormat={props.valueFormat}
       onChange={props.onChange}
       dateRange={props.dateRange}
-
+      disabled={props.disabled}
     >
       <Trigger />
       <Wrapper>
