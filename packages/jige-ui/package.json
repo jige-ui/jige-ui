@@ -32,7 +32,7 @@
     "type-check": "tsc --noEmit --skipLibCheck"
   },
   "peerDependencies": {
-    "jige-core": "^0.32.0",
+    "jige-core": "^0.33.0",
     "solid-js": "^1.9.3"
   },
   "dependencies": {
@@ -43,7 +43,7 @@
     "oklch-colors": "^0.0.1",
     "radash": "^12.1.0",
     "sass": "^1.77.8",
-    "solid-uses": "^0.8.0"
+    "solid-uses": "^0.8.1"
   },
   "devDependencies": {
     "esbuild-plugin-inline-import": "^1.1.0",
