@@ -10,6 +10,7 @@ export function Root(props: {
   placement?: 'top' | 'right' | 'bottom' | 'left' | 'top-start' | 'top-end' | 'right-start' | 'right-end' | 'bottom-start' | 'bottom-end' | 'left-start' | 'left-end'
   openDelay?: number
   closeDelay?: number
+  disabled?: boolean
 }) {
   mountStyle(css, 'jige-ui-popover')
   return (

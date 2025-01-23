@@ -18,6 +18,7 @@ export const context = createComponentState({
     dsDates: [] as string[],
     hlYears: [] as number[],
     hlMonths: [] as string[],
+    disabled: false,
   }),
   getters: {
     inst() {

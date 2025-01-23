@@ -12,11 +12,13 @@ export function Root(props: {
   valueFormat?: string
   onChange?: (value: string) => void
   dateRange?: [DateTypes, DateTypes]
+  disabled?: boolean
 }) {
   mountStyle(styles, 'jige-ui-date-picker')
   const Context = context.initial({
     valueFormat: () => props.valueFormat,
     dateRange: () => props.dateRange,
+    disabled: () => props.disabled,
   })
 
   const [state, actions] = Context.value
@@ -39,10 +41,14 @@ export function Root(props: {
     actions.setCurrMonth(inst.month())
   })
 
+  watch(() => state.disabled, (disabled) => {
+    console.log(disabled)
+  })
+
   return (
     <Context.Provider>
-      <Popover placement="bottom" trigger="manual">
-        <FormCore.Bind value={state.value} setValue={actions.setValue}>
+      <Popover placement="bottom" trigger="manual" disabled={state.disabled}>
+        <FormCore.Bind value={state.value} setValue={actions.setValue} setDisabled={actions.setDisabled}>
           {props.children}
         </FormCore.Bind>
       </Popover>

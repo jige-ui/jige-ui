@@ -32,7 +32,7 @@
     "type-check": "tsc --noEmit --skipLibCheck"
   },
   "peerDependencies": {
-    "jige-core": "^0.33.0",
+    "jige-core": "^0.33.1",
     "solid-js": "^1.9.3"
   },
   "dependencies": {
