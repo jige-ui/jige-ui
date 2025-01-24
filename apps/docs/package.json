@@ -16,7 +16,7 @@
     "@solidjs/router": "^0.15.2",
     "@unocss/reset": "^65.4.2",
     "dayjs": "^1.11.13",
-    "jige-core": "^0.33.1",
+    "jige-core": "^0.34.1",
     "jige-ui": "workspace:^",
     "radash": "^12.1.0",
     "solid-js": "^1.9.3",

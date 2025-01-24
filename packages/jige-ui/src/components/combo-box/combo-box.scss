@@ -1,0 +1,142 @@
+@use '../../styles/funcs';
+
+.jg-combo-box-list {
+  margin: 6px;
+  background: funcs.get-var('t-bg1');
+  border-radius: .25em;
+  box-shadow: funcs.get-var('shadow4');
+  animation-duration: 150ms;
+  animation-timing-function: funcs.get-var('bezier');
+
+  &[data-floating-status="opening"] {
+    transform-origin: funcs.get-var('combo-box-list-transform-origin');
+    animation-name: clip-open;
+  }
+}
+
+.jg-combo-box-list-inner {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 4px;
+}
+
+.jg-combo-box-item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding-left: 8px;
+  cursor: pointer;
+  border-radius: .2em;
+
+  &:hover {
+    background: funcs.get-var('t-bg4');
+  }
+
+  &[data-checked] {
+    background: funcs.get-var('t-bg4') !important;
+
+    &::after {
+      position: absolute;
+      top: 24%;
+      bottom: 24%;
+      left: 0;
+      display: block;
+      width: 4px;
+      content: '';
+      background: funcs.get-var('t-hl');
+      border-radius: 4px;
+    }
+  }
+}
+
+.jg-combo-box-list[data-floating-status="opening"] .jg-combo-box-item:hover {
+    background: none;
+}
+
+.jg-combo-box-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgb(0 0 0);
+  opacity: 0;
+  transition: opacity 0.2s, background 0.2s, color 0.2s;
+}
+
+
+.jg-combo-box-arrow {
+  position: absolute;
+  top: 28%;
+  right: 8px;
+  color: funcs.get-var('fg4');
+  transition: transform 0.2s;
+}
+
+
+.jg-combo-box-trigger {
+  position: relative;
+  display: inline-flex;
+  min-width: 7em;
+  padding: .25em .675em;
+  overflow: hidden;
+  cursor: pointer;
+  background: funcs.get-var('t-bg1');
+  border: 1px solid funcs.get-var('t-border');
+  border-radius: .25em;
+  box-shadow: funcs.get-var('shadow1');
+  transition:  border-color 0.2s, opacity 0.2s, color 0.2s;
+
+  &[data-disabled] {
+    pointer-events: none;
+    opacity: 0.7;
+  }
+
+  &:hover {
+    .jg-combo-box-overlay  {
+      opacity: .03;
+    }
+  }
+
+  &:active {
+    box-shadow: none;
+    opacity: .7;
+
+    .jg-combo-box-overlay  {
+      opacity: .08;
+    }
+
+    .jg-combo-box-arrow {
+      transform: translateY(2px);
+    }
+  }
+}
+
+.dark .jg-combo-box-trigger {
+  .jg-combo-box-overlay {
+    background: rgb(255 255 255);
+    opacity: .02;
+  }
+
+  &:hover {
+    .jg-combo-box-overlay {
+      opacity: .04;
+    }
+  }
+
+  &:active {
+    .jg-combo-box-overlay  {
+      opacity: .01;
+    }
+  }
+}
+
+@keyframes clip-open {
+  0% {
+    opacity: 0;
+    transform: scaleY(0.7);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scaleY(1);
+  }
+}
