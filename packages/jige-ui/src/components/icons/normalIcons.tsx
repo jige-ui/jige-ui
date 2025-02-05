@@ -11,6 +11,22 @@ export function IconThreeDots() {
   )
 }
 
+export function DoubleArrowLeft() {
+  return (
+    <IconSvgWrapper>
+      <path fill="currentColor" d="m4.836 12l6.207 6.207l1.414-1.414L7.664 12l4.793-4.793l-1.414-1.414zm5.65 0l6.207 6.207l1.414-1.414L13.314 12l4.793-4.793l-1.414-1.414z" />
+    </IconSvgWrapper>
+  )
+}
+
+export function DoubleArrowRight() {
+  return (
+    <IconSvgWrapper>
+      <path fill="currentColor" d="m19.164 12l-6.207-6.207l-1.414 1.414L16.336 12l-4.793 4.793l1.414 1.414zm-5.65 0L7.307 5.793L5.893 7.207L10.686 12l-4.793 4.793l1.414 1.414z" />
+    </IconSvgWrapper>
+  )
+}
+
 export function EyeLine() {
   return (
     <IconSvgWrapper>
