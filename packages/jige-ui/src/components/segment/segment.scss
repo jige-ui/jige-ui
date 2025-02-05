@@ -1,0 +1,21 @@
+@use '../../styles/funcs';
+
+.jg-segment {
+  position: relative;
+  display: flex;
+  border-radius: .25em;
+}
+
+.jg-segment-thumb {
+  position: absolute;
+  border-radius: .25em;
+  box-shadow: funcs.get-var('shadow2');
+  transition: transform 150ms;
+}
+
+.jg-segment-item {
+  font-size: .9em;
+  color: funcs.get-var('fg3');
+  text-align: center;
+  cursor: pointer;
+}
