@@ -9,6 +9,7 @@ export const context = createComponentState({
   state: () => ({
     value: today.format('YYYY-MM-DD'),
     valueFormat: 'YYYY-MM-DD',
+    name: '',
     currYear: today.year(),
     currMonth: today.month(),
     activePanel: 'day',

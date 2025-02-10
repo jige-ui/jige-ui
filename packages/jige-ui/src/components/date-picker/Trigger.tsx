@@ -34,6 +34,7 @@ export function Trigger() {
           type="text"
           value={state.value}
           ref={actions.setRefTrigger}
+          name={state.name || 'datepicker'}
           onChange={(e) => {
             if (!actions.setValue(e.currentTarget.value)) {
               e.currentTarget.value = state.value

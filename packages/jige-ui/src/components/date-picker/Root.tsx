@@ -44,7 +44,13 @@ export function Root(props: {
   return (
     <Context.Provider>
       <Popover placement="bottom" trigger="manual" disabled={state.disabled}>
-        <FormCore.Bind value={state.value} setValue={actions.setValue} setDisabled={actions.setDisabled}>
+        <FormCore.Bind
+          propDisabled={props.disabled}
+          value={state.value}
+          setValue={actions.setValue}
+          setDisabled={actions.setDisabled}
+          setName={actions.setName}
+        >
           {props.children}
         </FormCore.Bind>
       </Popover>

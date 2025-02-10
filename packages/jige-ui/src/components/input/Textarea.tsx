@@ -49,6 +49,7 @@ export function Textarea(props: {
   value?: string
   onChange?: (value: string) => void
   placeholder?: string
+  disabled?: boolean
 }) {
   const [hidden, setHidden] = createSignal(false)
   const [focused, setFocused] = createSignal(false)
@@ -56,6 +57,7 @@ export function Textarea(props: {
     <InputCore
       value={props.value}
       onChange={props.onChange}
+      disabled={props.disabled}
     >
       <ScrollbarCore
         class={`jg-input-wrapper${focused() ? ' jg-input-focused' : ''}`}

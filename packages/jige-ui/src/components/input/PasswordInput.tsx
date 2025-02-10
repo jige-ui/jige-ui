@@ -7,6 +7,7 @@ export function PasswordInput(props: {
   value?: string
   onChange?: (value: string) => void
   placeholder?: string
+  disabled?: boolean
 }) {
   const [showPass, setShowPass] = createSignal(false)
   const [focused, setFocused] = createSignal(false)
@@ -17,7 +18,7 @@ export function PasswordInput(props: {
         'jg-input-focused': focused(),
       }}
     >
-      <InputCore value={props.value} onChange={props.onChange}>
+      <InputCore value={props.value} onChange={props.onChange} disabled={props.disabled}>
         <InputCore.Native
           class="jg-input-native"
           type={showPass() ? 'text' : 'password'}

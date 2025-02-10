@@ -7,6 +7,7 @@ export function NormalInput(props: {
   onChange?: (value: string) => void
   type?: 'text' | 'password' | 'number'
   placeholder?: string
+  disabled?: boolean
 }) {
   const [focused, setFocused] = createSignal(false)
   return (
@@ -16,7 +17,7 @@ export function NormalInput(props: {
         'jg-input-focused': focused(),
       }}
     >
-      <InputCore value={props.value} onChange={props.onChange}>
+      <InputCore value={props.value} onChange={props.onChange} disabled={props.disabled}>
         <InputCore.Native
           class="jg-input-native"
           type={props.type || 'text'}
