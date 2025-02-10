@@ -8,3 +8,6 @@ export function isUndefined(v: any): v is undefined {
 export function undefinedOr<T, U>(v: T | undefined, or: U): T | U {
   return isUndefined(v) ? or : v
 }
+export function isDef<T>(v: T | undefined): v is T {
+  return !isUndefined(v)
+}

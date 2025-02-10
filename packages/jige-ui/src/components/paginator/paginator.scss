@@ -1,0 +1,45 @@
+@use '../../styles/funcs';
+
+.jg-paginator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 28px;
+  font-size: .875rem;
+  user-select: none;
+  border: 1px solid funcs.get-var('t-border');
+  border-radius: .25em;
+
+  >div:not(:last-child) {
+    border-right: 1px solid funcs.get-var('t-border');
+  }
+}
+
+.jg-paginator-pager {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  padding: .25rem .5rem;
+  color: funcs.get-var('fg2');
+  cursor: pointer;
+
+  &:hover {
+    background-color: funcs.get-var('t-bg4');
+  }
+
+  &[data-checked] {
+    color: funcs.get-var('fg1');
+    background-color: funcs.get-var('t-bg3');
+  }
+}
+
+.jg-paginator-pager-blank {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  padding: .25rem .5rem;
+  color: funcs.get-var('fg3');
+  cursor: pointer;
+}
