@@ -26,7 +26,7 @@ export function Header() {
           </Popover.Trigger>
           <Popover.Content arrow>
             <div class="p-2">
-              <Slider step={5} value={jigeUiState.hue} onChange={jigeUiActions.setHue} min={0} max={365} />
+              <Slider step={5} value={jigeUiState.hue} onChange={jigeUiActions.setHue} min={0} max={360} />
             </div>
           </Popover.Content>
         </Popover>
