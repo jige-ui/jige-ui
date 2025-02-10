@@ -1,7 +1,7 @@
 import type { InitialValue } from 'jige-core'
 import type { SetStoreFunction } from 'solid-js/store'
 import { FormCore } from 'jige-core'
-import { Input, Switcher } from 'jige-ui'
+import { Input, NumberBox, Switcher } from 'jige-ui'
 import { createMemo, For, Match, Switch } from 'solid-js'
 
 export function PropertySetting<T extends InitialValue>(props: {
@@ -34,7 +34,7 @@ export function PropertySetting<T extends InitialValue>(props: {
                 <Match when={typeof props.properties[item] === 'number'}>
                   <div>
                     <label>{item}</label>
-                    <Input type="number" />
+                    <NumberBox />
                   </div>
                 </Match>
               </Switch>

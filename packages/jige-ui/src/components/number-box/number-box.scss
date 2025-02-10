@@ -1,0 +1,70 @@
+
+@use '../../styles/funcs';
+
+.jg-number-box {
+  position: relative;
+  display: inline-flex;
+  border: 2px solid transparent;
+
+  &::before {
+    position: absolute;
+    inset: 0;
+    content: '';
+    background: funcs.get-var('t-bg2');
+    border: 1px solid funcs.get-var('t-border');
+    border-bottom-color: funcs.get-var('fg4');
+    border-radius: .25em;
+  }
+
+  &[data-disabled] {
+    pointer-events: none;
+    opacity: .6;
+  }
+
+  &[data-focused] {
+    background: funcs.get-var('t-bg1');
+
+    &::before {
+      border-bottom-color: funcs.get-var('t-hl');
+      border-bottom-width: 2px;
+    }
+  }
+
+  &:not([data-focused]):hover {
+    &::before {
+      background: funcs.get-var('t-bg3');
+    }
+  }
+}
+
+
+.jg-number-box-input {
+  position: relative;
+  width: 100%;
+  padding: 4px 8px;
+
+  /* Firefox */
+  appearance: textfield;
+
+  /* Chrome, Safari, Edge and Opera */
+  &::-webkit-outer-spin-button,
+  &::-webkit-inner-spin-button {
+    margin: 0;
+    appearance: none;
+  }
+}
+
+.jg-number-box-tools {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  padding: 0 4px;
+
+  > button {
+    height: 100%;
+    color: funcs.get-var('fg4');
+  }
+}
