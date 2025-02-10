@@ -2,6 +2,28 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.22.0](https://github.com/jige-ui/jige-ui/compare/v0.21.6...v0.22.0) (2025-02-10)
+
+
+### Features
+
+* add component 'combobox' ([#9](https://github.com/jige-ui/jige-ui/issues/9)) ([23a3055](https://github.com/jige-ui/jige-ui/commit/23a3055f2340dca3d9eea448bf289d5222f568fd))
+* add component 'number-box' ([#14](https://github.com/jige-ui/jige-ui/issues/14)) ([cbd99b5](https://github.com/jige-ui/jige-ui/commit/cbd99b53f0071f82736adcd67ac73392f60e78d4))
+* add component 'paginator' ([#15](https://github.com/jige-ui/jige-ui/issues/15)) ([518e592](https://github.com/jige-ui/jige-ui/commit/518e5924f91e11c6985168d181929d45f856de36))
+* add component 'radiogroup' and improve docs's palyground ([#8](https://github.com/jige-ui/jige-ui/issues/8)) ([a116c2e](https://github.com/jige-ui/jige-ui/commit/a116c2e3b426abc1eb99c0532838fdfaf31319d3))
+* add component 'segment' ([#13](https://github.com/jige-ui/jige-ui/issues/13)) ([11e9d6b](https://github.com/jige-ui/jige-ui/commit/11e9d6b29ec05cb74308dca3a61b5bc597eb1714))
+* add component 'select' ([#6](https://github.com/jige-ui/jige-ui/issues/6)) ([7472aa5](https://github.com/jige-ui/jige-ui/commit/7472aa576580dc250dd63443c3bb5e67c16f8a18))
+* add paginator to data-table ([016aae2](https://github.com/jige-ui/jige-ui/commit/016aae2b0239d9712e3bc84f7bb7432d02ca0313))
+* make button more simple ([#7](https://github.com/jige-ui/jige-ui/issues/7)) ([4616240](https://github.com/jige-ui/jige-ui/commit/4616240f99639e11759078cf036702c496699698))
+
+
+### Bug Fixes
+
+* add property 'placement' to tooltip ([947dd1a](https://github.com/jige-ui/jige-ui/commit/947dd1ac750f765195050f92fc08efb9fb9cf239))
+* **deps:** update dependency @iconify-json/ri to v1.2.5 ([#2](https://github.com/jige-ui/jige-ui/issues/2)) ([f04e777](https://github.com/jige-ui/jige-ui/commit/f04e777495b27dce109abb48ea09f20de2c21427))
+* missing name and native form ([3e9b9e0](https://github.com/jige-ui/jige-ui/commit/3e9b9e07ff0b4d093f0b28b2b6c46cb53f0494ff))
+* some issues ([fb24a70](https://github.com/jige-ui/jige-ui/commit/fb24a707a62c8553fcba31458decb0061202c8fc))
+
 ## [0.21.6](https://github.com/jige-ui/jige-ui/compare/v0.21.5...v0.21.6) (2025-01-20)
 
 ## [0.21.5](https://github.com/jige-ui/jige-ui/compare/v0.21.4...v0.21.5) (2025-01-02)
