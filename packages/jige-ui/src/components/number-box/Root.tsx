@@ -1,7 +1,7 @@
 import { callMaybeContextChild, FormCore, type PropsWithContextChild } from 'jige-core'
 import { watch } from 'solid-uses'
-import { context } from './context'
 import { undefinedOr } from '~/common/types'
+import { context } from './context'
 
 export function Root(props: PropsWithContextChild<typeof context, {
   min?: number
@@ -19,15 +19,13 @@ export function Root(props: PropsWithContextChild<typeof context, {
   const [state, actions] = Context.value
 
   watch(() => state.value, (v, prevV) => {
-    console.log(v);
-
-    if (isNaN(v) && isNaN(undefinedOr(prevV,0))) {
+    if (Number.isNaN(v) && Number.isNaN(undefinedOr(prevV, 0))) {
       return
     }
     props.onChange?.(v)
   })
 
-  watch([()=>state.max, ()=>state.min], ()=> {
+  watch([() => state.max, () => state.min], () => {
     actions.setValue(state.value)
   })
 

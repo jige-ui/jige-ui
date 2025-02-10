@@ -1,4 +1,3 @@
-import { isNumber } from 'radash'
 import { createComponentState } from 'solid-uses'
 
 export const context = createComponentState({
@@ -14,12 +13,13 @@ export const context = createComponentState({
     setValue(value: number) {
       if (value > this.state.max) {
         this.actions.setState('value', this.state.max)
-      } else if (value < this.state.min) {
+      }
+      else if (value < this.state.min) {
         this.actions.setState('value', this.state.min)
       }
       else {
         this.actions.setState('value', value)
       }
-    }
-  }
+    },
+  },
 })

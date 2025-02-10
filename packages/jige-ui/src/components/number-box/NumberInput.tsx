@@ -10,7 +10,7 @@ export function NumberInput(props: {
       type="text"
       disabled={state.disabled}
       name={state.name}
-      autocomplete='off'
+      autocomplete="off"
       value={Number.isNaN(state.value) ? '' : state.value}
       onInput={(e) => {
         const v = e.currentTarget.value
@@ -24,7 +24,7 @@ export function NumberInput(props: {
         }
         actions.setValue(n)
       }}
-      onChange={(e)=>{
+      onChange={(e) => {
         e.currentTarget.value = Number.isNaN(state.value) ? '' : String(state.value)
       }}
       onFocus={() => actions.setFocused(true)}

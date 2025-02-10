@@ -8,7 +8,7 @@ export function MinusAndPlus(props: {
   return (
     <div class={props.class}>
       <button
-        type='button'
+        type="button"
         onClick={() => actions.setValue(state.value + 1)}
         onMouseDown={e => e.preventDefault()}
         disabled={state.value >= state.max}
@@ -16,7 +16,7 @@ export function MinusAndPlus(props: {
         <ArrowUp />
       </button>
       <button
-        type='button'
+        type="button"
         onClick={() => actions.setValue(state.value - 1)}
         onMouseDown={e => e.preventDefault()}
         disabled={state.value <= state.min}
