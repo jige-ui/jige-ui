@@ -8,6 +8,7 @@ export const context = createComponentState({
     listItemHeight: 20,
     listItemWidth: 200,
     originY: 0,
+    name: 'combo-box',
   }),
   getters: {
     valueIndex() {

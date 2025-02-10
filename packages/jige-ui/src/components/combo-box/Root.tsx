@@ -21,7 +21,13 @@ export function Root(props: {
   const [state, actions] = Context.value
   return (
     <Context.Provider>
-      <FormCore.Bind value={state.value} setValue={actions.setValue} setDisabled={actions.setDisabled}>
+      <FormCore.Bind
+        propDisabled={props.disabled}
+        value={state.value}
+        setName={actions.setName}
+        setValue={actions.setValue}
+        setDisabled={actions.setDisabled}
+      >
         <FloatingUiCore
           disabled={state.disabled}
           trigger="click"
