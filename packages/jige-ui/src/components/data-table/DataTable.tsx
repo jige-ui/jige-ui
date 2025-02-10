@@ -4,6 +4,7 @@ import css from 'sass:./data-table.scss'
 import { For, Show } from 'solid-js'
 import { mountStyle } from 'solid-uses'
 import { BoxRemove } from '../icons'
+import { Paginator } from '../paginator'
 import { Scrollbar } from '../scrollbar'
 import { Spin } from '../spin'
 
@@ -42,6 +43,15 @@ export function DataTable(props: DataTableProps) {
               </TableCore.Body>
             </Scrollbar>
           </TableCore>
+          <Show when={props.pagination}>
+            <div class="jg-data-table-bottom">
+              <div>
+                total:
+                {props.pagination!.total}
+              </div>
+              <Paginator {...props.pagination!} />
+            </div>
+          </Show>
         </Show>
 
         <Show when={props.data.length === 0}>

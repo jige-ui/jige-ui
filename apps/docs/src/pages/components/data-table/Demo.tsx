@@ -1,6 +1,7 @@
-import { Button, DataTable } from 'jige-ui'
+import { DataTable } from 'jige-ui'
 import { random, uid } from 'radash'
-import { createResource } from 'solid-js'
+import { createResource, createSignal } from 'solid-js'
+import { watch } from 'solid-uses'
 
 export function Demo() {
   const generateData = () => {
@@ -27,10 +28,27 @@ export function Demo() {
 
   const [data, { refetch }] = createResource(generateData, { initialValue: [] })
 
+  const [currPage, setCurrPage] = createSignal(1)
+
+  watch(currPage, () => {
+    refetch()
+  })
+
   return (
     <div>
-      <div><Button label="refetch" onClick={() => { refetch() }} /></div>
-      <DataTable data={(data.latest) as any} loading={data.loading} maxHeight="450px" />
+      <DataTable
+        pagination={{
+          total: 100,
+          pageSize: 10,
+          onPageClick(page) {
+            setCurrPage(page)
+          },
+          currPage: currPage(),
+        }}
+        data={(data.latest) as any}
+        loading={data.loading}
+        maxHeight="400px"
+      />
     </div>
 
   )
