@@ -1,5 +1,5 @@
 import { Router, useCurrentMatches } from '@solidjs/router'
-import dayjs from 'dayjs'
+import { esday } from 'esday'
 import { Scrollbar } from 'jige-ui'
 import { createMemo, Suspense } from 'solid-js'
 import { watch } from 'solid-uses'
@@ -26,7 +26,7 @@ function RouteWrapper(props: {
           updated:
         </span>
         <span>
-          {dayjs(info().updated).format('YYYY-MM-DD')}
+          {esday(info().updated).format('YYYY-MM-DD')}
         </span>
       </div>
       <div class="p-2">
