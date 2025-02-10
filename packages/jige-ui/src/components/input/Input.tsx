@@ -7,7 +7,7 @@ import { PasswordInput } from './PasswordInput'
 import { Textarea } from './Textarea'
 
 export function Input(props: {
-  type?: 'text' | 'number' | 'textarea' | 'password'
+  type?: 'text' | 'textarea' | 'password'
   value?: string
   onChange?: (value: string) => void
   placeholder?: string

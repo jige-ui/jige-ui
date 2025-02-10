@@ -1,6 +1,7 @@
 import { InputCore } from 'jige-core'
 import { createSignal, Show } from 'solid-js'
 import { EyeLine, EyeOffLine } from '../icons'
+import { InputWrapper } from './InputWrapper'
 import { Placeholder } from './Placeholder'
 
 export function PasswordInput(props: {
@@ -11,16 +12,13 @@ export function PasswordInput(props: {
 }) {
   const [showPass, setShowPass] = createSignal(false)
   const [focused, setFocused] = createSignal(false)
+
   return (
-    <div
-      class="jg-input-wrapper"
-      classList={{
-        'jg-input-focused': focused(),
-      }}
-    >
-      <InputCore value={props.value} onChange={props.onChange} disabled={props.disabled}>
+    <InputCore value={props.value} onChange={props.onChange} disabled={props.disabled}>
+      <InputWrapper focused={focused()}>
         <InputCore.Native
           class="jg-input-native"
+          autocomplete="off"
           type={showPass() ? 'text' : 'password'}
           onFocus={() => setFocused(true)}
           onBlur={() => setFocused(false)}
@@ -33,12 +31,14 @@ export function PasswordInput(props: {
           onClick={() => {
             setShowPass(!showPass())
           }}
+          onMouseDown={(e) => { e.preventDefault() }}
+          onMouseUp={(e) => { e.preventDefault() }}
         >
           <Show when={showPass()} fallback={<EyeOffLine />}>
             <EyeLine />
           </Show>
         </button>
-      </InputCore>
-    </div>
+      </InputWrapper>
+    </InputCore>
   )
 }

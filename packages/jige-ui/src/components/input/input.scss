@@ -6,22 +6,48 @@
   align-items: center;
   justify-content: center;
   width: 100%;
-  padding: 3px 6px;
-  border: 1px solid funcs.get-var("t-border");
-  border-radius: 4px;
-  transition: all .3s funcs.get-var("bezier");
+  border: 2px solid transparent;
+
+  &::before {
+    position: absolute;
+    inset: 0;
+    content: '';
+    background: funcs.get-var('t-bg2');
+    border: 1px solid funcs.get-var('t-border');
+    border-bottom-color: funcs.get-var('fg4');
+    border-radius: .25em;
+  }
+
+  &[data-disabled] {
+    pointer-events: none;
+    opacity: .6;
+  }
+
+  &[data-focused] {
+    background: funcs.get-var('t-bg1');
+
+    &::before {
+      border-bottom-color: funcs.get-var('t-hl');
+      border-bottom-width: 2px;
+    }
+  }
+
+  &:not([data-focused]):hover {
+    &::before {
+      background: funcs.get-var('t-bg3');
+    }
+  }
 }
 
-.jg-input-focused {
-  border-color: funcs.get-var("t-hl");
-}
 
 .jg-input-suffix {
+  position: relative;
   display: inline-flex;
   flex-shrink: 0;
   flex-wrap: nowrap;
   align-items: center;
   justify-content: center;
+  margin-right: 4px;
   margin-left: 4px;
   color: funcs.get-var("fg4");
   white-space: nowrap;
@@ -41,13 +67,14 @@
 }
 
 .jg-input-native {
+  position: relative;
   flex-grow: 1;
   width: 100%;
-  padding: 0;
+  padding: 4px 8px;
   margin: 0;
   resize: none;
-  border: none;
   outline: none;
+  border: none;
 
   &::placeholder {
     display: none;

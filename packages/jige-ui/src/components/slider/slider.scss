@@ -4,9 +4,10 @@
   display: flex;
   align-items: center;
   min-width: 100px;
-  height: 10px;
+  height: 6px;
+  cursor: pointer;
   background: funcs.get-var('t-bg4');
-  border-radius: 10px;
+  border-radius: 6px;
 }
 
 .jg-slider-fill {
@@ -20,15 +21,15 @@
   position: absolute;
   width: 20px;
   height: 20px;
-  cursor: grab;
-  background: white;
-  border: 2px solid funcs.get-var('t-hl-lighter');
+  background: funcs.get-var('t-hl');
+  border: 5px solid funcs.get-var('t-bg3');
   border-radius: 50%;
   box-shadow: funcs.get-var('shadow4');
   transform: translateX(-50%);
+  transition: border-width .3s;
 
-  &[data-slider-dragging] {
-    cursor: grabbing;
+  &:hover {
+    border-width: 3px;
   }
 }
 
