@@ -1,9 +1,10 @@
 import type { JSX } from 'solid-js'
 import { AnimatedGroup, RadioGroupCore } from 'jige-core'
 import styles from 'sass:./tabs.scss'
-import { createMemo, For } from 'solid-js'
+import { createMemo, createSignal, For } from 'solid-js'
 import { mountStyle, watch } from 'solid-uses'
 
+import { setData } from '~/common/dataset'
 import context from './context'
 
 function Content(props: {
@@ -23,11 +24,14 @@ function Root(props: {
   mountStyle(styles, 'jige-ui-tabs')
 
   const Context = context.initial()
-  const [, actions] = Context.value
+  const [tabState, actions] = Context.value
+
+  const [prevActive, setPrevActive] = createSignal('')
 
   watch(() => props.active, (active, prev) => {
     if (!prev)
       return
+    setPrevActive(prev)
     if (props.options.indexOf(prev) < props.options.indexOf(active)) {
       actions.setDir('right')
     }
@@ -58,7 +62,14 @@ function Root(props: {
                   <RadioGroupCore.ItemNative />
                   <RadioGroupCore.ItemControl>
                     {state => (
-                      <div class="jg-tabs-header-item" data-checked={state.value === item.value || undefined}>
+                      <div
+                        class="jg-tabs-header-item"
+                        {...setData({
+                          checked: state.value === item.value,
+                          prev: prevActive() === item.value,
+                          dir: tabState.dir,
+                        })}
+                      >
                         {item.label}
                       </div>
                     )}
