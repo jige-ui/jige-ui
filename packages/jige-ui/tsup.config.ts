@@ -1,10 +1,11 @@
+import type { Options } from 'tsup'
 import browserslist from 'browserslist'
 import inlineImportPlugin from 'esbuild-plugin-inline-import'
 // tsup.config.ts
 import { solidPlugin } from 'esbuild-plugin-solid'
 import { browserslistToTargets, transform as lightCss } from 'lightningcss'
 import { compileAsync } from 'sass'
-import { defineConfig, type Options } from 'tsup'
+import { defineConfig } from 'tsup'
 
 const inlinePlugin = inlineImportPlugin({
   filter: /^sass:/,

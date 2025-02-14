@@ -1,5 +1,6 @@
+import type { JSX } from 'solid-js'
 import { FloatingUiCore } from 'jige-core'
-import { type JSX, Show, splitProps } from 'solid-js'
+import { Show, splitProps } from 'solid-js'
 import { combineStyle } from '~/common/dom'
 import { RootContext } from '../ROOT/context'
 

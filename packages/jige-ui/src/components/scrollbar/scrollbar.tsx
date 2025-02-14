@@ -1,6 +1,7 @@
+import type { JSX } from 'solid-js'
 import { ScrollbarCore } from 'jige-core'
 import scrollCss from 'sass:./scrollbar.scss'
-import { createMemo, createSignal, type JSX, Show } from 'solid-js'
+import { createMemo, createSignal, Show } from 'solid-js'
 import { mountStyle } from 'solid-uses'
 
 function GmScrollBar(props: {

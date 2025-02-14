@@ -1,4 +1,5 @@
-import { callMaybeContextChild, FormCore, type PropsWithContextChild } from 'jige-core'
+import type { PropsWithContextChild } from 'jige-core'
+import { callMaybeContextChild, FormCore } from 'jige-core'
 import { watch } from 'solid-uses'
 import { undefinedOr } from '~/common/types'
 import { context } from './context'
