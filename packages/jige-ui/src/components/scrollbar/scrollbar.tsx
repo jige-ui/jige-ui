@@ -63,7 +63,7 @@ export function Scrollbar(props: {
   onClick?: JSX.EventHandlerUnion<HTMLDivElement, MouseEvent>
 }) {
   mountStyle(scrollCss, 'jige-ui-scrollbar')
-  const [hidden, setHidden] = createSignal(false)
+  const [hidden, setHidden] = createSignal(true)
   return (
     <ScrollbarCore
       class={props.class}
