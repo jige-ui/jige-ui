@@ -7,7 +7,7 @@ import { context } from './context'
 
 export function Root(props: {
   value?: string
-  options?: string[]
+  options: string[]
   disabled?: boolean
   children: JSX.Element
 }) {

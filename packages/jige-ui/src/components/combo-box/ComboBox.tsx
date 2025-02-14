@@ -4,7 +4,7 @@ import { Trigger } from './Trigger'
 
 export function ComboBox(props: {
   value?: string
-  options?: string[]
+  options: string[]
   disabled?: boolean
 }) {
   return (
