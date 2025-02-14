@@ -14,7 +14,7 @@ export function useDialog(): DialogFactory {
     })
   }
   const dialog: DialogFactory = {} as DialogFactory
-  const keys = ['error', 'success', 'warning'] as const
+  const keys = ['error', 'success', 'warning', 'info'] as const
 
   keys.forEach((type) => {
     dialog[type] = (contentOrConf: string | Omit<DialogInst, 'id' | 'type'>) => {

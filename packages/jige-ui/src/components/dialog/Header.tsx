@@ -1,10 +1,10 @@
 import { ModalCore } from 'jige-core'
 import { createMemo, Match, Switch } from 'solid-js'
 import { Button } from '../button'
-import { CheckboxCircleFill, CloseCircleFill, CloseLargeFill, WarningFill } from '../icons'
+import { CheckboxCircleFill, CloseCircleFill, CloseLargeFill, InfoFill, WarningFill } from '../icons'
 
 export function Header(props: {
-  type: 'error' | 'warning' | 'success'
+  type: 'error' | 'warning' | 'success' | 'info'
   title: string
   onCloseClick?: () => void
 }) {
@@ -17,6 +17,8 @@ export function Header(props: {
         return 'var(--jg-fg-success)'
       case 'warning':
         return 'var(--jg-fg-warning)'
+      case 'info':
+        return 'var(--jg-fg-info)'
     }
   })
   return (
@@ -41,6 +43,9 @@ export function Header(props: {
             </Match>
             <Match when={props.type === 'warning'}>
               <WarningFill />
+            </Match>
+            <Match when={props.type === 'info'}>
+              <InfoFill />
             </Match>
           </Switch>
 

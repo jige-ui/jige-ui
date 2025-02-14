@@ -4,7 +4,7 @@ import { createMemo, onMount, Show } from 'solid-js'
 import { Button } from '../button'
 
 export function Footer(props: {
-  type: 'error' | 'warning' | 'success'
+  type: 'error' | 'warning' | 'success' | 'info'
   positiveText: string
   negativeText: string
   onPositiveClick?: () => void | Promise<void>
@@ -18,14 +18,7 @@ export function Footer(props: {
   })
 
   const color = createMemo(() => {
-    switch (props.type) {
-      case 'error':
-        return 'var(--jg-fg-danger)'
-      case 'success':
-        return 'var(--jg-fg-success)'
-      case 'warning':
-        return 'var(--jg-fg-warning)'
-    }
+    return `var(--jg-fg-${props.type})`
   })
   return (
     <div style={{
