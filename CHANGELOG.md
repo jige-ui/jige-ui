@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.23.0](https://github.com/jige-ui/jige-ui/compare/v0.22.0...v0.23.0) (2025-02-14)
+
+
+### Features
+
+* add component toast ([#16](https://github.com/jige-ui/jige-ui/issues/16)) ([20860c8](https://github.com/jige-ui/jige-ui/commit/20860c8638ed9505301a49dbdad69d6de2602790))
+* add zindex and default timeout config to toast ([814312a](https://github.com/jige-ui/jige-ui/commit/814312a04aa1e27aa03bb97e781a6a29f1a317cd))
+
+
+### Bug Fixes
+
+* scrollbar didn't hide when page loaded ([30d5bef](https://github.com/jige-ui/jige-ui/commit/30d5bef1630062ac330d735d4d143988cae6fb79))
+
 ## [0.22.0](https://github.com/jige-ui/jige-ui/compare/v0.21.6...v0.22.0) (2025-02-10)
 
 
