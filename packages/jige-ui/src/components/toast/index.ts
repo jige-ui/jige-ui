@@ -23,13 +23,13 @@ export function useToast(): ToastFactory {
           type,
           content: contentOrConf,
           title: type,
-          timeout: 3000,
+          timeout: 0,
         })
       }
       else {
         createInst({
           type,
-          timeout: 3000,
+          timeout: 0,
           ...contentOrConf,
         })
       }

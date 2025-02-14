@@ -9,21 +9,35 @@ import { Toast } from './Toast'
 
 export function Provider(props: {
   children: JSX.Element
+  defaultTimeout?: number
+  zIndex?: number
 }) {
   mountStyle(css, 'jige-ui-toast')
 
-  const Context = context.initial()
+  const Context = context.initial({
+    defaultTimeout: () => props.defaultTimeout,
+    zIndex: () => props.zIndex,
+  })
   const [state] = Context.value
 
   return (
     <Context.Provider>
       {props.children}
       <Portal mount={document.body}>
-        <div class="jg-toast-container">
+        <div
+          class="jg-toast-container"
+          style={{
+            'z-index': state.zIndex,
+          }}
+        >
           <For each={state.insts}>
             {(item) => {
               return (
-                <Toast inst={item} />
+                <Toast inst={{
+                  ...item,
+                  timeout: item.timeout || state.defaultTimeout,
+                }}
+                />
               )
             }}
           </For>
