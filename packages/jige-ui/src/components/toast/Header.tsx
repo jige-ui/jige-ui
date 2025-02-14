@@ -1,4 +1,3 @@
-import { ModalCore } from 'jige-core'
 import { createMemo, Match, Switch } from 'solid-js'
 import { Button } from '../button'
 import { CheckboxCircleFill, CloseCircleFill, CloseLargeFill, InfoFill, WarningFill } from '../icons'
@@ -6,19 +5,14 @@ import { CheckboxCircleFill, CloseCircleFill, CloseLargeFill, InfoFill, WarningF
 export function Header(props: {
   type: 'error' | 'warning' | 'success' | 'info'
   title: string
-  onCloseClick?: () => void
+  onCloseClick: () => void
 }) {
-  const [, actions] = ModalCore.useContext()
   const color = createMemo(() => {
     switch (props.type) {
       case 'error':
         return 'var(--jg-fg-danger)'
-      case 'success':
-        return 'var(--jg-fg-success)'
-      case 'warning':
-        return 'var(--jg-fg-warning)'
-      case 'info':
-        return 'var(--jg-fg-info)'
+      default:
+        return `var(--jg-fg-${props.type})`
     }
   })
   return (
@@ -26,12 +20,12 @@ export function Header(props: {
       <div style={{
         'display': 'flex',
         'align-items': 'center',
+        'width': '100%',
       }}
       >
-
         <div style={{
           'color': color(),
-          'font-size': '26px',
+          'font-size': '1.18em',
         }}
         >
           <Switch>
@@ -48,26 +42,26 @@ export function Header(props: {
               <InfoFill />
             </Match>
           </Switch>
-
         </div>
         <div style={{
           'margin-left': '8px',
-          'font-size': '18px',
+          'font-size': '1.07em',
         }}
         >
           {props.title}
         </div>
+
       </div>
       <Button
         variant="text"
         onClick={() => {
-          actions.setOpen(false)
-          props.onCloseClick?.()
+          props.onCloseClick()
         }}
         icon={<CloseLargeFill />}
         color="var(--jg-fg4)"
         style={{
-          opacity: 0.85,
+          'opacity': 0.85,
+          'font-size': '.8em',
         }}
       />
     </>

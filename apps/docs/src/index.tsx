@@ -1,4 +1,4 @@
-import { JigeDialogProvider, JigeProvider } from 'jige-ui'
+import { JigeDialogProvider, JigeProvider, JigeToastProvider } from 'jige-ui'
 
 /* @refresh reload */
 import { render } from 'solid-js/web'
@@ -13,7 +13,9 @@ const root = document.querySelector('#root')
 render(() => (
   <JigeProvider>
     <JigeDialogProvider>
-      <App />
+      <JigeToastProvider>
+        <App />
+      </JigeToastProvider>
     </JigeDialogProvider>
   </JigeProvider>
 ), root!)
