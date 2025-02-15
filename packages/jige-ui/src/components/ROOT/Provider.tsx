@@ -8,7 +8,7 @@ export function Provider(props: {
   children: any
   hue?: number
   themeColors?: ThemeVars
-  zIndexConfig?: { tooltip?: number, popover?: number, modal?: number }
+  zIndexConfig?: { tooltip?: number, popover?: number, toast?: number, modal?: number }
 }) {
   const Context = RootContext.initial({
     hue: () => props.hue,

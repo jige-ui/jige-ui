@@ -3,6 +3,7 @@ import type { JSX } from 'solid-js/jsx-runtime'
 export type ButtonVariant = 'link' | 'text' | 'solid'
 
 export interface ButtonProps {
+  type?: 'button' | 'submit' | 'reset'
   label?: string
   target?: string
   icon?: JSX.Element
@@ -17,4 +18,5 @@ export interface ButtonProps {
   variant?: ButtonVariant
   color?: string
   disabled?: boolean
+  download?: boolean
 }

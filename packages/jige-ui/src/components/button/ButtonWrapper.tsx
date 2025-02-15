@@ -13,6 +13,8 @@ export function ButtonWrapper(props: {
   target?: string
   disabled?: boolean
   ref?: HTMLAnchorElement | HTMLButtonElement | ((el: HTMLAnchorElement | HTMLButtonElement) => void)
+  type: 'button' | 'submit' | 'reset'
+  download?: boolean
 }) {
   const [state, actions] = context.useContext()
   const isAnchor = createMemo(() => {
@@ -36,9 +38,11 @@ export function ButtonWrapper(props: {
     <Dynamic
       disabled={props.disabled}
       component={isAnchor() ? 'a' : 'button'}
+      type={props.type}
       ref={props.ref as any}
       href={props.href}
       target={props.target}
+      download={props.download}
       onClick={(e: any) => {
         if (state.loading || isAnchor() || props.disabled)
           return

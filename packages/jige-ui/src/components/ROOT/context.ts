@@ -5,7 +5,7 @@ import { defaultThemeColors } from './gen_vars'
 const context = createComponentState({ state: () => ({
   hue: 165,
   themeColors: { ...defaultThemeColors } as ThemeVars,
-  zIndexConfig: { tooltip: 999, popover: 998, modal: 997 },
+  zIndexConfig: { tooltip: 999, popover: 998, toast: 997, modal: 996 },
 }), methods: {
   setHue(hue: number) {
     let normalized = hue

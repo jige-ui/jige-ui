@@ -4,6 +4,7 @@ import { For } from 'solid-js'
 import { Portal } from 'solid-js/web'
 
 import { mountStyle } from 'solid-uses'
+import { JigeRootContext } from '../ROOT'
 import { context } from './context'
 import { Toast } from './Toast'
 
@@ -16,9 +17,9 @@ export function Provider(props: {
 
   const Context = context.initial({
     defaultTimeout: () => props.defaultTimeout,
-    zIndex: () => props.zIndex,
   })
   const [state] = Context.value
+  const [rootState] = JigeRootContext.useContext()
 
   return (
     <Context.Provider>
@@ -27,7 +28,7 @@ export function Provider(props: {
         <div
           class="jg-toast-container"
           style={{
-            'z-index': state.zIndex,
+            'z-index': rootState.zIndexConfig.toast,
           }}
         >
           <For each={state.insts}>

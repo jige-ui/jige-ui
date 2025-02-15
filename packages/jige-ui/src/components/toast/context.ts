@@ -4,7 +4,6 @@ import { createComponentState } from 'solid-uses'
 export const context = createComponentState({
   state: () => ({
     insts: [] as ToastInst[],
-    zIndex: 996,
     defaultTimeout: 3000,
   }),
   methods: {

@@ -8,8 +8,10 @@ import { context } from './context'
 export function Root(props: {
   children: JSX.Element
   open?: boolean
+  onOpenChange?: (open: boolean) => void
   preventScroll?: boolean
   closeOnInteractOutside?: boolean
+  closeOnEsc?: boolean
 }) {
   mountStyle(css, 'jige-ui-modal')
   const Context = context.initial()

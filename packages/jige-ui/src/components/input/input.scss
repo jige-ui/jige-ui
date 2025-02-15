@@ -24,9 +24,8 @@
   }
 
   &[data-focused] {
-    background: funcs.get-var('t-bg1');
-
     &::before {
+      background: funcs.get-var('t-bg1');
       border-bottom-color: funcs.get-var('t-hl');
       border-bottom-width: 2px;
     }

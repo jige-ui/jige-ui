@@ -2,12 +2,13 @@ import type { JSX } from 'solid-js/jsx-runtime'
 import { FloatingUiCore, FormCore } from 'jige-core'
 import css from 'sass:./combo-box.scss'
 
-import { mountStyle } from 'solid-uses'
+import { mountStyle, watch } from 'solid-uses'
 import { context } from './context'
 
 export function Root(props: {
   value?: string
   options: string[]
+  onChange?: (value: string) => void
   disabled?: boolean
   children: JSX.Element
 }) {
@@ -19,6 +20,10 @@ export function Root(props: {
     options: () => props.options,
   })
   const [state, actions] = Context.value
+
+  watch(() => state.value, (v) => {
+    props.onChange?.(v)
+  })
   return (
     <Context.Provider>
       <FormCore.Bind

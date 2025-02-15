@@ -8,9 +8,10 @@
 }
 
 .jg-modal-content {
-  padding: 6px;
+  padding: 8px;
   margin-top: -38vh;
   background: funcs.get-var('t-bg2');
+  border: 1px solid funcs.get-var('t-border');
   border-radius: 6px;
   box-shadow: funcs.get-var('shadow8');
   animation-duration: 250ms;
@@ -60,8 +61,7 @@
 
 /* mask */
 .jg-modal-mask {
-  background: rgb(0 0 0 / 10%);
-  backdrop-filter: blur(2px);
+  background: rgb(0 0 0 / 40%);
   opacity: 0;
   transition: opacity 250ms;
 
@@ -72,10 +72,6 @@
   &[data-modal-status^="open"] {
     opacity: 1;
   }
-}
-
-.dark .jg-modal-mask {
-  background: rgb(255 255 255 / 10%);
 }
 
 /* mask end */

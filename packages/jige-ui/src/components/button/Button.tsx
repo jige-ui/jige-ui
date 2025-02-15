@@ -30,6 +30,8 @@ export function Button<T extends (string | undefined) = undefined>(props: Button
         class={props.class}
         target={props.target}
         disabled={props.disabled}
+        type={props.type || 'button'}
+        download={props.download}
       >
         <div class="jg-btn-overlay" />
         <ButtonContent icon={props.icon} label={props.label}>
