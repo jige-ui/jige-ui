@@ -14,14 +14,14 @@
     "@mdx-js/mdx": "3.1.0",
     "@solidjs/meta": "^0.29.4",
     "@solidjs/router": "^0.15.2",
-    "@unocss/reset": "^65.4.2",
+    "@unocss/reset": "^66.0.0",
     "esday": "^0.4.1",
     "jige-core": "^0.35.1",
     "jige-ui": "workspace:^",
     "radash": "^12.1.0",
     "solid-js": "^1.9.3",
     "solid-uses": "0.8.1",
-    "unocss": "^65.4.2"
+    "unocss": "^66.0.0"
   },
   "devDependencies": {
     "@mdx-js/rollup": "3.1.0",
