@@ -43,7 +43,7 @@ export function Root(props: {
               const totalHeight = state.valueIndex * (state.listItemHeight + 4)
               const scrollTop = totalHeight - rects.floating.height / 2 + state.listItemHeight / 2
               $scroll.scrollTop = scrollTop
-              const toTop = totalHeight - $scroll.scrollTop + state.listItemHeight + 4
+              const toTop = totalHeight - $scroll.scrollTop + state.listItemHeight + 6
               actions.setOriginY(totalHeight - $scroll.scrollTop)
               return -toTop
             },

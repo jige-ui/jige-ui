@@ -14,11 +14,11 @@
   overflow: hidden;
 
   &[data-status="opening"] {
-    animation: toast-opening 0.3s ease-out;
+    animation: toast-opening 250ms ease-out;
   }
 
   &[data-status="closing"] {
-    animation: toast-closing 0.3s ease-out;
+    animation: toast-closing 250ms ease-out;
   }
 }
 
@@ -65,12 +65,10 @@
 
 @keyframes toast-opening {
   0% {
-    max-height: 0;
     opacity: 0;
   }
 
   100% {
-    max-height: var(--height);
     opacity: 1;
   }
 }
