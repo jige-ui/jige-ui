@@ -43,7 +43,7 @@
     "oklch-colors": "^0.0.1",
     "radash": "^12.1.0",
     "sass": "^1.77.8",
-    "solid-uses": "^0.8.1"
+    "solid-uses": "^0.9.0"
   },
   "devDependencies": {
     "esbuild-plugin-inline-import": "^1.1.0",
