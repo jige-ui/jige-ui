@@ -1,6 +1,7 @@
 @use '../../styles/funcs';
 
 .jg-combo-box-list {
+  padding: 4px 0;
   margin: 6px;
   background: funcs.get-var('t-bg1');
   border-radius: .25em;
@@ -14,26 +15,29 @@
   }
 }
 
-.jg-combo-box-list-inner {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  padding: 4px;
+.jg-combo-box-scrollarea {
+  padding: 0 4px;
 }
 
 .jg-combo-box-item {
-  position: relative;
-  display: flex;
-  align-items: center;
-  padding-left: 8px;
-  cursor: pointer;
-  border-radius: .2em;
+  padding: 2px 0;
 
-  &:hover {
+  > div {
+    position: relative;
+    padding-left: 8px;
+    cursor: pointer;
+    border-radius: .2em;
+  }
+
+  &:hover > div {
     background: funcs.get-var('t-bg4');
   }
 
-  &[data-checked] {
+  &[data-highlight] > div {
+    background: funcs.get-var('t-bg4');
+  }
+
+  &[data-selected] > div {
     background: funcs.get-var('t-bg4') !important;
 
     &::after {
