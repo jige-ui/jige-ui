@@ -17,7 +17,7 @@ export function Demo() {
             <label class="text-sm">Value: </label>
             <span>{value()}</span>
           </div>
-          <ComboBox value={value()} options={list(100).map(v => v.toString())} disabled={p.disabled} onChange={setValue} />
+          <ComboBox value={value()} options={list(20000).map(v => v.toString())} disabled={p.disabled} onChange={setValue} />
         </div>
       </Playground.MainArea>
       <Playground.PropertySetting properties={p} onChange={setP} />

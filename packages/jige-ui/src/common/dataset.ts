@@ -1,6 +1,6 @@
-function setData(dataSets: { [key: string]: string | boolean }): { [key: string]: string }
-function setData(name: string, data: string | boolean): { [key: string]: string }
-function setData(name: string | { [key: string]: string | boolean }, data?: string | boolean) {
+function setData(dataSets: { [key: string]: string | boolean | number }): { [key: string]: string }
+function setData(name: string, data: string | boolean | number): { [key: string]: string }
+function setData(name: string | { [key: string]: string | boolean | number }, data?: string | boolean | number) {
   const attrName = `data-${name}`
   if (typeof name === 'object') {
     return Object.entries(name).reduce((acc, [name, data]) => {

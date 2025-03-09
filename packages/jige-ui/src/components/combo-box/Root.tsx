@@ -40,12 +40,12 @@ export function Root(props: {
           floatingOption={{
             offset: ({ elements, rects }) => {
               const $scroll = elements.floating.querySelector('.jg-combo-box-scrollarea')!.firstChild as HTMLElement
-              const totalHeight = state.valueIndex * (state.listItemHeight + 4)
+              const totalHeight = state.valueIndex * (state.listItemHeight)
               const scrollTop = totalHeight - rects.floating.height / 2 + state.listItemHeight / 2
               $scroll.scrollTop = scrollTop
-              const toTop = totalHeight - $scroll.scrollTop + state.listItemHeight + 6
+              const toTop = totalHeight - $scroll.scrollTop + state.listItemHeight
               actions.setOriginY(totalHeight - $scroll.scrollTop)
-              return -toTop
+              return -toTop - 8
             },
             flip: false,
             shift: {
@@ -53,8 +53,8 @@ export function Root(props: {
             },
             size: {
               apply({ rects }) {
-                actions.setListItemHeight(rects.reference.height)
-                actions.setListItemWidth(rects.reference.width - 8)
+                actions.setListItemHeight(rects.reference.height + 4)
+                actions.setListItemWidth(rects.reference.width)
               },
             },
           }}
