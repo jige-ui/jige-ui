@@ -1,5 +1,5 @@
 import type { JSX } from 'solid-js'
-import { createMemo, createSignal } from 'solid-js'
+import { createVirtualList } from '~/common/createVirtualList'
 import { CommonScrollWrapper } from './CommonScrollWrapper'
 
 export function VirtualInner(props: {
@@ -16,30 +16,19 @@ export function VirtualInner(props: {
   itemClass?: string
   scrollToSelected: boolean
 }) {
-  const [offset, setOffset] = createSignal(0)
-
-  const getFirstIdx = () => Math.max(0, Math.floor(offset() / props.rowHeight) - props.overscanCount)
-
-  const getLastIdx = () =>
-    Math.min(
-      props.items.length,
-      Math.floor(offset() / props.rowHeight) + Math.ceil(props.rootHeight / props.rowHeight) + props.overscanCount,
-    )
-
-  const containerHeight = createMemo(() => props.items.length * props.rowHeight)
-  const viewerTop = createMemo(() => getFirstIdx() * props.rowHeight)
-  const visibleItems = createMemo(() => props.items.map((value, index) => ({ value, index })).slice(getFirstIdx(), getLastIdx()))
+  const [{containerHeight, viewerTop, visibleItems}, onScroll] = createVirtualList({
+    items: () => props.items.map((value, index) => ({ value, index })),
+    rowHeight: () => props.rowHeight,
+    rootHeight: () => props.rootHeight,
+    overscanCount: () => props.overscanCount,
+  })
 
   return (
     <CommonScrollWrapper
       scrollToSelected={props.scrollToSelected}
       class={props.class}
       itemClass={props.itemClass}
-      onScroll={(e) => {
-        const el = e.target as HTMLElement
-        if (el?.scrollTop !== undefined)
-          setOffset(el.scrollTop)
-      }}
+      onScroll={onScroll}
       rootHeight={props.rootHeight}
       rowHeight={props.rowHeight}
       contentStyle={{

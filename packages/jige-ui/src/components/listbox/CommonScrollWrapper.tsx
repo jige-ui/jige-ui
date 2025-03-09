@@ -58,9 +58,7 @@ export function CommonScrollWrapper<T extends any[]>(props: {
       }
       else {
         if (ref) {
-          ref.scrollTo({
-            top: (index * props.rowHeight) - (props.rootHeight - props.rowHeight),
-          })
+          ref.scrollTop = (index * props.rowHeight) - (props.rootHeight - props.rowHeight)
         }
       }
     }
