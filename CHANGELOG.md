@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.24.0](https://github.com/jige-ui/jige-ui/compare/v0.23.1...v0.24.0) (2025-03-16)
+
+
+### Features
+
+* add componet 'listbox' and migrate to 'combobox' ([#21](https://github.com/jige-ui/jige-ui/issues/21)) ([fc6643f](https://github.com/jige-ui/jige-ui/commit/fc6643f4c0270bd1c40f01a02bdf2a2501763814))
+* remove 'select' and refactor form components ([8315b44](https://github.com/jige-ui/jige-ui/commit/8315b442eba809a7ffd4eed1c3d788ecf20632d7))
+
+
+### Bug Fixes
+
+* some style corections ([c031a79](https://github.com/jige-ui/jige-ui/commit/c031a7991616eab43104ff3349260350b0f49daf))
+
 ## [0.23.1](https://github.com/jige-ui/jige-ui/compare/v0.23.0...v0.23.1) (2025-02-15)
 
 
