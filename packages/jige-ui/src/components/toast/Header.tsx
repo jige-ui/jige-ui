@@ -1,6 +1,12 @@
-import { createMemo, Match, Switch } from 'solid-js'
+import { Match, Switch, createMemo } from 'solid-js'
 import { Button } from '../button'
-import { CheckboxCircleFill, CloseCircleFill, CloseLargeFill, InfoFill, WarningFill } from '../icons'
+import {
+  CheckboxCircleFill,
+  CloseCircleFill,
+  CloseLargeFill,
+  InfoFill,
+  WarningFill,
+} from '../icons'
 
 export function Header(props: {
   type: 'error' | 'warning' | 'success' | 'info'
@@ -17,16 +23,18 @@ export function Header(props: {
   })
   return (
     <>
-      <div style={{
-        'display': 'flex',
-        'align-items': 'center',
-        'width': '100%',
-      }}
-      >
-        <div style={{
-          'color': color(),
-          'font-size': '1.18em',
+      <div
+        style={{
+          display: 'flex',
+          'align-items': 'center',
+          width: '100%',
         }}
+      >
+        <div
+          style={{
+            color: color(),
+            'font-size': '1.18em',
+          }}
         >
           <Switch>
             <Match when={props.type === 'error'}>
@@ -43,24 +51,24 @@ export function Header(props: {
             </Match>
           </Switch>
         </div>
-        <div style={{
-          'margin-left': '8px',
-          'font-size': '1.07em',
-        }}
+        <div
+          style={{
+            'margin-left': '8px',
+            'font-size': '1.07em',
+          }}
         >
           {props.title}
         </div>
-
       </div>
       <Button
-        variant="text"
+        variant='text'
         onClick={() => {
           props.onCloseClick()
         }}
         icon={<CloseLargeFill />}
-        color="var(--jg-fg4)"
+        color='var(--jg-fg4)'
         style={{
-          'opacity': 0.85,
+          opacity: 0.85,
           'font-size': '.8em',
         }}
       />

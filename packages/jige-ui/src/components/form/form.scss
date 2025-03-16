@@ -1,0 +1,41 @@
+@use '../../styles/funcs';
+
+.jg-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.jg-form-field {
+  display: flex;
+  flex-direction: column;
+
+  &[data-invalid] {
+    .jg-input-wrapper::before {
+      border-bottom-color: funcs.get-var('fg-danger') !important;
+    }
+  }
+}
+
+.jg-form-field-control {
+  display: flex;
+  flex-direction: column;
+}
+
+.jg-form-field-label {
+  margin-bottom: 4px;
+  font-size: 14px;
+}
+
+.jg-form-field-description {
+  display: flex;
+  align-items: center;
+  height: 16px;
+  margin-bottom: 5px;
+  font-size: 12px;
+  opacity: .8;
+
+  &[data-invalid] {
+    color: funcs.get-var('fg-danger');
+    opacity: 1;
+  }
+}

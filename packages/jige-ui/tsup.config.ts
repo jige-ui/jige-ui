@@ -1,10 +1,10 @@
-import type { Options } from 'tsup'
 import browserslist from 'browserslist'
 import inlineImportPlugin from 'esbuild-plugin-inline-import'
 // tsup.config.ts
 import { solidPlugin } from 'esbuild-plugin-solid'
 import { browserslistToTargets, transform as lightCss } from 'lightningcss'
 import { compileAsync } from 'sass'
+import type { Options } from 'tsup'
 import { defineConfig } from 'tsup'
 
 const inlinePlugin = inlineImportPlugin({
@@ -48,7 +48,9 @@ function generateConfig(jsx: boolean, dts?: boolean): Options {
     outExtension() {
       return jsx ? { js: '.jsx' } : {}
     },
-    esbuildPlugins: !jsx ? [solidPlugin({ solid: { generate: 'dom' } }), inlinePlugin] : [inlinePlugin],
+    esbuildPlugins: !jsx
+      ? [solidPlugin({ solid: { generate: 'dom' } }), inlinePlugin]
+      : [inlinePlugin],
   }
 }
 
@@ -56,7 +58,5 @@ export default defineConfig((opt) => {
   if (opt.watch) {
     return generateConfig(true, true)
   }
-  else {
-    return [generateConfig(false, true), generateConfig(true)]
-  }
+  return [generateConfig(false, true), generateConfig(true)]
 })

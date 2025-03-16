@@ -1,6 +1,6 @@
-import type { JSX } from 'solid-js'
 import css from 'sass:./listbox.scss'
-import { mergeProps, Show } from 'solid-js'
+import type { JSX } from 'solid-js'
+import { Show, mergeProps } from 'solid-js'
 import { mountStyle } from 'solid-uses'
 
 import { ListInner } from './ListInner'
@@ -22,27 +22,21 @@ export function Listbox<T extends any[]>(props: {
   scrollToSelected?: boolean
 }) {
   mountStyle(css, 'jige-ui-listbox')
-  const realProps = mergeProps({
-    selectIndex: -1,
-    selectTrigger: 'click' as 'click' | 'arrow',
-    onSelect: () => {},
-    scrollToSelected: true,
-    overscanCount: 5,
-    fallback: <div />,
-  }, props)
+  const realProps = mergeProps(
+    {
+      selectIndex: -1,
+      selectTrigger: 'click' as 'click' | 'arrow',
+      onSelect: () => {},
+      scrollToSelected: true,
+      overscanCount: 5,
+      fallback: <div />,
+    },
+    props,
+  )
 
   return (
-    <Show
-      when={props.virtual || props.items.length > 500}
-      fallback={(
-        <ListInner
-          {...realProps}
-        />
-      )}
-    >
-      <VirtualInner
-        {...realProps}
-      />
+    <Show when={props.virtual || props.items.length > 500} fallback={<ListInner {...realProps} />}>
+      <VirtualInner {...realProps} />
     </Show>
   )
 }

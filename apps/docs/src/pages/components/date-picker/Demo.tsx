@@ -6,7 +6,7 @@ import { createMemo, createSignal } from 'solid-js'
 export function Demo() {
   const [currDates, setCurrDates] = createSignal<string[]>([])
   const [hlDates, setHlDates] = createSignal<string[]>([])
-  const dsDates = createMemo(() => currDates().filter(d => !hlDates().includes(d)))
+  const dsDates = createMemo(() => currDates().filter((d) => !hlDates().includes(d)))
   return (
     <div>
       <div>

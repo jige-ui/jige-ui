@@ -1,13 +1,11 @@
-import type { ToastFactory, ToastInst } from './types'
 import { createUniqueId } from 'solid-js'
-import { context } from './context'
 import { Provider } from './Provider'
+import { context } from './context'
+import type { ToastFactory, ToastInst } from './types'
 
 export function useToast(): ToastFactory {
-  const [,actions] = context.useContext()
-  function createInst(
-    inst: Omit<ToastInst, 'id'>,
-  ) {
+  const [, actions] = context.useContext()
+  function createInst(inst: Omit<ToastInst, 'id'>) {
     actions.addInst({
       ...inst,
       id: createUniqueId(),
@@ -16,25 +14,22 @@ export function useToast(): ToastFactory {
   const toast: ToastFactory = {} as ToastFactory
   const keys = ['error', 'success', 'warning', 'info'] as const
 
-  keys.forEach((type) => {
+  for (const type of keys) {
     toast[type] = (contentOrConf: string | Omit<ToastInst, 'id' | 'type'>) => {
       if (typeof contentOrConf === 'string') {
         createInst({
           type,
           content: contentOrConf,
           title: type,
-          timeout: 0,
         })
-      }
-      else {
+      } else {
         createInst({
           type,
-          timeout: 0,
           ...contentOrConf,
         })
       }
     }
-  })
+  }
 
   return toast
 }

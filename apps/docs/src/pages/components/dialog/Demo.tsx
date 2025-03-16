@@ -15,7 +15,7 @@ export function Demo() {
       <Playground.MainArea>
         <div>
           <Button
-            label="Fire Dialog"
+            label='Fire Dialog'
             onClick={() => {
               $d[s.type]({
                 title: s.title,

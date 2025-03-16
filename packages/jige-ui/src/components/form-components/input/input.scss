@@ -1,0 +1,83 @@
+@use '../../../styles/funcs';
+
+.jg-input-wrapper {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  border: 2px solid transparent;
+
+  &::before {
+    position: absolute;
+    inset: 0;
+    content: '';
+    background: funcs.get-var('t-bg2');
+    border: 1px solid funcs.get-var('t-border');
+    border-bottom-color: funcs.get-var('fg4');
+    border-radius: .25em;
+  }
+
+  &[data-disabled] {
+    pointer-events: none;
+    opacity: .6;
+  }
+
+  &[data-focused] {
+    &::before {
+      background: funcs.get-var('t-bg1');
+      border-bottom-color: funcs.get-var('t-hl');
+      border-bottom-width: 2px;
+    }
+  }
+
+  &:not([data-focused]):hover {
+    &::before {
+      background: funcs.get-var('t-bg3');
+    }
+  }
+}
+
+
+.jg-input-suffix {
+  position: relative;
+  display: inline-flex;
+  flex-shrink: 0;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: center;
+  margin-right: 4px;
+  margin-left: 4px;
+  color: funcs.get-var("fg4");
+  white-space: nowrap;
+  transition: color .3s funcs.get-var("bezier");
+}
+
+.jg-input-placeholder {
+  position: absolute;
+  top: 4px;
+  left: 10px;
+  font-size: .9em;
+  color: funcs.get-var("fg4");
+  pointer-events: none;
+  user-select: none;
+  opacity: .6;
+  transition: all 0.3s;
+}
+
+.jg-input-native {
+  position: relative;
+  flex-grow: 1;
+  width: 100%;
+  padding: 4px 8px;
+  margin: 0;
+  resize: none;
+  outline: none;
+  border: none;
+
+  &::placeholder {
+    display: none;
+    opacity: 0;
+  }
+}
+

@@ -10,18 +10,17 @@
     "build:ui": "cd packages/jige-ui && pnpm build",
     "clean": "turbo run clean && rimraf .turbo node_modules",
     "dev": "turbo dev",
-    "lint": "eslint ./packages/jige-ui",
+    "lint": "pnpm exec biome check .",
+    "lint:fix": "pnpm exec biome check --write .",
     "type-check": "cd packages/jige-ui && pnpm type-check",
     "release": "commit-and-tag-version -i CHANGELOG.md --same-file",
     "prepare": "husky"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "^4.8.1",
+    "@biomejs/biome": "1.9.4",
     "@commitlint/cli": "^19.8.0",
     "@commitlint/config-conventional": "^19.8.0",
     "commit-and-tag-version": "^12.5.0",
-    "eslint": "^9.22.0",
-    "eslint-plugin-solid": "^0.14.5",
     "husky": "^9.1.7",
     "rimraf": "^6.0.1",
     "turbo": "^2.4.4"

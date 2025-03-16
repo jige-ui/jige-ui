@@ -1,5 +1,5 @@
-import type { RGBColor } from './rgb_lrgb'
 import { convertRgbToOkLch, safeOklchToRgb } from './culori'
+import type { RGBColor } from './rgb_lrgb'
 
 type HashColor = `#${string}`
 
@@ -10,7 +10,7 @@ function hexToRgb(hex: string): RGBColor {
   const hexes = /^#?([\da-f]+)$/i.exec(hex.toLowerCase())
   let hexString = '00aeec'
 
-  if (hexes && hexes[1]) {
+  if (hexes?.[1]) {
     const tar = hexes[1]
     if (tar.length >= 3 && tar.length < 6) {
       const tmp = tar.slice(0, 3)
@@ -64,8 +64,7 @@ export function extractHue(color: ColorType): number {
   let rgb: RGBColor
   if (typeof color === 'string') {
     rgb = hexToRgb(color)
-  }
-  else {
+  } else {
     rgb = color
   }
   return convertRgbToOkLch(rgb).h

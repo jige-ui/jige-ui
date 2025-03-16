@@ -11,9 +11,7 @@ export function SpinDemo() {
         <Switcher value={loading()} onChange={setLoading} />
       </div>
       <Spin spinning={loading()} size={8}>
-        <div class="bg-bluegray h-full">
-          测试罢了
-        </div>
+        <div class='bg-bluegray h-full'>测试罢了</div>
       </Spin>
     </div>
   )

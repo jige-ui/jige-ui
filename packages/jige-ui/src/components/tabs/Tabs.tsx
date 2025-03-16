@@ -1,7 +1,7 @@
-import type { JSX } from 'solid-js'
-import { AnimatedGroup, RadioGroupCore } from 'jige-core'
 import styles from 'sass:./tabs.scss'
-import { createMemo, createSignal, For } from 'solid-js'
+import { AnimatedGroup, RadioGroupCore } from 'jige-core'
+import type { JSX } from 'solid-js'
+import { For, createMemo, createSignal } from 'solid-js'
 import { mountStyle, watch } from 'solid-uses'
 
 import { setData } from '~/common/dataset'
@@ -12,7 +12,11 @@ function Content(props: {
   key: string
 }) {
   const [state] = context.useContext()
-  return <AnimatedGroup.Panel key={props.key} class="jg-ani-tab" data-dir={state.dir}>{props.children}</AnimatedGroup.Panel>
+  return (
+    <AnimatedGroup.Panel key={props.key} class='jg-ani-tab' data-dir={state.dir}>
+      {props.children}
+    </AnimatedGroup.Panel>
+  )
 }
 
 function Root(props: {
@@ -28,17 +32,18 @@ function Root(props: {
 
   const [prevActive, setPrevActive] = createSignal('')
 
-  watch(() => props.active, (active, prev) => {
-    if (!prev)
-      return
-    setPrevActive(prev)
-    if (props.options.indexOf(prev) < props.options.indexOf(active)) {
-      actions.setDir('right')
-    }
-    else {
-      actions.setDir('left')
-    }
-  })
+  watch(
+    () => props.active,
+    (active, prev) => {
+      if (!prev) return
+      setPrevActive(prev)
+      if (props.options.indexOf(prev) < props.options.indexOf(active)) {
+        actions.setDir('right')
+      } else {
+        actions.setDir('left')
+      }
+    },
+  )
 
   const normalizeOptions = createMemo(() => {
     return props.options.map((option) => {
@@ -50,20 +55,17 @@ function Root(props: {
   })
   return (
     <Context.Provider>
-      <div class="jg-tabs">
-        <RadioGroupCore
-          onChange={props.onChange}
-          value={props.active}
-        >
-          <div class="jg-tabs-header">
+      <div class='jg-tabs'>
+        <RadioGroupCore onChange={props.onChange} value={props.active}>
+          <div class='jg-tabs-header'>
             <For each={normalizeOptions()}>
-              {item => (
+              {(item) => (
                 <RadioGroupCore.Item value={item.value}>
                   <RadioGroupCore.ItemNative />
                   <RadioGroupCore.ItemControl>
-                    {state => (
+                    {(state) => (
                       <div
-                        class="jg-tabs-header-item"
+                        class='jg-tabs-header-item'
                         {...setData({
                           checked: state.value === item.value,
                           prev: prevActive() === item.value,
@@ -79,12 +81,11 @@ function Root(props: {
             </For>
           </div>
         </RadioGroupCore>
-        <AnimatedGroup active={props.active} onChange={props.onChange} class="jg-tabs-content">
+        <AnimatedGroup active={props.active} onChange={props.onChange} class='jg-tabs-content'>
           {props.children}
         </AnimatedGroup>
       </div>
     </Context.Provider>
-
   )
 }
 

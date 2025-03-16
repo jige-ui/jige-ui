@@ -1,47 +1,37 @@
-import type { JSX, Ref } from 'solid-js'
-import { ScrollbarCore } from 'jige-core'
 import scrollCss from 'sass:./scrollbar.scss'
-import { createMemo, createSignal, Show } from 'solid-js'
+import { ScrollbarCore } from 'jige-core'
+import type { JSX, Ref } from 'solid-js'
+import { Show, createMemo, createSignal } from 'solid-js'
 import { mountStyle } from 'solid-uses'
 
 function GmScrollBar(props: {
   type: 'vertical' | 'horizontal'
   hidden: boolean
-  position?: { 'top'?: string, 'left'?: string, 'right'?: string, 'bottom'?: string, 'z-index'?: number }
+  position?: { top?: string; left?: string; right?: string; bottom?: string; 'z-index'?: number }
   color?: string
 }) {
   const state = ScrollbarCore.useContext()[0]
   const isVertical = createMemo(() => props.type === 'vertical')
   const classes = createMemo(() => {
     const base = ['jg-scrollbar']
-    if (isVertical())
-      base.push('jg-scrollbar-vertical')
-    else
-      base.push('jg-scrollbar-horizontal')
+    if (isVertical()) base.push('jg-scrollbar-vertical')
+    else base.push('jg-scrollbar-horizontal')
 
-    if (props.hidden)
-      base.push('is-hidden')
-    if (state.isDragging)
-      base.push('is-dragging')
+    if (props.hidden) base.push('is-hidden')
+    if (state.isDragging) base.push('is-dragging')
     return base.join(' ')
   })
   const pos = createMemo(() => {
     if (isVertical()) {
-      return Object.assign({ top: `2px`, right: '2px', bottom: '2px' }, props.position)
+      return Object.assign({ top: '2px', right: '2px', bottom: '2px' }, props.position)
     }
-    else {
-      return Object.assign({ left: `2px`, right: '12px', bottom: '2px' }, props.position)
-    }
+    return Object.assign({ left: '2px', right: '12px', bottom: '2px' }, props.position)
   })
   return (
-    <ScrollbarCore.Bar
-      type={props.type}
-      class={classes()}
-      style={pos()}
-    >
+    <ScrollbarCore.Bar type={props.type} class={classes()} style={pos()}>
       <ScrollbarCore.Thumb
         type={props.type}
-        class="jg-scrollbar-thumb"
+        class='jg-scrollbar-thumb'
         style={{ background: props.color || 'var(--jg-t-hl-lighter)' }}
       />
     </ScrollbarCore.Bar>
@@ -52,8 +42,14 @@ export function Scrollbar(props: {
   children: JSX.Element
   color?: string
   hideVertical?: boolean
-  verticalPos?: { 'top'?: string, 'left'?: string, 'right'?: string, 'bottom'?: string, 'z-index'?: number }
-  horizontalPos?: { 'top'?: string, 'left'?: string, 'right'?: string, 'bottom'?: string, 'z-index'?: number }
+  verticalPos?: { top?: string; left?: string; right?: string; bottom?: string; 'z-index'?: number }
+  horizontalPos?: {
+    top?: string
+    left?: string
+    right?: string
+    bottom?: string
+    'z-index'?: number
+  }
   hideHorizontal?: boolean
   class?: string
   height?: string
@@ -80,16 +76,24 @@ export function Scrollbar(props: {
       onClick={props.onClick}
     >
       <ScrollbarCore.ScrollArea onScroll={props.onScroll} ref={props.scrollRef}>
-        <ScrollbarCore.Content style={props.contentStyle}>
-          {props.children}
-        </ScrollbarCore.Content>
+        <ScrollbarCore.Content style={props.contentStyle}>{props.children}</ScrollbarCore.Content>
       </ScrollbarCore.ScrollArea>
       <Show when={!props.hideVertical}>
-        <GmScrollBar type="vertical" hidden={hidden()} color={props.color} position={props.verticalPos} />
+        <GmScrollBar
+          type='vertical'
+          hidden={hidden()}
+          color={props.color}
+          position={props.verticalPos}
+        />
       </Show>
 
       <Show when={!props.hideHorizontal}>
-        <GmScrollBar type="horizontal" hidden={hidden()} color={props.color} position={props.horizontalPos} />
+        <GmScrollBar
+          type='horizontal'
+          hidden={hidden()}
+          color={props.color}
+          position={props.horizontalPos}
+        />
       </Show>
     </ScrollbarCore>
   )

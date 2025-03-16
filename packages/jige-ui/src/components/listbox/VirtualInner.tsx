@@ -16,7 +16,7 @@ export function VirtualInner(props: {
   itemClass?: string
   scrollToSelected: boolean
 }) {
-  const [{containerHeight, viewerTop, visibleItems}, onScroll] = createVirtualList({
+  const [{ containerHeight, viewerTop, visibleItems }, onScroll] = createVirtualList({
     items: () => props.items.map((value, index) => ({ value, index })),
     rowHeight: () => props.rowHeight,
     rootHeight: () => props.rootHeight,
@@ -32,8 +32,8 @@ export function VirtualInner(props: {
       rootHeight={props.rootHeight}
       rowHeight={props.rowHeight}
       contentStyle={{
-        'height': `${containerHeight()}px`,
-        'position': 'relative',
+        height: `${containerHeight()}px`,
+        position: 'relative',
         'min-width': '100px',
       }}
       ulStyle={{
@@ -47,8 +47,9 @@ export function VirtualInner(props: {
       selectIndex={props.selectIndex}
       onSelect={props.onSelect}
       fallback={props.fallback}
-      children={props.children}
       selectTrigger={props.selectTrigger}
-    />
+    >
+      {props.children}
+    </CommonScrollWrapper>
   )
 }

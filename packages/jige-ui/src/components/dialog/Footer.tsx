@@ -1,6 +1,6 @@
 /* eslint-disable solid/reactivity */
 import { ModalCore } from 'jige-core'
-import { createMemo, onMount, Show } from 'solid-js'
+import { Show, createMemo, onMount } from 'solid-js'
 import { Button } from '../button'
 
 export function Footer(props: {
@@ -21,17 +21,18 @@ export function Footer(props: {
     return `var(--jg-fg-${props.type})`
   })
   return (
-    <div style={{
-      'display': 'flex',
-      'align-items': 'center',
-      'gap': '8px',
-      'padding': '8px',
-    }}
+    <div
+      style={{
+        display: 'flex',
+        'align-items': 'center',
+        gap: '8px',
+        padding: '8px',
+      }}
     >
       <Show when={props.negativeText}>
         <Button
-          variant="text"
-          color="var(--jg-fg4)"
+          variant='text'
+          color='var(--jg-fg4)'
           label={props.negativeText}
           onClick={async () => {
             await props.onNegativeClick?.()

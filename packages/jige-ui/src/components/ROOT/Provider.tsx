@@ -1,14 +1,14 @@
-import type { ThemeVars } from './gen_vars'
 import globalStyles from 'sass:../../styles/global.scss'
 import { mountStyle, watch } from 'solid-uses'
 import { RootContext } from './context'
+import type { ThemeVars } from './gen_vars'
 import { defaultThemeColors, genVars } from './gen_vars'
 
 export function Provider(props: {
   children: any
   hue?: number
   themeColors?: ThemeVars
-  zIndexConfig?: { tooltip?: number, popover?: number, toast?: number, modal?: number }
+  zIndexConfig?: { tooltip?: number; popover?: number; toast?: number; modal?: number }
 }) {
   const Context = RootContext.initial({
     hue: () => props.hue,
@@ -20,11 +20,14 @@ export function Provider(props: {
 
   const [state] = Context.value
 
-  watch(() => state.hue, (hue) => {
-    mountStyle(genVars(hue, state.themeColors), 'jige-ui-vars', true)
-  })
+  watch(
+    () => state.hue,
+    (hue) => {
+      mountStyle(genVars(hue, state.themeColors), 'jige-ui-vars', true)
+    },
+  )
 
   return <Context.Provider>{props.children}</Context.Provider>
 }
 
-export { RootContext, ThemeVars }
+export { RootContext, type ThemeVars }

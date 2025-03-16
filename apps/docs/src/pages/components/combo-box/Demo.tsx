@@ -12,17 +12,20 @@ export function Demo() {
   return (
     <Playground>
       <Playground.MainArea>
-        <div class="flex items-center gap-2">
-          <div class="flex gap-2 p-1">
-            <label class="text-sm">Value: </label>
+        <div class='flex items-center gap-2'>
+          <div class='flex gap-2 p-1'>
+            <div class='text-sm'>Value: </div>
             <span>{value()}</span>
           </div>
-          <ComboBox value={value()} options={list(20000).map(v => v.toString())} disabled={p.disabled} onChange={setValue} />
+          <ComboBox
+            value={value()}
+            options={list(20000).map((v) => v.toString())}
+            disabled={p.disabled}
+            onChange={setValue}
+          />
         </div>
       </Playground.MainArea>
       <Playground.PropertySetting properties={p} onChange={setP} />
-
     </Playground>
-
   )
 }

@@ -1,5 +1,12 @@
 @use '../../styles/funcs';
 
+
+.jg-listbox {
+  &:focus-visible {
+    outline: none;
+  }
+}
+
 .jg-listbox-item-inner {
   display: flex;
   align-items: center;

@@ -4,7 +4,7 @@ import { createStore } from 'solid-js/store'
 import { Playground } from '~/components/playground'
 
 export function Demo() {
-  const [value, setValue] = createSignal('1')
+  const [value, setValue] = createSignal('Apple')
   const [s, setS] = createStore({
     disabled: false,
   })
@@ -12,13 +12,18 @@ export function Demo() {
     <Playground>
       <Playground.MainArea>
         <div>
-          <div class="b b-t-border rounded-md mb-2">
-            <div class="p-2">
+          <div class='b b-t-border rounded-md mb-2'>
+            <div class='p-2'>
               Selected value:
               {value()}
             </div>
           </div>
-          <Segment value={value()} onChange={setValue} options={['1', '2', '3']} disabled={s.disabled} />
+          <Segment
+            value={value()}
+            onChange={setValue}
+            options={['Apple', 'Banana', 'Watermelon']}
+            disabled={s.disabled}
+          />
         </div>
       </Playground.MainArea>
       <Playground.PropertySetting properties={s} onChange={setS} />

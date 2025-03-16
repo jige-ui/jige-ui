@@ -10,6 +10,7 @@ export function Demo() {
     disabled: false,
     text: false,
     link: false,
+    color: '',
   })
 
   const variant = createMemo(() => {
@@ -22,22 +23,35 @@ export function Demo() {
     return 'solid'
   })
 
-  watch(() => p.link, (l) => {
-    if (l) {
-      setP({ text: false })
-    }
-  })
+  watch(
+    () => p.link,
+    (l) => {
+      if (l) {
+        setP({ text: false })
+      }
+    },
+  )
 
-  watch(() => p.text, (t) => {
-    if (t) {
-      setP({ link: false })
-    }
-  })
+  watch(
+    () => p.text,
+    (t) => {
+      if (t) {
+        setP({ link: false })
+      }
+    },
+  )
 
   return (
     <Playground>
       <Playground.MainArea>
-        <Button loading={p.loading} disabled={p.disabled} variant={variant() as any}>Button</Button>
+        <Button
+          loading={p.loading}
+          disabled={p.disabled}
+          variant={variant() as any}
+          color={p.color}
+        >
+          Button
+        </Button>
       </Playground.MainArea>
       <Playground.PropertySetting properties={p} onChange={setP} />
     </Playground>

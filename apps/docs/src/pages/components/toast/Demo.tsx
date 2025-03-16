@@ -16,7 +16,7 @@ export function Demo() {
       <Playground.MainArea>
         <div>
           <Button
-            label="Fire Toast"
+            label='Fire Toast'
             onClick={() => {
               $t[s.type]({
                 title: s.title,

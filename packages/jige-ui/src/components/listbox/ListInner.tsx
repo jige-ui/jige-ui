@@ -14,9 +14,5 @@ export function ListInner(props: {
   class?: string
   itemClass?: string
 }) {
-  return (
-    <CommonScrollWrapper
-      {...props}
-    />
-  )
+  return <CommonScrollWrapper {...props} />
 }

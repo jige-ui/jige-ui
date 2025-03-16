@@ -10,14 +10,17 @@ import 'uno.css'
 
 const root = document.querySelector('#root')
 
-render(() => (
-  <JigeProvider>
-    <JigeDialogProvider>
-      <JigeToastProvider>
-        <App />
-      </JigeToastProvider>
-    </JigeDialogProvider>
-  </JigeProvider>
-), root!)
+render(
+  () => (
+    <JigeProvider>
+      <JigeDialogProvider>
+        <JigeToastProvider>
+          <App />
+        </JigeToastProvider>
+      </JigeDialogProvider>
+    </JigeProvider>
+  ),
+  root!,
+)
 
 enableGlobalStore()

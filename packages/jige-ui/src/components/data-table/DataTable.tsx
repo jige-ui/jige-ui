@@ -1,12 +1,12 @@
-import type { DataTableProps } from './types'
-import { TableCore } from 'jige-core'
 import css from 'sass:./data-table.scss'
+import { TableCore } from 'jige-core'
 import { For, Show } from 'solid-js'
 import { mountStyle } from 'solid-uses'
 import { BoxRemove } from '../icons'
 import { Paginator } from '../paginator'
 import { Scrollbar } from '../scrollbar'
 import { Spin } from '../spin'
+import type { DataTableProps } from './types'
 
 export function DataTable(props: DataTableProps) {
   let headRef!: HTMLDivElement
@@ -14,12 +14,14 @@ export function DataTable(props: DataTableProps) {
   mountStyle(css, 'jige-ui-data-table')
   return (
     <Spin spinning={props.loading}>
-      <div class="jg-data-table">
+      <div class='jg-data-table'>
         <Show when={props.data.length > 0}>
           <TableCore data={props.data}>
             <TableCore.Head ref={headRef}>
-              {item => (
-                <th colspan={item.colspan} rowspan={item.rowspan} class="jg-data-table-head">{item.data}</th>
+              {(item) => (
+                <th colspan={item.colspan} rowspan={item.rowspan} class='jg-data-table-head'>
+                  {item.data}
+                </th>
               )}
             </TableCore.Head>
             <Scrollbar
@@ -32,11 +34,10 @@ export function DataTable(props: DataTableProps) {
               maxHeight={props.maxHeight}
             >
               <TableCore.Body>
-                {row => (
-                  <tr class="jg-data-table-row">
+                {(row) => (
+                  <tr class='jg-data-table-row'>
                     <For each={Object.keys(row)}>
-                      {key =>
-                        <td class="jg-data-table-item">{row[key]}</td>}
+                      {(key) => <td class='jg-data-table-item'>{row[key]}</td>}
                     </For>
                   </tr>
                 )}
@@ -44,7 +45,7 @@ export function DataTable(props: DataTableProps) {
             </Scrollbar>
           </TableCore>
           <Show when={props.pagination}>
-            <div class="jg-data-table-bottom">
+            <div class='jg-data-table-bottom'>
               <div>
                 total:
                 {props.pagination!.total}
@@ -55,7 +56,7 @@ export function DataTable(props: DataTableProps) {
         </Show>
 
         <Show when={props.data.length === 0}>
-          <div class="jg-data-table-empty">
+          <div class='jg-data-table-empty'>
             <div>
               <BoxRemove />
             </div>
@@ -64,6 +65,5 @@ export function DataTable(props: DataTableProps) {
         </Show>
       </div>
     </Spin>
-
   )
 }

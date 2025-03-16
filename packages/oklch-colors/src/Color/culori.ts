@@ -1,7 +1,7 @@
 import type { LCHColor } from './lab_lch'
-import type { RGBColor } from './rgb_lrgb'
 import { lab2lch, lch2lab } from './lab_lch'
 import { lrgb2oklab, oklab2lrgb } from './lrgb_oklab'
+import type { RGBColor } from './rgb_lrgb'
 import { lrgb2rgb, rgb2lrgb } from './rgb_lrgb'
 
 export function convertRgbToOkLch(rgb: RGBColor): LCHColor {
@@ -15,7 +15,7 @@ function convertOklchToRgb(oklch: LCHColor): RGBColor {
 export function safeOklchToRgb(oklch: LCHColor): RGBColor {
   let rgb = convertOklchToRgb(oklch)
   const unSafeC = (c: RGBColor) => {
-    return [c.r, c.g, c.b].some(c => c < 0 || c > 255)
+    return [c.r, c.g, c.b].some((c) => c < 0 || c > 255)
   }
   if (unSafeC(rgb) && !unSafeC(convertOklchToRgb({ ...oklch, c: 0 }))) {
     let start = 0
@@ -27,8 +27,7 @@ export function safeOklchToRgb(oklch: LCHColor): RGBColor {
       const tmp = convertOklchToRgb({ ...oklch, c: mid })
       if (unSafeC(tmp)) {
         end = mid
-      }
-      else {
+      } else {
         goodC = mid
         start = mid
       }

@@ -1,6 +1,6 @@
-import type { JSX } from 'solid-js/jsx-runtime'
-import { CircleProgressCore } from 'jige-core'
 import styles from 'sass:./progress.scss'
+import { CircleProgressCore } from 'jige-core'
+import type { JSX } from 'solid-js/jsx-runtime'
 
 import { mergeProps } from 'solid-js'
 import { mountStyle } from 'solid-uses'
@@ -20,43 +20,39 @@ export function CircleProgress(props: {
   injectSVG?: JSX.Element
 }) {
   mountStyle(styles, 'jige-ui-progress')
-  const realProps = mergeProps({
-    radius: 50,
-    fillWidth: 8,
-    railWidth: 8,
-    gapOffsetDegree: 0,
-    gapDegree: 0,
-    offsetDegree: 0,
-    size: '100px',
-    railColor: 'var(--jg-t-bg3)',
-    fillColor: 'var(--jg-t-hl)',
-  }, props)
+  const realProps = mergeProps(
+    {
+      radius: 50,
+      fillWidth: 8,
+      railWidth: 8,
+      gapOffsetDegree: 0,
+      gapDegree: 0,
+      offsetDegree: 0,
+      size: '100px',
+      railColor: 'var(--jg-t-bg3)',
+      fillColor: 'var(--jg-t-hl)',
+    },
+    props,
+  )
   return (
-    <div
-      class="jg-progress-circle"
-      style={
-        { width: realProps.size, height: realProps.size }
-      }
-    >
+    <div class='jg-progress-circle' style={{ width: realProps.size, height: realProps.size }}>
       <CircleProgressCore gapDegree={realProps.gapDegree} gapOffsetDegree={realProps.offsetDegree}>
         {props.injectSVG}
         <CircleProgressCore.Rail
-          class="jg-progress-circle-rail"
+          class='jg-progress-circle-rail'
           color={realProps.railColor}
           radius={realProps.radius}
           strokeWidth={realProps.railWidth}
         />
         <CircleProgressCore.Fill
-          class="jg-progress-circle-fill"
+          class='jg-progress-circle-fill'
           color={realProps.fillColor}
           radius={realProps.radius}
           strokeWidth={realProps.fillWidth}
           percent={realProps.percent}
         />
       </CircleProgressCore>
-      <div class="jg-progress-circle-content">
-        {props.children}
-      </div>
+      <div class='jg-progress-circle-content'>{props.children}</div>
     </div>
   )
 }

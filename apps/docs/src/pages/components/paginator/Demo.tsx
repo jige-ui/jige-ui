@@ -24,8 +24,6 @@ export function Demo() {
         </div>
       </Playground.MainArea>
       <Playground.PropertySetting properties={p} onChange={setP} />
-
     </Playground>
-
   )
 }

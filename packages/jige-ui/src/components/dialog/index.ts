@@ -1,13 +1,11 @@
-import type { DialogFactory, DialogInst } from './types'
 import { createUniqueId } from 'solid-js'
-import { context } from './context'
 import { Provider } from './Provider'
+import { context } from './context'
+import type { DialogFactory, DialogInst } from './types'
 
 export function useDialog(): DialogFactory {
-  const [,actions] = context.useContext()
-  function createInst(
-    inst: Omit<DialogInst, 'id'>,
-  ) {
+  const [, actions] = context.useContext()
+  function createInst(inst: Omit<DialogInst, 'id'>) {
     actions.addInst({
       ...inst,
       id: createUniqueId(),
@@ -16,7 +14,7 @@ export function useDialog(): DialogFactory {
   const dialog: DialogFactory = {} as DialogFactory
   const keys = ['error', 'success', 'warning', 'info'] as const
 
-  keys.forEach((type) => {
+  for (const type of keys) {
     dialog[type] = (contentOrConf: string | Omit<DialogInst, 'id' | 'type'>) => {
       if (typeof contentOrConf === 'string') {
         createInst({
@@ -24,15 +22,14 @@ export function useDialog(): DialogFactory {
           content: contentOrConf,
           title: type,
         })
-      }
-      else {
+      } else {
         createInst({
           type,
           ...contentOrConf,
         })
       }
     }
-  })
+  }
 
   return dialog
 }

@@ -14,8 +14,8 @@ export function Demo() {
     <Playground>
       <Playground.MainArea>
         <div>
-          <div class="b b-t-border rounded-md mb-2">
-            <div class="p-4">
+          <div class='b b-t-border rounded-md mb-2'>
+            <div class='p-4'>
               value:
               {value()}
             </div>

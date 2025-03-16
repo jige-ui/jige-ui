@@ -9,17 +9,16 @@ export interface LCHColor {
   h: number
 }
 
-export function normalizeHue(hue: number) {
-  // eslint-disable-next-line no-cond-assign
-  return (hue = hue % 360) < 0 ? hue + 360 : hue
+export function normalizeHue(hue: number): number {
+  const normalized = hue % 360
+  return normalized < 0 ? normalized + 360 : normalized
 }
 
 export function lab2lch(lab: LabColor): LCHColor {
   const { l, a, b } = lab
   const c = Math.sqrt(a * a + b * b)
   let h = 0
-  if (c)
-    h = normalizeHue((Math.atan2(b, a) * 180) / Math.PI)
+  if (c) h = normalizeHue((Math.atan2(b, a) * 180) / Math.PI)
   return { l, c, h }
 }
 

@@ -1,5 +1,5 @@
-import type { JSX } from 'solid-js/jsx-runtime'
 import { FloatingUiCore } from 'jige-core'
+import type { JSX } from 'solid-js/jsx-runtime'
 
 import aniFloatCss from 'sass:../../styles/common/ani-floating-ui.scss'
 import css from 'sass:./tooltip.scss'
@@ -21,9 +21,18 @@ export function Tooltip(props: {
   mountStyle(aniFloatCss, 'jige-ui-ani-floating-ui')
   const [state] = RootContext.useContext()
   return (
-    <FloatingUiCore placement={props.placement} openDelay={props.openDelay} closeDelay={props.closeDelay} trigger={props.trigger} disabled={props.disabled}>
+    <FloatingUiCore
+      placement={props.placement}
+      openDelay={props.openDelay}
+      closeDelay={props.closeDelay}
+      trigger={props.trigger}
+      disabled={props.disabled}
+    >
       <FloatingUiCore.Trigger>{props.children}</FloatingUiCore.Trigger>
-      <FloatingUiCore.Content class="jg-tooltip-content ani-floating-ui-move" zindex={props.zIndex || state.zIndexConfig.tooltip}>
+      <FloatingUiCore.Content
+        class='jg-tooltip-content ani-floating-ui-move'
+        zindex={props.zIndex || state.zIndexConfig.tooltip}
+      >
         {props.content}
       </FloatingUiCore.Content>
     </FloatingUiCore>

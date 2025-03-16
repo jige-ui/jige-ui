@@ -1,5 +1,5 @@
+import { For, createSignal } from 'solid-js'
 import type { JSX } from 'solid-js/jsx-runtime'
-import { createSignal, For } from 'solid-js'
 import { watch } from 'solid-uses'
 import { setData } from '~/common/dataset'
 import { Scrollbar } from '../scrollbar'
@@ -14,33 +14,34 @@ export function CommonScrollWrapper<T extends any[]>(props: {
   selectIndex: number
   onSelect: (item: T[number], index: number) => void
   selectTrigger: 'click' | 'arrow'
-  visibleItems?: { value: T[number], index: number }[]
+  visibleItems?: { value: T[number]; index: number }[]
   items: T
   fallback: JSX.Element
   scrollToSelected: boolean
   itemClass?: string
   class?: string
 }) {
-  let listRef!: HTMLUListElement
+  let listRef!: HTMLDivElement
 
   const [hlIndex, setHlIndex] = createSignal(-1)
   const [scrollRef, setScrollRef] = createSignal<HTMLDivElement | null>(null)
 
-  watch(() => props.selectIndex, (index) => {
-    setHlIndex(index)
-  })
+  watch(
+    () => props.selectIndex,
+    (index) => {
+      setHlIndex(index)
+    },
+  )
 
   function handleKeyDown(e: any) {
     if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
       e.preventDefault() // 防止滚动区域滚动
     }
     if (e.key === 'ArrowDown') {
-      setHlIndex(prev => Math.min(prev + 1, props.items.length - 1))
-    }
-    else if (e.key === 'ArrowUp') {
-      setHlIndex(prev => Math.max(prev - 1, 0))
-    }
-    else if (e.key === 'Enter') {
+      setHlIndex((prev) => Math.min(prev + 1, props.items.length - 1))
+    } else if (e.key === 'ArrowUp') {
+      setHlIndex((prev) => Math.max(prev - 1, 0))
+    } else if (e.key === 'Enter') {
       props.onSelect(props.items[hlIndex()], hlIndex())
     }
     const $item = listRef?.querySelector(`[data-index="${hlIndex()}"]`)
@@ -55,10 +56,9 @@ export function CommonScrollWrapper<T extends any[]>(props: {
       const $item = listRef?.querySelector(`[data-index="${index}"]`)
       if ($item) {
         $item.scrollIntoView({ block: 'nearest' })
-      }
-      else {
+      } else {
         if (ref) {
-          ref.scrollTop = (index * props.rowHeight) - (props.rootHeight - props.rowHeight)
+          ref.scrollTop = index * props.rowHeight - (props.rootHeight - props.rowHeight)
         }
       }
     }
@@ -72,26 +72,31 @@ export function CommonScrollWrapper<T extends any[]>(props: {
       onScroll={props.onScroll}
       maxHeight={`${props.rootHeight}px`}
       contentStyle={props.contentStyle}
-      color="var(--jg-fg4)"
+      color='var(--jg-fg4)'
       scrollRef={setScrollRef}
       class={props.class}
     >
-      <ul
-        role="listbox"
+      <div
         tabIndex={0}
+        class='jg-listbox'
+        role='listbox'
         onKeyDown={handleKeyDown}
         style={props.ulStyle}
         ref={listRef}
       >
-        <For fallback={props.fallback} each={props.visibleItems || props.items.map((item, index) => ({ value: item, index }))}>
+        <For
+          fallback={props.fallback}
+          each={props.visibleItems || props.items.map((item, index) => ({ value: item, index }))}
+        >
           {(item) => {
             return (
-              <li
+              <div
+                tabIndex={-1}
                 class={props.itemClass || 'jg-listbox-item'}
+                role='option'
                 style={{
                   height: `${props.rowHeight}px`,
                 }}
-                role="option"
                 aria-selected={item.index === props.selectIndex}
                 onClick={() => props.onSelect(item.value, item.index)}
                 {...setData({
@@ -100,14 +105,12 @@ export function CommonScrollWrapper<T extends any[]>(props: {
                   highlight: item.index === hlIndex(),
                 })}
               >
-                <div class="jg-listbox-item-inner">
-                  {props.children(item.value, item.index)}
-                </div>
-              </li>
+                <div class='jg-listbox-item-inner'>{props.children(item.value, item.index)}</div>
+              </div>
             )
           }}
         </For>
-      </ul>
+      </div>
     </Scrollbar>
   )
 }

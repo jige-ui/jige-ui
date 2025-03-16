@@ -8,10 +8,10 @@ export function Demo() {
     const data: any[] = []
     for (let i = 0; i < 100; i++) {
       data.push({
-        'name': `${uid(7)}`,
-        'age': random(1, 100),
-        'sex': random(0, 1) === 0 ? '男' : '女',
-        'address': `${uid(10)}`,
+        name: `${uid(7)}`,
+        age: random(1, 100),
+        sex: random(0, 1) === 0 ? '男' : '女',
+        address: `${uid(10)}`,
         'info.phone': `${random(13000000000, 19999999999)}`,
         'info.email': {
           data: `${uid(7)}@gmail.com`,
@@ -45,11 +45,10 @@ export function Demo() {
           },
           currPage: currPage(),
         }}
-        data={(data.latest) as any}
+        data={data.latest as any}
         loading={data.loading}
-        maxHeight="400px"
+        maxHeight='400px'
       />
     </div>
-
   )
 }

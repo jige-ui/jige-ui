@@ -1,5 +1,5 @@
-import type { JSX } from 'solid-js/jsx-runtime'
 import { createMemo } from 'solid-js'
+import type { JSX } from 'solid-js/jsx-runtime'
 import { Dynamic } from 'solid-js/web'
 import { combineStyle, runIgnoreError } from '~/common/dom'
 import { context } from './context'
@@ -11,8 +11,10 @@ export function ButtonWrapper(props: {
   style?: string | JSX.CSSProperties
   class?: string
   target?: string
-  disabled?: boolean
-  ref?: HTMLAnchorElement | HTMLButtonElement | ((el: HTMLAnchorElement | HTMLButtonElement) => void)
+  ref?:
+    | HTMLAnchorElement
+    | HTMLButtonElement
+    | ((el: HTMLAnchorElement | HTMLButtonElement) => void)
   type: 'button' | 'submit' | 'reset'
   download?: boolean
 }) {
@@ -24,19 +26,16 @@ export function ButtonWrapper(props: {
   const finalClasses = createMemo(() => {
     const classes = ['jg-btn', `jg-btn-${state.variant}`]
 
-    if (state.iconOnly)
-      classes.push('jg-btn-icon-only')
-    if (state.loading)
-      classes.push('is-loading')
-    if (props.class)
-      classes.push(props.class)
+    if (state.iconOnly) classes.push('jg-btn-icon-only')
+    if (state.loading) classes.push('is-loading')
+    if (props.class) classes.push(props.class)
 
     return classes.join(' ')
   })
 
   return (
     <Dynamic
-      disabled={props.disabled}
+      disabled={state.disabled}
       component={isAnchor() ? 'a' : 'button'}
       type={props.type}
       ref={props.ref as any}
@@ -44,8 +43,7 @@ export function ButtonWrapper(props: {
       target={props.target}
       download={props.download}
       onClick={(e: any) => {
-        if (state.loading || isAnchor() || props.disabled)
-          return
+        if (state.loading || isAnchor() || state.disabled) return
         if (props.onClick) {
           const doClick = async () => {
             actions.setLoading(true)
@@ -58,13 +56,16 @@ export function ButtonWrapper(props: {
           doClick()
         }
       }}
-      style={combineStyle({
-        '--jg-btn-fg': state.color ? 'white' : 'var(--jg-fg2)',
-        '--jg-btn-bg': state.color || 'var(--jg-t-bg1)',
-        '--jg-btn-link-fg': state.color || 'var(--jg-fg-link)',
-        '--jg-btn-text-fg': state.color || 'var(--jg-fg2)',
-        'border-radius': '.25em',
-      }, props.style)}
+      style={combineStyle(
+        {
+          '--jg-btn-fg': state.color ? 'white' : 'var(--jg-fg2)',
+          '--jg-btn-bg': state.color || 'var(--jg-t-bg1)',
+          '--jg-btn-link-fg': state.color || 'var(--jg-fg-link)',
+          '--jg-btn-text-fg': state.color || 'var(--jg-fg2)',
+          'border-radius': '.25em',
+        },
+        props.style,
+      )}
       class={finalClasses()}
     >
       {props.children}

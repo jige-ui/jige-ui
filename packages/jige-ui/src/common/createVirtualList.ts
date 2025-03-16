@@ -10,7 +10,11 @@ export function createVirtualList(params: {
   const { items, rowHeight, rootHeight, overscanCount } = params
   const [offset, setOffset] = createSignal(0)
   const getFirstIdx = () => Math.max(0, Math.floor(offset() / rowHeight()) - overscanCount())
-  const getLastIdx = () => Math.min(items().length, Math.floor(offset() / rowHeight()) + Math.ceil(rootHeight() / rowHeight()) + overscanCount())
+  const getLastIdx = () =>
+    Math.min(
+      items().length,
+      Math.floor(offset() / rowHeight()) + Math.ceil(rootHeight() / rowHeight()) + overscanCount(),
+    )
 
   const containerHeight = createMemo(() => items().length * rowHeight())
   const viewerTop = createMemo(() => getFirstIdx() * rowHeight())

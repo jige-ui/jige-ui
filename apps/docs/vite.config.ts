@@ -18,7 +18,11 @@ export default defineConfig({
     modules: false,
   },
   plugins: [
-    mdx({ jsxImportSource: 'solid-js/h', remarkPlugins: [remarkFrontmatter, remarkGfm], rehypePlugins: [rehypePrettyCode] }),
+    mdx({
+      jsxImportSource: 'solid-js/h',
+      remarkPlugins: [remarkFrontmatter, remarkGfm],
+      rehypePlugins: [rehypePrettyCode],
+    }),
     UnoCSS(),
     solidPlugin(),
     solidPagesPlugin({

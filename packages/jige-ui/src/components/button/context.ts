@@ -1,5 +1,5 @@
-import type { ButtonVariant } from './types'
 import { createComponentState } from 'solid-uses'
+import type { ButtonVariant } from './types'
 
 export const context = createComponentState({
   state: () => ({
@@ -7,5 +7,6 @@ export const context = createComponentState({
     color: '',
     variant: 'solid' as ButtonVariant,
     iconOnly: false,
+    disabled: false,
   }),
 })

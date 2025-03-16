@@ -32,7 +32,7 @@ export function LineProgress(props: {
 
   return (
     <div
-      class="jg-progress-line"
+      class='jg-progress-line'
       style={{
         height: props.height || '8px',
         width: props.width || '100%',
@@ -41,7 +41,7 @@ export function LineProgress(props: {
       }}
     >
       <div
-        class="jg-progress-line-fill"
+        class='jg-progress-line-fill'
         classList={{
           'jg-progress-line-fill-indeterminate': isIndeterminate(),
         }}

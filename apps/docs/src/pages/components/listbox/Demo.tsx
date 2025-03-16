@@ -16,9 +16,10 @@ export function Demo() {
     <Playground>
       <Playground.MainArea>
         <div>
-          <div style={{
-            width: '250px',
-          }}
+          <div
+            style={{
+              width: '250px',
+            }}
           >
             <Listbox
               items={list(s.length)}
@@ -30,10 +31,9 @@ export function Demo() {
                 setValue(index)
               }}
             >
-              {item => item}
+              {(item) => item}
             </Listbox>
           </div>
-
         </div>
       </Playground.MainArea>
       <Playground.PropertySetting properties={s} onChange={setS} />

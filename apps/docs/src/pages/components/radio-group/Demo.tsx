@@ -12,16 +12,16 @@ export function Demo() {
     <Playground>
       <Playground.MainArea>
         <div>
-          <div class="b b-t-border rounded-md">
-            <div class="p-4">
+          <div class='b b-t-border rounded-md'>
+            <div class='p-4'>
               Selected value:
               {value()}
             </div>
           </div>
           <RadioGroup value={value()} onChange={setValue} disabled={s.disabled}>
-            <RadioGroup.Item value="1" label="Option 1" />
-            <RadioGroup.Item value="2" label="Option 2" />
-            <RadioGroup.Item value="3" label="Option 3" disabled />
+            <RadioGroup.Item value='1' label='Option 1' />
+            <RadioGroup.Item value='2' label='Option 2' />
+            <RadioGroup.Item value='3' label='Option 3' disabled />
           </RadioGroup>
         </div>
       </Playground.MainArea>

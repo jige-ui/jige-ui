@@ -1,23 +1,39 @@
-import type { ButtonProps } from './types'
 import css from 'sass:./button.scss'
+import type { ButtonProps } from './types'
 
-import { mountStyle } from 'solid-uses'
+import { mountStyle, watch } from 'solid-uses'
 import { ButtonContent } from './ButtonContent'
 import { ButtonWrapper } from './ButtonWrapper'
-import { context } from './context'
 import { LoadingIcon } from './LoadingIcon'
+import { context } from './context'
+import { Form } from '../form'
 
-export function Button<T extends (string | undefined) = undefined>(props: ButtonProps & {
-  href?: T
-  ref?: T extends string ? (HTMLAnchorElement | ((el: HTMLAnchorElement) => void)) :
-      (HTMLButtonElement | ((el: HTMLButtonElement) => void))
-}) {
+export function Button<T extends string | undefined = undefined>(
+  props: ButtonProps & {
+    href?: T
+    ref?: T extends string
+      ? HTMLAnchorElement | ((el: HTMLAnchorElement) => void)
+      : HTMLButtonElement | ((el: HTMLButtonElement) => void)
+  },
+) {
   mountStyle(css, 'jige-ui-btn')
 
   const Context = context.initial({
     loading: () => props.loading,
     variant: () => props.variant,
     color: () => props.color,
+    disabled: () => props.disabled,
+  })
+
+  const [, actions] = Context.value
+  const [formState] = Form.useFormContext()
+
+  watch([() => formState.disabled, () => props.disabled, () => props.type], ([fD, pD, type]) => {
+    if ((type === 'submit' || type === 'reset') && fD) {
+      actions.setDisabled(true)
+    } else {
+      actions.setDisabled(pD || false)
+    }
   })
 
   return (
@@ -29,11 +45,10 @@ export function Button<T extends (string | undefined) = undefined>(props: Button
         ref={props.ref as any}
         class={props.class}
         target={props.target}
-        disabled={props.disabled}
         type={props.type || 'button'}
         download={props.download}
       >
-        <div class="jg-btn-overlay" />
+        <div class='jg-btn-overlay' />
         <ButtonContent icon={props.icon} label={props.label}>
           {props.children}
         </ButtonContent>

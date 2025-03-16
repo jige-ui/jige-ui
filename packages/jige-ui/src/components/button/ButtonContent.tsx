@@ -1,5 +1,5 @@
+import { Show, children } from 'solid-js'
 import type { JSX } from 'solid-js/jsx-runtime'
-import { children, Show } from 'solid-js'
 import { watch } from 'solid-uses'
 import { context } from './context'
 
@@ -17,18 +17,18 @@ export function ButtonContent(props: {
   })
   return (
     <div
-      class="jg-btn-content"
+      class='jg-btn-content'
       style={{
         opacity: state.loading ? 0 : 1,
       }}
     >
       <Show
         when={child()}
-        fallback={(
+        fallback={
           <>
             <Show when={icon()}>
               <div
-                class="jg-btn-icon"
+                class='jg-btn-icon'
                 style={{
                   'margin-right': props.label ? '0.375em' : '0',
                 }}
@@ -40,7 +40,7 @@ export function ButtonContent(props: {
               <span>{props.label}</span>
             </Show>
           </>
-        )}
+        }
       >
         {child()}
       </Show>

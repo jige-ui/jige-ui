@@ -1,8 +1,8 @@
+import css from 'sass:./paginator.scss'
 import { PaginatorCore } from 'jige-core'
 import { isNumber } from 'radash'
-import css from 'sass:./paginator.scss'
 
-import { createMemo, createSignal, Match, Show, Switch } from 'solid-js'
+import { Match, Show, Switch, createMemo, createSignal } from 'solid-js'
 import { mountStyle } from 'solid-uses'
 import { setData } from '~/common/dataset'
 import { isDef } from '~/common/types'
@@ -16,24 +16,31 @@ function Pager(props: {
   const isCurrent = createMemo(() => props.page === props.currPage)
   return (
     <div
-      class="jg-paginator-pager"
+      class='jg-paginator-pager'
       {...setData('checked', isCurrent())}
-      onClick={() => { !isCurrent() && props.onPageClick(props.page) }}
+      onClick={() => {
+        !isCurrent() && props.onPageClick(props.page)
+      }}
     >
       {props.page}
     </div>
   )
 }
 
-function PagerBlank(props: { onPageClick: (page: number) => void, left: boolean, currPage: number }) {
+function PagerBlank(props: {
+  onPageClick: (page: number) => void
+  left: boolean
+  currPage: number
+}) {
   const [isHover, setIsHover] = createSignal(false)
 
   return (
     <div
-      class="jg-paginator-pager-blank"
+      class='jg-paginator-pager-blank'
       onClick={() => {
         props.onPageClick(props.left ? props.currPage - 2 : props.currPage + 2)
       }}
+      onKeyDown={() => {}}
       onMouseEnter={() => setIsHover(true)}
       onMouseLeave={() => setIsHover(false)}
     >
@@ -78,9 +85,9 @@ export function Paginator(props: {
   })
   return (
     <div
-      class="jg-paginator"
+      class='jg-paginator'
       style={{
-        'opacity': shouldHide() ? 0 : props.disabled ? 0.6 : 1,
+        opacity: shouldHide() ? 0 : props.disabled ? 0.6 : 1,
         'pointer-events': props.disabled ? 'none' : 'auto',
       }}
     >
@@ -90,13 +97,13 @@ export function Paginator(props: {
             return (
               <Show
                 when={isNumber(page)}
-                fallback={(
+                fallback={
                   <PagerBlank
                     onPageClick={props.onPageClick}
                     left={page === 'space-left'}
                     currPage={props.currPage}
                   />
-                )}
+                }
               >
                 <Pager page={page as number} {...props} />
               </Show>
