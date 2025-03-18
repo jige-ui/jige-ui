@@ -55,15 +55,15 @@ export function Content(props: {
             () => stat.status,
             (status) => {
               if (
-                status !== 'opening' &&
-                status !== 'closing' &&
-                props.dynamicTransformOrigin !== false
+                status === 'opened' ||
+                status === 'closed' ||
+                props.dynamicTransformOrigin === false
               ) {
                 setTransformOrigin('center center')
                 return
               }
               const { triggerRef, contentRef } = state
-              if (!triggerRef || !contentRef) {
+              if (!triggerRef || !triggerRef.isConnected || !contentRef) {
                 setTransformOrigin('center center')
                 return
               }

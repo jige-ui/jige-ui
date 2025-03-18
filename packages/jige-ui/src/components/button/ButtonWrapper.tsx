@@ -42,7 +42,7 @@ export function ButtonWrapper(props: {
   })
 
   const thisHeight = createMemo(() => {
-    if (state.variant === 'solid') {
+    if (state.variant === 'solid' || state.variant === 'text') {
       if (props.size === 'small') return '24px'
       if (props.size === 'large') return '40px'
       return '32px'
