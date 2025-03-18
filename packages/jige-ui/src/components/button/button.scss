@@ -11,10 +11,15 @@
   position: relative;
   box-sizing: border-box;
   display: inline-flex;
+  flex-shrink: 0;
+  flex-wrap: nowrap;
   align-items: center;
   justify-content: center;
-  padding: .25em .675em;
+  height: funcs.get-var('height');
+  padding: 0 .675em;
   overflow: hidden;
+  font-size: funcs.get-var('font-size');
+  white-space: nowrap;
   cursor: pointer;
   background: transparent;
   transition:  border-color 0.2s, opacity 0.2s, color 0.2s;
@@ -25,7 +30,7 @@
   }
 
   &.jg-btn-icon-only {
-    width: 1.875em;
+    width: funcs.get-var('height');
     padding: .25em;
   }
 
@@ -135,10 +140,8 @@
 }
 
 .jg-btn-icon {
-  svg {
-    font-size: 1.3em;
-    vertical-align: -.18em;
-  }
+  font-size: 1.3em;
+  vertical-align: -.18em;
 }
 
 .jg-btn-content {

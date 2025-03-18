@@ -19,4 +19,5 @@ export interface ButtonProps {
   color?: string
   disabled?: boolean
   download?: boolean
+  size?: 'small' | 'medium' | 'large'
 }

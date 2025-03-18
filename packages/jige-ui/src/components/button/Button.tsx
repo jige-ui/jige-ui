@@ -43,6 +43,7 @@ export function Button<T extends string | undefined = undefined>(
         onClick={props.onClick}
         style={props.style}
         ref={props.ref as any}
+        size={props.size || 'medium'}
         class={props.class}
         target={props.target}
         type={props.type || 'button'}
