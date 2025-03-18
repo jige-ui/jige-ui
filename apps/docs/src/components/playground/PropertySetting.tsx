@@ -46,32 +46,26 @@ export function PropertySetting<
         <For each={propName()}>
           {(item) => (
             <FormCore.Field name={item}>
-              <Switch>
-                <Match when={checkType(item) === 'boolean'}>
-                  <div class='flex justify-between items-center m-1'>
+              <div class='flex justify-between items-center m-1 flex-wrap'>
+                <Switch>
+                  <Match when={checkType(item) === 'boolean'}>
                     <div>{item}</div>
                     <Switcher type='checkbox' />
-                  </div>
-                </Match>
-                <Match when={checkType(item) === 'string'}>
-                  <div class='flex justify-between items-center m-1'>
+                  </Match>
+                  <Match when={checkType(item) === 'string'}>
                     <div>{item}</div>
                     <Input />
-                  </div>
-                </Match>
-                <Match when={checkType(item) === 'number'}>
-                  <div class='flex justify-between items-center m-1'>
+                  </Match>
+                  <Match when={checkType(item) === 'number'}>
                     <div>{item}</div>
                     <NumberBox />
-                  </div>
-                </Match>
-                <Match when={Array.isArray(checkType(item))}>
-                  <div class='flex justify-between items-center m-1'>
+                  </Match>
+                  <Match when={Array.isArray(checkType(item))}>
                     <div>{item}</div>
                     <ComboBox options={checkType(item) as string[]} />
-                  </div>
-                </Match>
-              </Switch>
+                  </Match>
+                </Switch>
+              </div>
             </FormCore.Field>
           )}
         </For>

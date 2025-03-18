@@ -3,6 +3,7 @@ import type { JSX } from 'solid-js/jsx-runtime'
 import { watch } from 'solid-uses'
 import { setData } from '~/common/dataset'
 import { Scrollbar } from '../scrollbar'
+import { undefinedOr } from 'jige-core'
 
 export function CommonScrollWrapper<T extends any[]>(props: {
   onScroll?: (e: Event) => void
@@ -11,7 +12,7 @@ export function CommonScrollWrapper<T extends any[]>(props: {
   contentStyle?: string | JSX.CSSProperties
   ulStyle?: string | JSX.CSSProperties
   children: (item: T[number], index: number) => JSX.Element
-  selectIndex: number
+  selectIndex: number[]
   onSelect: (item: T[number], index: number) => void
   selectTrigger: 'click' | 'arrow'
   visibleItems?: { value: T[number]; index: number }[]
@@ -29,7 +30,10 @@ export function CommonScrollWrapper<T extends any[]>(props: {
   watch(
     () => props.selectIndex,
     (index) => {
-      setHlIndex(index)
+      console.log(index)
+
+      const lastItem = index[index.length - 1]
+      setHlIndex(undefinedOr(lastItem, -1))
     },
   )
 
@@ -97,11 +101,11 @@ export function CommonScrollWrapper<T extends any[]>(props: {
                 style={{
                   height: `${props.rowHeight}px`,
                 }}
-                aria-selected={item.index === props.selectIndex}
+                aria-selected={props.selectIndex.includes(item.index)}
                 onClick={() => props.onSelect(item.value, item.index)}
                 {...setData({
                   index: item.index,
-                  selected: item.index === props.selectIndex,
+                  selected: props.selectIndex.includes(item.index),
                   highlight: item.index === hlIndex(),
                 })}
               >

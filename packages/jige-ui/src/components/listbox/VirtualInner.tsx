@@ -10,7 +10,7 @@ export function VirtualInner(props: {
   fallback: JSX.Element
   children: (item: any, index: number) => JSX.Element
   onSelect: (item: any, index: number) => void
-  selectIndex: number
+  selectIndex: number[]
   selectTrigger: 'click' | 'arrow'
   class?: string
   itemClass?: string

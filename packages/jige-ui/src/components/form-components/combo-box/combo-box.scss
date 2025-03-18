@@ -22,6 +22,14 @@
 .jg-combo-box-item {
   padding: 2px 0;
 
+  .jg-combo-box-item-inner {
+    display: block;
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
   > div {
     position: relative;
     padding-left: 8px;
@@ -79,9 +87,12 @@
 .jg-combo-box-trigger {
   position: relative;
   display: inline-flex;
+  flex-shrink: 0;
   min-width: 7em;
   padding: .25em .675em;
   overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
   cursor: pointer;
   background: funcs.get-var('t-bg1');
   border: 1px solid funcs.get-var('t-border');
@@ -136,7 +147,11 @@
 @keyframes clip-open {
   0% {
     opacity: 0;
-    transform: scaleY(0.7);
+    transform: scaleY(0.8);
+  }
+
+  50% {
+    opacity: 1;
   }
 
   100% {

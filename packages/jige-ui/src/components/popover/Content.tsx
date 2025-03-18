@@ -22,10 +22,12 @@ export function Content(
     'class',
     'style',
   ])
+  console.log(localProps.style)
+
   return (
     <FloatingUiCore.Content
       {...otherProps}
-      class={`${localProps.class || ''} jg-popover-content`}
+      class={`${localProps.class || ''} jg-popover-content ani-floating-ui-move`}
       style={combineStyle(
         {
           '--jg-popover-bg': localProps.background || 'var(--jg-t-bg1)',

@@ -6,14 +6,12 @@ import { context } from './context'
 
 export function Trigger() {
   const [state] = context.useContext()
-  const [fieldState] = Form.useFieldContext()
   const [, fieldCoreActs] = FormCore.useField()
   return (
     <FloatingUiCore.Trigger>
       <div class='jg-combo-box-trigger' {...setData('disabled', state.disabled)}>
         <input
-          aria-labelledby={fieldState.labelID}
-          aria-describedby={fieldState.descriptionID}
+          {...Form.createNativeComponentAttrs()}
           type='text'
           name={state.name}
           value={state.value}
@@ -28,8 +26,11 @@ export function Trigger() {
         </i>
         <div
           style={{
-            display: 'flex',
+            display: 'block',
             'line-height': '1.3',
+            overflow: 'hidden',
+            'text-overflow': 'ellipsis',
+            'max-width': 'calc(100% - 16px)',
           }}
         >
           {state.value}

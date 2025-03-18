@@ -2,6 +2,7 @@ import { FloatingUiCore } from 'jige-core'
 import type { JSX } from 'solid-js'
 
 import css from 'sass:./popover.scss'
+import aniFloatCss from 'sass:../../styles/common/ani-floating-ui.scss'
 import { mountStyle } from 'solid-uses'
 
 export function Root(props: {
@@ -25,5 +26,6 @@ export function Root(props: {
   disabled?: boolean
 }) {
   mountStyle(css, 'jige-ui-popover')
+  mountStyle(aniFloatCss, 'jige-ui-ani-floating-ui')
   return <FloatingUiCore {...props} />
 }

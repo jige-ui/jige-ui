@@ -6,6 +6,7 @@ import { watch } from 'solid-uses'
 import { setData } from '~/common/dataset'
 import { InputFormBind } from './NormalInput'
 import { Placeholder } from './Placeholder'
+import { Form } from '~/components/form'
 
 function ScrollInput(props: {
   value?: string
@@ -32,6 +33,7 @@ function ScrollInput(props: {
   return (
     <InputCore.Native
       type='textarea'
+      {...Form.createNativeComponentAttrs()}
       ref={actions.setRefContent}
       autocomplete='off'
       placeholder={props.placeholder}

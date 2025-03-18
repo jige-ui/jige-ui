@@ -6,6 +6,11 @@
   background: funcs.get-var('t-bg2');
   border: 1px solid funcs.get-var('t-border');
   border-radius: .25em;
+
+  &[data-disabled] {
+    pointer-events: none;
+    opacity: .6;
+  }
 }
 
 .jg-segment-thumb {
@@ -15,7 +20,7 @@
   left: 0;
   border-radius: .25em;
   box-shadow: funcs.get-var('shadow4');
-  transition: transform 150ms;
+  transition: transform 150ms, width 150ms
 }
 
 .jg-segment-item {
@@ -39,7 +44,7 @@
     background: funcs.get-var('t-border');
   }
 
-  &[data-checked]::before {
+  &.hide-divider::before {
     opacity: 0;
   }
 

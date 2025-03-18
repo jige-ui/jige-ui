@@ -11,7 +11,7 @@ export function Demo() {
     length: 200,
   })
 
-  const [value, setValue] = createSignal(67)
+  const [value, setValue] = createSignal([67])
   return (
     <Playground>
       <Playground.MainArea>
@@ -27,8 +27,10 @@ export function Demo() {
               rowHeight={36}
               virtual={s.virtual}
               selectIndex={value()}
-              onSelect={(item, index) => {
-                setValue(index)
+              onSelect={(_item, index) => {
+                if (value().includes(index)) {
+                  setValue(value().filter((i) => i !== index))
+                } else setValue([...value(), index])
               }}
             >
               {(item) => item}

@@ -16,15 +16,13 @@ export function PasswordInput(props: {
   const [focused, setFocused] = createSignal(false)
 
   const [, fieldCoreActs] = FormCore.useField()
-  const [fieldState] = Form.useFieldContext()
 
   return (
     <InputCore value={props.value} onChange={props.onChange} disabled={props.disabled}>
       <InputFormBind disabled={props.disabled} />
       <InputWrapper focused={focused()}>
         <InputCore.Native
-          aria-labelledby={fieldState.labelID}
-          aria-describedby={fieldState.descriptionID}
+          {...Form.createNativeComponentAttrs()}
           class='jg-input-native'
           autocomplete='off'
           type={showPass() ? 'text' : 'password'}

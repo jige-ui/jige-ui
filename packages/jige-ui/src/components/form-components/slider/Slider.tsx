@@ -83,7 +83,7 @@ export function Slider(props: {
   return (
     <SliderCore {...props}>
       <Popover placement='top' trigger='manual'>
-        <SliderCore.Native />
+        <SliderCore.Native {...Form.createNativeComponentAttrs()} />
         <Track />
       </Popover>
     </SliderCore>

@@ -21,7 +21,7 @@ export function Demo() {
           <Segment
             value={value()}
             onChange={setValue}
-            options={['Apple', 'Banana', 'Watermelon']}
+            options={['Apple', 'Banana', 'Watermelon', 'Orange', 'Pineapple']}
             disabled={s.disabled}
           />
         </div>

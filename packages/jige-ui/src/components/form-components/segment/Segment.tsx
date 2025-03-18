@@ -1,10 +1,11 @@
 import css from 'sass:./segment.scss'
-import { RadioGroupCore, combineStyle } from 'jige-core'
+import { RadioGroupCore } from 'jige-core'
 import type { JSX } from 'solid-js'
 import { For, createMemo, mergeProps, onMount } from 'solid-js'
 import { mountStyle } from 'solid-uses'
 import { RadioFormBind } from '../radio-group/Root'
 import { Thumb } from './Thumb'
+import { Form } from '~/components/form'
 import type { RadioOption } from './types'
 import { setData } from '~/common/dataset'
 import { createStore, type SetStoreFunction } from 'solid-js/store'
@@ -16,15 +17,7 @@ function SegmentWrapper(props: {
 }) {
   const [radioState] = RadioGroupCore.useContext()
   return (
-    <div
-      class={props.class}
-      style={combineStyle(
-        {
-          opacity: radioState.disabled ? 0.6 : 1,
-        },
-        props.style,
-      )}
-    >
+    <div class={props.class} style={props.style} {...setData({ disabled: radioState.disabled })}>
       {props.children}
     </div>
   )
@@ -34,17 +27,27 @@ function Item(props: {
   label: string
   value: string | number
   checked: boolean
+  options: { value: string | number }[]
   setItemWidths: SetStoreFunction<Record<string | number, number>>
 }) {
   let ref!: HTMLButtonElement
+  const state = RadioGroupCore.useContext()[0]
 
   onMount(() => {
     props.setItemWidths(props.value, ref.offsetWidth)
+  })
+  const hideDivider = createMemo(() => {
+    if (props.checked) return true
+    const index = props.options.findIndex((option) => option.value === state.value)
+    return props.options[index + 1]?.value === props.value
   })
   return (
     <button
       type='button'
       class='jg-segment-item'
+      classList={{
+        'hide-divider': hideDivider(),
+      }}
       ref={ref}
       tabIndex={-1}
       {...setData({ checked: props.checked })}
@@ -99,7 +102,7 @@ export function Segment(props: {
           <For each={normalizeOptions()}>
             {(item) => (
               <RadioGroupCore.Item value={item.value as any}>
-                <RadioGroupCore.ItemNative />
+                <RadioGroupCore.ItemNative {...Form.createNativeComponentAttrs()} />
                 <RadioGroupCore.ItemControl>
                   {(state) => (
                     <Item
@@ -107,6 +110,7 @@ export function Segment(props: {
                       checked={state.value === item.value}
                       value={item.value}
                       setItemWidths={setItemWidths}
+                      options={normalizeOptions()}
                     />
                   )}
                 </RadioGroupCore.ItemControl>

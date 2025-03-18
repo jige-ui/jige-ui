@@ -7,13 +7,11 @@ export function NumberInput(props: {
 }) {
   const [state, actions] = context.useContext()
   const [, fieldCoreActs] = FormCore.useField()
-  const [fieldState] = Form.useFieldContext()
   return (
     <input
       class={props.class}
       type='text'
-      aria-labelledby={fieldState.labelID}
-      aria-describedby={fieldState.descriptionID}
+      {...Form.createNativeComponentAttrs()}
       disabled={state.disabled}
       name={state.name}
       autocomplete='off'

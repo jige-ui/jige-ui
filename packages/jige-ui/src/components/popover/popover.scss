@@ -5,8 +5,8 @@
   padding: 6px;
   color: var(--jg-popover-color);
   background: var(--jg-popover-bg);
-  filter: drop-shadow(funcs.get-var('shadow3'));
   border-radius: 6px;
+  filter: drop-shadow(funcs.get-var('shadow3'));
 }
 
 .jg-popover-arrow {

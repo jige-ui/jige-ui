@@ -1,6 +1,7 @@
 import { FormCore } from 'jige-core'
-import { Button, Form, Input } from 'jige-ui'
+import { Button, Form, Input, RadioGroup, Switcher } from 'jige-ui'
 import { sleep } from 'radash'
+import { For } from 'solid-js'
 import { createStore } from 'solid-js/store'
 import * as v from 'valibot'
 
@@ -18,6 +19,7 @@ function valiFieldAdapter(schema: v.GenericSchema | v.GenericSchemaAsync) {
 export function Demo() {
   const [p, setP] = createStore({
     disabled: false,
+    noLabel: false,
   })
 
   const [data, setData] = createStore({
@@ -29,6 +31,7 @@ export function Demo() {
     defaultValues: () => ({
       username: 'haha',
       password: '',
+      sex: 'male',
     }),
     onSubmit: async (value) => {
       await sleep(2000)
@@ -43,16 +46,27 @@ export function Demo() {
     <Playground>
       <Playground.MainArea>
         <Form staticFormInstance={form} disabled={p.disabled}>
-          <Form.Field label='Username' name='username'>
-            <Input type='text' />
+          <Form.Field label={p.noLabel ? undefined : 'Username'} name='username'>
+            <Input type='text' placeholder={p.noLabel ? 'Username' : ''} />
           </Form.Field>
           <Form.Field
-            label={'password'}
+            label={p.noLabel ? undefined : 'Password'}
             name={'password'}
             validators={[valiFieldAdapter(v.pipe(v.string(), v.nonEmpty('不能为空')))]}
-            description='input your password'
           >
-            <Input type='password' />
+            <Input type='password' placeholder={p.noLabel ? 'Password' : ''} />
+          </Form.Field>
+          <Form.Field label={p.noLabel ? undefined : 'Sex'} name='sex'>
+            <RadioGroup>
+              <For each={['male', 'female']}>
+                {(item) => <RadioGroup.Item value={item} label={item} />}
+              </For>
+            </RadioGroup>
+          </Form.Field>
+          <Form.Field name='remember'>
+            <div class='flex items-center'>
+              <Switcher type='checkbox' /> Remember me
+            </div>
           </Form.Field>
 
           <div class='flex gap-2'>

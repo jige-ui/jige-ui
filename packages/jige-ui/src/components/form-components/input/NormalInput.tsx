@@ -31,7 +31,6 @@ export function NormalInput(props: {
 }) {
   const [focused, setFocused] = createSignal(false)
   const [, fieldCoreActs] = FormCore.useField()
-  const [fieldState] = Form.useFieldContext()
   return (
     <InputCore value={props.value} onChange={props.onChange} disabled={props.disabled}>
       <InputFormBind disabled={props.disabled} />
@@ -40,8 +39,7 @@ export function NormalInput(props: {
           class='jg-input-native'
           autocomplete='off'
           type='text'
-          aria-labelledby={fieldState.labelID}
-          aria-describedby={fieldState.descriptionID}
+          {...Form.createNativeComponentAttrs()}
           onFocus={() => setFocused(true)}
           onBlur={() => {
             setFocused(false)

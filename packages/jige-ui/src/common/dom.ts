@@ -31,11 +31,11 @@ export function combineStyle(
   a: JSX.CSSProperties,
   b: JSX.CSSProperties | string | undefined,
 ): JSX.CSSProperties | string {
-  let bb = {}
+  let bb = b
   if (typeof b === 'string') {
     bb = stringStyleToObject(b)
   }
-  return { ...a, ...bb }
+  return { ...a, ...(bb as JSX.CSSProperties) }
 }
 
 export async function runIgnoreError<T>(fn: () => T) {

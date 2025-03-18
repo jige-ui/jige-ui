@@ -2,6 +2,7 @@ import { FormCore } from 'jige-core'
 import type { JSX } from 'solid-js/jsx-runtime'
 import { watch } from 'solid-uses'
 import { formContext } from './context'
+import { isDef } from '~/common/types'
 
 export function Bind(props: {
   isBlur?: boolean
@@ -18,7 +19,7 @@ export function Bind(props: {
   watch([() => fieldState.value, () => fieldState.name], ([value, name]) => {
     if (name) {
       props.setName(name)
-      props.setValue(value)
+      isDef(value) && props.setValue(value)
     }
   })
 

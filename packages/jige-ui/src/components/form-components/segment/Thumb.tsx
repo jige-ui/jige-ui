@@ -16,7 +16,7 @@ export function Thumb(props: {
       .reduce((acc, cur) => acc + cur, 0)
   })
 
-  const width = createMemo(() => props.itemWidths[state.value] || 0)
+  const width = createMemo(() => props.itemWidths[state.value] - 1 || 0)
   return (
     <div
       class='jg-segment-thumb'

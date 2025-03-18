@@ -38,7 +38,7 @@ export function Switcher(props: {
   return (
     <SwitcherCore checked={props.value} onChange={props.onChange} disabled={props.disabled}>
       <SwitcherBind propDisabled={props.disabled}>
-        <SwitcherCore.Native class='jg-switcher-native' />
+        <SwitcherCore.Native class='jg-switcher-native' {...Form.createNativeComponentAttrs()} />
         <Switch>
           <Match when={type() === 'checkbox'}>
             <SwitcherCore.Control>

@@ -32,7 +32,9 @@ export function Root(props: {
   mountStyle(css, 'jige-ui-radio-group')
   return (
     <RadioGroupCore value={props.value} onChange={props.onChange} disabled={props.disabled}>
-      <RadioFormBind propDisabled={props.disabled}>{props.children}</RadioFormBind>
+      <div {...Form.createNativeComponentAttrs()}>
+        <RadioFormBind propDisabled={props.disabled}>{props.children}</RadioFormBind>
+      </div>
     </RadioGroupCore>
   )
 }

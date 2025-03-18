@@ -11,5 +11,7 @@ export const fieldContext = createComponentState({
     descriptionID: '',
     labelID: '',
     labelFor: '',
+    hasLabel: false,
+    hasDescription: false,
   }),
 })

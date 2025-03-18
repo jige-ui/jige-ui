@@ -29,7 +29,7 @@ export function ListBox() {
         itemClass='jg-combo-box-item'
         scrollToSelected={false}
       >
-        {(item) => item}
+        {(item) => <div class='jg-combo-box-item-inner'>{item}</div>}
       </LB>
     </FloatingUiCore.Content>
   )

@@ -8,7 +8,7 @@ export function ListInner(props: {
   fallback: JSX.Element
   children: (item: any, index: number) => JSX.Element
   onSelect: (item: any, index: number) => void
-  selectIndex: number
+  selectIndex: number[]
   selectTrigger: 'click' | 'arrow'
   scrollToSelected: boolean
   class?: string
