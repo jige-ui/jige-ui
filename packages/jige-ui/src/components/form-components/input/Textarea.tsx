@@ -4,9 +4,9 @@ import { throttle } from 'radash'
 import { createSignal, onMount } from 'solid-js'
 import { watch } from 'solid-uses'
 import { setData } from '~/common/dataset'
+import { Form } from '~/components/form'
 import { InputFormBind } from './NormalInput'
 import { Placeholder } from './Placeholder'
-import { Form } from '~/components/form'
 
 function ScrollInput(props: {
   value?: string

@@ -1,9 +1,9 @@
 import styles from 'sass:./slider.scss'
 import { FloatingUiCore, SliderCore } from 'jige-core'
 import { mountStyle, watch } from 'solid-uses'
+import { setData } from '~/common/dataset'
 import { Form } from '~/components/form'
 import { Popover } from '../../popover'
-import { setData } from '~/common/dataset'
 
 function ToopTipSliderThumb(props: {
   disabled?: boolean

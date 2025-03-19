@@ -1,7 +1,8 @@
+import { combineStyle } from 'jige-core'
 import { createMemo } from 'solid-js'
 import type { JSX } from 'solid-js/jsx-runtime'
 import { Dynamic } from 'solid-js/web'
-import { combineStyle, runIgnoreError } from '~/common/dom'
+import { runIgnoreError } from '~/common/dom'
 import { context } from './context'
 
 export function ButtonWrapper(props: {

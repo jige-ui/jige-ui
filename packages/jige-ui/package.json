@@ -22,9 +22,7 @@
   "module": "dist/build.js",
   "types": "dist/build.d.ts",
   "typesVersions": {},
-  "files": [
-    "dist"
-  ],
+  "files": ["dist"],
   "scripts": {
     "build": "tsup",
     "dev": "tsup --watch",
@@ -32,7 +30,7 @@
     "type-check": "tsc --noEmit --skipLibCheck"
   },
   "peerDependencies": {
-    "jige-core": "^0.37.1",
+    "jige-core": "^0.37.2",
     "solid-js": "^1.9.3"
   },
   "dependencies": {

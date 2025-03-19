@@ -3,9 +3,9 @@ import type { JSX } from 'solid-js'
 import { Show, createMemo, mergeProps } from 'solid-js'
 import { mountStyle } from 'solid-uses'
 
+import { isArray } from 'radash'
 import { ListInner } from './ListInner'
 import { VirtualInner } from './VirtualInner'
-import { isArray } from 'radash'
 
 export function Listbox<T extends any[]>(props: {
   virtual?: boolean

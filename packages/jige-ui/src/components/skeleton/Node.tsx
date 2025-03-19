@@ -2,8 +2,8 @@ import css from 'sass:./skeleton.scss'
 import { splitProps } from 'solid-js'
 import type { JSX } from 'solid-js/jsx-runtime'
 
+import { combineStyle } from 'jige-core'
 import { mountStyle } from 'solid-uses'
-import { combineStyle } from '~/common/dom'
 
 export function Node(
   props: {

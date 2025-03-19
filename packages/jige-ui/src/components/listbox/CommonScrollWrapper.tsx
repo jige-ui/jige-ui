@@ -1,9 +1,9 @@
+import { undefinedOr } from 'jige-core'
 import { For, createSignal } from 'solid-js'
 import type { JSX } from 'solid-js/jsx-runtime'
 import { watch } from 'solid-uses'
 import { setData } from '~/common/dataset'
 import { Scrollbar } from '../scrollbar'
-import { undefinedOr } from 'jige-core'
 
 export function CommonScrollWrapper<T extends any[]>(props: {
   onScroll?: (e: Event) => void

@@ -2,13 +2,13 @@ import css from 'sass:./segment.scss'
 import { RadioGroupCore } from 'jige-core'
 import type { JSX } from 'solid-js'
 import { For, createMemo, mergeProps, onMount } from 'solid-js'
+import { type SetStoreFunction, createStore } from 'solid-js/store'
 import { mountStyle } from 'solid-uses'
+import { setData } from '~/common/dataset'
+import { Form } from '~/components/form'
 import { RadioFormBind } from '../radio-group/Root'
 import { Thumb } from './Thumb'
-import { Form } from '~/components/form'
 import type { RadioOption } from './types'
-import { setData } from '~/common/dataset'
-import { createStore, type SetStoreFunction } from 'solid-js/store'
 
 function SegmentWrapper(props: {
   children: JSX.Element

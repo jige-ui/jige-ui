@@ -2,11 +2,11 @@ import css from 'sass:./button.scss'
 import type { ButtonProps } from './types'
 
 import { mountStyle, watch } from 'solid-uses'
+import { Form } from '../form'
 import { ButtonContent } from './ButtonContent'
 import { ButtonWrapper } from './ButtonWrapper'
 import { LoadingIcon } from './LoadingIcon'
 import { context } from './context'
-import { Form } from '../form'
 
 export function Button<T extends string | undefined = undefined>(
   props: ButtonProps & {

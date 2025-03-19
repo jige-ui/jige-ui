@@ -9,7 +9,7 @@ import { defineConfig } from 'tsup'
 
 const inlinePlugin = inlineImportPlugin({
   filter: /^sass:/,
-  transform: async (contents, args) => {
+  transform: async (_contents, args) => {
     const browers = browserslist()
     const browersTarget = browserslistToTargets(browers)
     const code = (await compileAsync(args.path)).css
