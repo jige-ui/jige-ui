@@ -26,7 +26,7 @@ const inlinePlugin = inlineImportPlugin({
   },
 })
 
-function generateConfig(jsx: boolean, dts?: boolean): Options {
+function generateConfig(jsx: boolean, dts?: boolean, watch?: boolean): Options {
   return {
     target: 'esnext',
     platform: 'browser',
@@ -43,7 +43,9 @@ function generateConfig(jsx: boolean, dts?: boolean): Options {
         options.jsx = 'preserve'
       }
       options.chunkNames = '[name]/[hash]'
-      // options.drop = ['console', 'debugger']
+      if (!watch) {
+        options.drop = ['console', 'debugger']
+      }
     },
     outExtension() {
       return jsx ? { js: '.jsx' } : {}
@@ -56,7 +58,7 @@ function generateConfig(jsx: boolean, dts?: boolean): Options {
 
 export default defineConfig((opt) => {
   if (opt.watch) {
-    return generateConfig(true, true)
+    return generateConfig(true, true, true)
   }
   return [generateConfig(false, true), generateConfig(true)]
 })

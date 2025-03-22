@@ -5,18 +5,23 @@ import type { RadioOption } from './types'
 export function Thumb(props: {
   options: Exclude<RadioOption, string>[]
   bg: string
-  itemWidths: Record<string, number>
+  itemRefs: Record<string, HTMLButtonElement>
 }) {
   const state = RadioGroupCore.useContext()[0]
   const sliderX = createMemo(() => {
-    const index = props.options.findIndex((option) => option.value === state.value)
-    if (index === -1) return 0
-    return Object.values(props.itemWidths)
-      .slice(0, index)
-      .reduce((acc, cur) => acc + cur, 0)
+    const itemRef = props.itemRefs[state.value]
+    if (!itemRef) return 0
+    const { left } = itemRef.getBoundingClientRect()
+    const parentLeft = itemRef.parentElement?.getBoundingClientRect().left || 0
+    return left - parentLeft - 1
   })
 
-  const width = createMemo(() => props.itemWidths[state.value] - 1 || 0)
+  const width = createMemo(() => {
+    const itemRef = props.itemRefs[state.value]
+    if (!itemRef) return 0
+    const { width } = itemRef.getBoundingClientRect()
+    return width
+  })
   return (
     <div
       class='jg-segment-thumb'

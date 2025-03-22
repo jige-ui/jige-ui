@@ -22,7 +22,7 @@ export function Demo() {
           variant={p.variant as any}
           size={p.size as any}
           color={p.color}
-          icon={<div class='i-ri-account-circle-line' />}
+          icon={p.icon && <div class='i-ri-account-circle-line' />}
           label={p.label}
         />
       </Playground.MainArea>

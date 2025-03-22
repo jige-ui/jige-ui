@@ -16,6 +16,14 @@ function valiFieldAdapter(schema: v.GenericSchema | v.GenericSchemaAsync) {
   }
 }
 
+function valiForm(schemas: Record<string, v.GenericSchema | v.GenericSchemaAsync>) {
+  const finalValidate = {} as Record<string, any>
+  for (const key in schemas) {
+    finalValidate[key] = valiFieldAdapter(schemas[key])
+  }
+  return finalValidate
+}
+
 export function Demo() {
   const [p, setP] = createStore({
     disabled: false,
@@ -27,10 +35,22 @@ export function Demo() {
     password: '',
   })
 
+  const formSchema = {
+    username: v.pipe(v.string(), v.nonEmpty('不能为空')),
+    email: v.pipe(v.string(), v.nonEmpty('不能为空'), v.email('邮箱格式不正确')),
+    password: v.pipe(
+      v.string(),
+      v.minLength(6, '密码长度不能小于6'),
+      v.maxLength(12, '密码长度不能大于12'),
+    ),
+  }
+
   const form = FormCore.createForm({
     defaultValues: () => ({
       username: 'haha',
+      email: '',
       password: '',
+      confirmPassword: '',
       sex: 'male',
     }),
     onSubmit: async (value) => {
@@ -38,6 +58,7 @@ export function Demo() {
 
       setData(value)
     },
+    validate: valiForm(formSchema),
   })
 
   const [formState] = form.context
@@ -49,12 +70,25 @@ export function Demo() {
           <Form.Field label={p.noLabel ? undefined : 'Username'} name='username'>
             <Input type='text' placeholder={p.noLabel ? 'Username' : ''} />
           </Form.Field>
-          <Form.Field
-            label={p.noLabel ? undefined : 'Password'}
-            name={'password'}
-            validators={[valiFieldAdapter(v.pipe(v.string(), v.nonEmpty('不能为空')))]}
-          >
+          <Form.Field label={p.noLabel ? undefined : 'Email'} name='email'>
+            <Input placeholder={p.noLabel ? 'Email' : ''} />
+          </Form.Field>
+          <Form.Field label={p.noLabel ? undefined : 'Password'} name={'password'}>
             <Input type='password' placeholder={p.noLabel ? 'Password' : ''} />
+          </Form.Field>
+          <Form.Field
+            label={p.noLabel ? undefined : 'Confirm Password'}
+            name={'confirmPassword'}
+            validateRelatedFields={['password']}
+            validators={[
+              (value, form) => {
+                if (value !== form.password) {
+                  return '两次密码不一致'
+                }
+              },
+            ]}
+          >
+            <Input type='password' placeholder={p.noLabel ? 'Confirm Password' : ''} />
           </Form.Field>
           <Form.Field label={p.noLabel ? undefined : 'Sex'} name='sex'>
             <RadioGroup>

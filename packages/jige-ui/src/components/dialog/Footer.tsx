@@ -18,7 +18,7 @@ export function Footer(props: {
   })
 
   const color = createMemo(() => {
-    return `var(--jg-fg-${props.type})`
+    return `var(--jg-fg-${props.type === 'error' ? 'danger' : props.type})`
   })
   return (
     <div
@@ -32,7 +32,7 @@ export function Footer(props: {
       <Show when={props.negativeText}>
         <Button
           variant='text'
-          color='var(--jg-fg4)'
+          color='var(--jg-fg3)'
           label={props.negativeText}
           onClick={async () => {
             await props.onNegativeClick?.()

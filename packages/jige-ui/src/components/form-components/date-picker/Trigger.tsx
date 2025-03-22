@@ -8,12 +8,8 @@ import { context } from './context'
 
 export function Trigger() {
   const [state, actions] = context.useContext()
-
   const [floatState, floatActions] = FloatingUiCore.useContext()
-
-  const [fieldState] = Form.useFieldContext()
   const [, fieldCoreActs] = FormCore.useField()
-
   const [focused, setFocused] = createSignal(false)
 
   watch(
@@ -39,8 +35,7 @@ export function Trigger() {
       >
         <input
           type='text'
-          aria-labelledby={fieldState.labelID}
-          aria-describedby={fieldState.descriptionID}
+          {...Form.createNativeComponentAttrs()}
           value={state.value}
           ref={actions.setRefTrigger}
           name={state.name || 'datepicker'}

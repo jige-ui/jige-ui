@@ -28,13 +28,13 @@ function Item(props: {
   value: string | number
   checked: boolean
   options: { value: string | number }[]
-  setItemWidths: SetStoreFunction<Record<string | number, number>>
+  setItemRefs: SetStoreFunction<Record<string | number, HTMLButtonElement>>
 }) {
   let ref!: HTMLButtonElement
   const state = RadioGroupCore.useContext()[0]
 
   onMount(() => {
-    props.setItemWidths(props.value, ref.offsetWidth)
+    props.setItemRefs(props.value, ref)
   })
   const hideDivider = createMemo(() => {
     if (props.checked) return true
@@ -87,7 +87,7 @@ export function Segment(props: {
     props,
   )
 
-  const [itemWidths, setItemWidths] = createStore<Record<string | number, number>>({})
+  const [itemRefs, setItemRefs] = createStore<Record<string | number, HTMLButtonElement>>({})
 
   return (
     <RadioGroupCore onChange={props.onChange} value={props.value} disabled={props.disabled}>
@@ -98,7 +98,7 @@ export function Segment(props: {
             background: finalProps.railBg,
           }}
         >
-          <Thumb options={normalizeOptions()} bg={finalProps.thumbBg} itemWidths={itemWidths} />
+          <Thumb options={normalizeOptions()} bg={finalProps.thumbBg} itemRefs={itemRefs} />
           <For each={normalizeOptions()}>
             {(item) => (
               <RadioGroupCore.Item value={item.value as any}>
@@ -109,7 +109,7 @@ export function Segment(props: {
                       label={item.label}
                       checked={state.value === item.value}
                       value={item.value}
-                      setItemWidths={setItemWidths}
+                      setItemRefs={setItemRefs}
                       options={normalizeOptions()}
                     />
                   )}
