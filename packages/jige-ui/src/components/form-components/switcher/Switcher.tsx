@@ -45,7 +45,10 @@ export function Switcher(props: {
               {(state) => (
                 <div
                   class='jg-switcher-control jg-switcher-checkbox'
-                  {...setData('checked', state.checked)}
+                  {...setData({
+                    checked: state.checked,
+                    disabled: state.disabled,
+                  })}
                 >
                   <Show when={state.checked}>
                     <i class='jg-switcher-icon'>
@@ -59,7 +62,10 @@ export function Switcher(props: {
           <Match when={type() === 'switcher'}>
             <SwitcherCore.Control>
               {(state) => (
-                <div class='jg-switcher-control jg-switcher-switcher'>
+                <div
+                  class='jg-switcher-control jg-switcher-switcher'
+                  {...setData('disabled', state.disabled)}
+                >
                   <div class='jg-switcher-thumb' {...setData('checked', state.checked)} />
                 </div>
               )}
