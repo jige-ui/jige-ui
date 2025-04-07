@@ -3,6 +3,7 @@ import { createSignal } from 'solid-js'
 import { watch } from 'solid-uses'
 import { setData } from '~/common/dataset'
 import { Form } from '~/components/form'
+import { CalendarLine } from '~/components/icons'
 import { Popover } from '../../popover'
 import { context } from './context'
 
@@ -16,7 +17,7 @@ export function Trigger() {
     () => floatState.status,
     (status) => {
       if (status === 'closed') {
-        actions.setActivePanel('day')
+        actions.setActivePanel(state.defaultPanel)
         const inst = state.inst
         actions.setCurrYear(inst.year())
         actions.setCurrMonth(inst.month())
@@ -27,18 +28,24 @@ export function Trigger() {
   return (
     <Popover.Trigger>
       <div
-        class='jg-dp-trigger'
+        class='jg-input-wrapper jg-dp-trigger'
         {...setData({
           focused: focused(),
           disabled: state.disabled,
         })}
       >
+        <div class='jg-input-prefix'>
+          <CalendarLine />
+        </div>
         <input
           type='text'
+          autocomplete='off'
+          class='jg-input-native'
           {...Form.createNativeComponentAttrs()}
           value={state.value}
           ref={actions.setRefTrigger}
           name={state.name || 'datepicker'}
+          placeholder={state.placeholder || '请选择日期'}
           onChange={(e) => {
             if (!actions.setValue(e.currentTarget.value)) {
               e.currentTarget.value = state.value

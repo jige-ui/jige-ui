@@ -1,23 +1,33 @@
 import { Input } from 'jige-ui'
-import { createSignal } from 'solid-js'
+import { createStore } from 'solid-js/store'
+import { Playground } from '~/components/playground'
 
 export function Demo() {
-  const [value, setValue] = createSignal('')
+  const [p, setP] = createStore({
+    disabled: false,
+    clearable: false,
+    type: 'text' as 'text' | 'textarea' | 'password',
+  })
+
   return (
-    <div class='flex flex-col gap-2'>
-      <Input
-        value={value()}
-        onChange={setValue}
-        type='textarea'
-        placeholder='Type something here'
+    <Playground>
+      <Playground.MainArea>
+        <div>
+          <Input
+            disabled={p.disabled}
+            clearable={p.clearable}
+            type={p.type}
+            placeholder='Input some'
+          />
+        </div>
+      </Playground.MainArea>
+      <Playground.PropertySetting
+        properties={p}
+        onChange={setP}
+        typeDeclaration={{
+          type: ['text', 'textarea', 'password'],
+        }}
       />
-      <Input value={value()} onChange={setValue} placeholder='Type something here' />
-      <Input
-        value={value()}
-        onChange={setValue}
-        type='password'
-        placeholder='Type something here'
-      />
-    </div>
+    </Playground>
   )
 }

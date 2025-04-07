@@ -19,6 +19,7 @@ export function CommonScrollWrapper<T extends any[]>(props: {
   items: T
   fallback: JSX.Element
   scrollToSelected: boolean
+  preventFocus: boolean
   itemClass?: string
   class?: string
 }) {
@@ -30,14 +31,15 @@ export function CommonScrollWrapper<T extends any[]>(props: {
   watch(
     () => props.selectIndex,
     (index) => {
-      console.log(index)
-
       const lastItem = index[index.length - 1]
       setHlIndex(undefinedOr(lastItem, -1))
     },
   )
 
   function handleKeyDown(e: any) {
+    if (props.preventFocus) {
+      return
+    }
     if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
       e.preventDefault() // 防止滚动区域滚动
     }
@@ -55,7 +57,9 @@ export function CommonScrollWrapper<T extends any[]>(props: {
   }
 
   watch([hlIndex, scrollRef], ([index, ref]) => {
-    listRef?.focus()
+    if (!props.preventFocus) {
+      listRef?.focus()
+    }
     if (props.scrollToSelected) {
       const $item = listRef?.querySelector(`[data-index="${index}"]`)
       if ($item) {

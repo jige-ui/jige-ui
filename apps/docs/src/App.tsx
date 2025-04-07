@@ -53,7 +53,7 @@ export function App() {
   return (
     <Router
       root={(props) => (
-        <div class='flex h-screen w-screen flex-col bg-t-bg2 color-fg1'>
+        <div class='flex h-screen w-screen flex-col bg-t-bg2'>
           <div class='h-45px w-full bg-t-bg2 '>
             <Header />
           </div>

@@ -9,7 +9,7 @@ export function Trigger() {
   const [, fieldCoreActs] = FormCore.useField()
   return (
     <FloatingUiCore.Trigger>
-      <div class='jg-combo-box-trigger' {...setData('disabled', state.disabled)}>
+      <button class='jg-combo-box-trigger' {...setData('disabled', state.disabled)}>
         <input
           {...Form.createNativeComponentAttrs()}
           type='text'
@@ -35,7 +35,7 @@ export function Trigger() {
         >
           {state.value}
         </div>
-      </div>
+      </button>
     </FloatingUiCore.Trigger>
   )
 }

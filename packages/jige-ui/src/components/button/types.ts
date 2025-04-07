@@ -1,23 +1,24 @@
+import type { ComponentProps } from 'solid-js'
 import type { JSX } from 'solid-js/jsx-runtime'
 
 export type ButtonVariant = 'link' | 'text' | 'solid'
 
+type ButtonElementAnchorProps = Omit<ComponentProps<'a'>, 'onClick' | 'href'>
+type ButtonElementButtonProps = Omit<ComponentProps<'button'>, 'onClick' | 'href'>
+export type ButtonElement<THref = string | undefined> = THref extends string
+  ? ButtonElementAnchorProps
+  : ButtonElementButtonProps
+
 export interface ButtonProps {
-  type?: 'button' | 'submit' | 'reset'
   label?: string
-  target?: string
   icon?: JSX.Element
   onClick?: (e: MouseEvent) => void | Promise<void>
   loading?: boolean
-  children?: JSX.Element
-  class?: string
-  style?: string | JSX.CSSProperties
+  disabled?: boolean
   /**
    * @default solid
    */
   variant?: ButtonVariant
   color?: string
-  disabled?: boolean
-  download?: boolean
   size?: 'small' | 'medium' | 'large'
 }

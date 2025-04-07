@@ -1,8 +1,8 @@
 import { FormCore, InputCore } from 'jige-core'
-import { createSignal } from 'solid-js'
+import { Show, createSignal } from 'solid-js'
 import { Form } from '~/components/form'
+import { Clearable } from './Clearable'
 import { InputWrapper } from './InputWrapper'
-import { Placeholder } from './Placeholder'
 
 export function InputFormBind(props: {
   disabled?: boolean
@@ -28,6 +28,7 @@ export function NormalInput(props: {
   onChange?: (value: string) => void
   placeholder?: string
   disabled?: boolean
+  clearable?: boolean
 }) {
   const [focused, setFocused] = createSignal(false)
   const [, fieldCoreActs] = FormCore.useField()
@@ -45,8 +46,11 @@ export function NormalInput(props: {
             setFocused(false)
             fieldCoreActs.handleBlur?.()
           }}
+          placeholder={props.placeholder}
         />
-        <Placeholder placeholder={props.placeholder || ''} />
+        <Show when={props.clearable}>
+          <Clearable />
+        </Show>
       </InputWrapper>
     </InputCore>
   )

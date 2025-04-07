@@ -21,6 +21,7 @@ export function Listbox<T extends any[]>(props: {
   itemClass?: string
   class?: string
   scrollToSelected?: boolean
+  preventFocus?: boolean
 }) {
   mountStyle(css, 'jige-ui-listbox')
   const realProps = mergeProps(
@@ -29,6 +30,7 @@ export function Listbox<T extends any[]>(props: {
       selectTrigger: 'click' as 'click' | 'arrow',
       onSelect: () => {},
       scrollToSelected: true,
+      preventFocus: false,
       overscanCount: 5,
       fallback: <div />,
     },

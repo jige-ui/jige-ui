@@ -2,6 +2,8 @@ import { esday } from 'esday'
 import { debounce, isFunction, list } from 'radash'
 import { For } from 'solid-js'
 import { watch } from 'solid-uses'
+import { setData } from '~/common/dataset'
+import { dayes } from '~/common/dayes'
 import type { MaybeAsync } from '~/common/types'
 import { context } from './context'
 import { NumberToChinese } from './utils'
@@ -39,14 +41,21 @@ export function MonthPanel(props: {
         {(month) => (
           <div
             class='jg-dp-month-panel-month'
+            {...setData({
+              selected: state.inst.month() === month && state.inst.year() === state.currYear,
+              disabled: !checkMonth(month),
+            })}
             classList={{
               'jg-dp-month-panel-month-hl': isHl(month),
-              'jg-dp-disabled': !checkMonth(month),
             }}
             onClick={() => {
               if (!checkMonth(month)) return
               actions.setCurrMonth(month)
-              actions.setActivePanel('day')
+              actions.setActivePanel(state.defaultPanel)
+              if (state.defaultPanel === 'month') {
+                actions.setValue(dayes([state.currYear, month, 1]))
+                state.refTrigger?.blur()
+              }
             }}
             onKeyDown={() => {}}
           >

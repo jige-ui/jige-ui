@@ -1,4 +1,5 @@
 import type { EsDay } from 'esday'
+import { isArray } from 'radash'
 import { createComponentState } from 'solid-uses'
 import { dayes } from '~/common/dayes'
 import type { DateTypes } from './types'
@@ -7,12 +8,14 @@ const today = dayes()
 
 export const context = createComponentState({
   state: () => ({
-    value: today.format('YYYY-MM-DD'),
+    value: '',
     valueFormat: 'YYYY-MM-DD',
     name: '',
+    placeholder: '',
     currYear: today.year(),
     currMonth: today.month(),
     activePanel: 'day',
+    type: 'date',
     refTrigger: null as HTMLElement | null,
     dateRange: ['1800-01-01', '2200-01-01'] as [DateTypes, DateTypes],
     hlDates: [] as string[],
@@ -31,6 +34,16 @@ export const context = createComponentState({
     toInst() {
       return dayes(this.state.dateRange[1], this.state.valueFormat)
     },
+    defaultPanel() {
+      switch (this.state.type) {
+        case 'month':
+          return 'month'
+        case 'year':
+          return 'year'
+        default:
+          return 'day'
+      }
+    },
   },
   methods: {
     monthHandle(step: number) {
@@ -41,17 +54,39 @@ export const context = createComponentState({
         actions.setCurrMonth(d.month())
       }
     },
+    toValueString(
+      value: DateTypes | DateTypes[],
+    ): typeof value extends DateTypes[] ? string[] : string {
+      if (isArray(value)) {
+        // @ts-expect-error value is DateTypes[]
+        return value.map((v) => dayes(v, this.state.valueFormat).format(this.state.valueFormat))
+      }
+      return dayes(value, this.state.valueFormat).format(this.state.valueFormat)
+    },
     setValue(value: DateTypes) {
+      if (value === '') {
+        this.actions.setState('value', '')
+        return true
+      }
+
       const inst = dayes(value, this.state.valueFormat)
 
       if (inst.isValid()) {
-        if (inst >= this.state.fromInst && inst <= this.state.toInst) {
+        if (
+          this.actions.isInDateRange(inst) &&
+          !this.state.dsDates.includes(inst.format('YYYY-MM-DD'))
+        ) {
           this.actions.setState('value', inst.format(this.state.valueFormat))
           return true
         }
       }
 
       return false
+    },
+
+    isSelected(value: DateTypes) {
+      const stateValue = isArray(this.state.value) ? this.state.value : [this.state.value]
+      return stateValue.includes(this.actions.toValueString(value))
     },
 
     setCurrYear(year: number) {

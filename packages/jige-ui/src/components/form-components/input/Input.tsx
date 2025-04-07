@@ -12,6 +12,7 @@ export function Input(props: {
   onChange?: (value: string) => void
   placeholder?: string
   disabled?: boolean
+  clearable?: boolean
 }) {
   mountStyle(styles, 'jige-ui-input')
   return (

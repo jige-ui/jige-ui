@@ -22,8 +22,6 @@ export function Content(
     'class',
     'style',
   ])
-  console.log(localProps.style)
-
   return (
     <FloatingUiCore.Content
       {...otherProps}
@@ -31,7 +29,7 @@ export function Content(
       style={combineStyle(
         {
           '--jg-popover-bg': localProps.background || 'var(--jg-t-bg1)',
-          '--jg-popover-color': localProps.color || 'var(--jg-fg1)',
+          '--jg-popover-color': localProps.color || 'var(--jg-fg2)',
         },
         localProps.style,
       )}

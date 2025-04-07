@@ -2,9 +2,9 @@ import { FormCore, InputCore } from 'jige-core'
 import { Show, createSignal } from 'solid-js'
 import { Form } from '~/components/form'
 import { EyeLine, EyeOffLine } from '../../icons'
+import { Clearable } from './Clearable'
 import { InputWrapper } from './InputWrapper'
 import { InputFormBind } from './NormalInput'
-import { Placeholder } from './Placeholder'
 
 export function PasswordInput(props: {
   value?: string
@@ -31,8 +31,9 @@ export function PasswordInput(props: {
             setFocused(false)
             fieldCoreActs.handleBlur?.()
           }}
+          placeholder={props.placeholder}
         />
-        <Placeholder placeholder={props.placeholder || ''} />
+        <Clearable hasSuffix />
         <button
           type='button'
           aria-label='Toggle password visibility'

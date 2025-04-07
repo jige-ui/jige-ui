@@ -9,6 +9,10 @@ export function Wrapper(props: {
       onMouseDown={(e) => {
         e.preventDefault()
       }}
+      style={{
+        padding: 0,
+        border: '1px solid var(--jg-t-border)',
+      }}
     >
       {props.children}
     </Popover.Content>

@@ -142,3 +142,36 @@ export function ArrowUp() {
     </IconSvgWrapper>
   )
 }
+
+export function CaretUp() {
+  return (
+    <IconSvgWrapper>
+      <path
+        fill='currentColor'
+        d='M6.102 16.98c-1.074 0-1.648-1.264-.94-2.073l5.521-6.31a1.75 1.75 0 0 1 2.634 0l5.522 6.31c.707.809.133 2.073-.94 2.073z'
+      />
+    </IconSvgWrapper>
+  )
+}
+
+export function CaretDown() {
+  return (
+    <IconSvgWrapper>
+      <path
+        fill='currentColor'
+        d='M6.102 8c-1.074 0-1.648 1.265-.94 2.073l5.521 6.31a1.75 1.75 0 0 0 2.634 0l5.522-6.31c.707-.808.133-2.073-.94-2.073z'
+      />
+    </IconSvgWrapper>
+  )
+}
+
+export function CalendarLine() {
+  return (
+    <IconSvgWrapper>
+      <path
+        fill='currentColor'
+        d='M9 1v2h6V1h2v2h4a1 1 0 0 1 1 1v16a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h4V1zm11 10H4v8h16zM7 5H4v4h16V5h-3v2h-2V5H9v2H7z'
+      />
+    </IconSvgWrapper>
+  )
+}

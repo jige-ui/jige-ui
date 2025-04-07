@@ -1,6 +1,7 @@
 import { debounce, isArray, throttle } from 'radash'
 import { For, createSignal } from 'solid-js'
 import { watch } from 'solid-uses'
+import { setData } from '~/common/dataset'
 import type { MaybeAsync } from '~/common/types'
 import { context } from './context'
 import { genYears } from './utils'
@@ -51,14 +52,17 @@ export function YearPanel(props: {
         {(year) => (
           <div
             class='jg-dp-year-panel-year'
+            {...setData({
+              selected: state.inst.year() === year,
+              disabled: !checkYear(year),
+            })}
             classList={{
               'jg-dp-year-panel-year-hl': state.hlYears.includes(year),
-              'jg-dp-disabled': !checkYear(year),
             }}
             onClick={() => {
               if (!checkYear(year)) return
               actions.setCurrYear(year)
-              actions.setActivePanel('day')
+              actions.setActivePanel(state.defaultPanel)
             }}
             onKeyDown={() => {}}
           >

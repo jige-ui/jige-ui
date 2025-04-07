@@ -1,26 +1,18 @@
 import { combineStyle } from 'jige-core'
-import { createMemo } from 'solid-js'
-import type { JSX } from 'solid-js/jsx-runtime'
+import { createMemo, splitProps } from 'solid-js'
 import { Dynamic } from 'solid-js/web'
 import { runIgnoreError } from '~/common/dom'
 import { context } from './context'
+import type { ButtonElement } from './types'
 
-export function ButtonWrapper(props: {
-  children: JSX.Element
-  onClick?: (e: MouseEvent) => void | Promise<void>
-  href?: string
-  style?: string | JSX.CSSProperties
-  class?: string
-  target?: string
-  // @default 'medium'
-  size: 'small' | 'medium' | 'large'
-  ref?:
-    | HTMLAnchorElement
-    | HTMLButtonElement
-    | ((el: HTMLAnchorElement | HTMLButtonElement) => void)
-  type: 'button' | 'submit' | 'reset'
-  download?: boolean
-}) {
+export function ButtonWrapper<T = string | undefined>(
+  props: {
+    href: T
+    onClick?: (e: MouseEvent) => void | Promise<void>
+    size: 'small' | 'medium' | 'large'
+  } & ButtonElement<T>,
+) {
+  const [local, others] = splitProps(props, ['onClick', 'size', 'style', 'class'])
   const [state, actions] = context.useContext()
   const isAnchor = createMemo(() => {
     return !!props.href
@@ -54,21 +46,16 @@ export function ButtonWrapper(props: {
 
   return (
     <Dynamic
-      disabled={state.disabled}
-      component={isAnchor() ? 'a' : 'button'}
-      type={props.type}
-      ref={props.ref as any}
-      href={props.href}
-      target={props.target}
-      download={props.download}
+      {...others}
+      component={(isAnchor() ? 'a' : 'button') as any}
       onClick={(e: any) => {
         if (state.loading || isAnchor() || state.disabled) return
-        if (props.onClick) {
+        if (local.onClick) {
           const doClick = async () => {
             actions.setLoading(true)
-            if (props.onClick) {
+            if (local.onClick) {
               // eslint-disable-next-line solid/reactivity
-              await runIgnoreError(() => props.onClick!(e))
+              await runIgnoreError(() => local.onClick!(e))
             }
             actions.setLoading(false)
           }
@@ -85,11 +72,9 @@ export function ButtonWrapper(props: {
           '--jg-font-size': fontSize(),
           'border-radius': '.25em',
         },
-        props.style,
+        local.style,
       )}
-      class={finalClasses()}
-    >
-      {props.children}
-    </Dynamic>
+      class={[finalClasses(), local.class].join(' ')}
+    />
   )
 }

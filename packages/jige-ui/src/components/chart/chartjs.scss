@@ -1,0 +1,36 @@
+@use '../../styles/funcs';
+
+.jg-chartjs-tooltip {
+    position: fixed;
+    top: 0;
+    left: 0;
+    padding: .5em;
+    font-size: .875em;
+    color: funcs.get-var('t-fg1');
+    background: funcs.get-var('t-bg1');
+    border: 1px solid funcs.get-var('t-border');
+    border-radius: 8px;
+    box-shadow: funcs.get-var('shadow1');
+    opacity: 0;
+    transition: opacity .2s;
+}
+
+.jg-chartjs-tooltip-title {
+    font-weight: 600;
+    line-height: 1;
+}
+
+.jg-chartjs-tooltip-item {
+    display: flex;
+    align-items: center;
+    margin-top: .25em;
+    color: funcs.get-var('t-fg3');
+}
+
+.jg-chartjs-tooltip-dot {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    margin-right: 5px;
+    border-radius: 100%;
+}

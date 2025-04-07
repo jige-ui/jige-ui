@@ -4,6 +4,7 @@ import type { DateTypes } from './types'
 import { debounce, isFunction, list } from 'radash'
 import { For, createMemo, createSignal } from 'solid-js'
 import { watch } from 'solid-uses'
+import { setData } from '~/common/dataset'
 import { dayes } from '~/common/dayes'
 import type { MaybeAsync } from '~/common/types'
 import { context } from './context'
@@ -90,17 +91,20 @@ export function DayPanel(props: {
         {(day) => (
           <div
             class='jg-dp-day-panel-day'
+            {...setData({
+              selected: actions.isSelected(day),
+              disabled: isDsDay(day),
+            })}
+            title={day.format('YYYY-MM-DD')}
             classList={{
-              'jg-dp-is-curr': day.isSame(state.inst, 'day'),
               'jg-dp-is-not-curr-month': day.month() !== state.currMonth,
               'jg-dp-is-today': day.isToday(),
-              'jg-dp-disabled': isDsDay(day),
               'jg-dp-day-panel-day-hl':
                 state.hlDates.includes(day.format('YYYY-MM-DD')) && !day.isSame(state.inst, 'day'),
             }}
             onClick={() => {
-              if (isDsDay(day)) return
-              actions.setValue(day) && state.refTrigger?.blur()
+              actions.setValue(day)
+              state.refTrigger?.blur()
             }}
             onKeyDown={() => {}}
           >

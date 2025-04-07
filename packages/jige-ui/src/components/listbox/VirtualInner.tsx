@@ -15,6 +15,7 @@ export function VirtualInner(props: {
   class?: string
   itemClass?: string
   scrollToSelected: boolean
+  preventFocus: boolean
 }) {
   const [{ containerHeight, viewerTop, visibleItems }, onScroll] = createVirtualList({
     items: () => props.items.map((value, index) => ({ value, index })),
@@ -26,6 +27,7 @@ export function VirtualInner(props: {
   return (
     <CommonScrollWrapper
       scrollToSelected={props.scrollToSelected}
+      preventFocus={props.preventFocus}
       class={props.class}
       itemClass={props.itemClass}
       onScroll={onScroll}

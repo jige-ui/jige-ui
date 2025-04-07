@@ -11,6 +11,7 @@ export function ListInner(props: {
   selectIndex: number[]
   selectTrigger: 'click' | 'arrow'
   scrollToSelected: boolean
+  preventFocus: boolean
   class?: string
   itemClass?: string
 }) {

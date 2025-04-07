@@ -1,12 +1,34 @@
 @use '../../../styles/funcs';
 
+.jg-input-clear {
+  position: absolute;
+  top: 2px;
+  bottom: 3px;
+  font-size: .85em;
+  color: funcs.get-var('fg4');
+  pointer-events: none;
+  background: funcs.get-var('t-bg3');
+  opacity: 0;
+  transition: opacity .25s funcs.get-var('bezier');
+}
+
 .jg-input-wrapper {
   position: relative;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   width: 100%;
-  border: 2px solid transparent;
+  min-width: 10em;
+  height: 32px;
+  font-size: 14px;
+  border: 0;
+
+  &:hover {
+    .jg-input-clear {
+      pointer-events: auto;
+      opacity: 1;
+    }
+  }
 
   &::before {
     position: absolute;
@@ -29,6 +51,10 @@
       border-bottom-color: funcs.get-var('t-hl');
       border-bottom-width: 2px;
     }
+
+    .jg-input-clear {
+      background: funcs.get-var('t-bg1');
+    }
   }
 
   &:not([data-focused]):hover {
@@ -39,36 +65,36 @@
 }
 
 
-.jg-input-suffix {
+.jg-input-suffix, .jg-input-prefix {
   position: relative;
   display: inline-flex;
   flex-shrink: 0;
   flex-wrap: nowrap;
   align-items: center;
   justify-content: center;
-  margin-right: 4px;
-  margin-left: 4px;
   color: funcs.get-var("fg4");
   white-space: nowrap;
   transition: color .3s funcs.get-var("bezier");
+
+  svg {
+    margin-bottom: -.15em;
+    font-size: 1.15em;
+  }
 }
 
-.jg-input-placeholder {
-  position: absolute;
-  top: 4px;
-  left: 10px;
-  font-size: .9em;
-  color: funcs.get-var("fg4");
-  pointer-events: none;
-  user-select: none;
-  opacity: .6;
-  transition: all 0.3s;
+.jg-input-prefix {
+  margin-left: 8px;
+}
+
+.jg-input-suffix {
+  margin-right: 8px;
 }
 
 .jg-input-native {
   position: relative;
   flex-grow: 1;
   width: 100%;
+  height: 100%;
   padding: 4px 8px;
   margin: 0;
   resize: none;
@@ -76,8 +102,7 @@
   border: none;
 
   &::placeholder {
-    display: none;
-    opacity: 0;
+    color: funcs.get-var("fg4");
   }
 }
 

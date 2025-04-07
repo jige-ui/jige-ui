@@ -6,7 +6,6 @@ import { watch } from 'solid-uses'
 import { setData } from '~/common/dataset'
 import { Form } from '~/components/form'
 import { InputFormBind } from './NormalInput'
-import { Placeholder } from './Placeholder'
 
 function ScrollInput(props: {
   value?: string
@@ -116,7 +115,6 @@ export function Textarea(props: {
       <InputFormBind disabled={props.disabled} />
       <ScrollBar focused={focused()}>
         <ScrollInput {...props} setFocused={setFocused} />
-        <Placeholder placeholder={props.placeholder || ''} />
       </ScrollBar>
     </InputCore>
   )
