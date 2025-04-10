@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.26.0](https://github.com/jige-ui/jige-ui/compare/v0.25.2...v0.26.0) (2025-04-10)
+
+
+### Features
+
+* add component date-range-picker ([7c611d5](https://github.com/jige-ui/jige-ui/commit/7c611d5076cb314e09fb0675821aefa7c391b525))
+
+
+### Bug Fixes
+
+* add disabled style to switcher ([86ff0ed](https://github.com/jige-ui/jige-ui/commit/86ff0ed46ce0a1ebcc79d0e52aafbaa12634be65))
+* **deps:** update dependency valibot to v1.0.0 ([#24](https://github.com/jige-ui/jige-ui/issues/24)) ([16cf489](https://github.com/jige-ui/jige-ui/commit/16cf489170fc58cb49371f98bd633d6da83b2095))
+
 ## [0.25.2](https://github.com/jige-ui/jige-ui/compare/v0.25.1...v0.25.2) (2025-03-22)
 
 
