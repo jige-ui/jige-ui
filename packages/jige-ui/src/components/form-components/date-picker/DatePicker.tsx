@@ -1,13 +1,13 @@
 import { Match, Switch } from 'solid-js'
+import { dayes } from '~/common/dayes'
 import type { MaybePromise } from '~/common/types'
+import { MainPanel } from './MainPanel'
 import { Root } from './Root'
 import { Trigger } from './Trigger'
 import { Wrapper } from './Wrapper'
 import { YearList } from './YearList'
 import { context } from './context'
 import type { DatePickerType, DateTypes } from './types'
-import { MainPanel } from './MainPanel'
-import { dayes } from '~/common/dayes'
 
 function WrapperMainPanel(props: {
   highlightYears: number[] | ((visibleYearRange: [number, number]) => MaybePromise<number[]>)

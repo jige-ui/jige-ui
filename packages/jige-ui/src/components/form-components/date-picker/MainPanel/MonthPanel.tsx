@@ -5,8 +5,8 @@ import { watch } from 'solid-uses'
 import { setData } from '~/common/dataset'
 import { dayes } from '~/common/dayes'
 import type { MaybePromise } from '~/common/types'
-import { panelContext } from './context'
 import { NumberToChinese } from '../utils'
+import { panelContext } from './context'
 
 export function MonthPanel(props: {
   highlightMonths: string[] | ((visibleYear: number) => MaybePromise<string[]>)

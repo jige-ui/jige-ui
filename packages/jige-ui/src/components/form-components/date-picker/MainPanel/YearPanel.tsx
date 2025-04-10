@@ -2,10 +2,10 @@ import { debounce, isArray, throttle } from 'radash'
 import { For, createSignal } from 'solid-js'
 import { watch } from 'solid-uses'
 import { setData } from '~/common/dataset'
-import type { MaybePromise } from '~/common/types'
-import { panelContext } from './context'
-import { genYears } from '../utils'
 import { dayes } from '~/common/dayes'
+import type { MaybePromise } from '~/common/types'
+import { genYears } from '../utils'
+import { panelContext } from './context'
 
 export function YearPanel(props: {
   highlightYears: number[] | ((visibleYearRange: [number, number]) => MaybePromise<number[]>)

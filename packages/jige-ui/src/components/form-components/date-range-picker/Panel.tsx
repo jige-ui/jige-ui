@@ -1,7 +1,7 @@
-import { context } from './context'
-import { DatePickerMainPanel } from '../date-picker'
-import { batch } from 'solid-js'
 import type { EsDay } from 'esday'
+import { batch } from 'solid-js'
+import { DatePickerMainPanel } from '../date-picker'
+import { context } from './context'
 
 export function Panel() {
   const [state, actions] = context.useContext()
