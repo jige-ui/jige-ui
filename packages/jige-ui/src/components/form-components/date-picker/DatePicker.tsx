@@ -1,66 +1,50 @@
-import { AnimatedGroup } from 'jige-core'
-import { Match, Switch, createSignal } from 'solid-js'
-import { watch } from 'solid-uses'
-import type { MaybeAsync } from '~/common/types'
-import { DayPanel } from './DayPanel'
-import { HeadTools } from './HeadTools'
-import { MonthPanel } from './MonthPanel'
+import { Match, Switch } from 'solid-js'
+import type { MaybePromise } from '~/common/types'
 import { Root } from './Root'
 import { Trigger } from './Trigger'
 import { Wrapper } from './Wrapper'
 import { YearList } from './YearList'
-import { YearPanel } from './YearPanel'
 import { context } from './context'
 import type { DatePickerType, DateTypes } from './types'
+import { MainPanel } from './MainPanel'
+import { dayes } from '~/common/dayes'
 
-function AnimatedPanel(props: {
-  highlightYears?: number[] | ((visibleYearRange: [number, number]) => MaybeAsync<number[]>)
-  highlightMonths?: string[] | ((visibleYear: number) => MaybeAsync<string[]>)
-  highlightDates?:
+function WrapperMainPanel(props: {
+  highlightYears: number[] | ((visibleYearRange: [number, number]) => MaybePromise<number[]>)
+  highlightMonths: string[] | ((visibleYear: number) => MaybePromise<string[]>)
+  highlightDates:
     | DateTypes[]
     | ((
         visibleYear: number,
         visibleMonth: number,
         visibleDates: string[],
-      ) => MaybeAsync<DateTypes[]>)
-  disabledDates?:
+      ) => MaybePromise<DateTypes[]>)
+  disabledDates:
     | DateTypes[]
     | ((
         visibleYear: number,
         visibleMonth: number,
         visibleDates: string[],
-      ) => MaybeAsync<DateTypes[]>)
+      ) => MaybePromise<DateTypes[]>)
+  cellClass: string | ((day: DateTypes) => string)
 }) {
   const [state, actions] = context.useContext()
-  const [className, setClassName] = createSignal('')
-
-  watch(
-    () => state.activePanel,
-    () => {
-      setClassName('jg-dp-animated-panel')
-    },
-    { defer: true },
-  )
 
   return (
-    <AnimatedGroup
-      active={state.activePanel}
-      onChange={actions.setActivePanel}
-      class='jg-dp-animated-group'
-    >
-      <AnimatedGroup.Panel key='day' class={className()}>
-        <DayPanel
-          highlightDates={props.highlightDates || []}
-          disabledDates={props.disabledDates || []}
-        />
-      </AnimatedGroup.Panel>
-      <AnimatedGroup.Panel key='month' class={className()}>
-        <MonthPanel highlightMonths={props.highlightMonths || []} />
-      </AnimatedGroup.Panel>
-      <AnimatedGroup.Panel key='year' class={className()}>
-        <YearPanel highlightYears={props.highlightYears || []} />
-      </AnimatedGroup.Panel>
-    </AnimatedGroup>
+    <MainPanel
+      multiple={false}
+      currMonth={state.currMonth}
+      currYear={state.currYear}
+      value={[state.inst.format('YYYY-MM-DD')]}
+      onChange={(v) => {
+        if (state.inst.isSame(dayes(v[0]), 'day')) return
+        actions.setValue(dayes(v[0]))
+      }}
+      disabled={state.disabled}
+      dateRange={state.dateRange}
+      type={state.type as any}
+      {...props}
+    />
   )
 }
 
@@ -72,22 +56,23 @@ export function DatePicker(props: {
   placeholder?: string
   type?: DatePickerType
   dateRange?: [DateTypes, DateTypes]
-  highlightYears?: number[] | ((visibleYearRange: [number, number]) => MaybeAsync<number[]>)
-  highlightMonths?: string[] | ((visibleYear: number) => MaybeAsync<string[]>)
+  cellClass?: string | ((day: DateTypes) => string)
+  highlightYears?: number[] | ((visibleYearRange: [number, number]) => MaybePromise<number[]>)
+  highlightMonths?: string[] | ((visibleYear: number) => MaybePromise<string[]>)
   highlightDates?:
     | DateTypes[]
     | ((
         visibleYear: number,
         visibleMonth: number,
         visibleDates: string[],
-      ) => MaybeAsync<DateTypes[]>)
+      ) => MaybePromise<DateTypes[]>)
   disabledDates?:
     | DateTypes[]
     | ((
         visibleYear: number,
         visibleMonth: number,
         visibleDates: string[],
-      ) => MaybeAsync<DateTypes[]>)
+      ) => MaybePromise<DateTypes[]>)
 }) {
   return (
     <Root
@@ -103,15 +88,13 @@ export function DatePicker(props: {
       <Wrapper>
         <Switch
           fallback={
-            <>
-              <HeadTools />
-              <AnimatedPanel
-                highlightDates={props.highlightDates}
-                highlightMonths={props.highlightMonths}
-                highlightYears={props.highlightYears}
-                disabledDates={props.disabledDates}
-              />
-            </>
+            <WrapperMainPanel
+              cellClass={props.cellClass || ''}
+              highlightDates={props.highlightDates || []}
+              highlightMonths={props.highlightMonths || []}
+              highlightYears={props.highlightYears || []}
+              disabledDates={props.disabledDates || []}
+            />
           }
         >
           <Match when={props.type === 'year'}>

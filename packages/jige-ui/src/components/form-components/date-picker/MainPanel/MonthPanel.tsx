@@ -4,14 +4,14 @@ import { For } from 'solid-js'
 import { watch } from 'solid-uses'
 import { setData } from '~/common/dataset'
 import { dayes } from '~/common/dayes'
-import type { MaybeAsync } from '~/common/types'
-import { context } from './context'
-import { NumberToChinese } from './utils'
+import type { MaybePromise } from '~/common/types'
+import { panelContext } from './context'
+import { NumberToChinese } from '../utils'
 
 export function MonthPanel(props: {
-  highlightMonths: string[] | ((visibleYear: number) => MaybeAsync<string[]>)
+  highlightMonths: string[] | ((visibleYear: number) => MaybePromise<string[]>)
 }) {
-  const [state, actions] = context.useContext()
+  const [state, actions] = panelContext.useContext()
   const debounceSetHlMonths = debounce({ delay: 200 }, async (y: number) => {
     const getHls = props.highlightMonths
     if (isFunction(getHls)) {
@@ -42,7 +42,9 @@ export function MonthPanel(props: {
           <div
             class='jg-dp-month-panel-month'
             {...setData({
-              selected: state.inst.month() === month && state.inst.year() === state.currYear,
+              selected:
+                dayes(state.value).month() === month &&
+                dayes(state.value).year() === state.currYear,
               disabled: !checkMonth(month),
             })}
             classList={{
@@ -53,8 +55,7 @@ export function MonthPanel(props: {
               actions.setCurrMonth(month)
               actions.setActivePanel(state.defaultPanel)
               if (state.defaultPanel === 'month') {
-                actions.setValue(dayes([state.currYear, month, 1]))
-                state.refTrigger?.blur()
+                actions.setValue([dayes([state.currYear, month, 1]).format('YYYY-MM-DD')])
               }
             }}
             onKeyDown={() => {}}

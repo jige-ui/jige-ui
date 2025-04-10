@@ -1,24 +1,25 @@
 import type { EsDay } from 'esday'
-import type { DateTypes } from './types'
+import type { DateTypes } from '../types'
 
 import { debounce, isFunction, list } from 'radash'
 import { For, createMemo, createSignal } from 'solid-js'
 import { watch } from 'solid-uses'
 import { setData } from '~/common/dataset'
 import { dayes } from '~/common/dayes'
-import type { MaybeAsync } from '~/common/types'
-import { context } from './context'
-import { NumberToChinese, genCalendarDays } from './utils'
+import type { MaybePromise } from '~/common/types'
+import { NumberToChinese, genCalendarDays } from '../utils'
+import { panelContext } from './context'
 
 export function DayPanel(props: {
+  cellClass: string | ((day: EsDay) => string)
   highlightDates:
     | DateTypes[]
-    | ((year: number, month: number, dates: string[]) => MaybeAsync<DateTypes[]>)
+    | ((year: number, month: number, dates: string[]) => MaybePromise<DateTypes[]>)
   disabledDates:
     | DateTypes[]
-    | ((year: number, month: number, dates: string[]) => MaybeAsync<DateTypes[]>)
+    | ((year: number, month: number, dates: string[]) => MaybePromise<DateTypes[]>)
 }) {
-  const [state, actions] = context.useContext()
+  const [state, actions] = panelContext.useContext()
   const dates = createMemo(() => genCalendarDays(state.currYear, state.currMonth))
 
   // eslint-disable-next-line solid/reactivity
@@ -82,6 +83,23 @@ export function DayPanel(props: {
       isLoadingDsDates()
     )
   }
+
+  const cellClass = (day: EsDay) => {
+    const classList = ['jg-dp-day-panel-cell']
+    if (day.isToday()) classList.push('jg-dp-is-today')
+    if (day.month() !== state.currMonth) classList.push('jg-dp-is-not-curr-month')
+    if (state.hlDates.includes(day.format('YYYY-MM-DD')) && !day.isSame(state.value, 'day'))
+      classList.push('jg-dp-day-panel-day-hl')
+
+    if (isFunction(props.cellClass)) {
+      const cls = props.cellClass(day)
+      if (cls) classList.push(cls)
+    } else {
+      classList.push(props.cellClass)
+    }
+
+    return classList.join(' ')
+  }
   return (
     <div class='jg-dp-day-panel'>
       <For each={list(6)}>
@@ -90,25 +108,33 @@ export function DayPanel(props: {
       <For each={dates()}>
         {(day) => (
           <div
-            class='jg-dp-day-panel-day'
+            class={cellClass(day)}
             {...setData({
-              selected: actions.isSelected(day),
+              selected:
+                state.value.includes(day.format('YYYY-MM-DD')) && day.month() === state.currMonth,
               disabled: isDsDay(day),
             })}
-            title={day.format('YYYY-MM-DD')}
-            classList={{
-              'jg-dp-is-not-curr-month': day.month() !== state.currMonth,
-              'jg-dp-is-today': day.isToday(),
-              'jg-dp-day-panel-day-hl':
-                state.hlDates.includes(day.format('YYYY-MM-DD')) && !day.isSame(state.inst, 'day'),
-            }}
-            onClick={() => {
-              actions.setValue(day)
-              state.refTrigger?.blur()
-            }}
-            onKeyDown={() => {}}
           >
-            {day.date()}
+            <div
+              class='jg-dp-day-panel-day'
+              title={day.format('YYYY-MM-DD')}
+              onClick={() => {
+                if (state.multiple) {
+                  if (day.isSame(state.value, 'day')) {
+                    actions.setValue(
+                      state.value.filter((d) => !day.isSame(dayes(d), 'day')).map((d) => d),
+                    )
+                  } else {
+                    actions.setValue([...state.value, day.format('YYYY-MM-DD')])
+                  }
+                } else {
+                  actions.setValue([day.format('YYYY-MM-DD')])
+                }
+              }}
+              onKeyDown={() => {}}
+            >
+              {day.date()}
+            </div>
           </div>
         )}
       </For>

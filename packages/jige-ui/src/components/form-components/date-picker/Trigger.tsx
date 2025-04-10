@@ -12,6 +12,7 @@ export function Trigger() {
   const [floatState, floatActions] = FloatingUiCore.useContext()
   const [, fieldCoreActs] = FormCore.useField()
   const [focused, setFocused] = createSignal(false)
+  let ref!: HTMLInputElement
 
   watch(
     () => floatState.status,
@@ -22,6 +23,13 @@ export function Trigger() {
         actions.setCurrYear(inst.year())
         actions.setCurrMonth(inst.month())
       }
+    },
+  )
+
+  watch(
+    () => state.value,
+    () => {
+      ref?.blur()
     },
   )
 
@@ -38,12 +46,12 @@ export function Trigger() {
           <CalendarLine />
         </div>
         <input
+          ref={ref}
           type='text'
           autocomplete='off'
           class='jg-input-native'
           {...Form.createNativeComponentAttrs()}
           value={state.value}
-          ref={actions.setRefTrigger}
           name={state.name || 'datepicker'}
           placeholder={state.placeholder || '请选择日期'}
           onChange={(e) => {

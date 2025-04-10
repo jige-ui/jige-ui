@@ -1,5 +1,6 @@
 export * from './combo-box'
 export * from './date-picker'
+export * from './date-range-picker'
 export * from './input'
 export * from './number-box'
 export * from './radio-group'

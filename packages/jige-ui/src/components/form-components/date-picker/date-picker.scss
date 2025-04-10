@@ -10,12 +10,13 @@
 .jg-dp-day-panel {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
-  gap: 0.25em;
   align-content: space-evenly;
   height: 240px;
   padding: 0 4px;
   text-align: center;
 }
+
+
 
 .jg-dp-day-panel-week {
   font-size: 12px;
@@ -35,34 +36,58 @@
   &:hover {
     background: var(--jg-t-bg4);
   }
+}
 
-  &[data-selected] {
-    color: white;
-    background: var(--jg-t-hl);
-  }
+.jg-dp-day-panel-cell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
 
   &.jg-dp-is-not-curr-month {
-    color: var(--jg-fg3);
-    opacity: .65;
+    .jg-dp-day-panel-day {
+      color: var(--jg-fg3);
+      opacity: .65;
+    }
+  }
+
+
+  &[data-selected] {
+    .jg-dp-day-panel-day {
+      color: white;
+      background: var(--jg-t-hl);
+    }
   }
 
   &[data-disabled] {
-    color: var(--jg-fg3);
-    cursor: not-allowed;
-    opacity: .4;
+    .jg-dp-day-panel-day {
+      color: var(--jg-fg3);
+      cursor: not-allowed;
+      opacity: .4;
+    }
 
-    &:hover {
+    .jg-dp-day-panel-day:hover {
       background: transparent;
     }
   }
 
+
   &.jg-dp-is-today:not(.jg-dp-is-curr) {
-    border: 1px dashed var(--jg-fg4);
-    border-radius: 50%;
+    .jg-dp-day-panel-day::after {
+      position: absolute;
+      top: 4px;
+      right: 4px;
+      width: 4px;
+      height: 4px;
+      content: "";
+      background: var(--jg-t-hl);
+      border-radius: 50%;
+    }
   }
 }
 
-.jg-dp-month-panel,.jg-dp-year-panel {
+.jg-dp-month-panel,
+.jg-dp-year-panel {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 0.25em;
@@ -100,7 +125,8 @@
   }
 }
 
-.jg-dp-month-panel-month,.jg-dp-year-panel-year {
+.jg-dp-month-panel-month,
+.jg-dp-year-panel-year {
   position: relative;
   display: flex;
   align-items: center;
@@ -133,7 +159,9 @@
   }
 }
 
-.jg-dp-month-panel-month-hl,.jg-dp-year-panel-year-hl,.jg-dp-day-panel-day-hl {
+.jg-dp-month-panel-month-hl,
+.jg-dp-year-panel-year-hl,
+.jg-dp-day-panel-day-hl {
   &::after {
     position: absolute;
     bottom: 0;

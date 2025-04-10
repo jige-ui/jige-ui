@@ -2,11 +2,11 @@ import { throttle } from 'radash'
 import { Show, createMemo } from 'solid-js'
 import { Button } from '~/components/button'
 import { CaretDown, CaretUp } from '~/components/icons'
-import { context } from './context'
-import { NumberToChinese } from './utils'
+import { panelContext } from './context'
+import { NumberToChinese } from '../utils'
 
 export function HeadTools() {
-  const [state, actions] = context.useContext()
+  const [state, actions] = panelContext.useContext()
   const throttleMonth = throttle({ interval: 60 }, (e) => {
     actions.monthHandle(e.deltaY > 0 ? 1 : -1)
   })

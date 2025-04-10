@@ -1,5 +1,4 @@
 import type { EsDay } from 'esday'
-import { isArray } from 'radash'
 import { createComponentState } from 'solid-uses'
 import { dayes } from '~/common/dayes'
 import type { DateTypes } from './types'
@@ -16,7 +15,6 @@ export const context = createComponentState({
     currMonth: today.month(),
     activePanel: 'day',
     type: 'date',
-    refTrigger: null as HTMLElement | null,
     dateRange: ['1800-01-01', '2200-01-01'] as [DateTypes, DateTypes],
     hlDates: [] as string[],
     dsDates: [] as string[],
@@ -46,23 +44,6 @@ export const context = createComponentState({
     },
   },
   methods: {
-    monthHandle(step: number) {
-      const { state, actions } = this
-      const d = dayes(`${state.currYear}-${state.currMonth + 1}-01`).add(step, 'month')
-      if (d >= state.fromInst && d <= state.toInst) {
-        actions.setCurrYear(d.year())
-        actions.setCurrMonth(d.month())
-      }
-    },
-    toValueString(
-      value: DateTypes | DateTypes[],
-    ): typeof value extends DateTypes[] ? string[] : string {
-      if (isArray(value)) {
-        // @ts-expect-error value is DateTypes[]
-        return value.map((v) => dayes(v, this.state.valueFormat).format(this.state.valueFormat))
-      }
-      return dayes(value, this.state.valueFormat).format(this.state.valueFormat)
-    },
     setValue(value: DateTypes) {
       if (value === '') {
         this.actions.setState('value', '')
@@ -82,11 +63,6 @@ export const context = createComponentState({
       }
 
       return false
-    },
-
-    isSelected(value: DateTypes) {
-      const stateValue = isArray(this.state.value) ? this.state.value : [this.state.value]
-      return stateValue.includes(this.actions.toValueString(value))
     },
 
     setCurrYear(year: number) {

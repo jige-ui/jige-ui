@@ -1,5 +1,5 @@
 import { FormCore } from 'jige-core'
-import { Button, Form, Input, RadioGroup, Switcher } from 'jige-ui'
+import { Button, DateRangePicker, Form, Input, RadioGroup, Switcher } from 'jige-ui'
 import { sleep } from 'radash'
 import { For } from 'solid-js'
 import { createStore } from 'solid-js/store'
@@ -52,6 +52,7 @@ export function Demo() {
       password: '',
       confirmPassword: '',
       sex: 'male',
+      dateRange: ['2024-01-01', '2024-12-27'],
     }),
     onSubmit: async (value) => {
       await sleep(2000)
@@ -97,6 +98,9 @@ export function Demo() {
               </For>
             </RadioGroup>
           </Form.Field>
+          <Form.Field label={p.noLabel ? undefined : 'dateRange'} name='dateRange'>
+            <DateRangePicker />
+          </Form.Field>
           <Form.Field name='remember'>
             <div class='flex items-center'>
               <Switcher type='checkbox' /> Remember me
@@ -116,7 +120,7 @@ export function Demo() {
 
         <div class='mt-2'>
           <div class='text-sm'>changed after submit: </div>
-          <div class='b b-b-blue p-2'>{JSON.stringify(data)}</div>
+          <div class='b b-b-blue p-2'>{JSON.stringify(data, null, 2)}</div>
         </div>
       </Playground.MainArea>
       <Playground.PropertySetting properties={p} onChange={setP} />

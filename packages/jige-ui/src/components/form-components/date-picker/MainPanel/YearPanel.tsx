@@ -2,14 +2,15 @@ import { debounce, isArray, throttle } from 'radash'
 import { For, createSignal } from 'solid-js'
 import { watch } from 'solid-uses'
 import { setData } from '~/common/dataset'
-import type { MaybeAsync } from '~/common/types'
-import { context } from './context'
-import { genYears } from './utils'
+import type { MaybePromise } from '~/common/types'
+import { panelContext } from './context'
+import { genYears } from '../utils'
+import { dayes } from '~/common/dayes'
 
 export function YearPanel(props: {
-  highlightYears: number[] | ((visibleYearRange: [number, number]) => MaybeAsync<number[]>)
+  highlightYears: number[] | ((visibleYearRange: [number, number]) => MaybePromise<number[]>)
 }) {
-  const [state, actions] = context.useContext()
+  const [state, actions] = panelContext.useContext()
   const [years, setYears] = createSignal<number[]>(genYears(state.currYear))
   // eslint-disable-next-line solid/reactivity
   const throttleYear = throttle({ interval: 60 }, (e) => {
@@ -53,7 +54,7 @@ export function YearPanel(props: {
           <div
             class='jg-dp-year-panel-year'
             {...setData({
-              selected: state.inst.year() === year,
+              selected: dayes(state.value).year() === year,
               disabled: !checkYear(year),
             })}
             classList={{
