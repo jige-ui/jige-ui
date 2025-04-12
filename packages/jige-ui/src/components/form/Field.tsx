@@ -46,6 +46,7 @@ export function Field(
     label?: string
     class?: string
     style?: string | JSX.CSSProperties
+    required?: boolean
   },
 ) {
   const [localProps, otherProps] = splitProps(props, [
@@ -54,6 +55,8 @@ export function Field(
     'label',
     'class',
     'style',
+    'required',
+    'validators',
   ])
   const id = createUniqueId()
   const Context = fieldContext.initial({
@@ -64,12 +67,25 @@ export function Field(
   })
   return (
     <Context.Provider>
-      <FormCore.Field {...otherProps}>
+      <FormCore.Field
+        {...otherProps}
+        validators={[
+          (v) => {
+            if (localProps.required && !v?.toString().trim()) {
+              return '必填项！'
+            }
+          },
+          ...(localProps.validators || []),
+        ]}
+      >
         {(state, actions, nowrapData) => (
           <div
             class={`jg-form-field ${localProps.class || ''}`}
             style={localProps.style}
-            {...setData('invalid', !!state.errors.length)}
+            {...setData({
+              invalid: !!state.errors.length,
+              required: !!localProps.required,
+            })}
           >
             <div class='jg-form-field-control'>
               <Label label={localProps.label} />

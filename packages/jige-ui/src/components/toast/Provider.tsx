@@ -10,6 +10,11 @@ import { context } from './context'
 
 export function Provider(props: {
   children: JSX.Element
+  /**
+   * default timeout is 5000 (ms)
+   *
+   * ms
+   */
   defaultTimeout?: number
   zIndex?: number
 }) {

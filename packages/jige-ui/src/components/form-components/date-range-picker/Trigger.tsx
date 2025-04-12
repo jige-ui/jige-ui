@@ -39,7 +39,6 @@ export function Trigger() {
           type='text'
           autocomplete='off'
           class='jg-input-native'
-          {...Form.createNativeComponentAttrs()}
           value={state.value[0]}
           placeholder={state.placeholder[0]}
           onChange={(e) => {
@@ -80,7 +79,6 @@ export function Trigger() {
           type='text'
           autocomplete='off'
           class='jg-input-native'
-          {...Form.createNativeComponentAttrs()}
           value={state.value[1]}
           placeholder={state.placeholder[1]}
           onChange={(e) => {

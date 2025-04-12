@@ -5,6 +5,11 @@
   flex-direction: column;
 }
 
+.jg-form-field-label {
+  margin-bottom: 4px;
+  font-size: 14px;
+}
+
 .jg-form-field {
   display: flex;
   flex-direction: column;
@@ -15,16 +20,22 @@
       border-bottom-color: funcs.get-var('fg-danger') !important;
     }
   }
+
+  &[data-required] {
+    .jg-form-field-label::after {
+      margin-left: 4px;
+      font-size: 1.15em;
+      color: funcs.get-var('fg-danger');
+      content: '*';
+    }
+  }
 }
 
 .jg-form-field-control {
   width: 100%;
 }
 
-.jg-form-field-label {
-  margin-bottom: 4px;
-  font-size: 14px;
-}
+
 
 .jg-form-field-description {
   display: flex;

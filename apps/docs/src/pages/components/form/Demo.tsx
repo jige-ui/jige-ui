@@ -36,7 +36,7 @@ export function Demo() {
   })
 
   const formSchema = {
-    username: v.pipe(v.string(), v.nonEmpty('不能为空')),
+    username: v.pipe(v.string(), v.minLength(6, '长度不能小于6')),
     email: v.pipe(v.string(), v.nonEmpty('不能为空'), v.email('邮箱格式不正确')),
     password: v.pipe(
       v.string(),
@@ -68,7 +68,7 @@ export function Demo() {
     <Playground>
       <Playground.MainArea>
         <Form staticFormInstance={form} disabled={p.disabled}>
-          <Form.Field label={p.noLabel ? undefined : 'Username'} name='username'>
+          <Form.Field label={p.noLabel ? undefined : 'Username'} name='username' required>
             <Input type='text' placeholder={p.noLabel ? 'Username' : ''} />
           </Form.Field>
           <Form.Field label={p.noLabel ? undefined : 'Email'} name='email'>
@@ -78,6 +78,7 @@ export function Demo() {
             <Input type='password' placeholder={p.noLabel ? 'Password' : ''} />
           </Form.Field>
           <Form.Field
+            required
             label={p.noLabel ? undefined : 'Confirm Password'}
             name={'confirmPassword'}
             validateRelatedFields={['password']}

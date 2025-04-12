@@ -10,6 +10,9 @@ import { RootContext } from '../ROOT/context'
 export function Tooltip(props: {
   content: string
   children: JSX.Element
+  /**
+   * @default 350
+   */
   openDelay?: number
   closeDelay?: number
   placement?: 'top' | 'bottom' | 'left' | 'right'
@@ -23,7 +26,7 @@ export function Tooltip(props: {
   return (
     <FloatingUiCore
       placement={props.placement}
-      openDelay={props.openDelay}
+      openDelay={props.openDelay || 350}
       closeDelay={props.closeDelay}
       trigger={props.trigger}
       disabled={props.disabled}

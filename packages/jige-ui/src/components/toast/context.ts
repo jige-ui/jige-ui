@@ -4,7 +4,7 @@ import type { ToastInst } from './types'
 export const context = createComponentState({
   state: () => ({
     insts: [] as ToastInst[],
-    defaultTimeout: 3000,
+    defaultTimeout: 5000,
   }),
   methods: {
     addInst(inst: ToastInst) {

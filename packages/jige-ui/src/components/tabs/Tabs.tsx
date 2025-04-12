@@ -1,7 +1,7 @@
 import styles from 'sass:./tabs.scss'
 import { AnimatedGroup, RadioGroupCore } from 'jige-core'
-import type { JSX } from 'solid-js'
-import { For, createMemo, createSignal } from 'solid-js'
+import type { ComponentProps, JSX } from 'solid-js'
+import { For, createMemo, createSignal, splitProps } from 'solid-js'
 import { mountStyle, watch } from 'solid-uses'
 
 import { setData } from '~/common/dataset'
@@ -19,25 +19,32 @@ function Content(props: {
   )
 }
 
-function Root(props: {
-  children: JSX.Element
-  active: string
-  onChange: (key: string) => void
-  options: string[]
-}) {
+function Root(
+  props: {
+    active: string
+    onChange: (key: string) => void
+    options: string[]
+  } & ComponentProps<'div'>,
+) {
   mountStyle(styles, 'jige-ui-tabs')
 
+  const [localProps, otherProps] = splitProps(props, [
+    'active',
+    'onChange',
+    'options',
+    'class',
+    'children',
+  ])
   const Context = context.initial()
   const [tabState, actions] = Context.value
-
   const [prevActive, setPrevActive] = createSignal('')
 
   watch(
-    () => props.active,
+    () => localProps.active,
     (active, prev) => {
       if (!prev) return
       setPrevActive(prev)
-      if (props.options.indexOf(prev) < props.options.indexOf(active)) {
+      if (localProps.options.indexOf(prev) < localProps.options.indexOf(active)) {
         actions.setDir('right')
       } else {
         actions.setDir('left')
@@ -46,7 +53,7 @@ function Root(props: {
   )
 
   const normalizeOptions = createMemo(() => {
-    return props.options.map((option) => {
+    return localProps.options.map((option) => {
       if (typeof option === 'string') {
         return { label: option, value: option }
       }
@@ -55,8 +62,8 @@ function Root(props: {
   })
   return (
     <Context.Provider>
-      <div class='jg-tabs'>
-        <RadioGroupCore onChange={props.onChange} value={props.active}>
+      <div class={['jg-tabs', localProps.class].join(' ')} {...otherProps}>
+        <RadioGroupCore onChange={localProps.onChange} value={localProps.active}>
           <div class='jg-tabs-header'>
             <For each={normalizeOptions()}>
               {(item) => (
@@ -81,8 +88,12 @@ function Root(props: {
             </For>
           </div>
         </RadioGroupCore>
-        <AnimatedGroup active={props.active} onChange={props.onChange} class='jg-tabs-content'>
-          {props.children}
+        <AnimatedGroup
+          active={localProps.active}
+          onChange={localProps.onChange}
+          class='jg-tabs-content'
+        >
+          {localProps.children}
         </AnimatedGroup>
       </div>
     </Context.Provider>

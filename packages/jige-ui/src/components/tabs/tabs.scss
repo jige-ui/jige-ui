@@ -8,9 +8,23 @@
 }
 
 .jg-tabs-header {
+  position: relative;
   display: flex;
   flex-shrink: 0;
   align-items: stretch;
+  width: 100%;
+
+  &::after {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 0;
+    height: 2px;
+    content: "";
+    background-color: funcs.get-var('t-bg4');
+    border-radius: 2px;
+  }
 }
 
 .jg-tabs-header-item {
@@ -23,8 +37,9 @@
   &::after {
     position: absolute;
     right: calc(50% - 8px);
-    bottom: 0;
+    bottom: -0.5px;
     left: calc(50% - 8px);
+    z-index: 1;
     height: 3px;
     content: "";
     background-color: transparent;
