@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.27.0](https://github.com/jige-ui/jige-ui/compare/v0.26.0...v0.27.0) (2025-04-15)
+
+
+### Features
+
+* table improved ([294b829](https://github.com/jige-ui/jige-ui/commit/294b82902148e9ebffd1e8b87719befb361b3f2f))
+
+
+### Bug Fixes
+
+* a lot issues fixed ([3e9b2dd](https://github.com/jige-ui/jige-ui/commit/3e9b2dd3a13db51564213af36564c516aa96a5f0))
+
 ## [0.26.0](https://github.com/jige-ui/jige-ui/compare/v0.25.2...v0.26.0) (2025-04-10)
 
 
