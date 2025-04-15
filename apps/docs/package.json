@@ -6,7 +6,7 @@
     "node": ">=18"
   },
   "scripts": {
-    "dev": "set VITE_CJS_TRACE=true && vite",
+    "dev": "vite",
     "build": "vite build"
   },
   "dependencies": {
@@ -16,7 +16,7 @@
     "@solidjs/router": "^0.15.2",
     "@unocss/reset": "^66.0.0",
     "esday": "^0.4.1",
-    "jige-core": "^0.37.7",
+    "jige-core": "^0.38.3",
     "jige-ui": "workspace:^",
     "radash": "^12.1.0",
     "chart.js": "^4.4.8",

@@ -5,7 +5,7 @@ export function MainArea(props: {
 }) {
   return (
     <div
-      class='flex flex-1 py-20 justify-start items-center flex-col w-full'
+      class='flex flex-1 py-20 justify-start items-center flex-col w-[calc(100%-185px)]'
       style={{
         'background-image': 'radial-gradient(circle, var(--jg-t-border) 1px, transparent 1px)',
         'background-size': '16px 16px',

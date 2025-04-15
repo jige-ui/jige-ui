@@ -3,13 +3,13 @@ import { createMemo, splitProps } from 'solid-js'
 import { Dynamic } from 'solid-js/web'
 import { runIgnoreError } from '~/common/dom'
 import { context } from './context'
-import type { ButtonElement } from './types'
+import type { ButtonElement, ButtonSize } from './types'
 
 export function ButtonWrapper<T = string | undefined>(
   props: {
     href: T
     onClick?: (e: MouseEvent) => void | Promise<void>
-    size: 'small' | 'medium' | 'large'
+    size: ButtonSize
   } & ButtonElement<T>,
 ) {
   const [local, others] = splitProps(props, ['onClick', 'size', 'style', 'class'])
@@ -29,15 +29,30 @@ export function ButtonWrapper<T = string | undefined>(
   })
 
   const fontSize = createMemo(() => {
-    if (props.size === 'small') return '13px'
-    if (props.size === 'large') return '16px'
-    return '14px'
+    const size = props.size
+
+    if (typeof size === 'number') {
+      return `${size / 4 + 6}px`
+    }
+
+    switch (size) {
+      case 'small':
+        return '13px'
+      case 'large':
+        return '16px'
+      case 'medium':
+        return '14px'
+      default:
+        return '14px'
+    }
   })
 
   const thisHeight = createMemo(() => {
+    const size = props.size
     if (state.variant === 'solid' || state.variant === 'text') {
-      if (props.size === 'small') return '24px'
-      if (props.size === 'large') return '40px'
+      if (size === 'small') return '24px'
+      if (size === 'large') return '40px'
+      if (typeof size === 'number') return `${size}px`
       return '32px'
     }
 

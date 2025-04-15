@@ -30,7 +30,7 @@ export function Demo() {
         properties={p}
         onChange={setP}
         typeDeclaration={{
-          size: ['small', 'medium', 'large'],
+          size: ['small', 'medium', 'large', 50] as string[],
           variant: ['solid', 'text', 'link'],
         }}
       />
