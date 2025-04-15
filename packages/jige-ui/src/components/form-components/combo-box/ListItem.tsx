@@ -1,8 +1,10 @@
 import { FloatingUiCore } from 'jige-core'
 import { Listbox as LB } from '../../listbox'
 import { context } from './context'
+import { RootContext } from '~/components/ROOT/context'
 
 export function ListBox() {
+  const [rootState] = RootContext.useContext()
   const [state, actions] = context.useContext()
 
   const [, floatActs] = FloatingUiCore.useContext()
@@ -14,6 +16,7 @@ export function ListBox() {
         '--jg-combo-box-list-transform-origin': `center ${state.originY}px`,
         width: `${state.listItemWidth}px`,
       }}
+      zindex={rootState.zIndexConfig.popover}
     >
       <LB
         rootHeight={240}
