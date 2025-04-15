@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.27.1](https://github.com/jige-ui/jige-ui/compare/v0.27.0...v0.27.1) (2025-04-15)
+
+
+### Bug Fixes
+
+* add zIndex to combo-box ([044dcab](https://github.com/jige-ui/jige-ui/commit/044dcaba203584d40b603b8ad1276911b3f93cf2))
+
 ## [0.27.0](https://github.com/jige-ui/jige-ui/compare/v0.26.0...v0.27.0) (2025-04-15)
 
 
