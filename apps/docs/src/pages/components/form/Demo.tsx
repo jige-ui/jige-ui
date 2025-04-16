@@ -1,5 +1,14 @@
 import { FormCore } from 'jige-core'
-import { Button, DateRangePicker, Form, Input, RadioGroup, Switcher } from 'jige-ui'
+import {
+  Button,
+  ComboBox,
+  DateRangePicker,
+  Form,
+  Input,
+  NumberBox,
+  RadioGroup,
+  Switcher,
+} from 'jige-ui'
 import { sleep } from 'radash'
 import { For } from 'solid-js'
 import { createStore } from 'solid-js/store'
@@ -37,7 +46,6 @@ export function Demo() {
 
   const formSchema = {
     username: v.pipe(v.string(), v.minLength(6, '长度不能小于6')),
-    email: v.pipe(v.string(), v.nonEmpty('不能为空'), v.email('邮箱格式不正确')),
     password: v.pipe(
       v.string(),
       v.minLength(6, '密码长度不能小于6'),
@@ -48,7 +56,8 @@ export function Demo() {
   const form = FormCore.createForm({
     defaultValues: () => ({
       username: 'haha',
-      email: '',
+      age: 7,
+      city: '',
       password: '',
       confirmPassword: '',
       sex: 'male',
@@ -71,8 +80,14 @@ export function Demo() {
           <Form.Field label={p.noLabel ? undefined : 'Username'} name='username' required>
             <Input type='text' placeholder={p.noLabel ? 'Username' : ''} />
           </Form.Field>
-          <Form.Field label={p.noLabel ? undefined : 'Email'} name='email'>
-            <Input placeholder={p.noLabel ? 'Email' : ''} />
+          <Form.Field label={p.noLabel ? undefined : 'Age'} name='age' required>
+            <NumberBox placeholder={p.noLabel ? 'Age' : ''} />
+          </Form.Field>
+          <Form.Field label={p.noLabel ? undefined : 'City'} name='city' required>
+            <ComboBox
+              placeholder={p.noLabel ? 'City' : ''}
+              options={['beijing', 'shanghai', 'guangzhou']}
+            />
           </Form.Field>
           <Form.Field label={p.noLabel ? undefined : 'Password'} name={'password'}>
             <Input type='password' placeholder={p.noLabel ? 'Password' : ''} />

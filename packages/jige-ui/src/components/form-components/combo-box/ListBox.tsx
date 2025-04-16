@@ -25,14 +25,14 @@ export function ListBox() {
         selectTrigger='click'
         items={state.options}
         onSelect={(item) => {
-          actions.setValue(item)
+          actions.setValue(item.value)
           floatActs.setOpen(false)
         }}
         class='jg-combo-box-scrollarea'
         itemClass='jg-combo-box-item'
         scrollToSelected={false}
       >
-        {(item) => <div class='jg-combo-box-item-inner'>{item}</div>}
+        {(item) => <div class='jg-combo-box-item-inner'>{item.label}</div>}
       </LB>
     </FloatingUiCore.Content>
   )

@@ -71,8 +71,8 @@ export function Field(
         {...otherProps}
         validators={[
           (v) => {
-            if (localProps.required && !v?.toString().trim()) {
-              return '必填项！'
+            if (localProps.required) {
+              if (!v?.toString().trim() || Number.isNaN(v)) return '必填项！'
             }
           },
           ...(localProps.validators || []),

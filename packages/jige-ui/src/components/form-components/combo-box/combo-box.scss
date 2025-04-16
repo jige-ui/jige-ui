@@ -5,7 +5,7 @@
   margin: 6px;
   background: funcs.get-var('t-bg1');
   border-radius: .25em;
-  box-shadow: funcs.get-var('shadow4');
+  box-shadow: funcs.get-var('shadow8');
   animation-duration: 150ms;
   animation-timing-function: funcs.get-var('bezier');
 
@@ -13,6 +13,10 @@
     transform-origin: funcs.get-var('combo-box-list-transform-origin');
     animation-name: clip-open;
   }
+}
+
+.dark .jg-combo-box-list {
+  background: funcs.get-var('t-bg2');
 }
 
 .jg-combo-box-scrollarea {

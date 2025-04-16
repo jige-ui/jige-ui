@@ -4,11 +4,18 @@ export const context = createComponentState({
   state: () => ({
     value: Number.NaN,
     disabled: false,
-    min: Number.NEGATIVE_INFINITY,
-    max: Number.POSITIVE_INFINITY,
-    name: 'number-box',
+    min: Number.MIN_SAFE_INTEGER,
+    max: Number.MAX_SAFE_INTEGER,
+    name: '',
+    placeholder: '',
     focused: false,
   }),
+  getters: {
+    safeValue() {
+      const v = this.state.value
+      return Number.isNaN(v) ? 0 : v
+    },
+  },
   methods: {
     setValue(value: number) {
       if (value > this.state.max) {

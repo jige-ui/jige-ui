@@ -15,6 +15,7 @@ export function NumberInput(props: {
       disabled={state.disabled}
       name={state.name}
       autocomplete='off'
+      placeholder={state.placeholder}
       value={Number.isNaN(state.value) ? '' : state.value}
       onInput={(e) => {
         const v = e.currentTarget.value

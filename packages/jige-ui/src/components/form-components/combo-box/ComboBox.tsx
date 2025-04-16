@@ -1,19 +1,33 @@
-import { ListBox } from './ListItem'
+import type { SimpleType } from '~/components/data-table'
+import { ListBox } from './ListBox'
 import { Root } from './Root'
 import { Trigger } from './Trigger'
 
-export function ComboBox(props: {
+function normalizeOptions<T extends SimpleType>(
+  options: (T | { label: string; value: T })[],
+): { label: string; value: T }[] {
+  return options.map((option) => {
+    if (typeof option === 'string') {
+      return { label: option, value: option }
+    }
+    return option as { label: string; value: T }
+  })
+}
+
+export function ComboBox<T extends SimpleType>(props: {
   value?: string
-  options: string[]
+  options: (T | { label: string; value: T })[]
   disabled?: boolean
   onChange?: (value: string) => void
+  placeholder?: string
 }) {
   return (
     <Root
       value={props.value}
       disabled={props.disabled}
-      options={props.options}
+      options={normalizeOptions(props.options)}
       onChange={props.onChange}
+      placeholder={props.placeholder || '请选择...'}
     >
       <Trigger />
       <ListBox />

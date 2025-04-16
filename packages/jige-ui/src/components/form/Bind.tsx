@@ -19,12 +19,15 @@ export function Bind(props: {
   watch([() => fieldState.value, () => fieldState.name], ([value, name]) => {
     if (name) {
       props.setName(name)
-      isDef(value) && props.setValue(value)
+      if (isDef(value)) {
+        props.setValue(value)
+      }
     }
   })
 
   // bind value
   watch([() => props.value], ([value]) => {
+    console.log(value)
     fieldState.name && fieldActions.handleChange(value)
   })
 

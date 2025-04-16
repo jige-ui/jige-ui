@@ -13,6 +13,7 @@ export function Root(
       max?: number
       value?: number
       disabled?: boolean
+      placeholder?: string
       onChange?: (value: number) => void
     }
   >,
@@ -22,6 +23,7 @@ export function Root(
     min: () => props.min,
     max: () => props.max,
     disabled: () => props.disabled,
+    placeholder: () => props.placeholder,
   })
   const [state, actions] = Context.value
 

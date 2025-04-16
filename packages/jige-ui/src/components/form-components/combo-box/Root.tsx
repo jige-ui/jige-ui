@@ -6,11 +6,12 @@ import { mountStyle, watch } from 'solid-uses'
 import { Form } from '~/components/form'
 import { context } from './context'
 
-export function Root(props: {
+export function Root<T>(props: {
   value?: string
-  options: string[]
+  options: { label: string; value: T }[]
   onChange?: (value: string) => void
   disabled?: boolean
+  placeholder: string
   children: JSX.Element
 }) {
   mountStyle(css, 'jige-ui-combo-box')
@@ -19,6 +20,7 @@ export function Root(props: {
     disabled: () => props.disabled,
     value: () => props.value,
     options: () => props.options,
+    placeholder: () => props.placeholder,
   })
   const [state, actions] = Context.value
 
@@ -45,6 +47,9 @@ export function Root(props: {
             offset: ({ elements, rects }) => {
               const $scroll = elements.floating.querySelector('.jg-combo-box-scrollarea')!
                 .firstChild as HTMLElement
+
+              if (state.valueIndex === -1) return 0
+
               const totalHeight = state.valueIndex * state.listItemHeight
               const scrollTop = totalHeight - rects.floating.height / 2 + state.listItemHeight / 2
               $scroll.scrollTop = scrollTop
