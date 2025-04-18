@@ -2,14 +2,16 @@
 
 /* content */
 .jg-modal-content-wrapper {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  inset: 0;
+  display: block;
 }
 
 .jg-modal-content {
+  position: relative;
+  max-width: calc(100vw - 32px);
+  max-height: calc(100vh - 200px);
   padding: 8px;
-  margin-top: -38vh;
+  margin: 0 auto;
   background: funcs.get-var('t-bg2');
   border: 1px solid funcs.get-var('t-border');
   border-radius: 6px;

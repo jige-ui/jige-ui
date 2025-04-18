@@ -32,6 +32,7 @@ export function Content(props: {
   dynamicTransformOrigin?: boolean
   style?: string | JSX.CSSProperties
   zIndex?: number
+  width?: string
 }) {
   const [state, actions] = context.useContext()
   const [rs] = RootContext.useContext()
@@ -77,7 +78,14 @@ export function Content(props: {
               data-modal-status={stat.status}
               class='jg-modal-content'
               ref={actions.setContentRef}
-              style={combineStyle({ 'transform-origin': transformOrigin() }, props.style)}
+              style={combineStyle(
+                {
+                  'transform-origin': transformOrigin(),
+                  width: props.width || '520px',
+                  top: '100px',
+                },
+                props.style,
+              )}
             >
               {props.children}
             </div>
