@@ -24,18 +24,18 @@
   background: transparent;
   transition:  border-color 0.2s, opacity 0.2s, color 0.2s;
 
-  &:disabled {
+  &[data-disabled] {
     pointer-events: none;
     opacity: 0.5;
+  }
+
+  &[data-loading] {
+    pointer-events: none;
   }
 
   &.jg-btn-icon-only {
     width: funcs.get-var('height');
     padding: .25em;
-  }
-
-  &.is-loading {
-    pointer-events: none;
   }
 }
 

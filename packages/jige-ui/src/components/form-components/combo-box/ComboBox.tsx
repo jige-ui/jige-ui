@@ -7,8 +7,8 @@ function normalizeOptions<T extends SimpleType>(
   options: (T | { label: string; value: T })[],
 ): { label: string; value: T }[] {
   return options.map((option) => {
-    if (typeof option === 'string') {
-      return { label: option, value: option }
+    if (typeof option !== 'object') {
+      return { label: `${option}`, value: option }
     }
     return option as { label: string; value: T }
   })

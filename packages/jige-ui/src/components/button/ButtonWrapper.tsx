@@ -4,6 +4,7 @@ import { Dynamic } from 'solid-js/web'
 import { runIgnoreError } from '~/common/dom'
 import { context } from './context'
 import type { ButtonElement, ButtonSize } from './types'
+import { setData } from '~/common/dataset'
 
 export function ButtonWrapper<T = string | undefined>(
   props: {
@@ -22,7 +23,6 @@ export function ButtonWrapper<T = string | undefined>(
     const classes = ['jg-btn', `jg-btn-${state.variant}`]
 
     if (state.iconOnly) classes.push('jg-btn-icon-only')
-    if (state.loading) classes.push('is-loading')
     if (props.class) classes.push(props.class)
 
     return classes.join(' ')
@@ -62,6 +62,11 @@ export function ButtonWrapper<T = string | undefined>(
   return (
     <Dynamic
       {...others}
+      {...setData({
+        loading: state.loading,
+        disabled: state.disabled,
+      })}
+      disabled={state.disabled}
       component={(isAnchor() ? 'a' : 'button') as any}
       onClick={(e: any) => {
         if (state.loading || isAnchor() || state.disabled) return
