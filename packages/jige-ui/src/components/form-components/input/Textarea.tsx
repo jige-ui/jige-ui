@@ -3,7 +3,7 @@ import { FormCore, InputCore, ScrollbarCore } from 'jige-core'
 import { throttle } from 'radash'
 import { createSignal, onMount } from 'solid-js'
 import { watch } from 'solid-uses'
-import { setData } from '~/common/dataset'
+import { dataIf } from '~/common/dataset'
 import { Form } from '~/components/form'
 import { InputFormBind } from './NormalInput'
 
@@ -70,10 +70,8 @@ function ScrollBar(props: { children: any; focused: boolean }) {
       class='jg-input-wrapper'
       onMouseEnter={() => setHidden(false)}
       onMouseLeave={() => setHidden(true)}
-      {...setData({
-        disabled: state.disabled,
-        focused: props.focused,
-      })}
+      data-disabled={dataIf(state.disabled)}
+      data-focused={dataIf(props.focused)}
     >
       {props.children}
       <ScrollbarCore.Bar

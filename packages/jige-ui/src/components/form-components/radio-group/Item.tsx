@@ -1,5 +1,5 @@
 import { FormCore, RadioGroupCore } from 'jige-core'
-import { setData } from '~/common/dataset'
+import { dataIf } from '~/common/dataset'
 
 export function Item(props: {
   value: string
@@ -18,10 +18,8 @@ export function Item(props: {
       <RadioGroupCore.ItemControl>
         <div
           class='jg-radio-group-item'
-          {...setData({
-            disabled: state.disabled || props.disabled || false,
-            checked: state.value === props.value,
-          })}
+          data-checked={dataIf(state.value === props.value)}
+          data-disabled={dataIf(state.disabled || props.disabled || false)}
         >
           <button type='button' class='jg-radio-group-circle' />
           <div class='jg-radio-group-text'>{props.label}</div>

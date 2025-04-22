@@ -1,7 +1,7 @@
 import { debounce, isArray, throttle } from 'radash'
 import { For, createSignal } from 'solid-js'
 import { watch } from 'solid-uses'
-import { setData } from '~/common/dataset'
+import { dataIf } from '~/common/dataset'
 import { dayes } from '~/common/dayes'
 import type { MaybePromise } from '~/common/types'
 import { genYears } from '../utils'
@@ -53,10 +53,8 @@ export function YearPanel(props: {
         {(year) => (
           <div
             class='jg-dp-year-panel-year'
-            {...setData({
-              selected: dayes(state.value).year() === year,
-              disabled: !checkYear(year),
-            })}
+            data-selected={dataIf(dayes(state.value).year() === year)}
+            data-disabled={dataIf(!checkYear(year))}
             classList={{
               'jg-dp-year-panel-year-hl': state.hlYears.includes(year),
             }}

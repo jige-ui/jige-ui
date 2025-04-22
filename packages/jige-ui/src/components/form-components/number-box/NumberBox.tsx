@@ -2,7 +2,7 @@ import css from 'sass:./number-box.scss'
 import inputCss from 'sass:../input/input.scss'
 import { mountStyle } from 'solid-uses'
 
-import { setData } from '~/common/dataset'
+import { dataIf } from '~/common/dataset'
 import { MinusAndPlus } from './MinusAndPlus'
 import { NumberInput } from './NumberInput'
 import { Root } from './Root'
@@ -22,10 +22,8 @@ export function NumberBox(props: {
       {(state) => (
         <div
           class='jg-input-wrapper'
-          {...setData({
-            disabled: state.disabled,
-            focused: state.focused,
-          })}
+          data-focused={dataIf(state.focused)}
+          data-disabled={dataIf(state.disabled)}
         >
           <NumberInput class='jg-input-native' />
           <MinusAndPlus class='jg-number-box-tools' />

@@ -64,6 +64,8 @@ export function Content(props: {
                 return
               }
               const { triggerRef, contentRef } = state
+              console.log(triggerRef!.isConnected)
+
               if (!triggerRef || !triggerRef.isConnected || !contentRef) {
                 setTransformOrigin('center center')
                 return

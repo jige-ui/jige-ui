@@ -4,7 +4,7 @@ import type { ComponentProps, JSX } from 'solid-js'
 import { For, createMemo, createSignal, splitProps } from 'solid-js'
 import { mountStyle, watch } from 'solid-uses'
 
-import { setData } from '~/common/dataset'
+import { dataIf } from '~/common/dataset'
 import context from './context'
 
 function Content(props: {
@@ -73,11 +73,9 @@ function Root(
                     {(state) => (
                       <div
                         class='jg-tabs-header-item'
-                        {...setData({
-                          checked: state.value === item.value,
-                          prev: prevActive() === item.value,
-                          dir: tabState.dir,
-                        })}
+                        data-checked={dataIf(state.value === item.value)}
+                        data-prev={dataIf(prevActive() === item.value)}
+                        data-dir={tabState.dir}
                       >
                         {item.label}
                       </div>

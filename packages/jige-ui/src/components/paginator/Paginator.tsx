@@ -4,7 +4,7 @@ import { isNumber } from 'radash'
 
 import { Match, Show, Switch, createMemo, createSignal } from 'solid-js'
 import { mountStyle } from 'solid-uses'
-import { setData } from '~/common/dataset'
+import { dataIf } from '~/common/dataset'
 import { isDef } from '~/common/types'
 import { DoubleArrowLeft, DoubleArrowRight, IconThreeDots } from '../icons'
 
@@ -17,7 +17,7 @@ function Pager(props: {
   return (
     <div
       class='jg-paginator-pager'
-      {...setData('checked', isCurrent())}
+      data-checked={dataIf(isCurrent())}
       onClick={() => {
         !isCurrent() && props.onPageClick(props.page)
       }}

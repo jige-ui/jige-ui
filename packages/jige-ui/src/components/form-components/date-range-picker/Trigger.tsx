@@ -1,7 +1,7 @@
 import { FloatingUiCore, hiddenStyle } from 'jige-core'
 import { createSignal } from 'solid-js'
 import { watch } from 'solid-uses'
-import { setData } from '~/common/dataset'
+import { dataIf } from '~/common/dataset'
 import { dayes } from '~/common/dayes'
 import { Form } from '~/components/form'
 import { ArrowRight, CalendarLine } from '~/components/icons'
@@ -21,10 +21,8 @@ export function Trigger() {
     <Popover.Trigger>
       <div
         class='jg-input-wrapper jg-dp-trigger'
-        {...setData({
-          focused: focused(),
-          disabled: state.disabled,
-        })}
+        data-focused={dataIf(focused())}
+        data-disabled={dataIf(state.disabled)}
       >
         <input
           type='text'

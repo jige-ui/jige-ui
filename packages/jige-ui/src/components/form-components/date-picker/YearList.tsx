@@ -1,6 +1,6 @@
 import { list } from 'radash'
 import { createMemo } from 'solid-js'
-import { setData } from '~/common/dataset'
+import { dataIf } from '~/common/dataset'
 import { dayes } from '~/common/dayes'
 import { Listbox } from '~/components/listbox'
 import { context } from './context'
@@ -35,10 +35,8 @@ export function YearList() {
     >
       {(item) => (
         <div
-          {...setData({
-            selected: state.inst.year() === item,
-            disabled: !checkYear(item),
-          })}
+          data-selected={dataIf(state.inst.year() === item)}
+          data-disabled={dataIf(!checkYear(item))}
           class='jg-dp-year-list-year'
           onClick={() => {
             actions.setCurrYear(item)

@@ -1,7 +1,7 @@
 import styles from 'sass:./slider.scss'
 import { FloatingUiCore, SliderCore } from 'jige-core'
 import { mountStyle, watch } from 'solid-uses'
-import { setData } from '~/common/dataset'
+import { dataIf } from '~/common/dataset'
 import { Form } from '~/components/form'
 import { Popover } from '../../popover'
 
@@ -59,7 +59,7 @@ function ToopTipSliderThumb(props: {
 function Track() {
   const [sliderState] = SliderCore.useContext()
   return (
-    <SliderCore.Track class='jg-slider-track' {...setData({ disabled: sliderState.disabled })}>
+    <SliderCore.Track class='jg-slider-track' data-disabled={dataIf(sliderState.disabled)}>
       <SliderCore.Fill
         class='jg-slider-fill'
         style={{

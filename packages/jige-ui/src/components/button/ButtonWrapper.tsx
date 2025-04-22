@@ -4,7 +4,7 @@ import { Dynamic } from 'solid-js/web'
 import { runIgnoreError } from '~/common/dom'
 import { context } from './context'
 import type { ButtonElement, ButtonSize } from './types'
-import { setData } from '~/common/dataset'
+import { dataIf } from '~/common/dataset'
 
 export function ButtonWrapper<T = string | undefined>(
   props: {
@@ -62,10 +62,8 @@ export function ButtonWrapper<T = string | undefined>(
   return (
     <Dynamic
       {...others}
-      {...setData({
-        loading: state.loading,
-        disabled: state.disabled,
-      })}
+      data-loading={dataIf(state.loading)}
+      data-disabled={dataIf(state.disabled)}
       disabled={state.disabled}
       component={(isAnchor() ? 'a' : 'button') as any}
       onClick={(e: any) => {

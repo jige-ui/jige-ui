@@ -1,5 +1,5 @@
 import { InputCore } from 'jige-core'
-import { setData } from '~/common/dataset'
+import { dataIf } from '~/common/dataset'
 
 export function InputWrapper(props: {
   children: any
@@ -9,10 +9,8 @@ export function InputWrapper(props: {
   return (
     <div
       class='jg-input-wrapper'
-      {...setData({
-        focused: props.focused,
-        disabled: state.disabled,
-      })}
+      data-focused={dataIf(props.focused)}
+      data-disabled={dataIf(state.disabled)}
     >
       {props.children}
     </div>

@@ -15,6 +15,7 @@ export function ButtonContent(props: {
   watch([() => props.label, () => child()], ([label, child]) => {
     actions.setIconOnly(!label && !child)
   })
+
   return (
     <div
       class='jg-btn-content'

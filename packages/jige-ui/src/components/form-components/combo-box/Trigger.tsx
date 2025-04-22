@@ -1,5 +1,5 @@
 import { FloatingUiCore, hiddenStyle } from 'jige-core'
-import { setData } from '~/common/dataset'
+import { dataIf } from '~/common/dataset'
 import { ArrowDown } from '../../icons'
 import { context } from './context'
 import { Form } from '~/components/form'
@@ -18,7 +18,7 @@ export function Trigger() {
         readOnly
       />
       <FloatingUiCore.Trigger>
-        <button type='button' class='jg-combo-box-trigger' {...setData('disabled', state.disabled)}>
+        <button type='button' class='jg-combo-box-trigger' data-disabled={dataIf(state.disabled)}>
           <div class='jg-combo-box-overlay' />
           <i class='jg-combo-box-arrow'>
             <ArrowDown />

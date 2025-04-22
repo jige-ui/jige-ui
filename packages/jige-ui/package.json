@@ -22,9 +22,7 @@
   "module": "dist/build.js",
   "types": "dist/build.d.ts",
   "typesVersions": {},
-  "files": [
-    "dist"
-  ],
+  "files": ["dist"],
   "scripts": {
     "build": "tsup",
     "dev": "tsup --watch",
@@ -33,7 +31,7 @@
   },
   "peerDependencies": {
     "chart.js": "^4.4.8",
-    "jige-core": "^0.38.5",
+    "jige-core": "^0.39.0",
     "solid-js": "^1.9.3"
   },
   "dependencies": {

@@ -28,6 +28,8 @@ function ModalCloseHandle(props: {
 
   if (!jgModalState.triggerRef) jgModalActs.setTriggerRef(state.maybeTriggerRef)
 
+  console.log(jgModalState.triggerRef)
+
   return <></>
 }
 
@@ -42,6 +44,7 @@ export function Provider(props: {
   onMount(() => {
     useEventListener('mouseup', (e) => {
       if (e.target === document.body) return
+
       actions.setMaybeTriggerRef(e.target as HTMLElement)
     })
   })

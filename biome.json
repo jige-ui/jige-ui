@@ -36,7 +36,8 @@
         "noUnusedVariables": "error"
       },
       "a11y": {
-        "useSemanticElements": "off"
+        "useSemanticElements": "off",
+        "useKeyWithClickEvents": "off"
       }
     }
   },

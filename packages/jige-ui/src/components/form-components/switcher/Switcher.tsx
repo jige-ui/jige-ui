@@ -4,7 +4,7 @@ import type { JSX } from 'solid-js'
 import styles from 'sass:./switcher.scss'
 import { Match, Show, Switch, createMemo } from 'solid-js'
 import { mountStyle } from 'solid-uses'
-import { setData } from '~/common/dataset'
+import { dataIf } from '~/common/dataset'
 import { Form } from '~/components/form'
 import { AnimatedChecked } from '../../icons'
 
@@ -45,10 +45,8 @@ export function Switcher(props: {
               {(state) => (
                 <div
                   class='jg-switcher-control jg-switcher-checkbox'
-                  {...setData({
-                    checked: state.checked,
-                    disabled: state.disabled,
-                  })}
+                  data-checked={dataIf(state.checked)}
+                  data-disabled={dataIf(state.disabled)}
                 >
                   <Show when={state.checked}>
                     <i class='jg-switcher-icon'>
@@ -64,9 +62,9 @@ export function Switcher(props: {
               {(state) => (
                 <div
                   class='jg-switcher-control jg-switcher-switcher'
-                  {...setData('disabled', state.disabled)}
+                  data-disabled={dataIf(state.disabled)}
                 >
-                  <div class='jg-switcher-thumb' {...setData('checked', state.checked)} />
+                  <div class='jg-switcher-thumb' data-checked={dataIf(state.checked)} />
                 </div>
               )}
             </SwitcherCore.Control>

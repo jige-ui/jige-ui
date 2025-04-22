@@ -1,6 +1,6 @@
 /* eslint-disable solid/reactivity */
 import { ModalCore } from 'jige-core'
-import { Show, createMemo, onMount } from 'solid-js'
+import { Show, createMemo } from 'solid-js'
 import { Button } from '../button'
 
 export function Footer(props: {
@@ -11,11 +11,6 @@ export function Footer(props: {
   onNegativeClick?: () => void | Promise<void>
 }) {
   const [, actions] = ModalCore.useContext()
-  let postiveBtn!: HTMLButtonElement
-
-  onMount(() => {
-    postiveBtn.focus()
-  })
 
   const color = createMemo(() => {
     return `var(--jg-fg-${props.type === 'error' ? 'danger' : props.type})`
@@ -43,7 +38,6 @@ export function Footer(props: {
       <Show when={props.positiveText}>
         <Button
           color={color()}
-          ref={postiveBtn}
           label={props.positiveText}
           onClick={async () => {
             await props.onPositiveClick?.()

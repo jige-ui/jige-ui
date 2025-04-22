@@ -1,7 +1,7 @@
 import { FloatingUiCore, FormCore } from 'jige-core'
 import { createSignal } from 'solid-js'
 import { watch } from 'solid-uses'
-import { setData } from '~/common/dataset'
+import { dataIf } from '~/common/dataset'
 import { Form } from '~/components/form'
 import { CalendarLine } from '~/components/icons'
 import { Popover } from '../../popover'
@@ -37,10 +37,8 @@ export function Trigger() {
     <Popover.Trigger>
       <div
         class='jg-input-wrapper jg-dp-trigger'
-        {...setData({
-          focused: focused(),
-          disabled: state.disabled,
-        })}
+        data-focused={dataIf(focused())}
+        data-disabled={dataIf(state.disabled)}
       >
         <div class='jg-input-prefix'>
           <CalendarLine />

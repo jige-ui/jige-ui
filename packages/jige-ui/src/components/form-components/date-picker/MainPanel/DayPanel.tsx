@@ -4,7 +4,7 @@ import type { DateTypes } from '../types'
 import { debounce, isFunction, list } from 'radash'
 import { For, createMemo, createSignal } from 'solid-js'
 import { watch } from 'solid-uses'
-import { setData } from '~/common/dataset'
+import { dataIf } from '~/common/dataset'
 import { dayes } from '~/common/dayes'
 import type { MaybePromise } from '~/common/types'
 import { NumberToChinese, genCalendarDays } from '../utils'
@@ -109,11 +109,10 @@ export function DayPanel(props: {
         {(day) => (
           <div
             class={cellClass(day)}
-            {...setData({
-              selected:
-                state.value.includes(day.format('YYYY-MM-DD')) && day.month() === state.currMonth,
-              disabled: isDsDay(day),
-            })}
+            data-selected={dataIf(
+              state.value.includes(day.format('YYYY-MM-DD')) && day.month() === state.currMonth,
+            )}
+            data-disabled={dataIf(isDsDay(day))}
           >
             <div
               class='jg-dp-day-panel-day'

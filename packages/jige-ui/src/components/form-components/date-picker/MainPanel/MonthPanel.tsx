@@ -2,7 +2,7 @@ import { esday } from 'esday'
 import { debounce, isFunction, list } from 'radash'
 import { For } from 'solid-js'
 import { watch } from 'solid-uses'
-import { setData } from '~/common/dataset'
+import { dataIf } from '~/common/dataset'
 import { dayes } from '~/common/dayes'
 import type { MaybePromise } from '~/common/types'
 import { NumberToChinese } from '../utils'
@@ -41,12 +41,10 @@ export function MonthPanel(props: {
         {(month) => (
           <div
             class='jg-dp-month-panel-month'
-            {...setData({
-              selected:
-                dayes(state.value).month() === month &&
-                dayes(state.value).year() === state.currYear,
-              disabled: !checkMonth(month),
-            })}
+            data-selected={dataIf(
+              dayes(state.value).month() === month && dayes(state.value).year() === state.currYear,
+            )}
+            data-disabled={dataIf(!checkMonth(month))}
             classList={{
               'jg-dp-month-panel-month-hl': isHl(month),
             }}

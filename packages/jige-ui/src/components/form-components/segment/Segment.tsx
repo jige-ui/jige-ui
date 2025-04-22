@@ -4,7 +4,7 @@ import type { JSX } from 'solid-js'
 import { For, createMemo, mergeProps, onMount } from 'solid-js'
 import { type SetStoreFunction, createStore } from 'solid-js/store'
 import { mountStyle } from 'solid-uses'
-import { setData } from '~/common/dataset'
+import { dataIf } from '~/common/dataset'
 import { Form } from '~/components/form'
 import { RadioFormBind } from '../radio-group/Root'
 import { Thumb } from './Thumb'
@@ -17,7 +17,7 @@ function SegmentWrapper(props: {
 }) {
   const [radioState] = RadioGroupCore.useContext()
   return (
-    <div class={props.class} style={props.style} {...setData({ disabled: radioState.disabled })}>
+    <div class={props.class} style={props.style} data-disabled={dataIf(radioState.disabled)}>
       {props.children}
     </div>
   )
@@ -50,7 +50,7 @@ function Item(props: {
       }}
       ref={ref}
       tabIndex={-1}
-      {...setData({ checked: props.checked })}
+      data-checked={dataIf(props.checked)}
     >
       {props.label}
     </button>

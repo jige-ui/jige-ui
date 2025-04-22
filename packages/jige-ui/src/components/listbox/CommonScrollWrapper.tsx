@@ -2,7 +2,7 @@ import { undefinedOr } from 'jige-core'
 import { For, createSignal } from 'solid-js'
 import type { JSX } from 'solid-js/jsx-runtime'
 import { watch } from 'solid-uses'
-import { setData } from '~/common/dataset'
+import { dataIf } from '~/common/dataset'
 import { Scrollbar } from '../scrollbar'
 
 export function CommonScrollWrapper<T extends any[]>(props: {
@@ -107,11 +107,9 @@ export function CommonScrollWrapper<T extends any[]>(props: {
                 }}
                 aria-selected={props.selectIndex.includes(item.index)}
                 onClick={() => props.onSelect(item.value, item.index)}
-                {...setData({
-                  index: item.index,
-                  selected: props.selectIndex.includes(item.index),
-                  highlight: item.index === hlIndex(),
-                })}
+                data-index={item.index}
+                data-selected={dataIf(props.selectIndex.includes(item.index))}
+                data-highlight={dataIf(item.index === hlIndex())}
               >
                 <div class='jg-listbox-item-inner'>{props.children(item.value, item.index)}</div>
               </div>

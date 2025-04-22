@@ -1,7 +1,7 @@
 import { FormCore, callMaybeCallableChild } from 'jige-core'
 import { type JSX, Show, createMemo, createUniqueId, splitProps } from 'solid-js'
 import { watch } from 'solid-uses'
-import { setData } from '~/common/dataset'
+import { dataIf } from '~/common/dataset'
 import { fieldContext } from './context'
 
 function ErrorOrDescription(props: { description?: string }) {
@@ -19,7 +19,7 @@ function ErrorOrDescription(props: { description?: string }) {
       <div
         class='jg-form-field-description'
         id={state.descriptionID}
-        {...setData('invalid', !!errors()?.length)}
+        data-invalid={dataIf(errors()?.length)}
       >
         <Show when={errors()?.length > 0} fallback={props.description}>
           {errors().join(',')}
@@ -82,10 +82,8 @@ export function Field(
           <div
             class={`jg-form-field ${localProps.class || ''}`}
             style={localProps.style}
-            {...setData({
-              invalid: !!state.errors.length,
-              required: !!localProps.required,
-            })}
+            data-invalid={dataIf(state.errors.length)}
+            data-required={dataIf(localProps.required)}
           >
             <div class='jg-form-field-control'>
               <Label label={localProps.label} />
