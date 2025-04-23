@@ -5,20 +5,19 @@ import { mountStyle } from 'solid-uses'
 import { NormalInput } from './NormalInput'
 import { PasswordInput } from './PasswordInput'
 import { Textarea } from './Textarea'
+import type { JigeInputProps } from './types'
 
-export function Input(props: {
-  type?: 'text' | 'textarea' | 'password'
-  value?: string
-  onChange?: (value: string) => void
-  placeholder?: string
-  disabled?: boolean
-  clearable?: boolean
-}) {
+export function Input(props: JigeInputProps) {
   mountStyle(styles, 'jige-ui-input')
   return (
-    <Switch fallback={<NormalInput {...(props as any)} />}>
+    <Switch fallback={<NormalInput {...props} />}>
       <Match when={props.type === 'textarea'}>
-        <Textarea {...props} />
+        <Textarea
+          value={props.value}
+          onChange={props.onChange}
+          placeholder={props.placeholder}
+          disabled={props.disabled}
+        />
       </Match>
       <Match when={props.type === 'password'}>
         <PasswordInput {...props} />

@@ -1,10 +1,10 @@
 import { combineStyle } from 'jige-core'
 import { createMemo, splitProps } from 'solid-js'
 import { Dynamic } from 'solid-js/web'
+import { dataIf } from '~/common/dataset'
 import { runIgnoreError } from '~/common/dom'
 import { context } from './context'
 import type { ButtonElement, ButtonSize } from './types'
-import { dataIf } from '~/common/dataset'
 
 export function ButtonWrapper<T = string | undefined>(
   props: {

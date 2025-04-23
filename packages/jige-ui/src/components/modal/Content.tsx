@@ -1,4 +1,4 @@
-import { ModalCore } from 'jige-core'
+import { ModalCore, callMaybeContextChild } from 'jige-core'
 import { combineStyle } from 'jige-core'
 import { createSignal } from 'solid-js'
 import type { JSX } from 'solid-js/jsx-runtime'
@@ -28,7 +28,7 @@ function calcOrigin(triggerRef: HTMLElement, contentRef: HTMLElement) {
 }
 
 export function Content(props: {
-  children: JSX.Element
+  children: Parameters<typeof ModalCore.Content>['0']['children']
   dynamicTransformOrigin?: boolean
   style?: string | JSX.CSSProperties
   zIndex?: number
@@ -50,7 +50,7 @@ export function Content(props: {
           'z-index': undefinedOr(props.zIndex, rs.zIndexConfig.modal),
         }}
       >
-        {(stat) => {
+        {(stat, acts, staticData) => {
           const [transformOrigin, setTransformOrigin] = createSignal('')
           watch(
             () => stat.status,
@@ -64,7 +64,6 @@ export function Content(props: {
                 return
               }
               const { triggerRef, contentRef } = state
-              console.log(triggerRef!.isConnected)
 
               if (!triggerRef || !triggerRef.isConnected || !contentRef) {
                 setTransformOrigin('center center')
@@ -89,7 +88,7 @@ export function Content(props: {
                 props.style,
               )}
             >
-              {props.children}
+              {callMaybeContextChild([stat, acts, staticData], props.children)}
             </div>
           )
         }}

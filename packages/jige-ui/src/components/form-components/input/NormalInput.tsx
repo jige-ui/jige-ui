@@ -1,8 +1,9 @@
-import { FormCore, InputCore } from 'jige-core'
-import { Show, createSignal } from 'solid-js'
+import { FormCore, InputCore, runSolidEventHandler } from 'jige-core'
+import { Show, createSignal, splitProps } from 'solid-js'
 import { Form } from '~/components/form'
 import { Clearable } from './Clearable'
 import { InputWrapper } from './InputWrapper'
+import type { JigeInputProps } from './types'
 
 export function InputFormBind(props: {
   disabled?: boolean
@@ -23,32 +24,44 @@ export function InputFormBind(props: {
   )
 }
 
-export function NormalInput(props: {
-  value?: string
-  onChange?: (value: string) => void
-  placeholder?: string
-  disabled?: boolean
-  clearable?: boolean
-}) {
+export function NormalInput(props: Omit<JigeInputProps, 'type'>) {
   const [focused, setFocused] = createSignal(false)
   const [, fieldCoreActs] = FormCore.useField()
+  const [localProps, otherProps] = splitProps(props, [
+    'value',
+    'onChange',
+    'disabled',
+    'clearable',
+    'onFocus',
+    'onBlur',
+    'class',
+    'style',
+  ])
   return (
-    <InputCore value={props.value} onChange={props.onChange} disabled={props.disabled}>
-      <InputFormBind disabled={props.disabled} />
+    <InputCore
+      value={localProps.value}
+      onChange={localProps.onChange}
+      disabled={localProps.disabled}
+    >
+      <InputFormBind disabled={localProps.disabled} />
       <InputWrapper focused={focused()}>
         <InputCore.Native
+          {...(otherProps as any)}
           class='jg-input-native'
           autocomplete='off'
           type='text'
           {...Form.createNativeComponentAttrs()}
-          onFocus={() => setFocused(true)}
-          onBlur={() => {
+          onFocus={(e: any) => {
+            setFocused(true)
+            runSolidEventHandler(e, localProps.onFocus)
+          }}
+          onBlur={(e: any) => {
             setFocused(false)
             fieldCoreActs.handleBlur?.()
+            runSolidEventHandler(e, localProps.onBlur)
           }}
-          placeholder={props.placeholder}
         />
-        <Show when={props.clearable}>
+        <Show when={localProps.clearable}>
           <Clearable />
         </Show>
       </InputWrapper>

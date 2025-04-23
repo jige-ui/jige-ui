@@ -1,8 +1,8 @@
 import { FloatingUiCore, hiddenStyle } from 'jige-core'
 import { dataIf } from '~/common/dataset'
+import { Form } from '~/components/form'
 import { ArrowDown } from '../../icons'
 import { context } from './context'
-import { Form } from '~/components/form'
 
 export function Trigger() {
   const [state] = context.useContext()

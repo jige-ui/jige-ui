@@ -1,5 +1,5 @@
-import css from 'sass:./number-box.scss'
 import inputCss from 'sass:../input/input.scss'
+import css from 'sass:./number-box.scss'
 import { mountStyle } from 'solid-uses'
 
 import { dataIf } from '~/common/dataset'

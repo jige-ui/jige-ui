@@ -50,7 +50,7 @@ export function Root(
         value={state.value}
         setName={actions.setName}
       >
-        {callMaybeContextChild(context, props.children)}
+        {callMaybeContextChild(context.useContext(), props.children)}
       </Form.Bind>
     </Context.Provider>
   )

@@ -1,7 +1,7 @@
 import { FloatingUiCore } from 'jige-core'
+import { RootContext } from '~/components/ROOT/context'
 import { Listbox as LB } from '../../listbox'
 import { context } from './context'
-import { RootContext } from '~/components/ROOT/context'
 
 export function ListBox() {
   const [rootState] = RootContext.useContext()
