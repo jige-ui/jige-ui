@@ -18,6 +18,7 @@ export function Demo() {
             <span>{value()}</span>
           </div>
           <ComboBox
+            style={{ width: '100%' }}
             value={value()}
             options={list(20000).map((v) => v.toString())}
             disabled={p.disabled}

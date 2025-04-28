@@ -3,8 +3,12 @@ import { dataIf } from '~/common/dataset'
 import { Form } from '~/components/form'
 import { ArrowDown } from '../../icons'
 import { context } from './context'
+import type { JSX } from 'solid-js/jsx-runtime'
 
-export function Trigger() {
+export function Trigger(props: {
+  style?: string | JSX.CSSProperties
+  class?: string
+}) {
   const [state] = context.useContext()
   return (
     <div>
@@ -18,7 +22,12 @@ export function Trigger() {
         readOnly
       />
       <FloatingUiCore.Trigger>
-        <button type='button' class='jg-combo-box-trigger' data-disabled={dataIf(state.disabled)}>
+        <button
+          style={props.style}
+          type='button'
+          class={['jg-combo-box-trigger', props.class].join(' ')}
+          data-disabled={dataIf(state.disabled)}
+        >
           <div class='jg-combo-box-overlay' />
           <i class='jg-combo-box-arrow'>
             <ArrowDown />

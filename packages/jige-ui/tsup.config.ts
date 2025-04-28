@@ -33,7 +33,11 @@ function generateConfig(jsx: boolean, dts?: boolean, watch?: boolean): Options {
     format: 'esm',
     clean: true,
     dts,
-    entry: ['src/build.ts', 'src/components/*/index.ts'],
+    entry: [
+      'src/build.ts',
+      'src/components/*/index.ts',
+      'src/components/form-components/*/index.ts',
+    ],
     outDir: 'dist/',
     treeshake: { preset: 'smallest' },
     replaceNodeEnv: true,

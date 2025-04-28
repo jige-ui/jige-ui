@@ -2,6 +2,7 @@ import type { SimpleType } from '~/components/data-table'
 import { ListBox } from './ListBox'
 import { Root } from './Root'
 import { Trigger } from './Trigger'
+import type { JSX } from 'solid-js/jsx-runtime'
 
 function normalizeOptions<T extends SimpleType>(
   options: (T | { label: string; value: T })[],
@@ -21,6 +22,8 @@ export function ComboBox<T extends SimpleType>(props: {
   onChange?: (value: string) => void
   placeholder?: string
   disableBind?: boolean
+  class?: string
+  style?: string | JSX.CSSProperties
 }) {
   return (
     <Root
@@ -31,7 +34,7 @@ export function ComboBox<T extends SimpleType>(props: {
       placeholder={props.placeholder || '请选择...'}
       disableBind={props.disableBind || false}
     >
-      <Trigger />
+      <Trigger class={props.class} style={props.style} />
       <ListBox />
     </Root>
   )
