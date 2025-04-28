@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.28.0](https://github.com/jige-ui/jige-ui/compare/v0.27.6...v0.28.0) (2025-04-28)
+
+
+### Features
+
+* disable bind via prop ([81d2fb8](https://github.com/jige-ui/jige-ui/commit/81d2fb89f68c821d21ff92c41dc9013c04455ec6))
+* improve ([6107256](https://github.com/jige-ui/jige-ui/commit/6107256dea3fb5bbe1e2528200f81a2d54ce29f7))
+
 ## [0.27.6](https://github.com/jige-ui/jige-ui/compare/v0.27.5...v0.27.6) (2025-04-23)
 
 
