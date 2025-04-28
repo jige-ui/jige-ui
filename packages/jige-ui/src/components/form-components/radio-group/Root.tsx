@@ -8,6 +8,7 @@ import { Form } from '~/components/form'
 export function RadioFormBind(props: {
   propDisabled?: boolean
   children: JSX.Element
+  disableBind?: boolean
 }) {
   const [radioState, radioActions] = RadioGroupCore.useContext()
   return (
@@ -17,6 +18,7 @@ export function RadioFormBind(props: {
       setValue={radioActions.setValue}
       setDisabled={radioActions.setDisabled}
       setName={radioActions.setName}
+      disableBind={props.disableBind}
     >
       {props.children}
     </Form.Bind>
@@ -28,12 +30,15 @@ export function Root(props: {
   value?: string
   onChange?: (value: string) => void
   disabled?: boolean
+  disableBind?: boolean
 }) {
   mountStyle(css, 'jige-ui-radio-group')
   return (
     <RadioGroupCore value={props.value} onChange={props.onChange} disabled={props.disabled}>
       <div {...Form.createNativeComponentAttrs()}>
-        <RadioFormBind propDisabled={props.disabled}>{props.children}</RadioFormBind>
+        <RadioFormBind propDisabled={props.disabled} disableBind={props.disableBind}>
+          {props.children}
+        </RadioFormBind>
       </div>
     </RadioGroupCore>
   )

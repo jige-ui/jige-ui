@@ -7,6 +7,7 @@ import type { JigeInputProps } from './types'
 
 export function InputFormBind(props: {
   disabled?: boolean
+  disableBind: boolean
 }) {
   const [state, actions] = InputCore.useContext()
 
@@ -17,6 +18,7 @@ export function InputFormBind(props: {
       value={state.value}
       setValue={actions.setValue}
       setName={actions.setName}
+      disableBind={props.disableBind}
     >
       {/* biome-ignore lint/complexity/noUselessFragments: <explanation> */}
       <></>
@@ -36,6 +38,8 @@ export function NormalInput(props: Omit<JigeInputProps, 'type'>) {
     'onBlur',
     'class',
     'style',
+    'disableBind',
+    'readonly',
   ])
   return (
     <InputCore
@@ -43,8 +47,8 @@ export function NormalInput(props: Omit<JigeInputProps, 'type'>) {
       onChange={localProps.onChange}
       disabled={localProps.disabled}
     >
-      <InputFormBind disabled={localProps.disabled} />
-      <InputWrapper focused={focused()}>
+      <InputFormBind disabled={localProps.disabled} disableBind={!!localProps.disableBind} />
+      <InputWrapper focused={focused()} readonly={localProps.readonly || false}>
         <InputCore.Native
           {...(otherProps as any)}
           class='jg-input-native'
@@ -60,6 +64,7 @@ export function NormalInput(props: Omit<JigeInputProps, 'type'>) {
             fieldCoreActs.handleBlur?.()
             runSolidEventHandler(e, localProps.onBlur)
           }}
+          readonly={localProps.readonly}
         />
         <Show when={localProps.clearable}>
           <Clearable />

@@ -11,6 +11,7 @@ import { AnimatedChecked } from '../../icons'
 function SwitcherBind(props: {
   children: JSX.Element
   propDisabled?: boolean
+  disableBind?: boolean
 }) {
   const [state, actions] = SwitcherCore.useContext()
   return (
@@ -20,6 +21,7 @@ function SwitcherBind(props: {
       setDisabled={actions.setDisabled}
       setValue={actions.setChecked}
       setName={actions.setName}
+      disableBind={props.disableBind}
     >
       {props.children}
     </Form.Bind>
@@ -31,13 +33,14 @@ export function Switcher(props: {
   value?: boolean
   type?: 'checkbox' | 'switcher'
   disabled?: boolean
+  disableBind?: boolean
 }) {
   mountStyle(styles, 'jige-ui-switcher')
 
   const type = createMemo(() => props.type || 'switcher')
   return (
     <SwitcherCore checked={props.value} onChange={props.onChange} disabled={props.disabled}>
-      <SwitcherBind propDisabled={props.disabled}>
+      <SwitcherBind propDisabled={props.disabled} disableBind={props.disableBind}>
         <SwitcherCore.Native class='jg-switcher-native' {...Form.createNativeComponentAttrs()} />
         <Switch>
           <Match when={type() === 'checkbox'}>

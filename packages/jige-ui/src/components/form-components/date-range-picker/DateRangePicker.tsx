@@ -13,6 +13,7 @@ export function DateRangePicker(props: {
   value?: [string, string]
   onChange?: (value: [string, string]) => void
   placeholder?: [string, string]
+  disableBind?: boolean
 }) {
   mountStyle(dpCss, 'jige-ui-date-picker')
   mountStyle(inputCss, 'jige-ui-input')
@@ -35,6 +36,7 @@ export function DateRangePicker(props: {
           actions.setState('value', v)
         }}
         setName={actions.setName}
+        disableBind={props.disableBind}
       >
         <Popover
           placement='bottom-start'

@@ -22,6 +22,8 @@ export function PasswordInput(props: Omit<JigeInputProps, 'type'>) {
     'onBlur',
     'class',
     'style',
+    'disableBind',
+    'readonly',
   ])
 
   return (
@@ -30,8 +32,8 @@ export function PasswordInput(props: Omit<JigeInputProps, 'type'>) {
       onChange={localProps.onChange}
       disabled={localProps.disabled}
     >
-      <InputFormBind disabled={localProps.disabled} />
-      <InputWrapper focused={focused()}>
+      <InputFormBind disabled={localProps.disabled} disableBind={!!localProps.disableBind} />
+      <InputWrapper focused={focused()} readonly={localProps.readonly || false}>
         <InputCore.Native
           {...(otherProps as any)}
           {...Form.createNativeComponentAttrs()}
@@ -47,6 +49,7 @@ export function PasswordInput(props: Omit<JigeInputProps, 'type'>) {
             fieldCoreActs.handleBlur?.()
             runSolidEventHandler(e, props.onBlur)
           }}
+          readonly={localProps.readonly}
         />
         <Show when={localProps.clearable}>
           <Clearable hasSuffix />

@@ -49,6 +49,8 @@ export function App() {
         document.body.classList.remove('no-transition')
       }, 200)
     })
+
+    console.log(routes)
   })
   return (
     <Router

@@ -3,8 +3,9 @@ import type { JSX } from 'solid-js/jsx-runtime'
 import { watch } from 'solid-uses'
 import { isDef } from '~/common/types'
 import { formContext } from './context'
+import { Show } from 'solid-js'
 
-export function Bind(props: {
+function BindCore(props: {
   isBlur?: boolean
   propDisabled: boolean | undefined
   setDisabled: (disabled: boolean) => void
@@ -49,5 +50,25 @@ export function Bind(props: {
     },
   )
 
-  return <>{props.children}</>
+  return <></>
+}
+
+export function Bind(props: {
+  isBlur?: boolean
+  propDisabled: boolean | undefined
+  setDisabled: (disabled: boolean) => void
+  value: any
+  setValue: (value: any) => void
+  setName: (name: string) => void
+  children: JSX.Element
+  disableBind?: boolean
+}) {
+  return (
+    <>
+      <Show when={!props.disableBind}>
+        <BindCore {...props} />
+      </Show>
+      {props.children}
+    </>
+  )
 }

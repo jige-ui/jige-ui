@@ -13,6 +13,7 @@ export function Root<T>(props: {
   disabled?: boolean
   placeholder: string
   children: JSX.Element
+  disableBind: boolean
 }) {
   mountStyle(css, 'jige-ui-combo-box')
 
@@ -38,6 +39,7 @@ export function Root<T>(props: {
         setName={actions.setName}
         setValue={actions.setValue}
         setDisabled={actions.setDisabled}
+        disableBind={props.disableBind}
       >
         <FloatingUiCore
           disabled={state.disabled}

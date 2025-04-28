@@ -17,6 +17,7 @@ export function Input(props: JigeInputProps) {
           onChange={props.onChange}
           placeholder={props.placeholder}
           disabled={props.disabled}
+          readonly={props.readonly}
         />
       </Match>
       <Match when={props.type === 'password'}>

@@ -20,6 +20,7 @@ export function ComboBox<T extends SimpleType>(props: {
   disabled?: boolean
   onChange?: (value: string) => void
   placeholder?: string
+  disableBind?: boolean
 }) {
   return (
     <Root
@@ -28,6 +29,7 @@ export function ComboBox<T extends SimpleType>(props: {
       options={normalizeOptions(props.options)}
       onChange={props.onChange}
       placeholder={props.placeholder || '请选择...'}
+      disableBind={props.disableBind || false}
     >
       <Trigger />
       <ListBox />

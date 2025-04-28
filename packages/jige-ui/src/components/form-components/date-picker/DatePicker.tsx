@@ -53,6 +53,7 @@ export function DatePicker(props: {
   valueFormat?: string
   onChange?: (value: string) => void
   disabled?: boolean
+  disabledBind?: boolean
   placeholder?: string
   type?: DatePickerType
   dateRange?: [DateTypes, DateTypes]
@@ -83,6 +84,7 @@ export function DatePicker(props: {
       disabled={props.disabled}
       type={props.type}
       placeholder={props.placeholder}
+      disableBind={props.disabledBind || false}
     >
       <Trigger />
       <Wrapper>

@@ -6,5 +6,7 @@ export type JigeInputProps = {
   value?: string
   onChange?: (value: string) => void
   disabled?: boolean
+  disableBind?: boolean
   clearable?: boolean
+  readonly?: boolean
 } & Omit<ComponentProps<'input'>, 'type' | 'value' | 'onChange' | 'onInput' | 'disabled'>

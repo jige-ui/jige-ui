@@ -5,8 +5,9 @@ import { dataIf } from '~/common/dataset'
 import { Form } from '~/components/form'
 import { Popover } from '../../popover'
 
-function ToopTipSliderThumb(props: {
+function ToolTipSliderThumb(props: {
   disabled?: boolean
+  disableBind?: boolean
 }) {
   const floatActs = FloatingUiCore.useContext()[1]
   const [sliderState, sliderActs] = SliderCore.useContext()
@@ -34,6 +35,7 @@ function ToopTipSliderThumb(props: {
           value={sliderState.value}
           setValue={sliderActs.setValue}
           setName={sliderActs.setName}
+          disableBind={props.disableBind}
         >
           <SliderCore.Thumb
             class='jg-slider-thumb'
@@ -56,7 +58,10 @@ function ToopTipSliderThumb(props: {
   )
 }
 
-function Track() {
+function Track(props: {
+  disableBind?: boolean
+  disabled?: boolean
+}) {
   const [sliderState] = SliderCore.useContext()
   return (
     <SliderCore.Track class='jg-slider-track' data-disabled={dataIf(sliderState.disabled)}>
@@ -66,7 +71,7 @@ function Track() {
           width: `${sliderState.percentage}%`,
         }}
       />
-      <ToopTipSliderThumb />
+      <ToolTipSliderThumb disableBind={props.disableBind} disabled={props.disabled} />
     </SliderCore.Track>
   )
 }
@@ -78,13 +83,14 @@ export function Slider(props: {
   max?: number
   step?: number
   disabled?: boolean
+  disableBind?: boolean
 }) {
   mountStyle(styles, 'jige-ui-slider')
   return (
     <SliderCore {...props}>
       <Popover placement='top' trigger='manual'>
         <SliderCore.Native {...Form.createNativeComponentAttrs()} />
-        <Track />
+        <Track disableBind={props.disableBind} disabled={props.disabled} />
       </Popover>
     </SliderCore>
   )

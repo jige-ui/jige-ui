@@ -37,6 +37,7 @@ export function Demo() {
   const [p, setP] = createStore({
     disabled: false,
     noLabel: false,
+    disableBind: false,
   })
 
   const [data, setData] = createStore({
@@ -78,19 +79,28 @@ export function Demo() {
       <Playground.MainArea>
         <Form staticFormInstance={form} disabled={p.disabled}>
           <Form.Field label={p.noLabel ? undefined : 'Username'} name='username' required>
-            <Input type='text' placeholder={p.noLabel ? 'Username' : ''} />
+            <Input
+              type='text'
+              placeholder={p.noLabel ? 'Username' : ''}
+              disableBind={p.disableBind}
+            />
           </Form.Field>
           <Form.Field label={p.noLabel ? undefined : 'Age'} name='age' required>
-            <NumberBox placeholder={p.noLabel ? 'Age' : ''} />
+            <NumberBox placeholder={p.noLabel ? 'Age' : ''} disableBind={p.disableBind} />
           </Form.Field>
           <Form.Field label={p.noLabel ? undefined : 'City'} name='city' required>
             <ComboBox
               placeholder={p.noLabel ? 'City' : ''}
               options={['beijing', 'shanghai', 'guangzhou']}
+              disableBind={p.disableBind}
             />
           </Form.Field>
           <Form.Field label={p.noLabel ? undefined : 'Password'} name={'password'}>
-            <Input type='password' placeholder={p.noLabel ? 'Password' : ''} />
+            <Input
+              type='password'
+              placeholder={p.noLabel ? 'Password' : ''}
+              disableBind={p.disableBind}
+            />
           </Form.Field>
           <Form.Field
             required
@@ -105,21 +115,25 @@ export function Demo() {
               },
             ]}
           >
-            <Input type='password' placeholder={p.noLabel ? 'Confirm Password' : ''} />
+            <Input
+              type='password'
+              placeholder={p.noLabel ? 'Confirm Password' : ''}
+              disableBind={p.disableBind}
+            />
           </Form.Field>
           <Form.Field label={p.noLabel ? undefined : 'Sex'} name='sex'>
-            <RadioGroup>
+            <RadioGroup disableBind={p.disableBind}>
               <For each={['male', 'female']}>
                 {(item) => <RadioGroup.Item value={item} label={item} />}
               </For>
             </RadioGroup>
           </Form.Field>
           <Form.Field label={p.noLabel ? undefined : 'dateRange'} name='dateRange'>
-            <DateRangePicker />
+            <DateRangePicker disableBind={p.disableBind} />
           </Form.Field>
           <Form.Field name='remember'>
             <div class='flex items-center'>
-              <Switcher type='checkbox' /> Remember me
+              <Switcher type='checkbox' disableBind={p.disableBind} /> Remember me
             </div>
           </Form.Field>
 

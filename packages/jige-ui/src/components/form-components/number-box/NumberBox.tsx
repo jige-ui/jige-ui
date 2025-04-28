@@ -14,6 +14,7 @@ export function NumberBox(props: {
   min?: number
   value?: number
   onChange?: (value: number) => void
+  disableBind?: boolean
 }) {
   mountStyle(inputCss, 'jige-ui-input')
   mountStyle(css, 'jige-ui-number-box')

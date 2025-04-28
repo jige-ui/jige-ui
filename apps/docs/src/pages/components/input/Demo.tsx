@@ -6,6 +6,7 @@ export function Demo() {
   const [p, setP] = createStore({
     disabled: false,
     clearable: false,
+    readonly: false,
     type: 'text' as 'text' | 'textarea' | 'password',
   })
 
@@ -18,6 +19,7 @@ export function Demo() {
             clearable={p.clearable}
             type={p.type}
             placeholder='Input some'
+            readonly={p.readonly}
           />
         </div>
       </Playground.MainArea>

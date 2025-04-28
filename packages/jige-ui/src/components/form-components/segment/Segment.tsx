@@ -66,6 +66,7 @@ export function Segment(props: {
   class?: string
   thumbClass?: string
   disabled?: boolean
+  disableBind?: boolean
 }) {
   mountStyle(css, 'jige-ui-segment')
 
@@ -91,7 +92,7 @@ export function Segment(props: {
 
   return (
     <RadioGroupCore onChange={props.onChange} value={props.value} disabled={props.disabled}>
-      <RadioFormBind propDisabled={props.disabled}>
+      <RadioFormBind propDisabled={props.disabled} disableBind={props.disableBind}>
         <SegmentWrapper
           class={`jg-segment ${finalProps.class}`}
           style={{

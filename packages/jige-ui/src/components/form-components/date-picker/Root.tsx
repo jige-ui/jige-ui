@@ -16,6 +16,7 @@ export function Root(props: {
   disabled?: boolean
   type?: DatePickerType
   placeholder?: string
+  disableBind: boolean
 }) {
   mountStyle(styles, 'jige-ui-date-picker')
   mountStyle(inputCss, 'jige-ui-input')
@@ -83,6 +84,7 @@ export function Root(props: {
           setValue={actions.setValue}
           setDisabled={actions.setDisabled}
           setName={actions.setName}
+          disableBind={props.disableBind}
         >
           {props.children}
         </Form.Bind>

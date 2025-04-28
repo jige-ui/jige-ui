@@ -15,6 +15,7 @@ export function Root(
       disabled?: boolean
       placeholder?: string
       onChange?: (value: number) => void
+      disableBind?: boolean
     }
   >,
 ) {
@@ -49,6 +50,7 @@ export function Root(
         setValue={actions.setValue}
         value={state.value}
         setName={actions.setName}
+        disableBind={props.disableBind}
       >
         {callMaybeContextChild(context.useContext(), props.children)}
       </Form.Bind>

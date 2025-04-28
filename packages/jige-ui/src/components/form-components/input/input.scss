@@ -45,6 +45,10 @@
     opacity: .6;
   }
 
+  &[data-readonly] {
+    pointer-events: none;
+  }
+
   &[data-focused] {
     &::before {
       background: funcs.get-var('t-bg1');

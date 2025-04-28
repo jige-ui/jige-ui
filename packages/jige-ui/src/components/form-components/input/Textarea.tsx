@@ -11,6 +11,7 @@ function ScrollInput(props: {
   value?: string
   onChange?: (value: string) => void
   placeholder?: string
+  readonly?: boolean
   setFocused: (focused: boolean) => void
 }) {
   const [state, actions] = ScrollbarCore.useContext()
@@ -47,6 +48,7 @@ function ScrollInput(props: {
         resize: 'none',
         width: '100%',
       }}
+      readonly={props.readonly}
       onScroll={() => {
         throttleSetValue()
       }}
@@ -62,7 +64,7 @@ function ScrollInput(props: {
   )
 }
 
-function ScrollBar(props: { children: any; focused: boolean }) {
+function ScrollBar(props: { children: any; focused: boolean; readonly?: boolean }) {
   const [hidden, setHidden] = createSignal(false)
   const [state] = InputCore.useContext()
   return (
@@ -72,6 +74,7 @@ function ScrollBar(props: { children: any; focused: boolean }) {
       onMouseLeave={() => setHidden(true)}
       data-disabled={dataIf(state.disabled)}
       data-focused={dataIf(props.focused)}
+      data-readonly={dataIf(props.readonly)}
     >
       {props.children}
       <ScrollbarCore.Bar
@@ -106,12 +109,14 @@ export function Textarea(props: {
   onChange?: (value: string) => void
   placeholder?: string
   disabled?: boolean
+  disableBind?: boolean
+  readonly?: boolean
 }) {
   const [focused, setFocused] = createSignal(false)
   return (
     <InputCore value={props.value} onChange={props.onChange} disabled={props.disabled}>
-      <InputFormBind disabled={props.disabled} />
-      <ScrollBar focused={focused()}>
+      <InputFormBind disabled={props.disabled} disableBind={!!props.disableBind} />
+      <ScrollBar focused={focused()} readonly={props.readonly}>
         <ScrollInput {...props} setFocused={setFocused} />
       </ScrollBar>
     </InputCore>
