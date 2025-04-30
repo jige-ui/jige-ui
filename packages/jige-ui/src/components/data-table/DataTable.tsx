@@ -1,5 +1,5 @@
 import css from 'sass:./data-table.scss'
-import { TableCore } from 'jige-core'
+import { dataIf, TableCore, undefinedOr } from 'jige-core'
 import { For, Show, createMemo } from 'solid-js'
 import { mountStyle } from 'solid-uses'
 import { flattenObject } from '~/common/flatObject'
@@ -8,9 +8,11 @@ import { Paginator } from '../paginator'
 import { Scrollbar } from '../scrollbar'
 import { Spin } from '../spin'
 import { generateHeaders } from './common'
-import type { DataTableColumn, DataTableProps, SimpleType } from './types'
+import type { DataTableProps, SimpleType } from './types'
 
-export function DataTable(props: DataTableProps) {
+export function DataTable<R extends Record<string, any>, K extends string>(
+  props: DataTableProps<R, K>,
+) {
   let headRef!: HTMLTableSectionElement
 
   const fontSize = createMemo(() => {
@@ -34,23 +36,20 @@ export function DataTable(props: DataTableProps) {
 
   const columns = createMemo(() => {
     const columns = props.columns
-    const result: { [key: string]: Required<DataTableColumn> } = {}
+    const result: { [key: string]: any } = {}
 
     for (const i of columns) {
       const key = i.key
       const title = i.title || key
       const width = i.width || 0
       result[key] = {
+        ...i,
         key,
         title,
         width,
-        hidden: i.hidden || false,
-        isParentColumn: i.isParentColumn || false,
-        render:
-          i.render ||
-          ((v) => {
-            return <span>{v}</span>
-          }),
+        hidden: !!i.hidden,
+        isParentColumn: !!i.isParentColumn,
+        render: undefinedOr(i.render, (v: any) => <span>{v ?? ''}</span>),
       }
     }
 
@@ -58,24 +57,19 @@ export function DataTable(props: DataTableProps) {
   })
 
   const data = createMemo(() => {
-    const source = props.dataSource.map(
-      (item) =>
-        flattenObject(item) as {
-          [key: string]: SimpleType
-        },
-    )
+    const source = props.dataSource.map((item) => flattenObject(item))
 
-    const finalSource: { [key: string]: SimpleType }[] = []
+    const finalSource: typeof source = []
 
     for (const i of source) {
-      const newItem: { [key: string]: SimpleType } = {}
+      const newItem: Record<string, SimpleType> = {}
       for (const key in columns()) {
         const column = columns()[key]
         if (column && !column.hidden && !column.isParentColumn) {
           newItem[key] = i[key]
         }
       }
-      finalSource.push(newItem)
+      finalSource.push(newItem as any)
     }
 
     return finalSource
@@ -92,6 +86,7 @@ export function DataTable(props: DataTableProps) {
           'border-color': props.bordered ? 'var(--jg-t-border)' : 'transparent',
           'font-size': fontSize(),
         }}
+        data-bordered={dataIf(props.bordered)}
       >
         <Show when={data().length > 0}>
           <TableCore>
@@ -155,10 +150,12 @@ export function DataTable(props: DataTableProps) {
               </TableCore.Body>
             </Scrollbar>
           </TableCore>
-          <Show when={props.pagination}>
-            <div class='jg-data-table-bottom'>
-              <div />
-              <Paginator {...props.pagination!} />
+          <Show when={props.pagination || props.footer}>
+            <div class='jg-data-table-footer'>
+              <div>{props.footer || ''}</div>
+              <Show when={props.pagination}>
+                <Paginator {...props.pagination!} />
+              </Show>
             </div>
           </Show>
         </Show>

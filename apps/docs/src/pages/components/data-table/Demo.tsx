@@ -1,13 +1,20 @@
-import { DataTable } from 'jige-ui'
+import { Button, ComboBox, DataTable } from 'jige-ui'
 import { random, uid } from 'radash'
-import { createResource, createSignal } from 'solid-js'
+import { createResource, createSignal, Show } from 'solid-js'
 import { createStore } from 'solid-js/store'
 import { watch } from 'solid-uses'
 import { Playground } from '~/components/playground'
 
 export function Demo() {
   const generateData = () => {
-    const data: any[] = []
+    const data: {
+      name: string
+      age: number
+      sex: '男' | '女'
+      address: string
+      'info.phone': string
+      'info.email': string
+    }[] = []
     for (let i = 0; i < 100; i++) {
       data.push({
         name: `${uid(7)}`,
@@ -18,14 +25,14 @@ export function Demo() {
         'info.email': `${uid(7)}@gmail.com`,
       })
     }
-    return new Promise<any[]>((resolve) => {
+    return new Promise<typeof data>((resolve) => {
       setTimeout(() => {
         resolve(data)
       }, 1000)
     })
   }
 
-  const [data, { refetch }] = createResource(generateData, { initialValue: [] })
+  const [data, { refetch, mutate }] = createResource(generateData, { initialValue: [] })
 
   const [currPage, setCurrPage] = createSignal(1)
 
@@ -35,13 +42,21 @@ export function Demo() {
 
   const [p, setP] = createStore({
     size: 'medium',
+    bordered: false,
   })
+
+  const [editIndex, setEditIndex] = createSignal<number | null>(null)
+
+  const isEditing = (index: number) => {
+    return editIndex() === index
+  }
 
   return (
     <Playground>
       <Playground.MainArea>
         <div class='w-full p-4'>
           <DataTable
+            bordered={p.bordered}
             size={p.size as any}
             pagination={{
               total: 100,
@@ -55,7 +70,6 @@ export function Demo() {
             columns={[
               { key: 'info', title: '信息', isParentColumn: true },
               { key: 'info.phone', title: '电话' },
-
               { key: 'name', title: '姓名' },
               {
                 width: 200,
@@ -70,20 +84,71 @@ export function Demo() {
                 },
               },
               { key: 'age', title: '年龄', width: 60 },
-              { key: 'sex', title: '性别', width: 60 },
+              {
+                key: 'sex',
+                title: '性别',
+                width: 100,
+                render(v, _row, index) {
+                  return (
+                    <Show when={isEditing(index)} fallback={<span>{v}</span>}>
+                      <ComboBox
+                        value={v as string}
+                        options={['男', '女']}
+                        onChange={(value) => {
+                          value !== v &&
+                            mutate((prev) => {
+                              const res = [...prev]
+                              res[index].sex = value as '男'
+                              return [...res]
+                            })
+                        }}
+                      />
+                    </Show>
+                  )
+                },
+              },
               {
                 key: 'action',
                 title: '操作',
                 width: 200,
-                render() {
+                render(_, _row, index) {
                   return (
                     <div class='flex gap-2'>
-                      <button class='bg-blue-500 text-white p-2 rounded' type='button'>
-                        编辑
-                      </button>
-                      <button class='bg-red-500 text-white p-2 rounded' type='button'>
-                        删除
-                      </button>
+                      <Show
+                        when={!isEditing(index)}
+                        fallback={
+                          <>
+                            <Button
+                              label='确认'
+                              variant='text'
+                              size='small'
+                              color='var(--jg-t-hl)'
+                            />
+                            <Button
+                              label='取消'
+                              variant='text'
+                              size='small'
+                              color='var(--jg-fg-danger)'
+                            />
+                          </>
+                        }
+                      >
+                        <Button
+                          label='编辑'
+                          variant='text'
+                          size='small'
+                          color='var(--jg-t-hl)'
+                          onClick={() => {
+                            setEditIndex(index)
+                          }}
+                        />
+                        <Button
+                          label='删除'
+                          variant='text'
+                          size='small'
+                          color='var(--jg-fg-danger)'
+                        />
+                      </Show>
                     </div>
                   )
                 },

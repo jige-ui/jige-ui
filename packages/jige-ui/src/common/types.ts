@@ -11,3 +11,4 @@ export function undefinedOr<T, U>(v: T | undefined, or: U): T | U {
 export function isDef<T>(v: T | undefined): v is T {
   return !isUndefined(v)
 }
+export type Keys<T> = Extract<keyof T, string>

@@ -28,7 +28,7 @@ export const defaultThemeColors: ThemeVars = {
   't-bg4': { l: 95, c: 0.006, lD: 37, a: 0.5 },
   't-bg5': { l: 92.5, c: 0.008, lD: 40, a: 0.5 },
   't-bg6': { l: 89, c: 0.029, cD: 0.04 },
-  't-border': { l: 90, c: 0.008, lD: 42 },
+  't-border': { l: 91, c: 0.01, lD: 42, a: 0.6 },
   't-body': { l: 91, c: 0.014, lD: 18 },
 }
 
