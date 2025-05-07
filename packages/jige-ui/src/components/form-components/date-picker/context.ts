@@ -89,5 +89,17 @@ export const context = createComponentState({
     parseDate(value: DateTypes) {
       return dayes(value, this.state.valueFormat)
     },
+
+    setName(name: string) {
+      this.actions.setState('name', name)
+    },
+
+    setDisabled(disabled: boolean) {
+      this.actions.setState('disabled', disabled)
+    },
+
+    setActivePanel(panel: string) {
+      this.actions.setState('activePanel', panel)
+    },
   },
 })

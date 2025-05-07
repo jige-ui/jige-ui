@@ -7,7 +7,7 @@ import { context } from './context'
 
 export function Root(
   props: PropsWithContextChild<
-    typeof context,
+    ReturnType<typeof context.useContext>,
     {
       min?: number
       max?: number
@@ -46,10 +46,14 @@ export function Root(
     <Context.Provider>
       <Form.Bind
         propDisabled={props.disabled}
-        setDisabled={actions.setDisabled}
+        setDisabled={(d) => {
+          actions.setState('disabled', d)
+        }}
         setValue={actions.setValue}
         value={state.value}
-        setName={actions.setName}
+        setName={(n) => {
+          actions.setState('name', n)
+        }}
         disableBind={props.disableBind}
       >
         {callMaybeContextChild(context.useContext(), props.children)}

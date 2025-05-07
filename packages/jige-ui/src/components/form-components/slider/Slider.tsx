@@ -31,10 +31,14 @@ function ToolTipSliderThumb(props: {
       <Popover.Trigger>
         <Form.Bind
           propDisabled={props.disabled}
-          setDisabled={sliderActs.setDisabled}
+          setDisabled={(d) => {
+            sliderActs.setState('disabled', d)
+          }}
           value={sliderState.value}
           setValue={sliderActs.setValue}
-          setName={sliderActs.setName}
+          setName={(name) => {
+            sliderActs.setState('name', name)
+          }}
           disableBind={props.disableBind}
         >
           <SliderCore.Thumb

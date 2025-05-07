@@ -15,9 +15,15 @@ export function RadioFormBind(props: {
     <Form.Bind
       propDisabled={props.propDisabled}
       value={radioState.value}
-      setValue={radioActions.setValue}
-      setDisabled={radioActions.setDisabled}
-      setName={radioActions.setName}
+      setValue={(v) => {
+        radioActions.setState('value', v)
+      }}
+      setDisabled={(d) => {
+        radioActions.setState('disabled', d)
+      }}
+      setName={(n) => {
+        radioActions.setState('name', n)
+      }}
       disableBind={props.disableBind}
     >
       {props.children}

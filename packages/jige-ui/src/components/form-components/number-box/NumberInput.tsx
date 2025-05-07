@@ -32,10 +32,12 @@ export function NumberInput(props: {
       onChange={(e) => {
         e.currentTarget.value = Number.isNaN(state.value) ? '' : String(state.value)
       }}
-      onFocus={() => actions.setFocused(true)}
+      onFocus={() => {
+        actions.setState('focused', true)
+      }}
       onBlur={() => {
         fieldCoreActs.handleBlur?.()
-        actions.setFocused(false)
+        actions.setState('focused', false)
       }}
     />
   )

@@ -14,10 +14,14 @@ export function InputFormBind(props: {
   return (
     <Form.Bind
       propDisabled={props.disabled}
-      setDisabled={actions.setDisabled}
+      setDisabled={(d) => {
+        actions.setState('disabled', d)
+      }}
       value={state.value}
       setValue={actions.setValue}
-      setName={actions.setName}
+      setName={(n) => {
+        actions.setState('name', n)
+      }}
       disableBind={props.disableBind}
     >
       {/* biome-ignore lint/complexity/noUselessFragments: <explanation> */}

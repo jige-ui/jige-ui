@@ -45,9 +45,9 @@ function Root(
       if (!prev) return
       setPrevActive(prev)
       if (localProps.options.indexOf(prev) < localProps.options.indexOf(active)) {
-        actions.setDir('right')
+        actions.setState('dir', 'right')
       } else {
-        actions.setDir('left')
+        actions.setState('dir', 'left')
       }
     },
   )

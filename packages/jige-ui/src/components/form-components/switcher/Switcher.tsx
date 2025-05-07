@@ -18,9 +18,15 @@ function SwitcherBind(props: {
     <Form.Bind
       propDisabled={props.propDisabled}
       value={state.checked}
-      setDisabled={actions.setDisabled}
-      setValue={actions.setChecked}
-      setName={actions.setName}
+      setDisabled={(disabled) => {
+        actions.setState('disabled', disabled)
+      }}
+      setValue={(v) => {
+        actions.setState('checked', v)
+      }}
+      setName={(name) => {
+        actions.setState('name', name)
+      }}
       disableBind={props.disableBind}
     >
       {props.children}

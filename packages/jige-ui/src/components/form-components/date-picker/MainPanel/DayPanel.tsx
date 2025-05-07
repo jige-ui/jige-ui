@@ -32,9 +32,15 @@ export function DayPanel(props: {
         dates().map((d) => d.format('YYYY-MM-DD')),
       )
       if (y === state.currYear && m === state.currMonth)
-        actions.setHlDates(highlightDates.map((d) => dayes(d).format('YYYY-MM-DD')))
+        actions.setState(
+          'hlDates',
+          highlightDates.map((d) => dayes(d).format('YYYY-MM-DD')),
+        )
     } else {
-      actions.setHlDates(getHls.map((d) => dayes(d).format('YYYY-MM-DD')))
+      actions.setState(
+        'hlDates',
+        getHls.map((d) => dayes(d).format('YYYY-MM-DD')),
+      )
     }
   })
 
@@ -50,10 +56,16 @@ export function DayPanel(props: {
         dates().map((d) => d.format('YYYY-MM-DD')),
       )
       if (y === state.currYear && m === state.currMonth)
-        actions.setDsDates(disabledDates.map((d) => dayes(d).format('YYYY-MM-DD')))
+        actions.setState(
+          'dsDates',
+          disabledDates.map((d) => dayes(d).format('YYYY-MM-DD')),
+        )
       setIsLoadingDsDates(false)
     } else {
-      actions.setDsDates(getDs.map((d) => dayes(d).format('YYYY-MM-DD')))
+      actions.setState(
+        'dsDates',
+        getDs.map((d) => dayes(d).format('YYYY-MM-DD')),
+      )
     }
   })
 

@@ -10,7 +10,7 @@ export function Root(props: {
   open?: boolean
   onOpenChange?: (open: boolean) => void
   preventScroll?: boolean
-  closeOnInteractOutside?: boolean
+  closeOnClickMask?: boolean
   closeOnEsc?: boolean
 }) {
   mountStyle(css, 'jige-ui-modal')

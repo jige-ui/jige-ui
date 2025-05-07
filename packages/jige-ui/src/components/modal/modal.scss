@@ -77,3 +77,34 @@
 }
 
 /* mask end */
+
+
+.jg-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 36px;
+  padding: 0 8px;
+}
+
+.jg-modal-header-title {
+  font-weight: 600;
+  color: funcs.get-var('fg1');
+}
+
+.jg-modal-header-close {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2em;
+}
+
+.jg-modal-footer {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 0 8px;
+  margin-top: 4px;
+}

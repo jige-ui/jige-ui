@@ -22,9 +22,9 @@ function calcOrigin(triggerRef: HTMLElement, contentRef: HTMLElement) {
   const centerContent = getCenter(contentRect)
 
   const originX = centerTrigger.x - centerContent.x + contentRect.width / 2
-  const orginY = centerTrigger.y - centerContent.y + contentRect.height / 2
+  const originY = centerTrigger.y - centerContent.y + contentRect.height / 2
 
-  return [originX, orginY]
+  return [originX, originY]
 }
 
 export function Content(props: {
@@ -78,7 +78,9 @@ export function Content(props: {
             <div
               data-modal-status={stat.status}
               class='jg-modal-content'
-              ref={actions.setContentRef}
+              ref={(el) => {
+                actions.setState('contentRef', el)
+              }}
               style={combineStyle(
                 {
                   'transform-origin': transformOrigin(),

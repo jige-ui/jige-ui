@@ -24,7 +24,8 @@ export const context = createComponentState({
 
       // clear maybeTriggerRef after 100ms
       // compatible with other trigger events
-      this.actions.setTimer(
+      this.actions.setState(
+        'timer',
         setTimeout(() => {
           this.actions.setState('maybeTriggerRef', null)
         }, 100),

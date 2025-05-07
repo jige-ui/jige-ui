@@ -11,7 +11,7 @@ function ErrorOrDescription(props: { description?: string }) {
   const errors = createMemo(() => fieldState.errors.map((e) => e.message))
 
   watch([errors, () => props.description], ([e, d]) => {
-    actions.setHasDescription(e.length > 0 || !!d)
+    actions.setState('hasDescription', e.length > 0 || !!d)
   })
 
   return (
@@ -78,7 +78,7 @@ export function Field(
           ...(localProps.validators || []),
         ]}
       >
-        {(state, actions, nowrapData) => (
+        {(state, actions) => (
           <div
             class={`jg-form-field ${localProps.class || ''}`}
             style={localProps.style}
@@ -87,7 +87,7 @@ export function Field(
           >
             <div class='jg-form-field-control'>
               <Label label={localProps.label} />
-              <div>{callMaybeCallableChild(localProps.children, state, actions, nowrapData)}</div>
+              <div>{callMaybeCallableChild(localProps.children, state, actions)}</div>
             </div>
             <ErrorOrDescription description={localProps.description} />
           </div>

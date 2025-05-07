@@ -34,7 +34,9 @@ function ScrollInput(props: {
     <InputCore.Native
       type='textarea'
       {...Form.createNativeComponentAttrs()}
-      ref={actions.setRefContent}
+      ref={(el: HTMLElement) => {
+        actions.setState('refContent', el)
+      }}
       autocomplete='off'
       placeholder={props.placeholder}
       class='jg-input-native'

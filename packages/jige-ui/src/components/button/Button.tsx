@@ -41,9 +41,9 @@ export function Button<T extends string | undefined = undefined>(
 
   watch([() => formState.disabled, () => local.disabled, () => local.type], ([fD, pD, type]) => {
     if ((type === 'submit' || type === 'reset') && fD) {
-      actions.setDisabled(true)
+      actions.setState('disabled', true)
     } else {
-      actions.setDisabled(pD || false)
+      actions.setState('disabled', pD || false)
     }
   })
 

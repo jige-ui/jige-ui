@@ -6,5 +6,13 @@ export function Trigger(props: {
   children: JSX.Element
 }) {
   const [, actions] = context.useContext()
-  return <ModalCore.Trigger ref={actions.setTriggerRef}>{props.children}</ModalCore.Trigger>
+  return (
+    <ModalCore.Trigger
+      ref={(el) => {
+        actions.setState('triggerRef', el)
+      }}
+    >
+      {props.children}
+    </ModalCore.Trigger>
+  )
 }

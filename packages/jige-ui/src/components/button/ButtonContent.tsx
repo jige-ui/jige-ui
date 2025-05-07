@@ -13,7 +13,7 @@ export function ButtonContent(props: {
   const icon = children(() => props.icon)
 
   watch([() => props.label, () => child()], ([label, child]) => {
-    actions.setIconOnly(!label && !child)
+    actions.setState('iconOnly', !label && !child)
   })
 
   return (

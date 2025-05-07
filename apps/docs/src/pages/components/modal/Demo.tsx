@@ -2,7 +2,7 @@ import { Button, Modal } from 'jige-ui'
 
 export function Demo() {
   return (
-    <Modal>
+    <Modal closeOnEsc closeOnClickMask>
       <Modal.Trigger>
         <Button>Open Modal</Button>
       </Modal.Trigger>

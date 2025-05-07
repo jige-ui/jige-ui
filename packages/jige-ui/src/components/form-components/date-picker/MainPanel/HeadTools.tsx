@@ -21,7 +21,10 @@ export function HeadTools() {
       <div>
         <Button
           onClick={() => {
-            actions.setActivePanel(state.activePanel === 'year' ? state.defaultPanel : 'year')
+            actions.setState(
+              'activePanel',
+              state.activePanel === 'year' ? state.defaultPanel : 'year',
+            )
           }}
           onWheel={(e) => {
             e.preventDefault()
@@ -33,7 +36,10 @@ export function HeadTools() {
         <Show when={!monthMode()}>
           <Button
             onClick={() => {
-              actions.setActivePanel(state.activePanel === 'month' ? state.defaultPanel : 'month')
+              actions.setState(
+                'activePanel',
+                state.activePanel === 'month' ? state.defaultPanel : 'month',
+              )
             }}
             onWheel={(e) => {
               e.preventDefault()

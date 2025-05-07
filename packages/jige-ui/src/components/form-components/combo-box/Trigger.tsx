@@ -1,9 +1,9 @@
 import { FloatingUiCore, hiddenStyle } from 'jige-core'
+import type { JSX } from 'solid-js/jsx-runtime'
 import { dataIf } from '~/common/dataset'
 import { Form } from '~/components/form'
 import { ArrowDown } from '../../icons'
 import { context } from './context'
-import type { JSX } from 'solid-js/jsx-runtime'
 
 export function Trigger(props: {
   style?: string | JSX.CSSProperties

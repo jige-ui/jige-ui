@@ -56,7 +56,7 @@ export function Root<T>(props: {
               const scrollTop = totalHeight - rects.floating.height / 2 + state.listItemHeight / 2
               $scroll.scrollTop = scrollTop
               const toTop = totalHeight - $scroll.scrollTop + state.listItemHeight
-              actions.setOriginY(totalHeight - $scroll.scrollTop)
+              actions.setState('originY', totalHeight - $scroll.scrollTop)
               return -toTop - 8
             },
             flip: false,
@@ -65,8 +65,10 @@ export function Root<T>(props: {
             },
             size: {
               apply({ rects }) {
-                actions.setListItemHeight(rects.reference.height + 4)
-                actions.setListItemWidth(rects.reference.width)
+                actions.setState({
+                  listItemHeight: rects.reference.height + 4,
+                  listItemWidth: rects.reference.width,
+                })
               },
             },
           }}

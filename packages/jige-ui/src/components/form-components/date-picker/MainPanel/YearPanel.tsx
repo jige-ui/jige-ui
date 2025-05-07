@@ -29,10 +29,10 @@ export function YearPanel(props: {
   const debounceSetHlYears = debounce({ delay: 200 }, async (ys: number[]) => {
     const getHls = props.highlightYears
     if (isArray(getHls)) {
-      actions.setHlYears(getHls)
+      actions.setState('hlYears', getHls)
     } else {
       const years = await getHls([ys[0], ys[ys.length - 1]])
-      actions.setHlYears(years)
+      actions.setState('hlYears', years)
     }
   })
 

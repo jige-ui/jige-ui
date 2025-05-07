@@ -25,7 +25,7 @@ export function ListBox() {
         selectTrigger='click'
         items={state.options}
         onSelect={(item) => {
-          actions.setValue(item.value)
+          actions.setState('value', item.value)
           floatActs.setOpen(false)
         }}
         class='jg-combo-box-scrollarea'

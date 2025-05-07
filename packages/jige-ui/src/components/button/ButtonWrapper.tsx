@@ -70,12 +70,12 @@ export function ButtonWrapper<T = string | undefined>(
         if (state.loading || isAnchor() || state.disabled) return
         if (local.onClick) {
           const doClick = async () => {
-            actions.setLoading(true)
+            actions.setState('loading', true)
             if (local.onClick) {
               // eslint-disable-next-line solid/reactivity
               await runIgnoreError(() => local.onClick!(e))
             }
-            actions.setLoading(false)
+            actions.setState('loading', false)
           }
           doClick()
         }

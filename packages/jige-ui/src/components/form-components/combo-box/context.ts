@@ -16,4 +16,15 @@ export const context = createComponentState({
       return this.state.options.findIndex((item) => item.value === this.state.value)
     },
   },
+  methods: {
+    setValue(value: string) {
+      this.actions.setState('value', value)
+    },
+    setName(name: string) {
+      this.actions.setState('name', name)
+    },
+    setDisabled(disabled: boolean) {
+      this.actions.setState('disabled', disabled)
+    },
+  },
 })

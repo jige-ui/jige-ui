@@ -1,15 +1,16 @@
 import { FloatingUiCore } from 'jige-core'
 import { combineStyle } from 'jige-core'
 import type { JSX } from 'solid-js'
-import { Show, splitProps } from 'solid-js'
+import { Show, createMemo, splitProps } from 'solid-js'
 import { RootContext } from '../ROOT/context'
 
 export function Content(
   props: {
-    arrow?: boolean
+    arrow?: boolean | number
     background?: string
     color?: string
     zindex?: number
+    animation?: string
   } & JSX.HTMLAttributes<HTMLDivElement>,
 ) {
   const [state] = RootContext.useContext()
@@ -21,15 +22,54 @@ export function Content(
     'children',
     'class',
     'style',
+    'animation',
   ])
+
+  const classes = createMemo(() => {
+    const result = ['jg-popover-content']
+    if (!localProps.animation) {
+      result.push('ani-floating-ui-move')
+    } else {
+      result.push(localProps.animation)
+    }
+
+    if (localProps.class) {
+      result.push(localProps.class)
+    }
+
+    return result.join(' ')
+  })
+
+  const [floatingState] = FloatingUiCore.useContext()
+
+  const transformOrigin = createMemo(() => {
+    const placement = floatingState.placement
+    const map: Record<string, string> = {
+      top: 'bottom center',
+      'top-start': 'bottom left',
+      'top-end': 'bottom right',
+      bottom: 'top center',
+      'bottom-start': 'top left',
+      'bottom-end': 'top right',
+      left: 'center right',
+      'left-start': 'top right',
+      'left-end': 'bottom right',
+      right: 'center left',
+      'right-start': 'top left',
+      'right-end': 'bottom left',
+    }
+    return map[placement] || 'center center'
+  })
+
   return (
     <FloatingUiCore.Content
       {...otherProps}
-      class={`${localProps.class || ''} jg-popover-content ani-floating-ui-move`}
+      class={classes()}
       style={combineStyle(
         {
           '--jg-popover-bg': localProps.background || 'var(--jg-t-bg1)',
           '--jg-popover-color': localProps.color || 'var(--jg-fg2)',
+          '--jg-transform-origin': transformOrigin(),
         },
         localProps.style,
       )}
@@ -37,7 +77,10 @@ export function Content(
     >
       {localProps.children}
       <Show when={localProps.arrow}>
-        <FloatingUiCore.Arrow size={6} class='jg-popover-arrow' />
+        <FloatingUiCore.Arrow
+          size={typeof localProps.arrow === 'number' ? localProps.arrow : 6}
+          class='jg-popover-arrow'
+        />
       </Show>
     </FloatingUiCore.Content>
   )

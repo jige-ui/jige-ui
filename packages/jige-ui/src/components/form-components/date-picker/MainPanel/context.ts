@@ -38,6 +38,12 @@ export const panelContext = createComponentState({
     },
   },
   methods: {
+    setValue(value: string[]) {
+      this.actions.setState('value', value)
+    },
+    setActivePanel(panel: string) {
+      this.actions.setState('activePanel', panel)
+    },
     monthHandle(step: number) {
       const { state, actions } = this
       const d = dayes(`${state.currYear}-${state.currMonth + 1}-01`).add(step, 'month')

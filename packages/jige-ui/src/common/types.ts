@@ -12,3 +12,4 @@ export function isDef<T>(v: T | undefined): v is T {
   return !isUndefined(v)
 }
 export type Keys<T> = Extract<keyof T, string>
+export type SimpleType = string | number | boolean | null | undefined

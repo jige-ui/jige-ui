@@ -16,9 +16,9 @@ export function MonthPanel(props: {
     const getHls = props.highlightMonths
     if (isFunction(getHls)) {
       const mons = await getHls(y)
-      actions.setHlMonths(mons)
+      actions.setState('hlMonths', mons)
     } else {
-      actions.setHlMonths(getHls)
+      actions.setState('hlMonths', getHls)
     }
   })
 

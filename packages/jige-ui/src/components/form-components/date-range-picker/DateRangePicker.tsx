@@ -30,12 +30,16 @@ export function DateRangePicker(props: {
     <Context.Provider>
       <Form.Bind
         propDisabled={props.disabled}
-        setDisabled={actions.setDisabled}
+        setDisabled={(d) => {
+          actions.setState('disabled', d)
+        }}
         value={state.value}
         setValue={(v) => {
           actions.setState('value', v)
         }}
-        setName={actions.setName}
+        setName={(n) => {
+          actions.setState('name', n)
+        }}
         disableBind={props.disableBind}
       >
         <Popover
