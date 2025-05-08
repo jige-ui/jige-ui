@@ -7,7 +7,7 @@ import {
   createSolidTable,
   getCoreRowModel,
 } from '@tanstack/solid-table'
-import { Button, Modal, TanstackTable } from 'jige-ui'
+import { Button, Form, Input, Modal, NumberBox, TanstackTable } from 'jige-ui'
 import { random, sleep, uid } from 'radash'
 import { createResource, createSignal } from 'solid-js'
 
@@ -24,11 +24,40 @@ const columnHelper = createColumnHelper<Person>()
 const defaultColumns: ColumnDef<Person>[] = [
   columnHelper.display({
     header: 'Actions',
-    cell: (props) => (
-      <Button size='small' onClick={() => alert(props.row.index)}>
-        Edit
-      </Button>
+    cell: () => (
+      <Button
+        size='small'
+        label='edit'
+        onClick={(e) => {
+          e.preventDefault()
+          e.stopPropagation()
+        }}
+      />
     ),
+    meta: {
+      width: 200,
+      editable: (_formData, actions) => (
+        <div class='flex items-center gap-1'>
+          <Button
+            variant='text'
+            size='small'
+            onClick={async () => {
+              await actions.confirm()
+            }}
+            label='Confirm'
+            color='var(--jg-t-hl)'
+          />
+          <Button
+            size='small'
+            variant='text'
+            label='Cancel'
+            onClick={() => {
+              actions.cancel()
+            }}
+          />
+        </div>
+      ),
+    },
   }),
   {
     header: 'Name',
@@ -40,6 +69,11 @@ const defaultColumns: ColumnDef<Person>[] = [
         footer: (props) => props.column.id,
         meta: {
           width: 200,
+          editable: () => (
+            <Form.Field name='firstName'>
+              <Input />
+            </Form.Field>
+          ),
         },
       },
       {
@@ -48,6 +82,14 @@ const defaultColumns: ColumnDef<Person>[] = [
         cell: (info) => info.getValue(),
         header: () => <span>Last Name</span>,
         footer: (props) => props.column.id,
+        meta: {
+          width: 200,
+          editable: () => (
+            <Form.Field name='lastName'>
+              <Input />
+            </Form.Field>
+          ),
+        },
       },
     ],
   },
@@ -59,6 +101,14 @@ const defaultColumns: ColumnDef<Person>[] = [
         accessorKey: 'age',
         header: () => 'Age',
         footer: (props) => props.column.id,
+        meta: {
+          width: 100,
+          editable: () => (
+            <Form.Field name='age'>
+              <NumberBox min={14} max={150} />
+            </Form.Field>
+          ),
+        },
       },
       {
         header: 'More Info',
@@ -107,7 +157,7 @@ export function Demo() {
     bordered: false,
   })
 
-  const [data, { refetch }] = createResource(
+  const [data, { refetch, mutate }] = createResource(
     async () => {
       await sleep(random(5, 15) * 200)
       return genData(100)
@@ -136,6 +186,20 @@ export function Demo() {
       <Playground.MainArea>
         <div class='w-full p-4'>
           <TanstackTable
+            onAddNewRow={async (data) => {
+              await sleep(1000)
+              mutate((old) => [
+                ...old,
+                {
+                  firstName: data.firstName || '',
+                  lastName: data.lastName || '',
+                  age: data.age || 0,
+                  visits: data.visits || 0,
+                  status: data.status || 'unsigned',
+                  progress: data.progress || 10,
+                },
+              ])
+            }}
             loading={data.loading}
             staticTableInstance={table}
             bordered={p.bordered}

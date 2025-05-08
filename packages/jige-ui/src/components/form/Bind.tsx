@@ -28,7 +28,6 @@ function BindCore(props: {
 
   // bind value
   watch([() => props.value], ([value]) => {
-    console.log(value)
     fieldState.name && fieldActions.handleChange(value)
   })
 
