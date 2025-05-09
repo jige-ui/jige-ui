@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.30.0](https://github.com/jige-ui/jige-ui/compare/v0.29.0...v0.30.0) (2025-05-09)
+
+
+### Features
+
+* add new row require return boolean ([40934a5](https://github.com/jige-ui/jige-ui/commit/40934a57a6499b36ea4afcbd8ac18ab76fb486f7))
+* empty state, editable table ([bc5f32b](https://github.com/jige-ui/jige-ui/commit/bc5f32b2609a1a1737c5632d5ead73e826adc671))
+
 ## [0.29.0](https://github.com/jige-ui/jige-ui/compare/v0.28.0...v0.29.0) (2025-05-07)
 
 
