@@ -41,7 +41,7 @@ export function TanstackTable<T>(props: {
     currPage: number
   }
   footer?: JSX.Element
-  onAddNewRow?: (data: Record<string, any>) => void | Promise<void>
+  onAddNewRow?: (data: Record<string, any>) => boolean | Promise<boolean>
 }) {
   mountStyle(css, 'jige-ui-tanstack-table')
 
@@ -159,26 +159,32 @@ export function TanstackTable<T>(props: {
                     setShowNewRow(false)
                   }}
                   onConfirm={async (data) => {
-                    await props.onAddNewRow?.(data)
-                    setShowNewRow(false)
+                    if (await props.onAddNewRow?.(data)) setShowNewRow(false)
                   }}
                 />
               </Show>
             </TableCore.Body>
           </Scrollbar>
         </TableCore>
-        <div>
-          <Button
-            label='新增一行'
-            onClick={() => {
-              setShowNewRow(true)
-              scrollRef()?.scrollTo({
-                top: scrollRef()?.scrollHeight,
-                behavior: 'smooth',
-              })
-            }}
-          />
-        </div>
+        <Show when={props.onAddNewRow}>
+          <div>
+            <Button
+              style={{
+                width: '100%',
+                margin: '4px 0',
+              }}
+              label='新增一行'
+              onClick={() => {
+                setShowNewRow(true)
+                scrollRef()?.scrollTo({
+                  top: scrollRef()?.scrollHeight,
+                  behavior: 'smooth',
+                })
+              }}
+            />
+          </div>
+        </Show>
+
         <Show when={props.pagination || props.footer}>
           <div class='jg-data-table-footer'>
             <div>{props.footer || ''}</div>

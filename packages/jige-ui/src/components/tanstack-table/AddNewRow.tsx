@@ -30,7 +30,7 @@ export function AddNewRow<T>(props: {
                 {column.columnDef.meta?.editable?.(unwrap(state.formData) as any, {
                   confirm: async () => {
                     await actions.handleSubmit()
-                    await props.onConfirm(unwrap(state.formData))
+                    if (state.canSubmit) await props.onConfirm(unwrap(state.formData))
                   },
                   cancel: () => {
                     props.onCancel()

@@ -70,7 +70,7 @@ const defaultColumns: ColumnDef<Person>[] = [
         meta: {
           width: 200,
           editable: () => (
-            <Form.Field name='firstName'>
+            <Form.Field name='firstName' required>
               <Input />
             </Form.Field>
           ),
@@ -188,6 +188,10 @@ export function Demo() {
           <TanstackTable
             onAddNewRow={async (data) => {
               await sleep(1000)
+              if (data.age < 18) {
+                alert('Age must be greater than 18')
+                return false
+              }
               mutate((old) => [
                 ...old,
                 {
@@ -199,6 +203,7 @@ export function Demo() {
                   progress: data.progress || 10,
                 },
               ])
+              return true
             }}
             loading={data.loading}
             staticTableInstance={table}
