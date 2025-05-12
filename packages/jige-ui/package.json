@@ -22,9 +22,7 @@
   "module": "dist/build.js",
   "types": "dist/build.d.ts",
   "typesVersions": {},
-  "files": [
-    "dist"
-  ],
+  "files": ["dist"],
   "scripts": {
     "build": "tsup",
     "dev": "tsup --watch",
@@ -33,16 +31,14 @@
   },
   "peerDependencies": {
     "chart.js": "^4.4.9",
-    "jige-core": "^0.40.3",
+    "jige-core": "^0.40.4",
     "solid-js": "^1.9.6",
     "@tanstack/solid-table": "^8.21.3"
   },
   "dependencies": {
     "@solid-primitives/refs": "^1.1.1",
-    "@solid-primitives/resize-observer": "^2.1.1",
-    "browserslist": "^4.24.0",
+    "@solid-primitives/bounds": "^0.1.0",
     "esday": "^0.4.1",
-    "lightningcss": "^1.26.0",
     "oklch-colors": "^0.0.1",
     "radash": "^12.1.0",
     "solid-uses": "^0.11.0"
@@ -51,9 +47,11 @@
     "esbuild-plugin-inline-import": "^1.1.0",
     "esbuild-plugin-solid": "^0.6.0",
     "sass": "^1.86.0",
+    "lightningcss": "^1.26.0",
+    "browserslist": "^4.24.0",
     "stylelint": "^16.15.0",
     "stylelint-config-recess-order": "^6.0.0",
-    "stylelint-config-standard-scss": "^14.0.0",
+    "stylelint-config-standard-scss": "^15.0.0",
     "tsup": "^8.4.0",
     "typescript": "^5.5.4",
     "increase-memory-limit": "^1.0.7",

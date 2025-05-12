@@ -9,12 +9,13 @@ export function Footer(props: {
   children?: JSX.Element
   onOk?: () => void | Promise<void>
   onCancel?: () => void | Promise<void>
+  ref?: HTMLDivElement
 }) {
   const child = children(() => props.children)
   const [, modalActs] = ModalCore.useContext()
 
   return (
-    <div>
+    <div ref={props.ref}>
       <Show
         when={child()}
         fallback={

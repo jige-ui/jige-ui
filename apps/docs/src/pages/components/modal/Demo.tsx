@@ -10,6 +10,7 @@ export function Demo() {
         <div>
           <h1>Hello, World!</h1>
           <p>This is a modal dialog.</p>
+          <div class='h-200vh bg-amber' />
         </div>
       </Modal.Content>
     </Modal>

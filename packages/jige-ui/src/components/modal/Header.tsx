@@ -8,11 +8,12 @@ export function Header(props: {
   hideClose?: boolean
   children?: JSX.Element
   label?: string
+  ref?: HTMLDivElement
 }) {
   const [, modalActs] = ModalCore.useContext()
 
   return (
-    <div class='jg-modal-header'>
+    <div class='jg-modal-header' ref={props.ref}>
       <div class='jg-modal-header-title'>{props.label || props.children}</div>
       <div class='jg-modal-header-close'>
         <Show when={!props.hideClose}>

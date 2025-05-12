@@ -1,11 +1,13 @@
 import { ModalCore, callMaybeContextChild } from 'jige-core'
 import { combineStyle } from 'jige-core'
-import { createSignal } from 'solid-js'
+import { createSignal, Show } from 'solid-js'
 import type { JSX } from 'solid-js/jsx-runtime'
 import { watch } from 'solid-uses'
 import { undefinedOr } from '~/common/types'
 import { RootContext } from '../ROOT/context'
 import { context } from './context'
+import { Header } from './Header'
+import { Footer } from './Footer'
 
 function calcOrigin(triggerRef: HTMLElement, contentRef: HTMLElement) {
   contentRef.style.animationName = 'none'
@@ -33,6 +35,14 @@ export function Content(props: {
   style?: string | JSX.CSSProperties
   zIndex?: number
   width?: string
+  title?: string
+  header?: JSX.Element
+  hideClose?: boolean
+  footer?: JSX.Element
+  okText?: string
+  cancelText?: string
+  onOk?: () => void | Promise<void>
+  onCancel?: () => void | Promise<void>
 }) {
   const [state, actions] = context.useContext()
   const [rs] = RootContext.useContext()
@@ -86,11 +96,27 @@ export function Content(props: {
                   'transform-origin': transformOrigin(),
                   width: props.width || '520px',
                   top: '100px',
+                  position: 'relative',
                 },
                 props.style,
               )}
             >
+              <Show when={props.header !== null}>
+                <Header label={props.title} hideClose={props.hideClose}>
+                  {props.header}
+                </Header>
+              </Show>
               {callMaybeContextChild([stat, acts, staticData], props.children)}
+              <Show when={props.footer !== null}>
+                <Footer
+                  okText={props.okText}
+                  cancelText={props.cancelText}
+                  onOk={props.onOk}
+                  onCancel={props.onCancel}
+                >
+                  {props.footer}
+                </Footer>
+              </Show>
             </div>
           )
         }}

@@ -1,8 +1,6 @@
-import { createElementSize } from '@solid-primitives/resize-observer'
 import { FormCore, InputCore, ScrollbarCore } from 'jige-core'
 import { throttle } from 'radash'
-import { createSignal, onMount } from 'solid-js'
-import { watch } from 'solid-uses'
+import { createSignal } from 'solid-js'
 import { dataIf } from '~/common/dataset'
 import { Form } from '~/components/form'
 import { InputFormBind } from './NormalInput'
@@ -15,16 +13,6 @@ function ScrollInput(props: {
   setFocused: (focused: boolean) => void
 }) {
   const [state, actions] = ScrollbarCore.useContext()
-
-  onMount(() => {
-    const size = createElementSize(() => state.refContent)
-    watch(
-      [() => size.height, () => size.width],
-      throttle({ interval: 35 }, () => {
-        actions.setValue()
-      }),
-    )
-  })
 
   const [, fieldCoreActs] = FormCore.useField()
 
