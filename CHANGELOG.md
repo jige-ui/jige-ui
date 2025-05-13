@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.30.1](https://github.com/jige-ui/jige-ui/compare/v0.30.0...v0.30.1) (2025-05-13)
+
+
+### Bug Fixes
+
+* animation optimized ([01604c6](https://github.com/jige-ui/jige-ui/commit/01604c643464b0e30e5a92a4d54685806780048a))
+* **deps:** update dependency valibot to v1.1.0 ([#26](https://github.com/jige-ui/jige-ui/issues/26)) ([7bf166e](https://github.com/jige-ui/jige-ui/commit/7bf166e4cde9187001cfa7306a7d1ed42ff1368b))
+* some issues ([bc09a0b](https://github.com/jige-ui/jige-ui/commit/bc09a0b099f2edae4eb8a561d245a3e5093d9fa6))
+* type lint issues ([885e029](https://github.com/jige-ui/jige-ui/commit/885e0298fdd8043e5aca96b43b1b36253fde9ef8))
+
 ## [0.30.0](https://github.com/jige-ui/jige-ui/compare/v0.29.0...v0.30.0) (2025-05-09)
 
 
