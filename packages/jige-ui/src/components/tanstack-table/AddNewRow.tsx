@@ -1,6 +1,6 @@
 import type { Table } from '@tanstack/solid-table'
-import { TableCore, FormCore } from 'jige-core'
-import { createMemo, For } from 'solid-js'
+import { FormCore, TableCore } from 'jige-core'
+import { For, createMemo } from 'solid-js'
 import { unwrap } from 'solid-js/store'
 
 export function AddNewRow<T>(props: {

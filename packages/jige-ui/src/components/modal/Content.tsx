@@ -1,13 +1,13 @@
 import { ModalCore, callMaybeContextChild } from 'jige-core'
 import { combineStyle } from 'jige-core'
-import { createSignal, Show } from 'solid-js'
+import { Show, createSignal } from 'solid-js'
 import type { JSX } from 'solid-js/jsx-runtime'
 import { watch } from 'solid-uses'
 import { undefinedOr } from '~/common/types'
 import { RootContext } from '../ROOT/context'
-import { context } from './context'
-import { Header } from './Header'
 import { Footer } from './Footer'
+import { Header } from './Header'
+import { context } from './context'
 
 function calcOrigin(triggerRef: HTMLElement, contentRef: HTMLElement) {
   contentRef.style.animationName = 'none'

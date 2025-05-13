@@ -6,11 +6,11 @@ import { Spin } from '../spin'
 
 import css from 'sass:./tanstack-table.scss'
 import { mountStyle } from 'solid-uses'
-import { Paginator } from '../paginator'
-import { getMergeHeaderGroups } from './utils'
 import { Button } from '../button'
-import { AddNewRow } from './AddNewRow'
 import { BoxRemove } from '../icons'
+import { Paginator } from '../paginator'
+import { AddNewRow } from './AddNewRow'
+import { getMergeHeaderGroups } from './utils'
 
 declare module '@tanstack/solid-table' {
   // biome-ignore lint/correctness/noUnusedVariables: <explanation>

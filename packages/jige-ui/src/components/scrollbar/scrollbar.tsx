@@ -1,5 +1,5 @@
 import scrollCss from 'sass:./scrollbar.scss'
-import { combineStyle, runSolidEventHandler, ScrollbarCore } from 'jige-core'
+import { ScrollbarCore, combineStyle, runSolidEventHandler } from 'jige-core'
 import type { JSX, Ref } from 'solid-js'
 import { Show, createMemo, createSignal } from 'solid-js'
 import { mountStyle } from 'solid-uses'
