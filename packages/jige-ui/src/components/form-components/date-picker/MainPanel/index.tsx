@@ -29,7 +29,7 @@ function AnimatedPanel(props: {
         visibleDates: string[],
       ) => MaybePromise<DateTypes[]>)
 }) {
-  const [state, actions] = panelContext.useContext()
+  const [state] = panelContext.useContext()
   const [className, setClassName] = createSignal('')
 
   watch(
@@ -41,11 +41,7 @@ function AnimatedPanel(props: {
   )
 
   return (
-    <AnimatedGroup
-      active={state.activePanel}
-      onChange={actions.setActivePanel}
-      class='jg-dp-animated-group'
-    >
+    <AnimatedGroup active={state.activePanel} class='jg-dp-animated-group'>
       <AnimatedGroup.Panel key='day' class={className()}>
         <DayPanel
           cellClass={props.cellClass || ''}

@@ -86,11 +86,7 @@ function Root(
             </For>
           </div>
         </RadioGroupCore>
-        <AnimatedGroup
-          active={localProps.active}
-          onChange={localProps.onChange}
-          class='jg-tabs-content'
-        >
+        <AnimatedGroup active={localProps.active} class='jg-tabs-content'>
           {localProps.children}
         </AnimatedGroup>
       </div>
