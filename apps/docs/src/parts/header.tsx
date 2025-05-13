@@ -14,7 +14,7 @@ export function Header() {
           variant='text'
           icon={<div class='i-ri-contrast-2-line' />}
           onClick={() => {
-            actions.setIsDark(!state.isDark)
+            actions.setState('isDark', !state.isDark)
           }}
         />
         <Popover placement='bottom-end'>
