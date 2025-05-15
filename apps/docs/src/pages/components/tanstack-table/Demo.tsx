@@ -180,6 +180,7 @@ export function Demo() {
 
   const [open, setOpen] = createSignal(false)
   const [showItem, setShowItem] = createSignal<Person>()
+  const [currPage, setCurrPage] = createSignal(1)
 
   return (
     <Playground>
@@ -217,24 +218,18 @@ export function Demo() {
             pagination={{
               total: 10000,
               pageSize: 100,
-              onPageClick() {
+              onPageClick(pn) {
+                setCurrPage(pn)
                 refetch()
               },
-              currPage: 1,
+              currPage: currPage(),
             }}
           />
           <Modal open={open()} onOpenChange={setOpen} closeOnClickMask closeOnEsc>
-            <Modal.Content width='30vw'>
-              <Modal.Header>
-                <div class='flex items-center gap-2'>
-                  <div class='i-ri-account-box-fill text-xl' />
-                  <div>User Info</div>
-                </div>
-              </Modal.Header>
+            <Modal.Content width='30vw' title='Row Data'>
               <div>
                 <div class='mt-2'>{JSON.stringify(showItem(), null, 2)}</div>
               </div>
-              <Modal.Footer />
             </Modal.Content>
           </Modal>
         </div>

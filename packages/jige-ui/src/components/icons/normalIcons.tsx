@@ -143,6 +143,28 @@ export function ArrowUp() {
   )
 }
 
+export function ArrowLeftLine() {
+  return (
+    <IconSvgWrapper>
+      <path
+        fill='currentColor'
+        d='m10.828 12l4.95 4.95l-1.414 1.415L8 12l6.364-6.364l1.414 1.414z'
+      />
+    </IconSvgWrapper>
+  )
+}
+
+export function ArrowRightLine() {
+  return (
+    <IconSvgWrapper>
+      <path
+        fill='currentColor'
+        d='m13.172 12l-4.95-4.95l1.414-1.413L16 12l-6.364 6.364l-1.414-1.415z'
+      />
+    </IconSvgWrapper>
+  )
+}
+
 export function CaretUp() {
   return (
     <IconSvgWrapper>

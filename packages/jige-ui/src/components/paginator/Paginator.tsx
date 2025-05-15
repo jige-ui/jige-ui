@@ -6,7 +6,13 @@ import { Match, Show, Switch, createMemo, createSignal } from 'solid-js'
 import { mountStyle } from 'solid-uses'
 import { dataIf } from '~/common/dataset'
 import { isDef } from '~/common/types'
-import { DoubleArrowLeft, DoubleArrowRight, IconThreeDots } from '../icons'
+import {
+  ArrowLeftLine,
+  ArrowRightLine,
+  DoubleArrowLeft,
+  DoubleArrowRight,
+  IconThreeDots,
+} from '../icons'
 
 function Pager(props: {
   page: number
@@ -14,6 +20,7 @@ function Pager(props: {
   onPageClick: (page: number) => void
 }) {
   const isCurrent = createMemo(() => props.page === props.currPage)
+
   return (
     <div
       class='jg-paginator-pager'
@@ -23,6 +30,42 @@ function Pager(props: {
       }}
     >
       {props.page}
+    </div>
+  )
+}
+
+function PageArrow(props: {
+  isLeft: boolean
+  onPageClick: (page: number) => void
+}) {
+  const [state] = PaginatorCore.useContext()
+
+  const disabled = createMemo(() => {
+    if (props.isLeft) {
+      return state.currPage === 1
+    }
+    return state.currPage === state.totalPages
+  })
+
+  return (
+    <div
+      class='jg-paginator-pager'
+      onClick={() => {
+        if (props.isLeft) {
+          props.onPageClick(state.currPage - 1)
+        } else {
+          props.onPageClick(state.currPage + 1)
+        }
+      }}
+      style={{
+        'font-size': '18px',
+        color: 'var(--jg-fg3)',
+      }}
+      data-disabled={dataIf(disabled())}
+    >
+      <Show when={props.isLeft} fallback={<ArrowRightLine />}>
+        <ArrowLeftLine />
+      </Show>
     </div>
   )
 }
@@ -92,6 +135,7 @@ export function Paginator(props: {
       }}
     >
       <PaginatorCore {...props}>
+        <PageArrow isLeft onPageClick={props.onPageClick} />
         <PaginatorCore.Pager>
           {(page) => {
             return (
@@ -110,6 +154,7 @@ export function Paginator(props: {
             )
           }}
         </PaginatorCore.Pager>
+        <PageArrow isLeft={false} onPageClick={props.onPageClick} />
       </PaginatorCore>
     </div>
   )

@@ -5,7 +5,7 @@ import { Scrollbar } from '../scrollbar'
 import { Spin } from '../spin'
 
 import css from 'sass:./tanstack-table.scss'
-import { mountStyle } from 'solid-uses'
+import { mountStyle, watch } from 'solid-uses'
 import { Button } from '../button'
 import { BoxRemove } from '../icons'
 import { Paginator } from '../paginator'
@@ -74,6 +74,15 @@ export function TanstackTable<T>(props: {
   const [showNewRow, setShowNewRow] = createSignal(false)
 
   const [scrollRef, setScrollRef] = createSignal<HTMLDivElement>()
+
+  watch(
+    () => props.loading,
+    () => {
+      const scroll = scrollRef()
+      if (!scroll) return
+      scroll.scrollTop = 0
+    },
+  )
 
   return (
     <Spin spinning={props.loading}>
