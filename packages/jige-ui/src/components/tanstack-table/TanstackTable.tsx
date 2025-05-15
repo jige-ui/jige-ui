@@ -104,7 +104,7 @@ export function TanstackTable<T>(props: {
                       {(header) => {
                         return (
                           <TableCore.Column
-                            rowSpan={header.rowSpan}
+                            rowSpan={header.rowSpan || undefined}
                             colSpan={header.colSpan}
                             width={header.column.columnDef.meta?.width}
                             class='jg-data-table-head'
