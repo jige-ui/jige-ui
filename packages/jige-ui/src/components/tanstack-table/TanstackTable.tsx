@@ -34,6 +34,7 @@ export function TanstackTable<T>(props: {
   size?: 'small' | 'medium' | 'large' | number
   bordered?: boolean
   onRowClick?: (row: T, index: number) => void
+  onRowDbClick?: (row: T, index: number) => void
   pagination?: {
     total: number
     pageSize: number
@@ -147,6 +148,7 @@ export function TanstackTable<T>(props: {
                     <TableCore.Row
                       class='jg-data-table-row'
                       onClick={() => props.onRowClick?.(row.original, index())}
+                      onDblClick={() => props.onRowDbClick?.(row.original, index())}
                     >
                       <For each={row.getVisibleCells()}>
                         {(cell) => {

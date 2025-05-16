@@ -210,7 +210,7 @@ export function Demo() {
             staticTableInstance={table}
             bordered={p.bordered}
             size={p.size}
-            onRowClick={(row) => {
+            onRowDbClick={(row) => {
               setShowItem(row)
               setOpen(true)
             }}

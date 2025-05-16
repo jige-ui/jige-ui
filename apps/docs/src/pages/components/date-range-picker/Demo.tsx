@@ -14,7 +14,6 @@ export function Demo() {
         <div>
           <DateRangePicker
             disabled={p.disabled}
-            type={p.type}
             onBlur={() => {
               console.log('blur')
             }}
