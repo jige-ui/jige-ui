@@ -12,6 +12,7 @@ export function DateRangePicker(props: {
   disabled?: boolean
   value?: [string, string]
   onChange?: (value: [string, string]) => void
+  onBlur?: () => void
   placeholder?: [string, string]
   disableBind?: boolean
 }) {
@@ -27,9 +28,11 @@ export function DateRangePicker(props: {
   const [state, actions] = Context.value
 
   watch(
-    () => state.value,
+    () => [...state.value],
     (v) => {
-      props.onChange?.(v)
+      console.log('DateRangePicker', v)
+
+      props.onChange?.(v as [string, string])
     },
   )
 
@@ -55,7 +58,7 @@ export function DateRangePicker(props: {
           disabled={state.disabled}
           closeDelay={50}
         >
-          <Trigger />
+          <Trigger onBlur={props.onBlur || (() => {})} />
           <Popover.Content
             onMouseDown={(e) => {
               e.preventDefault()

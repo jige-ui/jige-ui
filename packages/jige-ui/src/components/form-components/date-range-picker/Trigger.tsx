@@ -8,14 +8,26 @@ import { ArrowRight, CalendarLine } from '~/components/icons'
 import { Popover } from '~/components/popover'
 import { context } from './context'
 
-export function Trigger() {
+export function Trigger(props: {
+  onBlur: () => void
+}) {
   const [state, actions] = context.useContext()
-  const [, floatActions] = FloatingUiCore.useContext()
+  const [floatState, floatActions] = FloatingUiCore.useContext()
   const [focused, setFocused] = createSignal(false)
 
   watch(focused, (f) => {
     floatActions.setTimerOpen(f)
   })
+
+  watch(
+    () => floatState.status,
+    (s) => {
+      if (s === 'closed') {
+        props.onBlur()
+      }
+    },
+    { defer: true },
+  )
 
   return (
     <Popover.Trigger>

@@ -12,7 +12,13 @@ export function Demo() {
     <Playground>
       <Playground.MainArea>
         <div>
-          <DateRangePicker disabled={p.disabled} type={p.type} />
+          <DateRangePicker
+            disabled={p.disabled}
+            type={p.type}
+            onBlur={() => {
+              console.log('blur')
+            }}
+          />
         </div>
       </Playground.MainArea>
       <Playground.PropertySetting
