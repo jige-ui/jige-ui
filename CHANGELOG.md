@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.30.4](https://github.com/jige-ui/jige-ui/compare/v0.30.3...v0.30.4) (2025-05-16)
+
+
+### Bug Fixes
+
+* onChange ([7624dbf](https://github.com/jige-ui/jige-ui/commit/7624dbfdd6c8bc26889ebf6b23ec7e0f34914a5c))
+
 ## [0.30.3](https://github.com/jige-ui/jige-ui/compare/v0.30.2...v0.30.3) (2025-05-15)
 
 
