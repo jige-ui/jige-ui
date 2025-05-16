@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.30.6](https://github.com/jige-ui/jige-ui/compare/v0.30.5...v0.30.6) (2025-05-16)
+
+
+### Features
+
+* dbClickRow ([41bf26c](https://github.com/jige-ui/jige-ui/commit/41bf26c8ed1d520659378b8e7b1b7d74b7574de2))
+
 ## [0.30.5](https://github.com/jige-ui/jige-ui/compare/v0.30.4...v0.30.5) (2025-05-16)
 
 
