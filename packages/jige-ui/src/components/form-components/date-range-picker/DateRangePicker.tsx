@@ -1,7 +1,7 @@
 import dpCss from 'sass:../date-picker/date-picker.scss'
 import inputCss from 'sass:../input/input.scss'
 import css from 'sass:./range-picker.scss'
-import { mountStyle } from 'solid-uses'
+import { mountStyle, watch } from 'solid-uses'
 import { Form } from '~/components/form'
 import { Popover } from '~/components/popover'
 import { Panel } from './Panel'
@@ -25,6 +25,13 @@ export function DateRangePicker(props: {
   })
 
   const [state, actions] = Context.value
+
+  watch(
+    () => state.value,
+    (v) => {
+      props.onChange?.(v)
+    },
+  )
 
   return (
     <Context.Provider>
