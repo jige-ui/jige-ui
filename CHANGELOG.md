@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.31.0](https://github.com/jige-ui/jige-ui/compare/v0.30.6...v0.31.0) (2025-05-20)
+
+
+### Features
+
+* component time-picker ([e614f82](https://github.com/jige-ui/jige-ui/commit/e614f8270b885d79443ef58b4f6f9a6a92ed8ea8))
+
 ## [0.30.6](https://github.com/jige-ui/jige-ui/compare/v0.30.5...v0.30.6) (2025-05-16)
 
 
