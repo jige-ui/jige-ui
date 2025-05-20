@@ -6,11 +6,12 @@ import { Form } from '~/components/form'
 import { Popover } from '../../popover'
 import { context } from './context'
 import type { DatePickerType, DateTypes } from './types'
+import { batch } from 'solid-js'
+import { isDef } from '~/common/types'
 
 export function Root(props: {
   children: JSX.Element
   value?: string
-  valueFormat?: string
   onChange?: (value: string) => void
   dateRange?: [DateTypes, DateTypes]
   disabled?: boolean
@@ -22,14 +23,15 @@ export function Root(props: {
   mountStyle(inputCss, 'jige-ui-input')
   const Context = context.initial({
     valueFormat: () => {
-      if (props.valueFormat) {
-        return props.valueFormat
-      }
       switch (props.type) {
         case 'month':
           return 'YYYY-MM'
-        case 'year':
-          return 'YYYY'
+        case 'hour':
+          return 'YYYY-MM-DD HH'
+        case 'minute':
+          return 'YYYY-MM-DD HH:mm'
+        case 'second':
+          return 'YYYY-MM-DD HH:mm:ss'
         default:
           return 'YYYY-MM-DD'
       }
@@ -42,8 +44,6 @@ export function Root(props: {
       switch (props.type) {
         case 'month':
           return 'month'
-        case 'year':
-          return 'year'
         default:
           return 'day'
       }
@@ -55,7 +55,7 @@ export function Root(props: {
   watch(
     () => props.value,
     (v) => {
-      v && actions.setValue(v)
+      isDef(v) && actions.setValue(v)
     },
   )
 
@@ -67,13 +67,26 @@ export function Root(props: {
     { defer: true },
   )
 
-  watch([() => state.value, () => state.valueFormat], ([v]) => {
-    props.onChange?.(v)
-    const inst = state.inst
+  watch(
+    () => state.value,
+    (v) => {
+      props.onChange?.(v)
+    },
+  )
 
-    actions.setCurrYear(inst.year())
-    actions.setCurrMonth(inst.month())
-  })
+  watch(
+    () => state.dateValue,
+    () => {
+      const inst = state.inst
+
+      if (!inst.isValid()) return
+
+      batch(() => {
+        actions.setCurrYear(inst.year())
+        actions.setCurrMonth(inst.month())
+      })
+    },
+  )
 
   return (
     <Context.Provider>

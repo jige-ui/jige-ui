@@ -3,7 +3,7 @@ import { createComponentState } from 'solid-uses'
 export const context = createComponentState({
   state: () => ({
     disabled: false,
-    value: '',
+    value: undefined as any,
     options: [] as { label: string; value: any }[],
     listItemHeight: 20,
     listItemWidth: 200,
@@ -16,9 +16,14 @@ export const context = createComponentState({
     valueIndex() {
       return this.state.options.findIndex((item) => item.value === this.state.value)
     },
+    valueLabel() {
+      const index = this.state.valueIndex
+      if (index === -1) return this.state.placeholder
+      return this.state.options[index].label
+    },
   },
   methods: {
-    setValue(value: string) {
+    setValue<T>(value: T) {
       this.actions.setState('value', value)
     },
     setName(name: string) {

@@ -2,12 +2,16 @@ import type { EsDay } from 'esday'
 import { createComponentState } from 'solid-uses'
 import { dayes } from '~/common/dayes'
 import type { DateTypes } from './types'
+import { checkTimeValue, parseDateStr } from './utils'
 
 const today = dayes()
 
 export const context = createComponentState({
   state: () => ({
     value: '',
+    dateValue: '',
+    timeValue: '00:00:00',
+    previewMode: false,
     valueFormat: 'YYYY-MM-DD',
     name: '',
     placeholder: '',
@@ -20,17 +24,18 @@ export const context = createComponentState({
     dsDates: [] as string[],
     hlYears: [] as number[],
     hlMonths: [] as string[],
+    triggerRef: null as HTMLInputElement | null,
     disabled: false,
   }),
   getters: {
     inst() {
-      return dayes(this.state.value, this.state.valueFormat)
+      return dayes(this.state.dateValue)
     },
     fromInst() {
-      return dayes(this.state.dateRange[0], this.state.valueFormat)
+      return dayes(this.state.dateRange[0])
     },
     toInst() {
-      return dayes(this.state.dateRange[1], this.state.valueFormat)
+      return dayes(this.state.dateRange[1])
     },
     defaultPanel() {
       switch (this.state.type) {
@@ -42,27 +47,46 @@ export const context = createComponentState({
           return 'day'
       }
     },
+    isDateTime() {
+      return ['hour', 'minute', 'second'].includes(this.state.type)
+    },
+    previewValue() {
+      if (!this.state.dateValue) {
+        return ''
+      }
+
+      if (this.state.isDateTime) {
+        return `${this.state.dateValue} ${this.state.timeValue}`
+      }
+      return this.state.dateValue
+    },
   },
   methods: {
-    setValue(value: DateTypes) {
-      if (value === '') {
-        this.actions.setState('value', '')
-        return true
+    syncPreviewToValue() {
+      if (this.state.isDateTime) {
+        this.actions.setValue(`${this.state.dateValue} ${this.state.timeValue}`)
+        return
       }
+      this.actions.setValue(this.state.dateValue)
+    },
 
-      const inst = dayes(value, this.state.valueFormat)
+    syncValueToPreview() {
+      const [date, time] = parseDateStr(this.state.value)
+      this.actions.setState({
+        dateValue: date,
+        timeValue: time,
+      })
+    },
 
-      if (inst.isValid()) {
-        if (
-          this.actions.isInDateRange(inst) &&
-          !this.state.dsDates.includes(inst.format('YYYY-MM-DD'))
-        ) {
-          this.actions.setState('value', inst.format(this.state.valueFormat))
-          return true
-        }
-      }
+    setValue(value: string) {
+      const [date, time] = parseDateStr(value)
+      console.log(date)
 
-      return false
+      this.actions.setState({
+        dateValue: date,
+        timeValue: time || '00:00:00',
+        value,
+      })
     },
 
     setCurrYear(year: number) {
@@ -100,6 +124,19 @@ export const context = createComponentState({
 
     setActivePanel(panel: string) {
       this.actions.setState('activePanel', panel)
+    },
+
+    setPreviewMode(mode: boolean) {
+      this.actions.setState('previewMode', mode)
+    },
+
+    checkDateStr(value: string) {
+      const date = dayes(value, this.state.valueFormat)
+      if (date.isValid() && this.state.isDateTime) {
+        const timeStr = value.split(' ')[1]
+        return checkTimeValue(timeStr, this.state.type as 'hour' | 'minute' | 'second')
+      }
+      return date.isValid()
     },
   },
 })

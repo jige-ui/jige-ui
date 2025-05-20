@@ -16,10 +16,10 @@ function normalizeOptions<T extends SimpleType>(
 }
 
 export function ComboBox<T extends SimpleType>(props: {
-  value?: string
+  value?: T
   options: (T | { label: string; value: T })[]
   disabled?: boolean
-  onChange?: (value: string) => void
+  onChange?: (value: T) => void
   placeholder?: string
   disableBind?: boolean
   class?: string

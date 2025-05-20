@@ -3,6 +3,7 @@ import { combineStyle } from 'jige-core'
 import type { JSX } from 'solid-js'
 import { Show, createMemo, splitProps } from 'solid-js'
 import { RootContext } from '../ROOT/context'
+import { isDef } from '~/common/types'
 
 export function Content(
   props: {
@@ -27,7 +28,7 @@ export function Content(
 
   const classes = createMemo(() => {
     const result = ['jg-popover-content']
-    if (!localProps.animation) {
+    if (!isDef(localProps.animation)) {
       result.push('ani-floating-ui-move')
     } else {
       result.push(localProps.animation)

@@ -25,9 +25,9 @@ function ThiftCheck() {
 }
 
 export function Root<T>(props: {
-  value?: string
+  value?: T
   options: { label: string; value: T }[]
-  onChange?: (value: string) => void
+  onChange?: (value: T) => void
   disabled?: boolean
   placeholder: string
   children: JSX.Element

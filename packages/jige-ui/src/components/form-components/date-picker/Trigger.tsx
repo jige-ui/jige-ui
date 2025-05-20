@@ -12,7 +12,6 @@ export function Trigger() {
   const [floatState, floatActions] = FloatingUiCore.useContext()
   const [, fieldCoreActs] = FormCore.useField()
   const [focused, setFocused] = createSignal(false)
-  let ref!: HTMLInputElement
 
   watch(
     () => floatState.status,
@@ -22,14 +21,8 @@ export function Trigger() {
         const inst = state.inst
         actions.setCurrYear(inst.year())
         actions.setCurrMonth(inst.month())
+        actions.syncValueToPreview()
       }
-    },
-  )
-
-  watch(
-    () => state.value,
-    () => {
-      ref?.blur()
     },
   )
 
@@ -39,26 +32,28 @@ export function Trigger() {
         class='jg-input-wrapper jg-dp-trigger'
         data-focused={dataIf(focused())}
         data-disabled={dataIf(state.disabled)}
+        data-preview={dataIf(state.previewMode)}
       >
         <div class='jg-input-prefix'>
           <CalendarLine />
         </div>
         <input
-          ref={ref}
+          ref={(el) => {
+            actions.setState('triggerRef', el)
+          }}
           type='text'
           autocomplete='off'
           class='jg-input-native'
           {...Form.createNativeComponentAttrs()}
-          value={state.value}
+          value={state.previewValue}
           name={state.name || 'datepicker'}
           placeholder={state.placeholder || '请选择日期'}
-          onChange={(e) => {
-            if (!actions.setValue(e.currentTarget.value)) {
-              e.currentTarget.value = state.value
-            }
-          }}
           onInput={(e) => {
-            actions.setValue(e.currentTarget.value)
+            const v = e.currentTarget.value
+            if (v.trim() === '') {
+              actions.setValue('')
+            }
+            if (actions.checkDateStr(v)) actions.setValue(e.currentTarget.value)
           }}
           onFocus={() => {
             floatActions.setOpen(true)

@@ -1,6 +1,6 @@
 import type { EsDay } from 'esday'
 import { AnimatedGroup } from 'jige-core'
-import { batch, createSignal } from 'solid-js'
+import { batch, type ComponentProps, createSignal } from 'solid-js'
 import { watch } from 'solid-uses'
 import type { MaybePromise } from '~/common/types'
 import type { DateTypes } from '../types'
@@ -61,6 +61,7 @@ function AnimatedPanel(props: {
 
 export function MainPanel(props: {
   onCurrYearMonthChange?: (year: number, month: number) => void
+  headerRight?: ComponentProps<typeof HeadTools>['headerRight']
   value: string[]
   onChange: (value: string[]) => void
   disabled: boolean
@@ -140,7 +141,7 @@ export function MainPanel(props: {
   return (
     <Context.Provider>
       <div>
-        <HeadTools />
+        <HeadTools headerRight={props.headerRight} />
         <AnimatedPanel
           cellClass={props.cellClass}
           highlightDates={props.highlightDates}

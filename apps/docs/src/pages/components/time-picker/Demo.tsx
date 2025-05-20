@@ -1,34 +1,27 @@
-import { DatePicker } from 'jige-ui'
-import { createSignal } from 'solid-js'
+import { TimePicker } from 'jige-ui'
 import { createStore } from 'solid-js/store'
 import { Playground } from '~/components/playground'
 
 export function Demo() {
   const [p, setP] = createStore({
     disabled: false,
-    type: 'date',
+    size: 'medium' as 'small' | 'medium',
+    type: 'second' as 'hour' | 'second' | 'minute',
   })
-
-  const [value, setValue] = createSignal('')
 
   return (
     <Playground>
       <Playground.MainArea>
         <div>
-          <div>日期: {value()}</div>
-          <DatePicker
-            disabled={p.disabled}
-            type={p.type as any}
-            value={value()}
-            onChange={setValue}
-          />
+          <TimePicker disabled={p.disabled} type={p.type} size={p.size} />
         </div>
       </Playground.MainArea>
       <Playground.PropertySetting
         properties={p}
         onChange={setP}
         typeDeclaration={{
-          type: ['date', 'month', 'hour', 'minute', 'second'],
+          type: ['hour', 'minute', 'second'],
+          size: ['small', 'medium'],
         }}
       />
     </Playground>

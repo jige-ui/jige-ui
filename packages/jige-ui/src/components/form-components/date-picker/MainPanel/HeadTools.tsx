@@ -1,11 +1,16 @@
 import { throttle } from 'radash'
-import { Show, createMemo } from 'solid-js'
+import { type JSX, Show, createMemo } from 'solid-js'
 import { Button } from '~/components/button'
 import { CaretDown, CaretUp } from '~/components/icons'
 import { NumberToChinese } from '../utils'
 import { panelContext } from './context'
 
-export function HeadTools() {
+export function HeadTools(props: {
+  headerRight?: (
+    state: ReturnType<typeof panelContext.useContext>[0],
+    actions: ReturnType<typeof panelContext.useContext>[1],
+  ) => JSX.Element
+}) {
   const [state, actions] = panelContext.useContext()
   const throttleMonth = throttle({ interval: 60 }, (e) => {
     actions.monthHandle(e.deltaY > 0 ? 1 : -1)
@@ -20,6 +25,7 @@ export function HeadTools() {
     <div class='jg-dp-head-tools'>
       <div>
         <Button
+          size={30}
           onClick={() => {
             actions.setState(
               'activePanel',
@@ -32,9 +38,11 @@ export function HeadTools() {
           }}
           label={`${state.currYear}年`}
           variant='text'
+          style={{ 'font-size': '16px', padding: '0 4px' }}
         />
         <Show when={!monthMode()}>
           <Button
+            size={30}
             onClick={() => {
               actions.setState(
                 'activePanel',
@@ -46,26 +54,31 @@ export function HeadTools() {
               throttleMonth(e)
             }}
             variant='text'
+            style={{ 'font-size': '16px', padding: '0 4px' }}
           >
             {NumberToChinese(state.currMonth + 1)}月
           </Button>
         </Show>
       </div>
       <div class='jg-dp-head-tools-caret'>
-        <Button
-          variant='text'
-          icon={<CaretUp />}
-          onClick={() => {
-            monthMode() ? actions.setCurrYear(state.currYear + 1) : actions.monthHandle(1)
-          }}
-        />
-        <Button
-          variant='text'
-          icon={<CaretDown />}
-          onClick={() => {
-            monthMode() ? actions.setCurrYear(state.currYear - 1) : actions.monthHandle(-1)
-          }}
-        />
+        <Show when={!props.headerRight} fallback={props.headerRight!(state, actions)}>
+          <Button
+            variant='text'
+            icon={<CaretUp />}
+            onClick={() => {
+              monthMode() ? actions.setCurrYear(state.currYear + 1) : actions.monthHandle(1)
+            }}
+            style={{ 'font-size': '12px' }}
+          />
+          <Button
+            variant='text'
+            icon={<CaretDown />}
+            onClick={() => {
+              monthMode() ? actions.setCurrYear(state.currYear - 1) : actions.monthHandle(-1)
+            }}
+            style={{ 'font-size': '12px' }}
+          />
+        </Show>
       </div>
     </div>
   )

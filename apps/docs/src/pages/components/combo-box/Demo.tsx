@@ -8,7 +8,7 @@ export function Demo() {
   const [p, setP] = createStore({
     disabled: false,
   })
-  const [value, setValue] = createSignal('25')
+  const [value, setValue] = createSignal(25)
   return (
     <Playground>
       <Playground.MainArea>
@@ -20,7 +20,10 @@ export function Demo() {
           <ComboBox
             style={{ width: '100%' }}
             value={value()}
-            options={list(20000).map((v) => v.toString())}
+            options={list(20000).map((v) => ({
+              value: v,
+              label: `Option ${v}`,
+            }))}
             disabled={p.disabled}
             onChange={setValue}
           />

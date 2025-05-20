@@ -9,7 +9,7 @@
     "build:docs": "cd apps/docs && pnpm build",
     "build:ui": "cd packages/jige-ui && pnpm build",
     "clean": "pnpm exec rimraf .turbo node_modules",
-    "dev": "turbo dev",
+    "dev": "turbo watch dev jige-ui#build-dev",
     "lint": "pnpm exec biome check .",
     "lint:fix": "pnpm exec biome check --write .",
     "type-check": "cd packages/jige-ui && pnpm type-check",

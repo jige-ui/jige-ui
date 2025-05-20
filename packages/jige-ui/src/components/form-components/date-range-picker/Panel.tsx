@@ -1,7 +1,10 @@
 import type { EsDay } from 'esday'
-import { batch } from 'solid-js'
+import { batch, onCleanup, onMount } from 'solid-js'
 import { DatePickerMainPanel } from '../date-picker'
 import { context } from './context'
+import { Button } from '~/components/button'
+import { CheckFill, CloseFill } from '~/components/icons'
+import { TimePicker } from '../time-picker'
 
 export function Panel() {
   const [state, actions] = context.useContext()
@@ -15,6 +18,14 @@ export function Panel() {
     type: 'date' as const,
     multiple: true,
   }
+
+  onMount(() => {
+    actions.setState('previewMode', true)
+  })
+
+  onCleanup(() => {
+    actions.setState('previewMode', false)
+  })
 
   const updateCurrYearMonthData = (currYear: number, currMonth: number, isFromPanel = true) => {
     batch(() => {
@@ -58,44 +69,98 @@ export function Panel() {
   }
 
   return (
-    <div class='jg-dp-range-panel'>
-      <DatePickerMainPanel
-        value={[...state.value]}
-        onCurrYearMonthChange={updateCurrYearMonthData}
-        currMonth={state.currYearMonthData.fromMonth}
-        currYear={state.currYearMonthData.fromYear}
-        disabled={state.disabled}
-        cellClass={cellClass}
-        onChange={(v) => {
-          const length = v.length
-          const from = v[length - 2]
-          const to = v[length - 1]
-          if (state.value[0] !== from || state.value[1] !== to) {
-            actions.setValue(to)
+    <div>
+      <div class='jg-dp-range-panel'>
+        <DatePickerMainPanel
+          value={[...state.dateValue]}
+          onCurrYearMonthChange={updateCurrYearMonthData}
+          currMonth={state.currYearMonthData.fromMonth}
+          currYear={state.currYearMonthData.fromYear}
+          disabled={state.disabled}
+          cellClass={cellClass}
+          onChange={(v) => {
+            const length = v.length
+            const from = v[length - 2]
+            const to = v[length - 1]
+            if (state.dateValue[0] !== from || state.dateValue[1] !== to) {
+              actions.setDateValue(to)
+            }
+          }}
+          headerRight={
+            state.isDateTime
+              ? () => (
+                  <TimePicker
+                    size='small'
+                    value={state.timeValue[0]}
+                    onChange={(v) => {
+                      actions.setState('timeValue', 0, v)
+                    }}
+                  />
+                )
+              : undefined
           }
-        }}
-        {...commonProps}
-      />
-      <div class='jg-dp-divider' />
-      <DatePickerMainPanel
-        onCurrYearMonthChange={(currYear, currMonth) => {
-          updateCurrYearMonthData(currYear, currMonth, false)
-        }}
-        value={[...state.value]}
-        currMonth={state.currYearMonthData.toMonth}
-        currYear={state.currYearMonthData.toYear}
-        disabled={state.disabled}
-        cellClass={cellClass}
-        onChange={(v) => {
-          const length = v.length
-          const from = v[length - 2]
-          const to = v[length - 1]
-          if (state.value[0] !== from || state.value[1] !== to) {
-            actions.setValue(to)
+          {...commonProps}
+        />
+        <div class='jg-dp-divider' />
+        <DatePickerMainPanel
+          onCurrYearMonthChange={(currYear, currMonth) => {
+            updateCurrYearMonthData(currYear, currMonth, false)
+          }}
+          value={[...state.dateValue]}
+          currMonth={state.currYearMonthData.toMonth}
+          currYear={state.currYearMonthData.toYear}
+          disabled={state.disabled}
+          cellClass={cellClass}
+          onChange={(v) => {
+            const length = v.length
+            const from = v[length - 2]
+            const to = v[length - 1]
+            if (state.dateValue[0] !== from || state.dateValue[1] !== to) {
+              actions.setDateValue(to)
+            }
+          }}
+          headerRight={
+            state.isDateTime
+              ? () => (
+                  <TimePicker
+                    size='small'
+                    value={state.timeValue[1]}
+                    onChange={(v) => {
+                      actions.setState('timeValue', 1, v)
+                    }}
+                  />
+                )
+              : undefined
           }
+          {...commonProps}
+        />
+      </div>
+      <div
+        style={{
+          display: 'flex',
+          'justify-content': 'space-between',
+          padding: '4px',
+          'border-top': '1px solid var(--jg-t-border)',
         }}
-        {...commonProps}
-      />
+      >
+        <Button
+          variant='text'
+          style={{ width: '100%', 'flex-shrink': 1 }}
+          icon={<CheckFill />}
+          onClick={() => {
+            actions.syncPreviewToValue()
+            actions.blurTrigger()
+          }}
+        />
+        <Button
+          variant='text'
+          style={{ width: '100%', 'flex-shrink': 1 }}
+          icon={<CloseFill />}
+          onClick={() => {
+            actions.blurTrigger()
+          }}
+        />
+      </div>
     </div>
   )
 }

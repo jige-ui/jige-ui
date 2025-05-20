@@ -2,7 +2,6 @@ import { FloatingUiCore, hiddenStyle } from 'jige-core'
 import { createSignal } from 'solid-js'
 import { watch } from 'solid-uses'
 import { dataIf } from '~/common/dataset'
-import { dayes } from '~/common/dayes'
 import { Form } from '~/components/form'
 import { ArrowRight, CalendarLine } from '~/components/icons'
 import { Popover } from '~/components/popover'
@@ -25,6 +24,15 @@ export function Trigger(props: {
       if (s === 'closed') {
         props.onBlur()
       }
+      if (s === 'closing') {
+        const [ref1, ref2] = state.triggerRefs
+        if (ref1) {
+          ref1.value = state.value[0]
+        }
+        if (ref2) {
+          ref2.value = state.value[1]
+        }
+      }
     },
     { defer: true },
   )
@@ -35,6 +43,7 @@ export function Trigger(props: {
         class='jg-input-wrapper jg-dp-trigger'
         data-focused={dataIf(focused())}
         data-disabled={dataIf(state.disabled)}
+        data-preview={dataIf(state.previewMode)}
       >
         <input
           type='text'
@@ -46,29 +55,22 @@ export function Trigger(props: {
           <CalendarLine />
         </div>
         <input
+          ref={(el) => {
+            actions.setState('triggerRefs', 0, el)
+          }}
           type='text'
           autocomplete='off'
           class='jg-input-native'
-          value={state.value[0]}
+          value={state.previewValue[0]}
           placeholder={state.placeholder[0]}
-          onChange={(e) => {
-            const inst = dayes(e.currentTarget.value, 'YYYY-MM-DD')
-            if (inst.isValid()) {
-              actions.setState('value', 0, inst.format('YYYY-MM-DD'))
-            } else {
-              e.currentTarget.value = state.value[0]
-            }
-          }}
           onInput={(e) => {
             const value = e.currentTarget.value
             if (value.trim() === '') {
-              actions.setState('value', 0, '')
+              actions.setValue(['', state.previewValue[1]])
               return
             }
-            const inst = dayes(value, 'YYYY-MM-DD')
-            if (inst.isValid()) {
-              actions.setState('value', 0, inst.format('YYYY-MM-DD'))
-              actions.updateCurrYearMonthData()
+            if (actions.checkDateStr(value)) {
+              actions.setValue([value, state.previewValue[1]])
             }
           }}
           onFocus={() => {
@@ -86,29 +88,22 @@ export function Trigger(props: {
           <ArrowRight />
         </div>
         <input
+          ref={(el) => {
+            actions.setState('triggerRefs', 1, el)
+          }}
           type='text'
           autocomplete='off'
           class='jg-input-native'
-          value={state.value[1]}
+          value={state.previewValue[1]}
           placeholder={state.placeholder[1]}
-          onChange={(e) => {
-            const inst = dayes(e.currentTarget.value, 'YYYY-MM-DD')
-            if (inst.isValid()) {
-              actions.setState('value', 1, inst.format('YYYY-MM-DD'))
-            } else {
-              e.currentTarget.value = state.value[1]
-            }
-          }}
           onInput={(e) => {
             const value = e.currentTarget.value
             if (value.trim() === '') {
-              actions.setState('value', 1, '')
+              actions.setValue([state.previewValue[0], ''])
               return
             }
-            const inst = dayes(value, 'YYYY-MM-DD')
-            if (inst.isValid()) {
-              actions.setState('value', 1, inst.format('YYYY-MM-DD'))
-              actions.updateCurrYearMonthData()
+            if (actions.checkDateStr(value)) {
+              actions.setValue([state.previewValue[0], value])
             }
           }}
           onFocus={() => {

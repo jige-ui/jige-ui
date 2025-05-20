@@ -7,6 +7,7 @@ import { Popover } from '~/components/popover'
 import { Panel } from './Panel'
 import { Trigger } from './Trigger'
 import { context } from './context'
+import { isArray } from 'radash'
 
 export function DateRangePicker(props: {
   disabled?: boolean
@@ -15,14 +16,15 @@ export function DateRangePicker(props: {
   onBlur?: () => void
   placeholder?: [string, string]
   disableBind?: boolean
+  type?: 'datetime' | 'date'
 }) {
   mountStyle(dpCss, 'jige-ui-date-picker')
   mountStyle(inputCss, 'jige-ui-input')
   mountStyle(css, 'jige-ui-date-range-picker')
   const Context = context.initial({
-    value: () => props.value,
     placeholder: () => props.placeholder,
     disabled: () => props.disabled,
+    type: () => props.type,
   })
 
   const [state, actions] = Context.value
@@ -30,9 +32,34 @@ export function DateRangePicker(props: {
   watch(
     () => [...state.value],
     (v) => {
-      console.log('DateRangePicker', v)
-
       props.onChange?.(v as [string, string])
+    },
+    { defer: true },
+  )
+
+  watch(
+    () => props.value,
+    (v) => {
+      if (v && v[0] !== state.value[0] && v[1] !== state.value[1]) {
+        actions.setValue(v)
+      }
+    },
+  )
+
+  watch(
+    () => state.type,
+    () => {
+      actions.setState('dateValue', ['', ''])
+      actions.setState('timeValue', ['00:00:00', '00:00:00'])
+      actions.syncPreviewToValue()
+    },
+    { defer: true },
+  )
+
+  watch(
+    () => [...state.timeValue],
+    (v) => {
+      console.log(v)
     },
   )
 
@@ -45,7 +72,14 @@ export function DateRangePicker(props: {
         }}
         value={state.value}
         setValue={(v) => {
-          actions.setState('value', v)
+          if (isArray(v)) {
+            const safeV = ['', ''] as [string, string]
+            safeV[0] = v[0] || ''
+            safeV[1] = v[1] || ''
+            if (safeV[0] !== state.value[0] || safeV[1] !== state.value[1]) {
+              actions.setValue(safeV)
+            }
+          }
         }}
         setName={(n) => {
           actions.setState('name', n)
@@ -56,7 +90,7 @@ export function DateRangePicker(props: {
           placement='bottom-start'
           trigger='manual'
           disabled={state.disabled}
-          closeDelay={50}
+          closeDelay={28}
         >
           <Trigger onBlur={props.onBlur || (() => {})} />
           <Popover.Content

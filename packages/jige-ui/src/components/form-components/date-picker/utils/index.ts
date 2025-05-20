@@ -59,3 +59,35 @@ export function NumberToChinese(num: number) {
   const arr1 = ['日', '一', '二', '三', '四', '五', '六', '七', '八', '九', '十', '十一', '十二']
   return arr1[num]
 }
+
+export function checkTimeValue(
+  value: string,
+  timeType: 'hour' | 'minute' | 'second' | 'ignore' = 'ignore',
+) {
+  const timeRegex = /^(0\d|1\d|2[0-3])(:[0-5]\d){0,2}$/
+  let length = 0
+  if (timeType === 'hour') {
+    length = 2
+  } else if (timeType === 'minute') {
+    length = 5
+  } else if (timeType === 'second') {
+    length = 8
+  }
+
+  if (length && value?.length !== length) {
+    return false
+  }
+
+  return timeRegex.test(value)
+}
+
+export function parseDateStr(value: string) {
+  const vals = value.split(' ')
+  const dateValue = vals[0]
+  const timeValue = checkTimeValue(vals[1]) ? vals[1] : ''
+  const inst = dayes(dateValue)
+  if (inst.isValid()) {
+    return [dateValue, timeValue] as [string, string]
+  }
+  return ['', ''] as [string, string]
+}

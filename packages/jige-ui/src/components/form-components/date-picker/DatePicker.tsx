@@ -1,13 +1,15 @@
-import { Match, Switch } from 'solid-js'
-import { dayes } from '~/common/dayes'
 import type { MaybePromise } from '~/common/types'
 import { MainPanel } from './MainPanel'
 import { Root } from './Root'
 import { Trigger } from './Trigger'
 import { Wrapper } from './Wrapper'
-import { YearList } from './YearList'
 import { context } from './context'
 import type { DatePickerType, DateTypes } from './types'
+import { TimePicker } from '../time-picker'
+import { Button } from '~/components/button'
+import { CheckFill, CloseFill } from '~/components/icons'
+import { onCleanup, onMount } from 'solid-js'
+import { dayes } from '~/common/dayes'
 
 function WrapperMainPanel(props: {
   highlightYears: number[] | ((visibleYearRange: [number, number]) => MaybePromise<number[]>)
@@ -30,27 +32,82 @@ function WrapperMainPanel(props: {
 }) {
   const [state, actions] = context.useContext()
 
+  onMount(() => {
+    actions.setState('previewMode', true)
+  })
+
+  onCleanup(() => {
+    actions.setState('previewMode', false)
+  })
+
   return (
-    <MainPanel
-      multiple={false}
-      currMonth={state.currMonth}
-      currYear={state.currYear}
-      value={[state.inst.format('YYYY-MM-DD')]}
-      onChange={(v) => {
-        if (state.inst.isSame(dayes(v[0]), 'day')) return
-        actions.setValue(dayes(v[0]))
-      }}
-      disabled={state.disabled}
-      dateRange={state.dateRange}
-      type={state.type as any}
-      {...props}
-    />
+    <div>
+      <MainPanel
+        multiple={false}
+        currMonth={state.currMonth}
+        currYear={state.currYear}
+        value={[state.dateValue]}
+        onChange={(v) => {
+          if (v[0] === state.dateValue) return
+          if (state.type === 'month') {
+            actions.setState('dateValue', dayes(v[0]).format('YYYY-MM'))
+            return
+          }
+          actions.setState('dateValue', v[0])
+        }}
+        disabled={state.disabled}
+        dateRange={state.dateRange}
+        type={state.type as any}
+        headerRight={
+          state.isDateTime
+            ? () => (
+                <TimePicker
+                  size='small'
+                  disableBind
+                  value={state.timeValue}
+                  onChange={(v) => {
+                    if (v === state.timeValue) return
+                    actions.setState('timeValue', v)
+                  }}
+                  type={state.type as any}
+                />
+              )
+            : undefined
+        }
+        {...props}
+      />
+      <div
+        style={{
+          display: 'flex',
+          'justify-content': 'space-between',
+          padding: '4px',
+          'border-top': '1px solid var(--jg-t-border)',
+        }}
+      >
+        <Button
+          variant='text'
+          style={{ width: '100%', 'flex-shrink': 1 }}
+          icon={<CheckFill />}
+          onClick={() => {
+            actions.syncPreviewToValue()
+            state.triggerRef?.blur()
+          }}
+        />
+        <Button
+          variant='text'
+          style={{ width: '100%', 'flex-shrink': 1 }}
+          icon={<CloseFill />}
+          onClick={() => {
+            state.triggerRef?.blur()
+          }}
+        />
+      </div>
+    </div>
   )
 }
 
 export function DatePicker(props: {
   value?: string
-  valueFormat?: string
   onChange?: (value: string) => void
   disabled?: boolean
   disableBind?: boolean
@@ -78,7 +135,6 @@ export function DatePicker(props: {
   return (
     <Root
       value={props.value}
-      valueFormat={props.valueFormat}
       onChange={props.onChange}
       dateRange={props.dateRange}
       disabled={props.disabled}
@@ -88,21 +144,13 @@ export function DatePicker(props: {
     >
       <Trigger />
       <Wrapper>
-        <Switch
-          fallback={
-            <WrapperMainPanel
-              cellClass={props.cellClass || ''}
-              highlightDates={props.highlightDates || []}
-              highlightMonths={props.highlightMonths || []}
-              highlightYears={props.highlightYears || []}
-              disabledDates={props.disabledDates || []}
-            />
-          }
-        >
-          <Match when={props.type === 'year'}>
-            <YearList />
-          </Match>
-        </Switch>
+        <WrapperMainPanel
+          cellClass={props.cellClass || ''}
+          highlightDates={props.highlightDates || []}
+          highlightMonths={props.highlightMonths || []}
+          highlightYears={props.highlightYears || []}
+          disabledDates={props.disabledDates || []}
+        />
       </Wrapper>
     </Root>
   )
