@@ -1,3 +1,4 @@
+import { esday } from 'esday'
 import { DateRangePicker } from 'jige-ui'
 import { createSignal } from 'solid-js'
 import { createStore } from 'solid-js/store'
@@ -22,6 +23,15 @@ export function Demo() {
             value={value()}
             onChange={setValue}
             type={p.type}
+            presets={[
+              {
+                label: '本周',
+                value: [
+                  esday().startOf('week').format('YYYY-MM-DD HH:mm:ss'),
+                  esday().endOf('week').format('YYYY-MM-DD HH:mm:ss'),
+                ],
+              },
+            ]}
           />
         </div>
       </Playground.MainArea>

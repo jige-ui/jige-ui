@@ -3,6 +3,7 @@ import { createComponentState } from 'solid-uses'
 import { dayes } from '~/common/dayes'
 import type { DateTypes } from './types'
 import { checkTimeValue, parseDateStr } from './utils'
+import { batch } from 'solid-js'
 
 const today = dayes()
 
@@ -63,29 +64,26 @@ export const context = createComponentState({
   },
   methods: {
     syncPreviewToValue() {
-      if (this.state.isDateTime) {
-        this.actions.setValue(`${this.state.dateValue} ${this.state.timeValue}`)
-        return
-      }
-      this.actions.setValue(this.state.dateValue)
+      this.actions.setState('value', this.state.previewValue)
     },
 
     syncValueToPreview() {
       const [date, time] = parseDateStr(this.state.value)
       this.actions.setState({
         dateValue: date,
-        timeValue: time,
+        timeValue: time || '00:00:00',
       })
     },
 
     setValue(value: string) {
       const [date, time] = parseDateStr(value)
-      console.log(date)
 
-      this.actions.setState({
-        dateValue: date,
-        timeValue: time || '00:00:00',
-        value,
+      batch(() => {
+        this.actions.setState({
+          dateValue: date,
+          timeValue: time || '00:00:00',
+        })
+        this.actions.syncPreviewToValue()
       })
     },
 

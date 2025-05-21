@@ -189,10 +189,6 @@
   border-bottom: 1px solid funcs.get-var('t-border');
 }
 
-.jg-dp-animated-group {
-  width: 245px;
-}
-
 .jg-dp-animated-panel[data-ag-status="closing"] {
   animation: panel-close 125ms cubic-bezier(0.4, 0, 0.2, 1);
 }

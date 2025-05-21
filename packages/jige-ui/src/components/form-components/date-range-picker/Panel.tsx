@@ -1,14 +1,18 @@
 import type { EsDay } from 'esday'
-import { batch, onCleanup, onMount } from 'solid-js'
+import { batch, For, onCleanup, onMount } from 'solid-js'
 import { DatePickerMainPanel } from '../date-picker'
 import { context } from './context'
 import { Button } from '~/components/button'
 import { CheckFill, CloseFill } from '~/components/icons'
 import { TimePicker } from '../time-picker'
 
-export function Panel() {
+export function Panel(props: {
+  presets?: {
+    label: string
+    value: [string, string]
+  }[]
+}) {
   const [state, actions] = context.useContext()
-  actions.updateCurrYearMonthData()
   const commonProps = {
     dateRange: ['1800-01-01', '2200-01-01'] as [string, string],
     highlightYears: [] as number[],
@@ -20,6 +24,7 @@ export function Panel() {
   }
 
   onMount(() => {
+    actions.updateCurrYearMonthData()
     actions.setState('previewMode', true)
   })
 
@@ -95,6 +100,7 @@ export function Panel() {
                     onChange={(v) => {
                       actions.setState('timeValue', 0, v)
                     }}
+                    disableBind
                   />
                 )
               : undefined
@@ -128,6 +134,7 @@ export function Panel() {
                     onChange={(v) => {
                       actions.setState('timeValue', 1, v)
                     }}
+                    disableBind
                   />
                 )
               : undefined
@@ -143,23 +150,49 @@ export function Panel() {
           'border-top': '1px solid var(--jg-t-border)',
         }}
       >
-        <Button
-          variant='text'
-          style={{ width: '100%', 'flex-shrink': 1 }}
-          icon={<CheckFill />}
-          onClick={() => {
-            actions.syncPreviewToValue()
-            actions.blurTrigger()
+        <div
+          style={{
+            display: 'flex',
+            'align-items': 'center',
           }}
-        />
-        <Button
-          variant='text'
-          style={{ width: '100%', 'flex-shrink': 1 }}
-          icon={<CloseFill />}
-          onClick={() => {
-            actions.blurTrigger()
+        >
+          <For each={props.presets}>
+            {(preset) => (
+              <Button
+                variant='link'
+                label={preset.label}
+                onClick={() => {
+                  actions.setPreviewValue(preset.value)
+                }}
+              />
+            )}
+          </For>
+        </div>
+        <div
+          style={{
+            display: 'flex',
+            'align-items': 'center',
+            width: '128px',
           }}
-        />
+        >
+          <Button
+            variant='text'
+            style={{ width: '100%', 'flex-shrink': 1 }}
+            icon={<CheckFill />}
+            onClick={() => {
+              actions.syncPreviewToValue()
+              actions.blurTrigger()
+            }}
+          />
+          <Button
+            variant='text'
+            style={{ width: '100%', 'flex-shrink': 1 }}
+            icon={<CloseFill />}
+            onClick={() => {
+              actions.blurTrigger()
+            }}
+          />
+        </div>
       </div>
     </div>
   )

@@ -18,12 +18,13 @@ export function FakeScrollArea<TValue extends string | number>(props: {
     },
     props,
   )
-  const [currIndex, setCurrIndex] = createSignal(0)
-  const overScan = createMemo(() => {
-    return Math.ceil(realProps.visibleItems / 2) + 3
-  })
   const shouldFake = createMemo(() => {
     return realProps.items.length > realProps.visibleItems
+  })
+  const [currIndex, setCurrIndex] = createSignal(0)
+  const overScan = createMemo(() => {
+    if (!shouldFake()) return 0
+    return Math.ceil(realProps.visibleItems / 2) + 3
   })
 
   const renderItems = createMemo(() => {
@@ -40,17 +41,14 @@ export function FakeScrollArea<TValue extends string | number>(props: {
   const handleOnWheel = (e: WheelEvent) => {
     e.preventDefault()
     e.stopPropagation()
+
     const { deltaY } = e
     const index = currIndex()
     const newIndex = deltaY > 0 ? index + 1 : index - 1
     if (shouldFake()) {
       setCurrIndex(newIndex)
     } else {
-      if (newIndex < 0) {
-        setCurrIndex(props.items.length - 1)
-      } else if (newIndex >= props.items.length) {
-        setCurrIndex(0)
-      } else {
+      if (newIndex >= 0 && newIndex < realProps.items.length) {
         setCurrIndex(newIndex)
       }
     }
@@ -63,6 +61,7 @@ export function FakeScrollArea<TValue extends string | number>(props: {
   })
 
   let ref!: HTMLDivElement
+  let wrapperRef!: HTMLDivElement
 
   watch(
     () => realProps.value,
@@ -116,6 +115,7 @@ export function FakeScrollArea<TValue extends string | number>(props: {
   return (
     <div
       class='jg-fake-scroll-area'
+      ref={wrapperRef}
       onWheel={handleOnWheel}
       style={combineStyle(
         {
@@ -124,6 +124,7 @@ export function FakeScrollArea<TValue extends string | number>(props: {
         },
         realProps.style,
       )}
+      data-scrolling={dataIf(isScrolling())}
     >
       <div
         style={combineStyle(
@@ -159,7 +160,6 @@ export function FakeScrollArea<TValue extends string | number>(props: {
                 class='jg-fake-scroll-item'
                 style={{
                   height: `${realProps.itemHeight}px`,
-                  'pointer-events': isScrolling() ? 'none' : 'auto',
                 }}
                 onClick={() => {
                   props.onChange(item.value)

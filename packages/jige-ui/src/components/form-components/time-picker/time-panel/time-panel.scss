@@ -1,8 +1,3 @@
-.jg-fake-scroll-area {
-    position: relative;
-    overflow: hidden;
-}
-
 .jg-fake-scroll-item-inner {
     display: flex;
     align-items: center;
@@ -10,11 +5,10 @@
     width: 100%;
     height: 100%;
 
-    &:hover{
+    &:hover {
         background: var(--jg-t-bg4);
     }
 }
-
 
 .jg-fake-scroll-item {
     padding: 2px;
@@ -28,3 +22,15 @@
     }
 }
 
+
+.jg-fake-scroll-area {
+    position: relative;
+    overflow: hidden;
+
+    &[data-scrolling] {
+        .jg-fake-scroll-item {
+            pointer-events: none;
+            background: inherit;
+        }
+    }
+}

@@ -11,6 +11,7 @@ import { YearPanel } from './YearPanel'
 import { panelContext } from './context'
 
 function AnimatedPanel(props: {
+  width: number
   cellClass: string | ((day: EsDay) => string)
   highlightYears: number[] | ((visibleYearRange: [number, number]) => MaybePromise<number[]>)
   highlightMonths: string[] | ((visibleYear: number) => MaybePromise<string[]>)
@@ -41,20 +42,26 @@ function AnimatedPanel(props: {
   )
 
   return (
-    <AnimatedGroup active={state.activePanel} class='jg-dp-animated-group'>
-      <AnimatedGroup.Panel key='day' class={className()}>
-        <DayPanel
-          cellClass={props.cellClass || ''}
-          highlightDates={props.highlightDates || []}
-          disabledDates={props.disabledDates || []}
-        />
-      </AnimatedGroup.Panel>
-      <AnimatedGroup.Panel key='month' class={className()}>
-        <MonthPanel highlightMonths={props.highlightMonths || []} />
-      </AnimatedGroup.Panel>
-      <AnimatedGroup.Panel key='year' class={className()}>
-        <YearPanel highlightYears={props.highlightYears || []} />
-      </AnimatedGroup.Panel>
+    <AnimatedGroup active={state.activePanel}>
+      <div
+        style={{
+          width: `${props.width}px`,
+        }}
+      >
+        <AnimatedGroup.Panel key='day' class={className()}>
+          <DayPanel
+            cellClass={props.cellClass || ''}
+            highlightDates={props.highlightDates || []}
+            disabledDates={props.disabledDates || []}
+          />
+        </AnimatedGroup.Panel>
+        <AnimatedGroup.Panel key='month' class={className()}>
+          <MonthPanel highlightMonths={props.highlightMonths || []} />
+        </AnimatedGroup.Panel>
+        <AnimatedGroup.Panel key='year' class={className()}>
+          <YearPanel highlightYears={props.highlightYears || []} />
+        </AnimatedGroup.Panel>
+      </div>
     </AnimatedGroup>
   )
 }
@@ -63,6 +70,7 @@ export function MainPanel(props: {
   onCurrYearMonthChange?: (year: number, month: number) => void
   headerRight?: ComponentProps<typeof HeadTools>['headerRight']
   value: string[]
+  width?: number
   onChange: (value: string[]) => void
   disabled: boolean
   type: 'date' | 'month'
@@ -143,6 +151,7 @@ export function MainPanel(props: {
       <div>
         <HeadTools headerRight={props.headerRight} />
         <AnimatedPanel
+          width={props.width || 245}
           cellClass={props.cellClass}
           highlightDates={props.highlightDates}
           highlightMonths={props.highlightMonths}

@@ -77,7 +77,7 @@ export const context = createComponentState({
         this.actions.setState('dateValue', 0, lastValue)
       })
     },
-    setValue(value: [string, string]) {
+    setPreviewValue(value: [string, string]) {
       const fromVals = parseDateStr(value[0])
       const toVals = parseDateStr(value[1])
       batch(() => {
@@ -85,7 +85,12 @@ export const context = createComponentState({
         this.actions.setState('timeValue', 0, fromVals[1] || '00:00:00')
         this.actions.setState('dateValue', 1, toVals[0])
         this.actions.setState('timeValue', 1, toVals[1] || '00:00:00')
-        this.actions.setState('value', value)
+      })
+    },
+    setValue(value: [string, string]) {
+      batch(() => {
+        this.actions.setPreviewValue(value)
+        this.actions.syncPreviewToValue()
       })
     },
     syncValueToPreview() {
@@ -99,7 +104,7 @@ export const context = createComponentState({
       })
     },
     syncPreviewToValue() {
-      this.actions.setValue(this.state.previewValue)
+      this.actions.setState('value', this.state.previewValue)
     },
     updateCurrYearMonthData() {
       this.actions.setState('currYearMonthData', {

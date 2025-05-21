@@ -5,7 +5,7 @@
   "license": "MIT",
   "scripts": {
     "build": "turbo run build",
-    "pub:ui": "pnpm build && cd packages/jige-ui && pnpm publish -r",
+    "pub:ui": "pnpm build:ui && cd packages/jige-ui && pnpm publish -r",
     "build:docs": "cd apps/docs && pnpm build",
     "build:ui": "cd packages/jige-ui && pnpm build",
     "clean": "pnpm exec rimraf .turbo node_modules",

@@ -17,6 +17,12 @@ export function DateRangePicker(props: {
   placeholder?: [string, string]
   disableBind?: boolean
   type?: 'datetime' | 'date'
+  presets?: [
+    {
+      label: string
+      value: [string, string]
+    },
+  ]
 }) {
   mountStyle(dpCss, 'jige-ui-date-picker')
   mountStyle(inputCss, 'jige-ui-input')
@@ -102,7 +108,7 @@ export function DateRangePicker(props: {
               border: '1px solid var(--jg-t-border)',
             }}
           >
-            <Panel />
+            <Panel presets={props.presets} />
           </Popover.Content>
         </Popover>
       </Form.Bind>

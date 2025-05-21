@@ -25,7 +25,7 @@ export function HeadTools(props: {
     <div class='jg-dp-head-tools'>
       <div>
         <Button
-          size={30}
+          size={26}
           onClick={() => {
             actions.setState(
               'activePanel',
@@ -38,11 +38,11 @@ export function HeadTools(props: {
           }}
           label={`${state.currYear}年`}
           variant='text'
-          style={{ 'font-size': '16px', padding: '0 4px' }}
+          style={{ 'font-size': '15px', padding: '0 4px' }}
         />
         <Show when={!monthMode()}>
           <Button
-            size={30}
+            size={26}
             onClick={() => {
               actions.setState(
                 'activePanel',
@@ -54,7 +54,7 @@ export function HeadTools(props: {
               throttleMonth(e)
             }}
             variant='text'
-            style={{ 'font-size': '16px', padding: '0 4px' }}
+            style={{ 'font-size': '14px', padding: '0 4px' }}
           >
             {NumberToChinese(state.currMonth + 1)}月
           </Button>

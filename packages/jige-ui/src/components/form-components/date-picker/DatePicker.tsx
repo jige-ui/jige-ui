@@ -43,6 +43,7 @@ function WrapperMainPanel(props: {
   return (
     <div>
       <MainPanel
+        width={256}
         multiple={false}
         currMonth={state.currMonth}
         currYear={state.currYear}
@@ -86,6 +87,7 @@ function WrapperMainPanel(props: {
       >
         <Button
           variant='text'
+          size={30}
           style={{ width: '100%', 'flex-shrink': 1 }}
           icon={<CheckFill />}
           onClick={() => {
@@ -95,6 +97,7 @@ function WrapperMainPanel(props: {
         />
         <Button
           variant='text'
+          size={30}
           style={{ width: '100%', 'flex-shrink': 1 }}
           icon={<CloseFill />}
           onClick={() => {

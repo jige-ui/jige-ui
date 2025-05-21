@@ -2,6 +2,7 @@ import { FormCore } from 'jige-core'
 import {
   Button,
   ComboBox,
+  DatePicker,
   DateRangePicker,
   Form,
   Input,
@@ -128,8 +129,11 @@ export function Demo() {
               </For>
             </RadioGroup>
           </Form.Field>
+          <Form.Field label={p.noLabel ? undefined : 'date'} name='date'>
+            <DatePicker disableBind={p.disableBind} type='second' />
+          </Form.Field>
           <Form.Field label={p.noLabel ? undefined : 'dateRange'} name='dateRange'>
-            <DateRangePicker disableBind={p.disableBind} />
+            <DateRangePicker disableBind={p.disableBind} type='datetime' />
           </Form.Field>
           <Form.Field name='remember'>
             <div class='flex items-center'>
