@@ -4,7 +4,6 @@ import { dataIf } from '~/common/dataset'
 import { Form } from '~/components/form'
 import { ArrowDown } from '../../icons'
 import { context } from './context'
-import { isDef } from '~/common/types'
 
 export function Trigger(props: {
   style?: string | JSX.CSSProperties
@@ -40,7 +39,7 @@ export function Trigger(props: {
               overflow: 'hidden',
               'text-overflow': 'ellipsis',
               'max-width': 'calc(100% - 16px)',
-              opacity: isDef(state.value) ? 1 : 0.5,
+              opacity: state.valueIndex !== -1 ? 1 : 0.5,
             }}
           >
             {state.valueLabel}

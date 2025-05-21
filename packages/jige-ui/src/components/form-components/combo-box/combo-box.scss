@@ -25,6 +25,7 @@
 
 .jg-combo-box-item {
   padding: 2px 0;
+  color: funcs.get-var('fg3');
 
   .jg-combo-box-item-inner {
     display: block;
@@ -50,6 +51,7 @@
   }
 
   &[data-selected] > div {
+    color: funcs.get-var('fg2') !important;
     background: funcs.get-var('t-bg4') !important;
 
     &::after {

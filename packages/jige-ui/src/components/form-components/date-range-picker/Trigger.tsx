@@ -23,6 +23,7 @@ export function Trigger(props: {
     (s) => {
       if (s === 'closed') {
         props.onBlur()
+        actions.syncValueToPreview()
       }
       if (s === 'closing') {
         const [ref1, ref2] = state.triggerRefs

@@ -8,7 +8,7 @@ export function Demo() {
   const [p, setP] = createStore({
     disabled: false,
   })
-  const [value, setValue] = createSignal(25)
+  const [value, setValue] = createSignal<number>()
   return (
     <Playground>
       <Playground.MainArea>

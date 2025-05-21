@@ -1,4 +1,5 @@
 import { TimePicker } from 'jige-ui'
+import { createSignal } from 'solid-js'
 import { createStore } from 'solid-js/store'
 import { Playground } from '~/components/playground'
 
@@ -9,11 +10,20 @@ export function Demo() {
     type: 'second' as 'hour' | 'second' | 'minute',
   })
 
+  const [value, setValue] = createSignal('')
+
   return (
     <Playground>
       <Playground.MainArea>
         <div>
-          <TimePicker disabled={p.disabled} type={p.type} size={p.size} />
+          <div>value: {value()}</div>
+          <TimePicker
+            value={value()}
+            onChange={setValue}
+            disabled={p.disabled}
+            type={p.type}
+            size={p.size}
+          />
         </div>
       </Playground.MainArea>
       <Playground.PropertySetting
