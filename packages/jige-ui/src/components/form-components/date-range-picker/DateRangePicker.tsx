@@ -1,13 +1,13 @@
 import dpCss from 'sass:../date-picker/date-picker.scss'
 import inputCss from 'sass:../input/input.scss'
 import css from 'sass:./range-picker.scss'
+import { isArray } from 'radash'
 import { mountStyle, watch } from 'solid-uses'
 import { Form } from '~/components/form'
 import { Popover } from '~/components/popover'
 import { Panel } from './Panel'
 import { Trigger } from './Trigger'
 import { context } from './context'
-import { isArray } from 'radash'
 
 export function DateRangePicker(props: {
   disabled?: boolean

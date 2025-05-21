@@ -1,15 +1,15 @@
+import { onCleanup, onMount } from 'solid-js'
+import { dayes } from '~/common/dayes'
 import type { MaybePromise } from '~/common/types'
+import { Button } from '~/components/button'
+import { CheckFill, CloseFill } from '~/components/icons'
+import { TimePicker } from '../time-picker'
 import { MainPanel } from './MainPanel'
 import { Root } from './Root'
 import { Trigger } from './Trigger'
 import { Wrapper } from './Wrapper'
 import { context } from './context'
 import type { DatePickerType, DateTypes } from './types'
-import { TimePicker } from '../time-picker'
-import { Button } from '~/components/button'
-import { CheckFill, CloseFill } from '~/components/icons'
-import { onCleanup, onMount } from 'solid-js'
-import { dayes } from '~/common/dayes'
 
 function WrapperMainPanel(props: {
   highlightYears: number[] | ((visibleYearRange: [number, number]) => MaybePromise<number[]>)

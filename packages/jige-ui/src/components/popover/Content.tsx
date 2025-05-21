@@ -2,8 +2,8 @@ import { FloatingUiCore } from 'jige-core'
 import { combineStyle } from 'jige-core'
 import type { JSX } from 'solid-js'
 import { Show, createMemo, splitProps } from 'solid-js'
-import { RootContext } from '../ROOT/context'
 import { isDef } from '~/common/types'
+import { RootContext } from '../ROOT/context'
 
 export function Content(
   props: {

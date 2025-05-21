@@ -1,10 +1,10 @@
 import type { EsDay } from 'esday'
-import { batch, For, onCleanup, onMount } from 'solid-js'
-import { DatePickerMainPanel } from '../date-picker'
-import { context } from './context'
+import { For, batch, onCleanup, onMount } from 'solid-js'
 import { Button } from '~/components/button'
 import { CheckFill, CloseFill } from '~/components/icons'
+import { DatePickerMainPanel } from '../date-picker'
 import { TimePicker } from '../time-picker'
+import { context } from './context'
 
 export function Panel(props: {
   presets?: {

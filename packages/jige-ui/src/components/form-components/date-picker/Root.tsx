@@ -1,13 +1,13 @@
 import inputCss from 'sass:../input/input.scss'
 import styles from 'sass:./date-picker.scss'
+import { batch } from 'solid-js'
 import type { JSX } from 'solid-js/jsx-runtime'
 import { mountStyle, watch } from 'solid-uses'
+import { isDef } from '~/common/types'
 import { Form } from '~/components/form'
 import { Popover } from '../../popover'
 import { context } from './context'
 import type { DatePickerType, DateTypes } from './types'
-import { batch } from 'solid-js'
-import { isDef } from '~/common/types'
 
 export function Root(props: {
   children: JSX.Element

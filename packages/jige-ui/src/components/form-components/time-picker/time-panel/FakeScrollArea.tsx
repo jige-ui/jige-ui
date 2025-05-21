@@ -1,5 +1,5 @@
 import { combineStyle, dataIf, uiRefreshDo } from 'jige-core'
-import { createMemo, createSignal, For, type JSX, mergeProps, onMount } from 'solid-js'
+import { For, type JSX, createMemo, createSignal, mergeProps, onMount } from 'solid-js'
 import { watch } from 'solid-uses'
 
 export function FakeScrollArea<TValue extends string | number>(props: {

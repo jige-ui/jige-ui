@@ -2,11 +2,11 @@ import { mountStyle, watch } from 'solid-uses'
 import { context } from './context'
 
 import css from 'sass:./time-panel.scss'
-import { FakeScrollArea } from './FakeScrollArea'
 import { list, max } from 'radash'
-import { createMemo, Show } from 'solid-js'
-import { CheckFill, CloseFill } from '~/components/icons'
+import { Show, createMemo } from 'solid-js'
 import { Button } from '~/components/button'
+import { CheckFill, CloseFill } from '~/components/icons'
+import { FakeScrollArea } from './FakeScrollArea'
 
 export function TimePanel(props: {
   itemHeight: number

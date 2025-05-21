@@ -1,9 +1,9 @@
 import { FloatingUiCore } from 'jige-core'
+import { Popover } from '~/components/popover'
 import { Root } from './Root'
-import { TimePanel } from './time-panel'
 import { Trigger } from './Trigger'
 import { context } from './context'
-import { Popover } from '~/components/popover'
+import { TimePanel } from './time-panel'
 
 function FloatingContent() {
   const [state, actions] = context.useContext()
