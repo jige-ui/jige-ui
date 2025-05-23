@@ -30,7 +30,11 @@ const getPlugins = (jsx: boolean) => {
   let plugins = [inlinePlugin, Icons({ compiler: 'solid' })]
 
   if (!jsx) {
-    plugins = [solidPlugin({ solid: { generate: 'dom' } }), ...plugins]
+    plugins = [
+      Icons({ compiler: 'solid' }),
+      solidPlugin({ solid: { generate: 'dom' } }),
+      inlinePlugin,
+    ]
   }
 
   return plugins
