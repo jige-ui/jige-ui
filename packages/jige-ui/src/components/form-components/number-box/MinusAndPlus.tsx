@@ -1,6 +1,6 @@
-import { context } from './context'
-import IconFluentChevronUp24Regular from '~icons/fluent/chevron-up-24-regular'
 import IconFluentChevronDown24Regular from '~icons/fluent/chevron-down-24-regular'
+import IconFluentChevronUp24Regular from '~icons/fluent/chevron-up-24-regular'
+import { context } from './context'
 
 export function MinusAndPlus(props: {
   class?: string

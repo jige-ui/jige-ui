@@ -3,10 +3,10 @@ import { createSignal } from 'solid-js'
 import { watch } from 'solid-uses'
 import { dataIf } from '~/common/dataset'
 import { Form } from '~/components/form'
-import { Popover } from '../../popover'
-import { context } from './context'
 import IconFluentCalendar24Regular from '~icons/fluent/calendar-24-regular'
+import { Popover } from '../../popover'
 import { ClearableSuffix } from '../input/ClearableSuffix'
+import { context } from './context'
 
 export function Trigger(props: {
   clearable: boolean

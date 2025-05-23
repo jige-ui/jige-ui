@@ -1,9 +1,9 @@
+import { undefinedOr } from 'jige-core'
 import type { JSX } from 'solid-js/jsx-runtime'
 import type { SimpleType } from '~/common/types'
 import { ListBox } from './ListBox'
 import { Root } from './Root'
 import { Trigger } from './Trigger'
-import { undefinedOr } from 'jige-core'
 
 function normalizeOptions<T extends SimpleType>(
   options: (T | { label: string; value: T })[],

@@ -1,8 +1,8 @@
 import { FloatingUiCore } from 'jige-core'
 import { mergeProps } from 'solid-js'
 import type { JSX } from 'solid-js/jsx-runtime'
-import { Button } from '../button'
 import IconFluentErrorCircle24Filled from '~icons/fluent/error-circle-24-filled'
+import { Button } from '../button'
 
 import css from 'sass:./pop-confirm.scss'
 import { mountStyle } from 'solid-uses'

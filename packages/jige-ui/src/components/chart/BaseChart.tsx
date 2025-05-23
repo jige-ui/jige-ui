@@ -116,7 +116,7 @@ function showTooltip(context: ChartContext) {
     timeoutId = setTimeout(() => {
       el.style.opacity = '0'
       el.style.transition = 'opacity 0.2s'
-    }, 250)
+    }, 250) as unknown as number
     return
   }
 

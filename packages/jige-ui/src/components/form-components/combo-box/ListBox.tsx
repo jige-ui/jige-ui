@@ -1,4 +1,4 @@
-import { dataIf, FloatingUiCore } from 'jige-core'
+import { FloatingUiCore, dataIf } from 'jige-core'
 import { RootContext } from '~/components/ROOT/context'
 import { Listbox as LB } from '../../listbox'
 import { context } from './context'

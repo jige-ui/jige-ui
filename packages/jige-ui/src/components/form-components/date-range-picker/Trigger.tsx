@@ -4,10 +4,10 @@ import { watch } from 'solid-uses'
 import { dataIf } from '~/common/dataset'
 import { Form } from '~/components/form'
 import { Popover } from '~/components/popover'
-import { context } from './context'
-import { ClearableSuffix } from '../input/ClearableSuffix'
-import IconFluentCalendar24Regular from '~icons/fluent/calendar-24-regular'
 import IconFluentArrowRight24Filled from '~icons/fluent/arrow-right-24-filled'
+import IconFluentCalendar24Regular from '~icons/fluent/calendar-24-regular'
+import { ClearableSuffix } from '../input/ClearableSuffix'
+import { context } from './context'
 
 export function Trigger(props: {
   onBlur: () => void

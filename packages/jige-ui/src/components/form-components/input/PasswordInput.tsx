@@ -1,11 +1,11 @@
 import { FormCore, InputCore, runSolidEventHandler, undefinedOr } from 'jige-core'
-import { createSignal, Show, splitProps } from 'solid-js'
+import { Show, createSignal, splitProps } from 'solid-js'
 import { Form } from '~/components/form'
+import IconFluentEye24Regular from '~icons/fluent/eye-24-regular'
+import IconFluentEyeOff24Filled from '~icons/fluent/eye-off-24-filled'
 import { InputWrapper } from './InputWrapper'
 import { InputFormBind } from './NormalInput'
 import type { JigeInputProps } from './types'
-import IconFluentEyeOff24Filled from '~icons/fluent/eye-off-24-filled'
-import IconFluentEye24Regular from '~icons/fluent/eye-24-regular'
 
 function VisibleSwitcher(props: {
   visible: boolean

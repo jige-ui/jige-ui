@@ -5,8 +5,8 @@ import css from 'sass:./time-panel.scss'
 import { list, max } from 'radash'
 import { Show, createMemo } from 'solid-js'
 import { Button } from '~/components/button'
-import IconFluentDismiss24Regular from '~icons/fluent/dismiss-24-regular'
 import IconFluentCheckmark24Regular from '~icons/fluent/checkmark-24-regular'
+import IconFluentDismiss24Regular from '~icons/fluent/dismiss-24-regular'
 import { FakeScrollArea } from './FakeScrollArea'
 
 export function TimePanel(props: {

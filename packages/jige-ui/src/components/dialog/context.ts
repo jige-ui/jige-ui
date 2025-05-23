@@ -28,7 +28,7 @@ export const context = createComponentState({
         'timer',
         setTimeout(() => {
           this.actions.setState('maybeTriggerRef', null)
-        }, 100),
+        }, 100) as unknown as number,
       )
     },
   },

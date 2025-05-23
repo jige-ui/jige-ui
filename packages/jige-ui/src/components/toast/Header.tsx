@@ -1,11 +1,11 @@
 import { Match, Switch, createMemo } from 'solid-js'
 import { Button } from '../button'
 
-import IconFluentDismissCircle24Filled from '~icons/fluent/dismiss-circle-24-filled'
 import IconFluentCheckmarkCircle24Filled from '~icons/fluent/checkmark-circle-24-filled'
+import IconFluentDismiss24Regular from '~icons/fluent/dismiss-24-regular'
+import IconFluentDismissCircle24Filled from '~icons/fluent/dismiss-circle-24-filled'
 import IconFluentErrorCircle24Filled from '~icons/fluent/error-circle-24-filled'
 import IconFluentInfo24Filled from '~icons/fluent/info-24-filled'
-import IconFluentDismiss24Regular from '~icons/fluent/dismiss-24-regular'
 
 export function Header(props: {
   type: 'error' | 'warning' | 'success' | 'info'

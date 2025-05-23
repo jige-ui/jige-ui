@@ -1,9 +1,9 @@
 import { FormCore, InputCore, runSolidEventHandler, undefinedOr } from 'jige-core'
-import { createSignal, type JSX, splitProps } from 'solid-js'
+import { type JSX, createSignal, splitProps } from 'solid-js'
 import { Form } from '~/components/form'
+import { ClearableSuffix } from './ClearableSuffix'
 import { InputWrapper } from './InputWrapper'
 import type { JigeInputProps } from './types'
-import { ClearableSuffix } from './ClearableSuffix'
 
 export function InputFormBind(props: {
   disabled?: boolean

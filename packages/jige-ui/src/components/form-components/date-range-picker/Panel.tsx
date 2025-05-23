@@ -1,11 +1,11 @@
 import type { EsDay } from 'esday'
 import { For, batch, onCleanup, onMount } from 'solid-js'
 import { Button } from '~/components/button'
+import IconFluentCheckmark24Regular from '~icons/fluent/checkmark-24-regular'
+import IconFluentDismiss24Regular from '~icons/fluent/dismiss-24-regular'
 import { DatePickerMainPanel } from '../date-picker'
 import { TimePicker } from '../time-picker'
 import { context } from './context'
-import IconFluentDismiss24Regular from '~icons/fluent/dismiss-24-regular'
-import IconFluentCheckmark24Regular from '~icons/fluent/checkmark-24-regular'
 
 export function Panel(props: {
   presets?: {
