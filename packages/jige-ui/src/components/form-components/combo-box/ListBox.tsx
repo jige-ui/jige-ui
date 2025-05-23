@@ -1,9 +1,11 @@
-import { FloatingUiCore } from 'jige-core'
+import { dataIf, FloatingUiCore } from 'jige-core'
 import { RootContext } from '~/components/ROOT/context'
 import { Listbox as LB } from '../../listbox'
 import { context } from './context'
 
-export function ListBox() {
+export function ListBox(props: {
+  size: 'small' | 'medium' | 'large'
+}) {
   const [rootState] = RootContext.useContext()
   const [state, actions] = context.useContext()
 
@@ -17,6 +19,9 @@ export function ListBox() {
         width: `${state.listItemWidth}px`,
       }}
       zindex={rootState.zIndexConfig.popover}
+      data-small={dataIf(props.size === 'small')}
+      data-medium={dataIf(props.size === 'medium')}
+      data-large={dataIf(props.size === 'large')}
     >
       <LB
         rootHeight={240}

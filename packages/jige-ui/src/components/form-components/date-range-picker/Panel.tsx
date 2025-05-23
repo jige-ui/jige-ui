@@ -1,15 +1,18 @@
 import type { EsDay } from 'esday'
 import { For, batch, onCleanup, onMount } from 'solid-js'
 import { Button } from '~/components/button'
-import { CheckFill, CloseFill } from '~/components/icons'
 import { DatePickerMainPanel } from '../date-picker'
 import { TimePicker } from '../time-picker'
 import { context } from './context'
+import IconFluentDismiss24Regular from '~icons/fluent/dismiss-24-regular'
+import IconFluentCheckmark24Regular from '~icons/fluent/checkmark-24-regular'
 
 export function Panel(props: {
   presets?: {
     label: string
-    value: [string, string]
+    value:
+      | [string, string]
+      | ((state: ReturnType<typeof context.useContext>[0]) => [string, string])
   }[]
 }) {
   const [state, actions] = context.useContext()
@@ -162,7 +165,9 @@ export function Panel(props: {
                 variant='link'
                 label={preset.label}
                 onClick={() => {
-                  actions.setPreviewValue(preset.value)
+                  const value =
+                    typeof preset.value === 'function' ? preset.value(state) : preset.value
+                  actions.setValue(value)
                 }}
               />
             )}
@@ -178,7 +183,7 @@ export function Panel(props: {
           <Button
             variant='text'
             style={{ width: '100%', 'flex-shrink': 1 }}
-            icon={<CheckFill />}
+            icon={<IconFluentCheckmark24Regular />}
             onClick={() => {
               actions.syncPreviewToValue()
               actions.blurTrigger()
@@ -187,7 +192,7 @@ export function Panel(props: {
           <Button
             variant='text'
             style={{ width: '100%', 'flex-shrink': 1 }}
-            icon={<CloseFill />}
+            icon={<IconFluentDismiss24Regular />}
             onClick={() => {
               actions.blurTrigger()
             }}

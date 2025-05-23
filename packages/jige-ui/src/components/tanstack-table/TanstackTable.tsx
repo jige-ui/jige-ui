@@ -7,7 +7,7 @@ import { Spin } from '../spin'
 import css from 'sass:./tanstack-table.scss'
 import { mountStyle, watch } from 'solid-uses'
 import { Button } from '../button'
-import { BoxRemove } from '../icons'
+import IconFluentBoxDismiss24Regular from '~icons/fluent/box-dismiss-24-regular'
 import { Paginator } from '../paginator'
 import { AddNewRow } from './AddNewRow'
 import { getMergeHeaderGroups } from './utils'
@@ -136,7 +136,7 @@ export function TanstackTable<T>(props: {
             <Show when={rows().length === 0 && !showNewRow()}>
               <div class='jg-data-table-empty'>
                 <div>
-                  <BoxRemove />
+                  <IconFluentBoxDismiss24Regular />
                 </div>
                 <div style={{ 'margin-top': '8px' }}>什么都没有哦</div>
               </div>

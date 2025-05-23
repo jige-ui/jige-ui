@@ -136,5 +136,9 @@ export const context = createComponentState({
       }
       return date.isValid()
     },
+
+    clear() {
+      this.actions.setValue('')
+    },
   },
 })

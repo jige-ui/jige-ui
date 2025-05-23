@@ -1,7 +1,6 @@
 import type { PropsWithContextChild } from 'jige-core'
-import { callMaybeContextChild } from 'jige-core'
+import { callMaybeContextChild, undefinedOr } from 'jige-core'
 import { watch } from 'solid-uses'
-import { undefinedOr } from '~/common/types'
 import { Form } from '~/components/form'
 import { context } from './context'
 

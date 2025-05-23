@@ -7,13 +7,20 @@
     "module": "ESNext",
     "moduleResolution": "node",
     "paths": {
-      "~/*": ["src/*"]
+      "~/*": [
+        "src/*"
+      ]
     },
     "strict": true,
     "noEmit": true,
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
-    "isolatedModules": true
+    "isolatedModules": true,
+    "types": [
+      "unplugin-icons/types/solid",
+    ]
   },
-  "exclude": ["dist"]
+  "exclude": [
+    "dist"
+  ]
 }

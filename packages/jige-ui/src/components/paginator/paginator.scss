@@ -5,7 +5,7 @@
   align-items: center;
   justify-content: center;
   height: 28px;
-  font-size: .875rem;
+  font-size: funcs.get-var('fs-12');
   user-select: none;
 
 }
@@ -35,6 +35,7 @@
   }
 
   &[data-disabled] {
+    color: funcs.get-var('fg4');
     pointer-events: none;
     opacity: .8;
   }

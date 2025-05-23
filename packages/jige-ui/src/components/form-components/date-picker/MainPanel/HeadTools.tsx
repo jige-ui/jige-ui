@@ -1,9 +1,10 @@
 import { throttle } from 'radash'
 import { type JSX, Show, createMemo } from 'solid-js'
 import { Button } from '~/components/button'
-import { CaretDown, CaretUp } from '~/components/icons'
 import { NumberToChinese } from '../utils'
 import { panelContext } from './context'
+import IconFluentCaretUp24Filled from '~icons/fluent/caret-up-24-filled'
+import IconFluentCaretDown24Filled from '~icons/fluent/caret-down-24-filled'
 
 export function HeadTools(props: {
   headerRight?: (
@@ -64,7 +65,7 @@ export function HeadTools(props: {
         <Show when={!props.headerRight} fallback={props.headerRight!(state, actions)}>
           <Button
             variant='text'
-            icon={<CaretUp />}
+            icon={<IconFluentCaretUp24Filled />}
             onClick={() => {
               monthMode() ? actions.setCurrYear(state.currYear + 1) : actions.monthHandle(1)
             }}
@@ -72,7 +73,7 @@ export function HeadTools(props: {
           />
           <Button
             variant='text'
-            icon={<CaretDown />}
+            icon={<IconFluentCaretDown24Filled />}
             onClick={() => {
               monthMode() ? actions.setCurrYear(state.currYear - 1) : actions.monthHandle(-1)
             }}

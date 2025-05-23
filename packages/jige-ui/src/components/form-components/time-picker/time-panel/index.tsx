@@ -5,7 +5,8 @@ import css from 'sass:./time-panel.scss'
 import { list, max } from 'radash'
 import { Show, createMemo } from 'solid-js'
 import { Button } from '~/components/button'
-import { CheckFill, CloseFill } from '~/components/icons'
+import IconFluentDismiss24Regular from '~icons/fluent/dismiss-24-regular'
+import IconFluentCheckmark24Regular from '~icons/fluent/checkmark-24-regular'
 import { FakeScrollArea } from './FakeScrollArea'
 
 export function TimePanel(props: {
@@ -125,7 +126,7 @@ export function TimePanel(props: {
           <Button
             variant='text'
             style={{ width: '100%', 'flex-shrink': 1 }}
-            icon={<CheckFill />}
+            icon={<IconFluentCheckmark24Regular />}
             size={max([props.width / 5, 24])}
             onClick={() => {
               props.onConfirm?.(state.hour, state.minute, state.second)
@@ -135,7 +136,7 @@ export function TimePanel(props: {
             variant='text'
             size={max([props.width / 5, 24])}
             style={{ width: '100%', 'flex-shrink': 1 }}
-            icon={<CloseFill />}
+            icon={<IconFluentDismiss24Regular />}
             onClick={() => {
               props.onCancel?.()
             }}

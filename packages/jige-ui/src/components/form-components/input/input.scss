@@ -1,34 +1,72 @@
 @use '../../../styles/funcs';
 
+.jg-input-suffix, .jg-input-prefix {
+  position: relative;
+  display: inline-flex;
+  flex-shrink: 0;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: center;
+  color: funcs.get-var("fg4");
+  white-space: nowrap;
+  transition: color .3s funcs.get-var("bezier");
+}
+
+.jg-input-prefix {
+  margin-left: 8px;
+}
+
+.jg-input-suffix {
+  margin-right: 8px;
+}
+
+
 .jg-input-clear {
   position: absolute;
-  top: 2px;
-  bottom: 3px;
-  font-size: .85em;
+  inset-inline-end: 0;
+  top: 50%;
+  right: 8px;
   color: funcs.get-var('fg4');
   pointer-events: none;
-  background: funcs.get-var('t-bg3');
+  cursor: pointer;
   opacity: 0;
-  transition: opacity .25s funcs.get-var('bezier');
+  transform: translateY(-50%);
+  transition-timing-function: funcs.get-var('bezier');
+  transition-duration: 250ms;
+  transition-property: opacity, color;
+
+  &:hover {
+    color: funcs.get-var('t-fg1');
+  }
+}
+
+.jg-input-password-switcher {
+  position: absolute;
+  inset-inline-end: 0;
+  top: 50%;
+  right: 8px;
+  color: funcs.get-var('fg4');
+  cursor: pointer;
+  transform: translateY(-50%);
+  transition-timing-function: funcs.get-var('bezier');
+  transition-duration: 250ms;
+  transition-property: opacity, color;
+
+  &:hover {
+    color: funcs.get-var('t-fg1');
+  }
 }
 
 .jg-input-wrapper {
   position: relative;
   display: inline-flex;
   align-items: center;
-  justify-content: center;
   width: 100%;
   min-width: 3em;
-  height: 32px;
-  font-size: 14px;
+  height: funcs.get-var('h-medium');
+  font-size: funcs.get-var('fs-14');
+  line-height: funcs.get-var('lh-14');
   border: 0;
-
-  &:hover {
-    .jg-input-clear {
-      pointer-events: auto;
-      opacity: 1;
-    }
-  }
 
   &::before {
     position: absolute;
@@ -38,6 +76,29 @@
     border: 1px solid funcs.get-var('t-border');
     border-bottom-color: funcs.get-var('fg4');
     border-radius: .25em;
+  }
+
+  &[data-small] {
+    height: funcs.get-var('h-small');
+    font-size: funcs.get-var('fs-12');
+    line-height: funcs.get-var('lh-12');
+  }
+
+  &[data-large] {
+    height: funcs.get-var('h-large');
+    font-size: funcs.get-var('fs-16');
+    line-height: funcs.get-var('lh-16');
+  }
+
+  &:hover {
+    .jg-input-clear {
+      pointer-events: auto;
+      opacity: 1;
+    }
+
+    .jg-input-suffix:not(:last-child) {
+      opacity: 0;
+    }
   }
 
   &[data-disabled] {
@@ -69,30 +130,10 @@
 }
 
 
-.jg-input-suffix, .jg-input-prefix {
-  position: relative;
-  display: inline-flex;
-  flex-shrink: 0;
-  flex-wrap: nowrap;
-  align-items: center;
-  justify-content: center;
-  color: funcs.get-var("fg4");
-  white-space: nowrap;
-  transition: color .3s funcs.get-var("bezier");
 
-  svg {
-    margin-bottom: -.15em;
-    font-size: 1.15em;
-  }
-}
 
-.jg-input-prefix {
-  margin-left: 8px;
-}
 
-.jg-input-suffix {
-  margin-right: 8px;
-}
+
 
 .jg-input-native {
   position: relative;

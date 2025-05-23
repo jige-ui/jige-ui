@@ -1,13 +1,13 @@
 import { Show } from 'solid-js'
-import { IconThreeDots } from '../icons'
 import { context } from './context'
+import IconFluentMoreHorizontal24Filled from '~icons/fluent/more-horizontal-24-filled'
 
 export function LoadingIcon() {
   const [state] = context.useContext()
   return (
     <Show when={state.loading}>
       <div class='jg-btn-loading'>
-        <IconThreeDots />
+        <IconFluentMoreHorizontal24Filled />
       </div>
     </Show>
   )

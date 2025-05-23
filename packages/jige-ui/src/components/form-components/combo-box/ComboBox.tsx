@@ -3,6 +3,7 @@ import type { SimpleType } from '~/common/types'
 import { ListBox } from './ListBox'
 import { Root } from './Root'
 import { Trigger } from './Trigger'
+import { undefinedOr } from 'jige-core'
 
 function normalizeOptions<T extends SimpleType>(
   options: (T | { label: string; value: T })[],
@@ -24,6 +25,7 @@ export function ComboBox<T extends SimpleType>(props: {
   disableBind?: boolean
   class?: string
   style?: string | JSX.CSSProperties
+  size?: 'small' | 'medium' | 'large'
 }) {
   return (
     <Root
@@ -34,8 +36,8 @@ export function ComboBox<T extends SimpleType>(props: {
       placeholder={props.placeholder || '请选择...'}
       disableBind={props.disableBind || false}
     >
-      <Trigger class={props.class} style={props.style} />
-      <ListBox />
+      <Trigger class={props.class} style={props.style} size={undefinedOr(props.size, 'medium')} />
+      <ListBox size={undefinedOr(props.size, 'medium')} />
     </Root>
   )
 }

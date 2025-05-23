@@ -63,6 +63,7 @@ export function Demo() {
       password: '',
       confirmPassword: '',
       sex: 'male',
+      date: '',
       dateRange: ['2024-01-01', '2024-12-27'],
     }),
     onSubmit: async (value) => {

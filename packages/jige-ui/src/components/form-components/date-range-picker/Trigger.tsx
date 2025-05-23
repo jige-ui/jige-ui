@@ -3,12 +3,15 @@ import { createSignal } from 'solid-js'
 import { watch } from 'solid-uses'
 import { dataIf } from '~/common/dataset'
 import { Form } from '~/components/form'
-import { ArrowRight, CalendarLine } from '~/components/icons'
 import { Popover } from '~/components/popover'
 import { context } from './context'
+import { ClearableSuffix } from '../input/ClearableSuffix'
+import IconFluentCalendar24Regular from '~icons/fluent/calendar-24-regular'
+import IconFluentArrowRight24Filled from '~icons/fluent/arrow-right-24-filled'
 
 export function Trigger(props: {
   onBlur: () => void
+  clearable: boolean
 }) {
   const [state, actions] = context.useContext()
   const [floatState, floatActions] = FloatingUiCore.useContext()
@@ -52,9 +55,6 @@ export function Trigger(props: {
           {...Form.createNativeComponentAttrs()}
           name={state.name}
         />
-        <div class='jg-input-prefix'>
-          <CalendarLine />
-        </div>
         <input
           ref={(el) => {
             actions.setState('triggerRefs', 0, el)
@@ -86,7 +86,7 @@ export function Trigger(props: {
             position: 'relative',
           }}
         >
-          <ArrowRight />
+          <IconFluentArrowRight24Filled />
         </div>
         <input
           ref={(el) => {
@@ -113,6 +113,13 @@ export function Trigger(props: {
           onBlur={() => {
             setFocused(false)
           }}
+        />
+        <ClearableSuffix
+          suffix={<IconFluentCalendar24Regular />}
+          onClear={() => {
+            actions.clear()
+          }}
+          showClearable={props.clearable && !state.isEmpty}
         />
       </div>
     </Popover.Trigger>

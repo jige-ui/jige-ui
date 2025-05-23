@@ -8,6 +8,7 @@ export function Demo() {
     clearable: false,
     readonly: false,
     type: 'text' as 'text' | 'textarea' | 'password',
+    size: 'medium' as 'small' | 'medium' | 'large',
   })
 
   return (
@@ -20,6 +21,7 @@ export function Demo() {
             type={p.type}
             placeholder='Input some'
             readonly={p.readonly}
+            size={p.size}
           />
         </div>
       </Playground.MainArea>
@@ -28,6 +30,7 @@ export function Demo() {
         onChange={setP}
         typeDeclaration={{
           type: ['text', 'textarea', 'password'],
+          size: ['small', 'medium', 'large'],
         }}
       />
     </Playground>

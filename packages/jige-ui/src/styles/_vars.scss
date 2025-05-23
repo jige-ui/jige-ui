@@ -34,3 +34,18 @@ $colors-dark: (
   fg-success: #4caf50,
   fg-warning: #ff9800,
 );
+$text-ramp: (
+  10: (10px, 14px),
+  12: (12px, 16px),
+  14: (14px, 20px),
+  16: (16px, 22px),
+  20: (20px, 26px),
+  24: (24px, 32px),
+  28: (28px, 36px),
+  32: (32px, 40px),
+);
+$height-ramp: (
+  small: 24px,
+  medium: 32px,
+  large: 40px,
+);

@@ -3,11 +3,25 @@
 .jg-combo-box-list {
   padding: 4px 0;
   margin: 6px;
+  font-size: funcs.get-var('fs-14');
+  line-height: funcs.get-var('lh-14');
   background: funcs.get-var('t-bg1');
   border-radius: .25em;
   box-shadow: funcs.get-var('shadow8');
   animation-duration: 150ms;
   animation-timing-function: funcs.get-var('bezier');
+
+
+  &[data-small] {
+    font-size: funcs.get-var('fs-12');
+    line-height: funcs.get-var('lh-12');
+  }
+
+  &[data-large] {
+    font-size: funcs.get-var('fs-16');
+    line-height: funcs.get-var('lh-16');
+  }
+
 
   &[data-floating-status="opening"] {
     transform-origin: funcs.get-var('combo-box-list-transform-origin');
@@ -35,22 +49,22 @@
     white-space: nowrap;
   }
 
-  > div {
+  >div {
     position: relative;
     padding-left: 8px;
     cursor: pointer;
     border-radius: .2em;
   }
 
-  &:hover > div {
+  &:hover>div {
     background: funcs.get-var('t-bg4');
   }
 
-  &[data-highlight] > div {
+  &[data-highlight]>div {
     background: funcs.get-var('t-bg4');
   }
 
-  &[data-selected] > div {
+  &[data-selected]>div {
     color: funcs.get-var('fg2') !important;
     background: funcs.get-var('t-bg4') !important;
 
@@ -69,7 +83,7 @@
 }
 
 .jg-combo-box-list[data-floating-status="opening"] .jg-combo-box-item:hover {
-    background: none;
+  background: none;
 }
 
 .jg-combo-box-overlay {
@@ -83,10 +97,11 @@
 
 .jg-combo-box-arrow {
   position: absolute;
-  top: 28%;
+  top: 50%;
   right: 8px;
   color: funcs.get-var('fg4');
-  transition: transform 0.2s;
+  transform: translateY(-50%);
+  transition: top 100ms;
 }
 
 
@@ -94,18 +109,34 @@
   position: relative;
   display: inline-flex;
   flex-shrink: 0;
+  align-items: center;
   min-width: 7em;
-  height: 32px;
+  height: funcs.get-var('h-medium');
   padding: .25em .675em;
   overflow: hidden;
   text-overflow: ellipsis;
+  font-size: funcs.get-var('fs-14');
+  line-height: funcs.get-var('lh-14');
   white-space: nowrap;
   cursor: pointer;
   background: funcs.get-var('t-bg1');
   border: 1px solid funcs.get-var('t-border');
   border-radius: .25em;
   box-shadow: funcs.get-var('shadow1');
-  transition:  border-color 0.2s, opacity 0.2s, color 0.2s;
+  transition: border-color 0.2s, opacity 0.2s, color 0.2s;
+
+  &[data-small] {
+    height: funcs.get-var('h-small');
+    font-size: funcs.get-var('fs-12');
+    line-height: funcs.get-var('lh-12');
+  }
+
+  &[data-large] {
+    height: funcs.get-var('h-large');
+    font-size: funcs.get-var('fs-16');
+    line-height: funcs.get-var('lh-16');
+  }
+
 
   &[data-disabled] {
     pointer-events: none;
@@ -113,7 +144,7 @@
   }
 
   &:hover {
-    .jg-combo-box-overlay  {
+    .jg-combo-box-overlay {
       opacity: .03;
     }
   }
@@ -122,12 +153,12 @@
     box-shadow: none;
     opacity: .7;
 
-    .jg-combo-box-overlay  {
+    .jg-combo-box-overlay {
       opacity: .08;
     }
 
     .jg-combo-box-arrow {
-      transform: translateY(2px);
+      top: calc(50% + 3px);
     }
   }
 }
@@ -145,7 +176,7 @@
   }
 
   &:active {
-    .jg-combo-box-overlay  {
+    .jg-combo-box-overlay {
       opacity: .01;
     }
   }

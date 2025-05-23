@@ -6,13 +6,11 @@ import { Match, Show, Switch, createMemo, createSignal } from 'solid-js'
 import { mountStyle } from 'solid-uses'
 import { dataIf } from '~/common/dataset'
 import { isDef } from '~/common/types'
-import {
-  ArrowLeftLine,
-  ArrowRightLine,
-  DoubleArrowLeft,
-  DoubleArrowRight,
-  IconThreeDots,
-} from '../icons'
+import IconFluentChevronDoubleLeft16Filled from '~icons/fluent/chevron-double-left-16-filled'
+import IconFluentChevronDoubleRight16Filled from '~icons/fluent/chevron-double-right-16-filled'
+import IconFluentChevronLeft24Regular from '~icons/fluent/chevron-left-24-regular'
+import IconFluentChevronRight24Regular from '~icons/fluent/chevron-right-24-regular'
+import IconFluentMoreHorizontal24Filled from '~icons/fluent/more-horizontal-24-filled'
 
 function Pager(props: {
   page: number
@@ -58,13 +56,12 @@ function PageArrow(props: {
         }
       }}
       style={{
-        'font-size': '18px',
         color: 'var(--jg-fg3)',
       }}
       data-disabled={dataIf(disabled())}
     >
-      <Show when={props.isLeft} fallback={<ArrowRightLine />}>
-        <ArrowLeftLine />
+      <Show when={props.isLeft} fallback={<IconFluentChevronRight24Regular />}>
+        <IconFluentChevronLeft24Regular />
       </Show>
     </div>
   )
@@ -89,12 +86,12 @@ function PagerBlank(props: {
     >
       <Switch>
         <Match when={isHover()}>
-          <Show when={props.left} fallback={<DoubleArrowRight />}>
-            <DoubleArrowLeft />
+          <Show when={props.left} fallback={<IconFluentChevronDoubleRight16Filled />}>
+            <IconFluentChevronDoubleLeft16Filled />
           </Show>
         </Match>
         <Match when={!isHover()}>
-          <IconThreeDots />
+          <IconFluentMoreHorizontal24Filled />
         </Match>
       </Switch>
     </div>

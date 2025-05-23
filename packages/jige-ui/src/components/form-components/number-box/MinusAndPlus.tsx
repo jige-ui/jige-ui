@@ -1,5 +1,6 @@
-import { ArrowDown, ArrowUp } from '../../icons'
 import { context } from './context'
+import IconFluentChevronUp24Regular from '~icons/fluent/chevron-up-24-regular'
+import IconFluentChevronDown24Regular from '~icons/fluent/chevron-down-24-regular'
 
 export function MinusAndPlus(props: {
   class?: string
@@ -13,7 +14,7 @@ export function MinusAndPlus(props: {
         onMouseDown={(e) => e.preventDefault()}
         disabled={state.value >= state.max}
       >
-        <ArrowUp />
+        <IconFluentChevronUp24Regular />
       </button>
       <button
         type='button'
@@ -21,7 +22,7 @@ export function MinusAndPlus(props: {
         onMouseDown={(e) => e.preventDefault()}
         disabled={state.value <= state.min}
       >
-        <ArrowDown />
+        <IconFluentChevronDown24Regular />
       </button>
     </div>
   )

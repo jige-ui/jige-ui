@@ -54,6 +54,9 @@ export const context = createComponentState({
       }
       return [fromValue, toValue] as [string, string]
     },
+    isEmpty() {
+      return this.state.value[0] === '' && this.state.value[1] === ''
+    },
   },
   methods: {
     setDateValue(lastValue: string) {
@@ -130,6 +133,9 @@ export const context = createComponentState({
         return checkTimeValue(timeValue, 'second')
       }
       return inst.isValid()
+    },
+    clear() {
+      this.actions.setValue(['', ''])
     },
   },
 })

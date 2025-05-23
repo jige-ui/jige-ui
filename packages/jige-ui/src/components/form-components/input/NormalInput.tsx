@@ -1,9 +1,9 @@
-import { FormCore, InputCore, runSolidEventHandler } from 'jige-core'
-import { Show, createSignal, splitProps } from 'solid-js'
+import { FormCore, InputCore, runSolidEventHandler, undefinedOr } from 'jige-core'
+import { createSignal, type JSX, splitProps } from 'solid-js'
 import { Form } from '~/components/form'
-import { Clearable } from './Clearable'
 import { InputWrapper } from './InputWrapper'
 import type { JigeInputProps } from './types'
+import { ClearableSuffix } from './ClearableSuffix'
 
 export function InputFormBind(props: {
   disabled?: boolean
@@ -30,6 +30,22 @@ export function InputFormBind(props: {
   )
 }
 
+export function Suffix(props: {
+  clearable: boolean
+  suffix?: JSX.Element
+}) {
+  const [state, actions] = InputCore.useContext()
+
+  return (
+    <ClearableSuffix
+      showClearable={props.clearable && !!state.value}
+      onClear={() => {
+        actions.setValue('')
+      }}
+    />
+  )
+}
+
 export function NormalInput(props: Omit<JigeInputProps, 'type'>) {
   const [focused, setFocused] = createSignal(false)
   const [, fieldCoreActs] = FormCore.useField()
@@ -44,6 +60,8 @@ export function NormalInput(props: Omit<JigeInputProps, 'type'>) {
     'style',
     'disableBind',
     'readonly',
+    'suffix',
+    'size',
   ])
   return (
     <InputCore
@@ -52,7 +70,11 @@ export function NormalInput(props: Omit<JigeInputProps, 'type'>) {
       disabled={localProps.disabled}
     >
       <InputFormBind disabled={localProps.disabled} disableBind={!!localProps.disableBind} />
-      <InputWrapper focused={focused()} readonly={localProps.readonly || false}>
+      <InputWrapper
+        focused={focused()}
+        readonly={localProps.readonly || false}
+        size={undefinedOr(localProps.size, 'medium')}
+      >
         <InputCore.Native
           {...(otherProps as any)}
           class='jg-input-native'
@@ -70,9 +92,7 @@ export function NormalInput(props: Omit<JigeInputProps, 'type'>) {
           }}
           readonly={localProps.readonly}
         />
-        <Show when={localProps.clearable}>
-          <Clearable />
-        </Show>
+        <Suffix clearable={undefinedOr(localProps.clearable, true)} suffix={localProps.suffix} />
       </InputWrapper>
     </InputCore>
   )

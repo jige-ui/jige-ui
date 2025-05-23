@@ -2,12 +2,13 @@ import { FloatingUiCore, hiddenStyle } from 'jige-core'
 import type { JSX } from 'solid-js/jsx-runtime'
 import { dataIf } from '~/common/dataset'
 import { Form } from '~/components/form'
-import { ArrowDown } from '../../icons'
+import IconFluentChevronDown24Filled from '~icons/fluent/chevron-down-24-filled'
 import { context } from './context'
 
 export function Trigger(props: {
   style?: string | JSX.CSSProperties
   class?: string
+  size: 'small' | 'medium' | 'large'
 }) {
   const [state] = context.useContext()
   return (
@@ -27,22 +28,29 @@ export function Trigger(props: {
           type='button'
           class={['jg-combo-box-trigger', props.class].join(' ')}
           data-disabled={dataIf(state.disabled)}
+          data-small={dataIf(props.size === 'small')}
+          data-medium={dataIf(props.size === 'medium')}
+          data-large={dataIf(props.size === 'large')}
         >
           <div class='jg-combo-box-overlay' />
-          <i class='jg-combo-box-arrow'>
-            <ArrowDown />
+          <i
+            class='jg-combo-box-arrow'
+            style={{
+              'font-size': '.75em',
+            }}
+          >
+            <IconFluentChevronDown24Filled />
           </i>
           <div
             style={{
               display: 'block',
-              'line-height': '1.3',
               overflow: 'hidden',
               'text-overflow': 'ellipsis',
               'max-width': 'calc(100% - 16px)',
               opacity: state.valueIndex !== -1 ? 1 : 0.5,
             }}
           >
-            {state.valueLabel}
+            <span>{state.valueLabel}</span>
           </div>
         </button>
       </FloatingUiCore.Trigger>

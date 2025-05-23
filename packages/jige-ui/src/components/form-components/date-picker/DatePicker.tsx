@@ -2,7 +2,6 @@ import { onCleanup, onMount } from 'solid-js'
 import { dayes } from '~/common/dayes'
 import type { MaybePromise } from '~/common/types'
 import { Button } from '~/components/button'
-import { CheckFill, CloseFill } from '~/components/icons'
 import { TimePicker } from '../time-picker'
 import { MainPanel } from './MainPanel'
 import { Root } from './Root'
@@ -10,6 +9,9 @@ import { Trigger } from './Trigger'
 import { Wrapper } from './Wrapper'
 import { context } from './context'
 import type { DatePickerType, DateTypes } from './types'
+import { undefinedOr } from 'jige-core'
+import IconFluentCheckmark24Regular from '~icons/fluent/checkmark-24-regular'
+import IconFluentDismiss24Regular from '~icons/fluent/dismiss-24-regular'
 
 function WrapperMainPanel(props: {
   highlightYears: number[] | ((visibleYearRange: [number, number]) => MaybePromise<number[]>)
@@ -89,7 +91,7 @@ function WrapperMainPanel(props: {
           variant='text'
           size={30}
           style={{ width: '100%', 'flex-shrink': 1 }}
-          icon={<CheckFill />}
+          icon={<IconFluentCheckmark24Regular />}
           onClick={() => {
             actions.syncPreviewToValue()
             state.triggerRef?.blur()
@@ -99,7 +101,7 @@ function WrapperMainPanel(props: {
           variant='text'
           size={30}
           style={{ width: '100%', 'flex-shrink': 1 }}
-          icon={<CloseFill />}
+          icon={<IconFluentDismiss24Regular />}
           onClick={() => {
             state.triggerRef?.blur()
           }}
@@ -116,6 +118,7 @@ export function DatePicker(props: {
   disableBind?: boolean
   placeholder?: string
   type?: DatePickerType
+  clearable?: boolean
   dateRange?: [DateTypes, DateTypes]
   cellClass?: string | ((day: DateTypes) => string)
   highlightYears?: number[] | ((visibleYearRange: [number, number]) => MaybePromise<number[]>)
@@ -145,7 +148,7 @@ export function DatePicker(props: {
       placeholder={props.placeholder}
       disableBind={props.disableBind || false}
     >
-      <Trigger />
+      <Trigger clearable={undefinedOr(props.clearable, true)} />
       <Wrapper>
         <WrapperMainPanel
           cellClass={props.cellClass || ''}

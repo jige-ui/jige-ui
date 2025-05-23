@@ -1,11 +1,41 @@
-import { FormCore, InputCore, runSolidEventHandler } from 'jige-core'
-import { Show, createSignal, splitProps } from 'solid-js'
+import { FormCore, InputCore, runSolidEventHandler, undefinedOr } from 'jige-core'
+import { createSignal, Show, splitProps } from 'solid-js'
 import { Form } from '~/components/form'
-import { EyeLine, EyeOffLine } from '../../icons'
-import { Clearable } from './Clearable'
 import { InputWrapper } from './InputWrapper'
 import { InputFormBind } from './NormalInput'
 import type { JigeInputProps } from './types'
+import IconFluentEyeOff24Filled from '~icons/fluent/eye-off-24-filled'
+import IconFluentEye24Regular from '~icons/fluent/eye-24-regular'
+
+function VisibleSwitcher(props: {
+  visible: boolean
+  onVisibleChange: (visible: boolean) => void
+}) {
+  const [state] = InputCore.useContext()
+
+  return (
+    <Show when={!!state.value}>
+      <button
+        type='button'
+        aria-label='Toggle password visibility'
+        class='jg-input-password-switcher'
+        onClick={() => {
+          props.onVisibleChange(!props.visible)
+        }}
+        onMouseDown={(e) => {
+          e.preventDefault()
+        }}
+        onMouseUp={(e) => {
+          e.preventDefault()
+        }}
+      >
+        <Show when={props.visible} fallback={<IconFluentEye24Regular />}>
+          <IconFluentEyeOff24Filled />
+        </Show>
+      </button>
+    </Show>
+  )
+}
 
 export function PasswordInput(props: Omit<JigeInputProps, 'type'>) {
   const [showPass, setShowPass] = createSignal(false)
@@ -24,6 +54,7 @@ export function PasswordInput(props: Omit<JigeInputProps, 'type'>) {
     'style',
     'disableBind',
     'readonly',
+    'size',
   ])
 
   return (
@@ -33,7 +64,11 @@ export function PasswordInput(props: Omit<JigeInputProps, 'type'>) {
       disabled={localProps.disabled}
     >
       <InputFormBind disabled={localProps.disabled} disableBind={!!localProps.disableBind} />
-      <InputWrapper focused={focused()} readonly={localProps.readonly || false}>
+      <InputWrapper
+        focused={focused()}
+        readonly={localProps.readonly || false}
+        size={undefinedOr(localProps.size, 'medium')}
+      >
         <InputCore.Native
           {...(otherProps as any)}
           {...Form.createNativeComponentAttrs()}
@@ -51,27 +86,7 @@ export function PasswordInput(props: Omit<JigeInputProps, 'type'>) {
           }}
           readonly={localProps.readonly}
         />
-        <Show when={localProps.clearable}>
-          <Clearable hasSuffix />
-        </Show>
-        <button
-          type='button'
-          aria-label='Toggle password visibility'
-          class='jg-input-suffix'
-          onClick={() => {
-            setShowPass(!showPass())
-          }}
-          onMouseDown={(e) => {
-            e.preventDefault()
-          }}
-          onMouseUp={(e) => {
-            e.preventDefault()
-          }}
-        >
-          <Show when={showPass()} fallback={<EyeOffLine />}>
-            <EyeLine />
-          </Show>
-        </button>
+        <VisibleSwitcher visible={showPass()} onVisibleChange={setShowPass} />
       </InputWrapper>
     </InputCore>
   )

@@ -36,7 +36,6 @@ export function VirtualInner(props: {
       contentStyle={{
         height: `${containerHeight()}px`,
         position: 'relative',
-        'min-width': '100px',
       }}
       ulStyle={{
         position: 'absolute',

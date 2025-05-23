@@ -28,8 +28,6 @@ function ModalCloseHandle(props: {
 
   if (!jgModalState.triggerRef) jgModalActs.setState('triggerRef', state.maybeTriggerRef)
 
-  console.log(jgModalState.triggerRef)
-
   return <></>
 }
 

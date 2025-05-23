@@ -1,12 +1,11 @@
 import { Match, Switch, createMemo } from 'solid-js'
 import { Button } from '../button'
-import {
-  CheckboxCircleFill,
-  CloseCircleFill,
-  CloseLargeFill,
-  InfoFill,
-  WarningFill,
-} from '../icons'
+
+import IconFluentDismissCircle24Filled from '~icons/fluent/dismiss-circle-24-filled'
+import IconFluentCheckmarkCircle24Filled from '~icons/fluent/checkmark-circle-24-filled'
+import IconFluentErrorCircle24Filled from '~icons/fluent/error-circle-24-filled'
+import IconFluentInfo24Filled from '~icons/fluent/info-24-filled'
+import IconFluentDismiss24Regular from '~icons/fluent/dismiss-24-regular'
 
 export function Header(props: {
   type: 'error' | 'warning' | 'success' | 'info'
@@ -38,16 +37,16 @@ export function Header(props: {
         >
           <Switch>
             <Match when={props.type === 'error'}>
-              <CloseCircleFill />
+              <IconFluentDismissCircle24Filled />
             </Match>
             <Match when={props.type === 'success'}>
-              <CheckboxCircleFill />
+              <IconFluentCheckmarkCircle24Filled />
             </Match>
             <Match when={props.type === 'warning'}>
-              <WarningFill />
+              <IconFluentErrorCircle24Filled />
             </Match>
             <Match when={props.type === 'info'}>
-              <InfoFill />
+              <IconFluentInfo24Filled />
             </Match>
           </Switch>
         </div>
@@ -65,7 +64,7 @@ export function Header(props: {
         onClick={() => {
           props.onCloseClick()
         }}
-        icon={<CloseLargeFill />}
+        icon={<IconFluentDismiss24Regular />}
         color='var(--jg-fg4)'
         style={{
           opacity: 0.85,

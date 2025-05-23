@@ -6,6 +6,7 @@ import { browserslistToTargets, transform as lightCss } from 'lightningcss'
 import { compileAsync } from 'sass'
 import type { Options } from 'tsup'
 import { defineConfig } from 'tsup'
+import Icons from 'unplugin-icons/esbuild'
 
 const inlinePlugin = inlineImportPlugin({
   filter: /^sass:/,
@@ -14,7 +15,6 @@ const inlinePlugin = inlineImportPlugin({
     const browersTarget = browserslistToTargets(browers)
     const code = (await compileAsync(args.path)).css
     const res = lightCss({
-      // @ts-expect-error node buffer
       // eslint-disable-next-line node/prefer-global/buffer
       code: Buffer.from(code),
       minify: true,
@@ -25,6 +25,16 @@ const inlinePlugin = inlineImportPlugin({
     return res
   },
 })
+
+const getPlugins = (jsx: boolean) => {
+  let plugins = [inlinePlugin, Icons({ compiler: 'solid' })]
+
+  if (!jsx) {
+    plugins = [solidPlugin({ solid: { generate: 'dom' } }), ...plugins]
+  }
+
+  return plugins
+}
 
 function generateConfig(jsx: boolean, dts?: boolean, watch?: boolean): Options {
   return {
@@ -54,9 +64,7 @@ function generateConfig(jsx: boolean, dts?: boolean, watch?: boolean): Options {
     outExtension() {
       return jsx ? { js: '.jsx' } : {}
     },
-    esbuildPlugins: !jsx
-      ? [solidPlugin({ solid: { generate: 'dom' } }), inlinePlugin]
-      : [inlinePlugin],
+    esbuildPlugins: getPlugins(jsx),
   }
 }
 

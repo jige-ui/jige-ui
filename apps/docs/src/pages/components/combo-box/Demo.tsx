@@ -7,6 +7,7 @@ import { Playground } from '~/components/playground'
 export function Demo() {
   const [p, setP] = createStore({
     disabled: false,
+    size: 'medium' as 'small' | 'medium' | 'large',
   })
   const [value, setValue] = createSignal<number>()
   return (
@@ -26,10 +27,17 @@ export function Demo() {
             }))}
             disabled={p.disabled}
             onChange={setValue}
+            size={p.size}
           />
         </div>
       </Playground.MainArea>
-      <Playground.PropertySetting properties={p} onChange={setP} />
+      <Playground.PropertySetting
+        properties={p}
+        onChange={setP}
+        typeDeclaration={{
+          size: ['small', 'medium', 'large'],
+        }}
+      />
     </Playground>
   )
 }

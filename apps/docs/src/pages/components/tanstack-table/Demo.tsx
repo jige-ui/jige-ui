@@ -69,11 +69,13 @@ const defaultColumns: ColumnDef<Person>[] = [
         footer: (props) => props.column.id,
         meta: {
           width: 200,
-          editable: () => (
-            <Form.Field name='firstName' required>
-              <Input />
-            </Form.Field>
-          ),
+          editable: () => {
+            return (
+              <Form.Field name='firstName' required>
+                <Input />
+              </Form.Field>
+            )
+          },
         },
       },
       {
