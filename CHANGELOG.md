@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.32.0](https://github.com/jige-ui/jige-ui/compare/v0.31.3...v0.32.0) (2025-05-24)
+
+
+### Features
+
+* add `onBlur` and `onFocus` events to any input-able element ([29766be](https://github.com/jige-ui/jige-ui/commit/29766bef995e164185608c52086026e3f121c3ff))
+
+
+### Bug Fixes
+
+* build error ([98e7f71](https://github.com/jige-ui/jige-ui/commit/98e7f71d9bc090bcd369c56d431e040cc8ad7483))
+
 ## [0.31.3](https://github.com/jige-ui/jige-ui/compare/v0.31.2...v0.31.3) (2025-05-23)
 
 
