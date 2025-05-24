@@ -28,6 +28,8 @@ export function Demo() {
             disabled={p.disabled}
             onChange={setValue}
             size={p.size}
+            onFocus={() => console.log('focus')}
+            onBlur={() => console.log('blur')}
           />
         </div>
       </Playground.MainArea>

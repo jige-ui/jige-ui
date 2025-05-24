@@ -1,54 +1,81 @@
-import { FormCore, InputCore, ScrollbarCore } from 'jige-core'
+import { mergeRefs } from '@solid-primitives/refs'
+import { FormCore, InputCore, ScrollbarCore, combineStyle, runSolidEventHandler } from 'jige-core'
 import { throttle } from 'radash'
-import { createSignal } from 'solid-js'
+import { createSignal, splitProps } from 'solid-js'
 import { dataIf } from '~/common/dataset'
 import { Form } from '~/components/form'
 import { InputFormBind } from './NormalInput'
+import type { JigeInputProps } from './types'
 
-function ScrollInput(props: {
-  value?: string
-  onChange?: (value: string) => void
-  placeholder?: string
-  readonly?: boolean
-  setFocused: (focused: boolean) => void
-}) {
+function ScrollInput(
+  props: Omit<JigeInputProps, 'type'> & {
+    setFocused: (focused: boolean) => void
+  },
+) {
+  const [localProps, otherProps] = splitProps(props, [
+    'value',
+    'onChange',
+    'disabled',
+    'clearable',
+    'onFocus',
+    'onBlur',
+    'class',
+    'style',
+    'disableBind',
+    'readonly',
+    'suffix',
+    'size',
+    'setFocused',
+    'ref',
+    'onScroll',
+    'onScrollEnd',
+  ])
   const [state, actions] = ScrollbarCore.useContext()
-
   const [, fieldCoreActs] = FormCore.useField()
-
   const throttleSetValue = throttle({ interval: 30 }, actions.setValue)
 
   return (
     <InputCore.Native
-      type='textarea'
+      {...(otherProps as any)}
       {...Form.createNativeComponentAttrs()}
-      ref={(el: HTMLElement) => {
-        actions.setState('refContent', el)
-      }}
+      type='textarea'
+      ref={
+        mergeRefs(localProps.ref, (el) => {
+          actions.setState('refContent', el)
+        }) as any
+      }
       autocomplete='off'
-      placeholder={props.placeholder}
-      class='jg-input-native'
-      style={{
-        position: 'relative',
-        overflow: 'auto',
-        'scrollbar-width': 'none',
-        height: state.height,
-        'max-height': state.maxHeight,
-        'user-select': state.isDragging ? 'none' : undefined,
-        resize: 'none',
-        width: '100%',
-      }}
+      class={['jg-input-native', localProps.class].join(' ')}
+      style={combineStyle(
+        {
+          position: 'relative',
+          overflow: 'auto',
+          'scrollbar-width': 'none',
+          height: state.height,
+          'max-height': state.maxHeight,
+          'user-select': state.isDragging ? 'none' : undefined,
+          resize: 'none',
+          width: '100%',
+        },
+        localProps.style,
+      )}
       readonly={props.readonly}
-      onScroll={() => {
+      onScroll={(e: Event) => {
         throttleSetValue()
+        runSolidEventHandler(e, localProps.onScroll)
       }}
-      onScrollEnd={() => {
+      onScrollEnd={(e: Event) => {
         actions.setValue()
+        runSolidEventHandler(e, localProps.onScrollEnd)
       }}
-      onFocus={() => props.setFocused(true)}
-      onBlur={() => {
-        props.setFocused(false)
-        fieldCoreActs.handleBlur?.()
+      onFocus={(e: Event) => {
+        localProps.setFocused(true)
+        runSolidEventHandler(e, localProps.onFocus)
+      }}
+      onBlur={(e: Event) => {
+        localProps.setFocused(false)
+        fieldCoreActs.handleBlur()
+        runSolidEventHandler(e, localProps.onBlur)
       }}
     />
   )
@@ -94,14 +121,7 @@ function ScrollBar(props: { children: any; focused: boolean; readonly?: boolean 
   )
 }
 
-export function Textarea(props: {
-  value?: string
-  onChange?: (value: string) => void
-  placeholder?: string
-  disabled?: boolean
-  disableBind?: boolean
-  readonly?: boolean
-}) {
+export function Textarea(props: Omit<JigeInputProps, 'type'>) {
   const [focused, setFocused] = createSignal(false)
   return (
     <InputCore value={props.value} onChange={props.onChange} disabled={props.disabled}>

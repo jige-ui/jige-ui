@@ -4,6 +4,8 @@ import { context } from './context'
 
 export function NumberInput(props: {
   class?: string
+  onFocus?: () => void
+  onBlur?: () => void
 }) {
   const [state, actions] = context.useContext()
   const [, fieldCoreActs] = FormCore.useField()
@@ -34,10 +36,12 @@ export function NumberInput(props: {
       }}
       onFocus={() => {
         actions.setState('focused', true)
+        props.onFocus?.()
       }}
       onBlur={() => {
         fieldCoreActs.handleBlur?.()
         actions.setState('focused', false)
+        props.onBlur?.()
       }}
     />
   )

@@ -27,6 +27,7 @@ export const context = createComponentState({
     hlMonths: [] as string[],
     triggerRef: null as HTMLInputElement | null,
     disabled: false,
+    focused: false,
   }),
   getters: {
     inst() {

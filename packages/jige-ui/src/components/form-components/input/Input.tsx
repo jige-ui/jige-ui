@@ -12,13 +12,7 @@ export function Input(props: JigeInputProps) {
   return (
     <Switch fallback={<NormalInput {...props} />}>
       <Match when={props.type === 'textarea'}>
-        <Textarea
-          value={props.value}
-          onChange={props.onChange}
-          placeholder={props.placeholder}
-          disabled={props.disabled}
-          readonly={props.readonly}
-        />
+        <Textarea {...props} />
       </Match>
       <Match when={props.type === 'password'}>
         <PasswordInput {...props} />

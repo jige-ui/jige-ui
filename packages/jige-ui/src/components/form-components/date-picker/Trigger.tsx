@@ -1,5 +1,5 @@
 import { FloatingUiCore, FormCore } from 'jige-core'
-import { createSignal } from 'solid-js'
+import { batch, createSignal } from 'solid-js'
 import { watch } from 'solid-uses'
 import { dataIf } from '~/common/dataset'
 import { Form } from '~/components/form'
@@ -20,11 +20,17 @@ export function Trigger(props: {
     () => floatState.status,
     (status) => {
       if (status === 'closed') {
-        actions.setActivePanel(state.defaultPanel)
-        const inst = state.inst
-        actions.setCurrYear(inst.year())
-        actions.setCurrMonth(inst.month())
-        actions.syncValueToPreview()
+        batch(() => {
+          actions.setState('focused', false)
+          actions.setActivePanel(state.defaultPanel)
+          const inst = state.inst
+          actions.setCurrYear(inst.year())
+          actions.setCurrMonth(inst.month())
+          actions.syncValueToPreview()
+        })
+      }
+      if (status === 'opened') {
+        actions.setState('focused', true)
       }
     },
   )

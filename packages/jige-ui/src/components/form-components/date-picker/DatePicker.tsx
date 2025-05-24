@@ -114,6 +114,8 @@ function WrapperMainPanel(props: {
 export function DatePicker(props: {
   value?: string
   onChange?: (value: string) => void
+  onFocus?: () => void
+  onBlur?: () => void
   disabled?: boolean
   disableBind?: boolean
   placeholder?: string
@@ -147,6 +149,8 @@ export function DatePicker(props: {
       type={props.type}
       placeholder={props.placeholder}
       disableBind={props.disableBind || false}
+      onFocus={props.onFocus}
+      onBlur={props.onBlur}
     >
       <Trigger clearable={undefinedOr(props.clearable, true)} />
       <Wrapper>

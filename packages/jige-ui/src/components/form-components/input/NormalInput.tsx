@@ -77,7 +77,7 @@ export function NormalInput(props: Omit<JigeInputProps, 'type'>) {
       >
         <InputCore.Native
           {...(otherProps as any)}
-          class='jg-input-native'
+          class={['jg-input-native', localProps.class].join(' ')}
           autocomplete='off'
           type='text'
           {...Form.createNativeComponentAttrs()}

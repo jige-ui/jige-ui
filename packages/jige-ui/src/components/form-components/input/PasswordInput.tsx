@@ -72,7 +72,7 @@ export function PasswordInput(props: Omit<JigeInputProps, 'type'>) {
         <InputCore.Native
           {...(otherProps as any)}
           {...Form.createNativeComponentAttrs()}
-          class='jg-input-native'
+          class={['jg-input-native', localProps.class].join(' ')}
           autocomplete='off'
           type={showPass() ? 'text' : 'password'}
           onFocus={(e: any) => {

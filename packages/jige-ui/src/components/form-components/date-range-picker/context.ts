@@ -20,6 +20,7 @@ export const context = createComponentState({
     name: '',
     type: 'date' as 'datetime' | 'date',
     triggerRefs: [null, null] as [null | HTMLInputElement, null | HTMLInputElement],
+    focused: false,
   }),
   getters: {
     fromInst() {

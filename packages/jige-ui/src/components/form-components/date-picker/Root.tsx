@@ -13,6 +13,8 @@ export function Root(props: {
   children: JSX.Element
   value?: string
   onChange?: (value: string) => void
+  onFocus?: () => void
+  onBlur?: () => void
   dateRange?: [DateTypes, DateTypes]
   disabled?: boolean
   type?: DatePickerType
@@ -86,6 +88,18 @@ export function Root(props: {
         actions.setCurrMonth(inst.month())
       })
     },
+  )
+
+  watch(
+    () => state.focused,
+    (focused) => {
+      if (focused) {
+        props.onFocus?.()
+      } else {
+        props.onBlur?.()
+      }
+    },
+    { defer: true },
   )
 
   return (

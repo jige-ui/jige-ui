@@ -22,6 +22,8 @@ export function Demo() {
             placeholder='Input some'
             readonly={p.readonly}
             size={p.size}
+            onFocus={() => console.log('focus')}
+            onBlur={() => console.log('blur')}
           />
         </div>
       </Playground.MainArea>

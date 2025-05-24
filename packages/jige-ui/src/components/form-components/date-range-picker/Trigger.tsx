@@ -10,7 +10,6 @@ import { ClearableSuffix } from '../input/ClearableSuffix'
 import { context } from './context'
 
 export function Trigger(props: {
-  onBlur: () => void
   clearable: boolean
 }) {
   const [state, actions] = context.useContext()
@@ -25,8 +24,11 @@ export function Trigger(props: {
     () => floatState.status,
     (s) => {
       if (s === 'closed') {
-        props.onBlur()
+        actions.setState('focused', false)
         actions.syncValueToPreview()
+      }
+      if (s === 'opened') {
+        actions.setState('focused', true)
       }
       if (s === 'closing') {
         const [ref1, ref2] = state.triggerRefs

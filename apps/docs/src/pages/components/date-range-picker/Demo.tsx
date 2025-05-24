@@ -23,6 +23,8 @@ export function Demo() {
             value={value()}
             onChange={setValue}
             type={p.type}
+            onFocus={() => console.log('focus')}
+            onBlur={() => console.log('blur')}
             presets={[
               {
                 label: '本周',

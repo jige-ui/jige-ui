@@ -21,6 +21,8 @@ export function Demo() {
             type={p.type as any}
             value={value()}
             onChange={setValue}
+            onFocus={() => console.log('focus')}
+            onBlur={() => console.log('blur')}
           />
         </div>
       </Playground.MainArea>

@@ -15,6 +15,7 @@ export function DateRangePicker(props: {
   value?: [string, string]
   onChange?: (value: [string, string]) => void
   onBlur?: () => void
+  onFocus?: () => void
   placeholder?: [string, string]
   disableBind?: boolean
   clearable?: boolean
@@ -64,6 +65,18 @@ export function DateRangePicker(props: {
     { defer: true },
   )
 
+  watch(
+    () => state.focused,
+    (focused) => {
+      if (focused) {
+        props.onFocus?.()
+      } else {
+        props.onBlur?.()
+      }
+    },
+    { defer: true },
+  )
+
   return (
     <Context.Provider>
       <Form.Bind
@@ -93,10 +106,7 @@ export function DateRangePicker(props: {
           disabled={state.disabled}
           closeDelay={28}
         >
-          <Trigger
-            onBlur={props.onBlur || (() => {})}
-            clearable={undefinedOr(props.clearable, true)}
-          />
+          <Trigger clearable={undefinedOr(props.clearable, true)} />
           <Popover.Content
             onMouseDown={(e) => {
               e.preventDefault()
