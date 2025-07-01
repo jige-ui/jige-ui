@@ -22,9 +22,7 @@
   "module": "dist/build.js",
   "types": "dist/build.d.ts",
   "typesVersions": {},
-  "files": [
-    "dist"
-  ],
+  "files": ["dist"],
   "scripts": {
     "build": "tsup",
     "build-dev": "cross-env DEV_MODE=true tsup",
@@ -33,7 +31,7 @@
   "peerDependencies": {
     "@tanstack/solid-table": "^8.21.3",
     "chart.js": "^4.4.9",
-    "jige-core": "^0.40.4",
+    "jige-core": "^0.40.5",
     "solid-js": "^1.9.6"
   },
   "dependencies": {

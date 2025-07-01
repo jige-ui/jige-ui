@@ -25,15 +25,16 @@ export function Content(props: {
           style={{
             color: 'var(--jg-fg-warning)',
             'margin-right': '4px',
+            'font-size': '16px',
           }}
         >
           <IconFluentErrorCircle24Filled />
         </div>
       ),
-      cancelText: 'Cancel',
-      okText: 'OK',
-      title: 'Are you sure?',
-      description: 'Are you sure you want to do this?',
+      cancelText: '取消',
+      okText: '确认',
+      title: '警告',
+      description: '你确定要这么做?',
     },
     props,
   )
@@ -48,7 +49,7 @@ export function Content(props: {
       <div class='jg-pop-confirm-description'>{finalProps.description}</div>
       <div class='jg-pop-confirm-actions'>
         <Button
-          size={'small'}
+          size={22}
           onClick={() => {
             finalProps.onCancel?.()
             popActs.setOpen(false)
@@ -57,7 +58,7 @@ export function Content(props: {
           {finalProps.cancelText}
         </Button>
         <Button
-          size={'small'}
+          size={22}
           onClick={async () => {
             await finalProps.onConfirm?.()
             popActs.setOpen(false)
