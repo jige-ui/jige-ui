@@ -1,7 +1,7 @@
 {
   "name": "jige-ui",
   "type": "module",
-  "version": "0.32.1",
+  "version": "0.32.2",
   "private": false,
   "description": "a solidjs component library",
   "license": "MIT",
@@ -22,7 +22,9 @@
   "module": "dist/build.js",
   "types": "dist/build.d.ts",
   "typesVersions": {},
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "build": "tsup",
     "build-dev": "cross-env DEV_MODE=true tsup",
