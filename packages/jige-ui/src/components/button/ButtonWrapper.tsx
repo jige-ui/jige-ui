@@ -71,10 +71,13 @@ export function ButtonWrapper<T = string | undefined>(
         if (local.onClick) {
           const doClick = async () => {
             actions.setState('loading', true)
-            if (local.onClick) {
-              await local.onClick(e)
+            try {
+              if (local.onClick) {
+                await local.onClick(e)
+              }
+            } finally {
+              actions.setState('loading', false)
             }
-            actions.setState('loading', false)
           }
           doClick()
         }
