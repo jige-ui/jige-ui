@@ -1,5 +1,5 @@
 import scrollCss from 'sass:./scrollbar.scss'
-import { ScrollbarCore, combineStyle, runSolidEventHandler } from 'jige-core'
+import { ScrollbarCore, runSolidEventHandler } from 'jige-core'
 import type { JSX, Ref } from 'solid-js'
 import { Show, createMemo, createSignal } from 'solid-js'
 import { mountStyle } from 'solid-uses'
@@ -62,7 +62,6 @@ export function Scrollbar(props: {
 }) {
   mountStyle(scrollCss, 'jige-ui-scrollbar')
   const [hidden, setHidden] = createSignal(true)
-  const [isScrolling, setIsScrolling] = createSignal(false)
   return (
     <ScrollbarCore
       class={props.class}
@@ -78,24 +77,11 @@ export function Scrollbar(props: {
     >
       <ScrollbarCore.ScrollArea
         onScroll={(e) => {
-          setIsScrolling(true)
           runSolidEventHandler(e, props.onScroll)
-        }}
-        onScrollEnd={() => {
-          setIsScrolling(false)
         }}
         ref={props.scrollRef}
       >
-        <ScrollbarCore.Content
-          style={combineStyle(
-            {
-              'user-select': isScrolling() ? 'none' : 'auto',
-            },
-            props.contentStyle,
-          )}
-        >
-          {props.children}
-        </ScrollbarCore.Content>
+        <ScrollbarCore.Content style={props.contentStyle}>{props.children}</ScrollbarCore.Content>
       </ScrollbarCore.ScrollArea>
       <Show when={!props.hideVertical}>
         <GmScrollBar

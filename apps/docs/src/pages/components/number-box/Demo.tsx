@@ -9,6 +9,7 @@ export function Demo() {
     disabled: false,
     max: 100,
     min: 0,
+    size: 'medium' as 'small' | 'medium' | 'large',
   })
   return (
     <Playground>
@@ -23,7 +24,13 @@ export function Demo() {
           <NumberBox value={value()} onChange={setValue} {...s} />
         </div>
       </Playground.MainArea>
-      <Playground.PropertySetting properties={s} onChange={setS} />
+      <Playground.PropertySetting
+        properties={s}
+        onChange={setS}
+        typeDeclaration={{
+          size: ['small', 'medium', 'large'],
+        }}
+      />
     </Playground>
   )
 }

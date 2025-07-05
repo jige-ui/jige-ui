@@ -16,6 +16,7 @@ export function NumberBox(props: {
   onChange?: (value: number) => void
   onFocus?: () => void
   onBlur?: () => void
+  size?: 'small' | 'medium' | 'large'
   disableBind?: boolean
 }) {
   mountStyle(inputCss, 'jige-ui-input')
@@ -27,6 +28,9 @@ export function NumberBox(props: {
           class='jg-input-wrapper'
           data-focused={dataIf(state.focused)}
           data-disabled={dataIf(state.disabled)}
+          data-small={dataIf(props.size === 'small')}
+          data-medium={dataIf(props.size === 'medium')}
+          data-large={dataIf(props.size === 'large')}
         >
           <NumberInput class='jg-input-native' onBlur={props.onBlur} onFocus={props.onFocus} />
           <MinusAndPlus class='jg-number-box-tools' />

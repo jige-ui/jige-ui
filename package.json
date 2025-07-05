@@ -5,9 +5,10 @@
   "license": "MIT",
   "scripts": {
     "build": "turbo run build",
-    "pub:ui": "pnpm build:ui && cd packages/jige-ui && pnpm publish -r",
+    "pub:ui": "pnpm build:core && pnpm build:ui && cd packages/jige-ui && pnpm publish -r",
     "build:docs": "cd apps/docs && pnpm build",
     "build:ui": "cd packages/jige-ui && pnpm build",
+    "build:core": "cd packages/jige-core && cross-env DROP_CONSOLE=true pnpm build",
     "clean": "pnpm exec rimraf .turbo node_modules",
     "dev": "turbo watch dev jige-ui#build-dev",
     "lint": "pnpm exec biome check .",
@@ -23,7 +24,8 @@
     "commit-and-tag-version": "^12.5.0",
     "husky": "^9.1.7",
     "rimraf": "^6.0.1",
-    "turbo": "^2.5.3"
+    "turbo": "^2.5.3",
+    "cross-env": "^7.0.3"
   },
   "commit-and-tag-version": {
     "packageFiles": [

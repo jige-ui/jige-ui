@@ -8,7 +8,11 @@
     "jige-ui#build-dev": {
       "inputs": ["src/**/*.tsx", "src/**/*.scss"],
       "outputs": ["dist/**"],
+      "dependsOn": ["jige-core#build"],
       "cache": false
+    },
+    "jige-core#build": {
+      "outputs": ["dist/**"]
     },
     "dev": {
       "cache": false,
