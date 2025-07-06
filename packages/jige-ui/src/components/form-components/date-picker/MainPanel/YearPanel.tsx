@@ -1,6 +1,5 @@
-import { debounce, isArray, throttle } from 'radash'
+import { createWatch, debounce, isArray, throttle } from 'jige-utils'
 import { For, createSignal } from 'solid-js'
-import { watch } from 'solid-uses'
 import { dataIf } from '~/common/dataset'
 import { dayes } from '~/common/dayes'
 import type { MaybePromise } from '~/common/types'
@@ -13,7 +12,7 @@ export function YearPanel(props: {
   const [state, actions] = panelContext.useContext()
   const [years, setYears] = createSignal<number[]>(genYears(state.currYear))
   // eslint-disable-next-line solid/reactivity
-  const throttleYear = throttle({ interval: 60 }, (e) => {
+  const throttleYear = throttle((e: WheelEvent) => {
     const maxYear = state.toInst.year()
     const minYear = state.fromInst.year()
     const firstYear = years()[0]
@@ -24,9 +23,9 @@ export function YearPanel(props: {
     } else if (e.deltaY < 0 && firstYear > minYear) {
       setYears(genYears(firstYear - 12))
     }
-  })
+  }, 60)
 
-  const debounceSetHlYears = debounce({ delay: 200 }, async (ys: number[]) => {
+  const debounceSetHlYears = debounce(async (ys: number[]) => {
     const getHls = props.highlightYears
     if (isArray(getHls)) {
       actions.setState('hlYears', getHls)
@@ -34,13 +33,13 @@ export function YearPanel(props: {
       const years = await getHls([ys[0], ys[ys.length - 1]])
       actions.setState('hlYears', years)
     }
-  })
+  }, 200)
 
   const checkYear = (year: number) => {
     return year >= state.fromInst.year() && year <= state.toInst.year()
   }
 
-  watch(years, debounceSetHlYears)
+  createWatch(years, debounceSetHlYears)
   return (
     <div
       class='jg-dp-year-panel'

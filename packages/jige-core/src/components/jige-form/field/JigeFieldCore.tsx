@@ -1,12 +1,11 @@
 import { callMaybeCallableChild } from '@/common/props'
 import { type JSX, mergeProps, onCleanup, onMount } from 'solid-js'
 import type { JigeFormAsyncValidator, JigeFormValidator } from '../validator'
-
-import { watch } from 'solid-uses'
 import { formContext } from '../form/context'
 import { getValueFromPath } from '../utils'
 import { FieldContext } from './context'
 import { createFieldContext, type getFieldContext } from './fieldContext'
+import { createWatch } from 'jige-utils'
 
 export type JigeFieldCoreProps = {
   name: string
@@ -51,7 +50,7 @@ function FieldCore(props: JigeFieldCoreProps) {
     formActs.clearState(realProps.name)
   })
 
-  watch(
+  createWatch(
     () => context[0].value,
     (v) => {
       if (v !== getValueFromPath(formStatic.initialValues, realProps.name)) {
@@ -62,14 +61,14 @@ function FieldCore(props: JigeFieldCoreProps) {
     },
   )
 
-  watch(
+  createWatch(
     () => context[0].isTouched,
     (v) => {
       v && formActs.setState('isTouched', v)
     },
   )
 
-  watch(
+  createWatch(
     () => realProps.validateRelatedFields.map((v) => formActs.getFieldValue(v)),
     () => {
       context[1].handleValidate()

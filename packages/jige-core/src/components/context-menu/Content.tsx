@@ -4,8 +4,8 @@ import { makeEventListener } from '@solid-primitives/event-listener'
 import { Show, onMount } from 'solid-js'
 import type { JSX } from 'solid-js/jsx-runtime'
 import { Portal } from 'solid-js/web'
-import { watch } from 'solid-uses'
 import context from './context'
+import { createWatch } from 'jige-utils'
 
 function ContentCore(
   props: { zindex?: number } & Omit<JSX.HTMLAttributes<HTMLDivElement>, 'onAnimationEnd' | 'ref'>,
@@ -15,7 +15,7 @@ function ContentCore(
   const targetBounds = createElementBounds(() => state.triggerEl)
   const contentBounds = createElementBounds(() => state.contentEl)
   onMount(() => {
-    watch(
+    createWatch(
       () => ({ ...targetBounds }),
       () => {
         actions.setOpen(false)
@@ -23,14 +23,14 @@ function ContentCore(
       { defer: true },
     )
 
-    watch(
+    createWatch(
       () => ({ ...contentBounds, stateClientX: state.clientX, stateClientY: state.clientY }),
       () => {
         actions.updatePos()
       },
     )
 
-    watch(
+    createWatch(
       () => state.status,
       () => {
         if (state.status.endsWith('ing')) {

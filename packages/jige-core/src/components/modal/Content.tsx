@@ -6,8 +6,8 @@ import { makeEventListener } from '@solid-primitives/event-listener'
 import { Ref } from '@solid-primitives/refs'
 import { createMemo, onCleanup, onMount, splitProps } from 'solid-js'
 import type { JSX } from 'solid-js/jsx-runtime'
-import { watch } from 'solid-uses'
 import { GlobalModalStore, context } from './context'
+import { createWatch } from 'jige-utils'
 
 export function Content(
   props: PropsWithContextChild<
@@ -45,7 +45,7 @@ export function Content(
       }
     })
 
-    watch(
+    createWatch(
       () => state.status,
       (status) => {
         if (status.endsWith('ing')) {

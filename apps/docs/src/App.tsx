@@ -3,10 +3,10 @@ import { Router, useCurrentMatches } from '@solidjs/router'
 import { esday } from 'esday'
 import { Scrollbar } from 'jige-ui'
 import { Suspense, createMemo, onMount } from 'solid-js'
-import { useEventListener, watch } from 'solid-uses'
 import { Aside } from './parts/aside'
 import { Header } from './parts/header'
 import { useAppState } from './state/app-state'
+import { createWatch, makeEventListener } from 'jige-utils'
 
 function RouteWrapper(props: {
   children: any
@@ -32,7 +32,7 @@ function RouteWrapper(props: {
 export function App() {
   const [state] = useAppState()
 
-  watch(
+  createWatch(
     () => state.isDark,
     (d) => {
       document.body.classList.toggle('dark', d)
@@ -42,7 +42,7 @@ export function App() {
   let timer: NodeJS.Timeout
 
   onMount(() => {
-    useEventListener('resize', () => {
+    makeEventListener(window, 'resize', () => {
       document.body.classList.add('no-transition')
       clearTimeout(timer)
       timer = setTimeout(() => {

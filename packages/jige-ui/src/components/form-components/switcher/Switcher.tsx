@@ -3,7 +3,7 @@ import type { JSX } from 'solid-js'
 
 import styles from 'sass:./switcher.scss'
 import { Match, Show, Switch, createMemo } from 'solid-js'
-import { mountStyle } from 'solid-uses'
+import { mountStyle } from 'jige-utils'
 import { dataIf } from '~/common/dataset'
 import { Form } from '~/components/form'
 import { AnimatedChecked } from '../../icons'

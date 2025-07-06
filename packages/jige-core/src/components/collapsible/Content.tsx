@@ -5,8 +5,8 @@ import { runSolidEventHandler } from '@/common/solidjs'
 import { mergeRefs } from '@solid-primitives/refs'
 import type { JSX } from 'solid-js'
 import { Show, createSignal, onMount, splitProps } from 'solid-js'
-import { watch } from 'solid-uses'
 import context from './context'
+import { createWatch } from 'jige-utils'
 
 function CollapsibleContentMain(
   props: PropsWithContextChild<
@@ -20,7 +20,7 @@ function CollapsibleContentMain(
   let ref!: HTMLDivElement
 
   onMount(() => {
-    watch([() => state.status], () => {
+    createWatch([() => state.status], () => {
       if (state.status.endsWith('ing')) {
         setHeight(`${getElementHeight(ref)}px`)
         if (!hasAnimation(ref)) {

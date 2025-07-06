@@ -1,7 +1,7 @@
 import { Show, children } from 'solid-js'
 import type { JSX } from 'solid-js/jsx-runtime'
-import { watch } from 'solid-uses'
 import { context } from './context'
+import { createWatch } from 'jige-utils'
 
 export function ButtonContent(props: {
   children?: JSX.Element
@@ -12,7 +12,7 @@ export function ButtonContent(props: {
   const child = children(() => props.children)
   const icon = children(() => props.icon)
 
-  watch([() => props.label, () => child()], ([label, child]) => {
+  createWatch([() => props.label, () => child()], ([label, child]) => {
     actions.setState('iconOnly', !label && !child)
   })
 

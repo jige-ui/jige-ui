@@ -1,6 +1,5 @@
 import { FloatingUiCore, hiddenStyle } from 'jige-core'
 import { createSignal } from 'solid-js'
-import { watch } from 'solid-uses'
 import { dataIf } from '~/common/dataset'
 import { Form } from '~/components/form'
 import { Popover } from '~/components/popover'
@@ -8,6 +7,7 @@ import IconFluentArrowRight24Filled from '~icons/fluent/arrow-right-24-filled'
 import IconFluentCalendar24Regular from '~icons/fluent/calendar-24-regular'
 import { ClearableSuffix } from '../input/ClearableSuffix'
 import { context } from './context'
+import { createWatch } from 'jige-utils'
 
 export function Trigger(props: {
   clearable: boolean
@@ -16,11 +16,11 @@ export function Trigger(props: {
   const [floatState, floatActions] = FloatingUiCore.useContext()
   const [focused, setFocused] = createSignal(false)
 
-  watch(focused, (f) => {
+  createWatch(focused, (f) => {
     floatActions.setTimerOpen(f)
   })
 
-  watch(
+  createWatch(
     () => floatState.status,
     (s) => {
       if (s === 'closed') {

@@ -1,6 +1,6 @@
 import { createRoot } from 'solid-js'
 import { createStore } from 'solid-js/store'
-import { createComponentState } from 'solid-uses'
+import { createComponentState } from 'solid-tiny-context'
 import type { CloseableStatus } from '../../common/types'
 
 export const CollapsibleParents = createRoot(() => {

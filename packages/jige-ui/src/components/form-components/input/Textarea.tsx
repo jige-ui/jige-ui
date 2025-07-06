@@ -1,6 +1,6 @@
 import { mergeRefs } from '@solid-primitives/refs'
 import { FormCore, InputCore, ScrollbarCore, combineStyle, runSolidEventHandler } from 'jige-core'
-import { throttle } from 'radash'
+import { throttle } from 'jige-utils'
 import { createSignal, splitProps } from 'solid-js'
 import { dataIf } from '~/common/dataset'
 import { Form } from '~/components/form'
@@ -32,7 +32,7 @@ function ScrollInput(
   ])
   const [state, actions] = ScrollbarCore.useContext()
   const [, fieldCoreActs] = FormCore.useField()
-  const throttleSetValue = throttle({ interval: 30 }, actions.setValue)
+  const throttleSetValue = throttle(actions.setValue, 30)
 
   return (
     <InputCore.Native

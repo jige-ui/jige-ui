@@ -1,5 +1,5 @@
 import { createContext } from 'solid-js'
-import { createComponentState } from 'solid-uses'
+import { createComponentState } from 'solid-tiny-context'
 
 export const fieldNameContext = createComponentState({
   state: () => ({

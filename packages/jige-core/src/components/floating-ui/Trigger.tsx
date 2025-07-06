@@ -1,8 +1,8 @@
 import { makeEventListener } from '@solid-primitives/event-listener'
 import { Ref, mergeRefs } from '@solid-primitives/refs'
 import type { JSX } from 'solid-js'
-import { watch } from 'solid-uses'
 import { context } from './context'
+import { createWatch } from 'jige-utils'
 
 // this is the trgger component
 export function Trigger(props: {
@@ -11,7 +11,7 @@ export function Trigger(props: {
 }) {
   const [state, actions] = context.useContext()
 
-  watch(
+  createWatch(
     () => state.refTrigger,
     (refTrigger) => {
       if (!refTrigger) return
@@ -30,7 +30,7 @@ export function Trigger(props: {
     },
   )
 
-  watch([() => state.status, () => state.placement], ([status, placement]) => {
+  createWatch([() => state.status, () => state.placement], ([status, placement]) => {
     const refTrigger = state.refTrigger
     if (!refTrigger) return
 

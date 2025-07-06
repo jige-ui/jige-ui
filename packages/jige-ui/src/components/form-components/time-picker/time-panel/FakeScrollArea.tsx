@@ -1,6 +1,6 @@
 import { combineStyle, dataIf, uiRefreshDo } from 'jige-core'
+import { createWatch } from 'jige-utils';
 import { For, type JSX, createMemo, createSignal, mergeProps, onMount } from 'solid-js'
-import { watch } from 'solid-uses'
 
 export function FakeScrollArea<TValue extends string | number>(props: {
   value: TValue
@@ -63,7 +63,7 @@ export function FakeScrollArea<TValue extends string | number>(props: {
   let ref!: HTMLDivElement
   let wrapperRef!: HTMLDivElement
 
-  watch(
+  createWatch(
     () => realProps.value,
     (v) => {
       if (v !== currItem().value) {
@@ -90,7 +90,7 @@ export function FakeScrollArea<TValue extends string | number>(props: {
     return realProps.items[realIndex()]
   })
 
-  watch(currItem, (newItem) => {
+  createWatch(currItem, (newItem) => {
     if (newItem.value !== props.value) {
       props.onChange(newItem.value)
     }

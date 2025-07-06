@@ -2,7 +2,7 @@ import css from 'sass:./button.scss'
 import type { ButtonElement, ButtonProps } from './types'
 
 import { splitProps } from 'solid-js'
-import { mountStyle, watch } from 'solid-uses'
+import { mountStyle, createWatch } from 'jige-utils'
 import { Form } from '../form'
 import { ButtonContent } from './ButtonContent'
 import { ButtonWrapper } from './ButtonWrapper'
@@ -39,13 +39,16 @@ export function Button<T extends string | undefined = undefined>(
   const [, actions] = Context.value
   const [formState] = Form.useFormContext()
 
-  watch([() => formState.disabled, () => local.disabled, () => local.type], ([fD, pD, type]) => {
-    if ((type === 'submit' || type === 'reset') && fD) {
-      actions.setState('disabled', true)
-    } else {
-      actions.setState('disabled', pD || false)
-    }
-  })
+  createWatch(
+    [() => formState.disabled, () => local.disabled, () => local.type],
+    ([fD, pD, type]) => {
+      if ((type === 'submit' || type === 'reset') && fD) {
+        actions.setState('disabled', true)
+      } else {
+        actions.setState('disabled', pD || false)
+      }
+    },
+  )
 
   return (
     <Context.Provider>

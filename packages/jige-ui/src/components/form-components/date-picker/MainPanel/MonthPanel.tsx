@@ -1,7 +1,6 @@
 import { esday } from 'esday'
-import { debounce, isFunction, list } from 'radash'
+import { createWatch, debounce, isFunction, list } from 'jige-utils'
 import { For } from 'solid-js'
-import { watch } from 'solid-uses'
 import { dataIf } from '~/common/dataset'
 import { dayes } from '~/common/dayes'
 import type { MaybePromise } from '~/common/types'
@@ -12,7 +11,7 @@ export function MonthPanel(props: {
   highlightMonths: string[] | ((visibleYear: number) => MaybePromise<string[]>)
 }) {
   const [state, actions] = panelContext.useContext()
-  const debounceSetHlMonths = debounce({ delay: 200 }, async (y: number) => {
+  const debounceSetHlMonths = debounce(async (y: number) => {
     const getHls = props.highlightMonths
     if (isFunction(getHls)) {
       const mons = await getHls(y)
@@ -20,7 +19,7 @@ export function MonthPanel(props: {
     } else {
       actions.setState('hlMonths', getHls)
     }
-  })
+  }, 200)
 
   const isHl = (m: number) => {
     const inst = esday().year(state.currYear).month(m)
@@ -34,7 +33,7 @@ export function MonthPanel(props: {
     return inst >= state.fromInst && inst <= state.toInst
   }
 
-  watch(() => state.currYear, debounceSetHlMonths)
+  createWatch(() => state.currYear, debounceSetHlMonths)
   return (
     <div class='jg-dp-month-panel'>
       <For each={list(11)}>

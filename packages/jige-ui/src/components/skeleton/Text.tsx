@@ -1,4 +1,4 @@
-import { list } from 'radash'
+import { list } from 'jige-utils'
 import { For, Show, createMemo } from 'solid-js'
 import { Node } from './Node'
 

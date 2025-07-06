@@ -1,8 +1,8 @@
 import { createElementBounds } from '@solid-primitives/bounds'
 import { mergeRefs } from '@solid-primitives/refs'
 import { type ComponentProps, createSignal, splitProps } from 'solid-js'
-import { watch } from 'solid-uses'
 import context from './context'
+import { createWatch } from 'jige-utils'
 
 export default function Table(props: ComponentProps<'div'>) {
   const Context = context.initial()
@@ -11,7 +11,7 @@ export default function Table(props: ComponentProps<'div'>) {
   const [ref, setRef] = createSignal<HTMLDivElement | null>(null)
   const bounds = createElementBounds(ref)
 
-  watch([() => bounds.width, () => ({ ...state.manualWidths })], ([w]) => {
+  createWatch([() => bounds.width, () => ({ ...state.manualWidths })], ([w]) => {
     if (w) {
       actions.refresh(w)
     }

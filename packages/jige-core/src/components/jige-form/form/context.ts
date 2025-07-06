@@ -1,7 +1,7 @@
 import type { AsyncFn, MaybeAsyncFn } from '@/common/types'
 import { isUndefined } from '@/common/types'
 import { batch } from 'solid-js'
-import { createComponentState } from 'solid-uses'
+import { createComponentState } from 'solid-tiny-context'
 import { getValueFromPath } from '../utils'
 import type { JigeFormValidatorCorrectReturn } from '../validator'
 

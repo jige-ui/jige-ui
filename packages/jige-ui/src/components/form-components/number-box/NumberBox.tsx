@@ -1,6 +1,6 @@
 import inputCss from 'sass:../input/input.scss'
 import css from 'sass:./number-box.scss'
-import { mountStyle } from 'solid-uses'
+import { mountStyle } from 'jige-utils'
 
 import { dataIf } from '~/common/dataset'
 import { MinusAndPlus } from './MinusAndPlus'

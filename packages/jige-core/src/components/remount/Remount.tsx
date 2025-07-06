@@ -1,13 +1,13 @@
+import { createWatch } from 'jige-utils'
 import type { JSX } from 'solid-js'
 import { Show, createSignal } from 'solid-js'
-import { watch } from 'solid-uses'
 
 export function Remount(props: {
   remountWhenChange: any
   children: JSX.Element
 }) {
   const [show, setShow] = createSignal(true)
-  watch(
+  createWatch(
     () => props.remountWhenChange,
     () => {
       setShow(false)

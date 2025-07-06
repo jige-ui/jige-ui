@@ -3,7 +3,7 @@ import { For } from 'solid-js'
 import type { JSX } from 'solid-js/jsx-runtime'
 import { Portal } from 'solid-js/web'
 
-import { mountStyle } from 'solid-uses'
+import { mountStyle } from 'jige-utils'
 import { JigeRootContext } from '../ROOT'
 import { Toast } from './Toast'
 import { context } from './context'

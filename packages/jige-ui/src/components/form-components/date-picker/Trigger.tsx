@@ -1,12 +1,12 @@
 import { FloatingUiCore, FormCore } from 'jige-core'
 import { batch, createSignal } from 'solid-js'
-import { watch } from 'solid-uses'
 import { dataIf } from '~/common/dataset'
 import { Form } from '~/components/form'
 import IconFluentCalendar24Regular from '~icons/fluent/calendar-24-regular'
 import { Popover } from '../../popover'
 import { ClearableSuffix } from '../input/ClearableSuffix'
 import { context } from './context'
+import { createWatch } from 'jige-utils'
 
 export function Trigger(props: {
   clearable: boolean
@@ -16,7 +16,7 @@ export function Trigger(props: {
   const [, fieldCoreActs] = FormCore.useField()
   const [focused, setFocused] = createSignal(false)
 
-  watch(
+  createWatch(
     () => floatState.status,
     (status) => {
       if (status === 'closed') {

@@ -3,7 +3,7 @@ import { ComboBox, Form, Input, NumberBox, Switcher } from 'jige-ui'
 import { isEqual } from 'radash'
 import { For, Match, Switch, createSignal } from 'solid-js'
 import type { SetStoreFunction } from 'solid-js/store'
-import { watch } from 'solid-uses'
+import { createWatch } from 'jige-utils'
 
 export function PropertySetting<T extends { [key: string]: any }>(props: {
   properties: T
@@ -20,14 +20,14 @@ export function PropertySetting<T extends { [key: string]: any }>(props: {
 
   const [propName, setPropName] = createSignal<string[]>([])
 
-  watch(
+  createWatch(
     () => ({ ...props.properties }),
     (p) => {
       isEqual(propName(), Object.keys(p)) || setPropName(Object.keys(p))
     },
   )
 
-  watch(
+  createWatch(
     () => ({ ...form.context[0].formData }),
     (data: any) => {
       props.onChange(data)

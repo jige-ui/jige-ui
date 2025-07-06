@@ -1,4 +1,4 @@
-import { watch } from 'solid-uses'
+import { createWatch } from 'jige-utils'
 import context from './context'
 
 export function Rail(props: {
@@ -8,7 +8,7 @@ export function Rail(props: {
   class?: string
 }) {
   const [state, actions] = context.useContext()
-  watch(
+  createWatch(
     () => props.strokeWidth,
     () => {
       actions.setState('railWidth', props.strokeWidth)

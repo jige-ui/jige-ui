@@ -2,7 +2,7 @@ import inputCss from 'sass:../input/input.scss'
 import styles from 'sass:./date-picker.scss'
 import { batch } from 'solid-js'
 import type { JSX } from 'solid-js/jsx-runtime'
-import { mountStyle, watch } from 'solid-uses'
+import { mountStyle, createWatch } from 'jige-utils'
 import { isDef } from '~/common/types'
 import { Form } from '~/components/form'
 import { Popover } from '../../popover'
@@ -54,14 +54,14 @@ export function Root(props: {
 
   const [state, actions] = Context.value
 
-  watch(
+  createWatch(
     () => props.value,
     (v) => {
       isDef(v) && actions.setValue(v)
     },
   )
 
-  watch(
+  createWatch(
     () => state.type,
     () => {
       actions.setValue('')
@@ -69,14 +69,14 @@ export function Root(props: {
     { defer: true },
   )
 
-  watch(
+  createWatch(
     () => state.value,
     (v) => {
       props.onChange?.(v)
     },
   )
 
-  watch(
+  createWatch(
     () => state.dateValue,
     () => {
       const inst = state.inst
@@ -90,7 +90,7 @@ export function Root(props: {
     },
   )
 
-  watch(
+  createWatch(
     () => state.focused,
     (focused) => {
       if (focused) {

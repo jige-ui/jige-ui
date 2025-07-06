@@ -2,7 +2,7 @@ import { ModalCore } from 'jige-core'
 import type { JSX } from 'solid-js/jsx-runtime'
 
 import css from 'sass:./modal.scss'
-import { mountStyle } from 'solid-uses'
+import { mountStyle } from 'jige-utils'
 import { context } from './context'
 
 export function Root(props: {

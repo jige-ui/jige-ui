@@ -1,7 +1,6 @@
 import type { EsDay } from 'esday'
 import { AnimatedGroup } from 'jige-core'
 import { type ComponentProps, batch, createSignal } from 'solid-js'
-import { watch } from 'solid-uses'
 import type { MaybePromise } from '~/common/types'
 import type { DateTypes } from '../types'
 import { DayPanel } from './DayPanel'
@@ -9,6 +8,7 @@ import { HeadTools } from './HeadTools'
 import { MonthPanel } from './MonthPanel'
 import { YearPanel } from './YearPanel'
 import { panelContext } from './context'
+import { createWatch } from 'jige-utils'
 
 function AnimatedPanel(props: {
   width: number
@@ -33,7 +33,7 @@ function AnimatedPanel(props: {
   const [state] = panelContext.useContext()
   const [className, setClassName] = createSignal('')
 
-  watch(
+  createWatch(
     () => state.activePanel,
     () => {
       setClassName('jg-dp-animated-panel')
@@ -115,14 +115,14 @@ export function MainPanel(props: {
 
   const [state, actions] = Context.value
 
-  watch(
+  createWatch(
     () => state.value,
     (v) => {
       props.onChange(v)
     },
   )
 
-  watch(
+  createWatch(
     () => props.currMonth,
     (m) => {
       batch(() => {
@@ -139,7 +139,7 @@ export function MainPanel(props: {
     },
   )
 
-  watch(
+  createWatch(
     () => [state.currYear, state.currMonth],
     ([y, m]) => {
       props.onCurrYearMonthChange?.(y, m)

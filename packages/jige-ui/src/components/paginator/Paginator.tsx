@@ -1,9 +1,9 @@
 import css from 'sass:./paginator.scss'
 import { PaginatorCore } from 'jige-core'
-import { isNumber } from 'radash'
+import { isNumber } from 'jige-utils'
 
 import { Match, Show, Switch, createMemo, createSignal } from 'solid-js'
-import { mountStyle } from 'solid-uses'
+import { mountStyle } from 'jige-utils'
 import { dataIf } from '~/common/dataset'
 import { isDef } from '~/common/types'
 import IconFluentChevronDoubleLeft16Filled from '~icons/fluent/chevron-double-left-16-filled'

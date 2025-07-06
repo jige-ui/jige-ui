@@ -1,4 +1,4 @@
-import { createComponentState } from 'solid-uses'
+import { createComponentState } from 'solid-tiny-context'
 
 export const context = createComponentState({
   state: () => ({

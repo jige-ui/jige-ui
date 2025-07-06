@@ -5,7 +5,7 @@ import IconFluentErrorCircle24Filled from '~icons/fluent/error-circle-24-filled'
 import { Button } from '../button'
 
 import css from 'sass:./pop-confirm.scss'
-import { mountStyle } from 'solid-uses'
+import { mountStyle } from 'jige-utils'
 
 export function Content(props: {
   title?: string

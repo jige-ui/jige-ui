@@ -1,7 +1,7 @@
 import type { JSX } from 'solid-js'
 import { createUniqueId } from 'solid-js'
-import { watch } from 'solid-uses'
 import context, { CollapsibleParents } from './context'
+import { createWatch } from 'jige-utils';
 
 export function Root(props: { children: JSX.Element; parentID?: string }) {
   const Context = context.initial({
@@ -11,7 +11,7 @@ export function Root(props: { children: JSX.Element; parentID?: string }) {
   const [state, actions] = Context.value
   const [pstate, psetState] = CollapsibleParents
 
-  watch([() => state.status, () => state.parentId], ([status, pid]) => {
+  createWatch([() => state.status, () => state.parentId], ([status, pid]) => {
     if (pid) {
       if (status.startsWith('open')) {
         psetState(pid, state.id)
@@ -19,7 +19,7 @@ export function Root(props: { children: JSX.Element; parentID?: string }) {
     }
   })
 
-  watch(
+  createWatch(
     () => pstate[state.parentId],
     (id) => {
       if (!state.parentId || !state.id) return

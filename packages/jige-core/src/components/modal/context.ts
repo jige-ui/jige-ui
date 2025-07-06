@@ -1,8 +1,9 @@
 import { preventBodyScroll } from '@/common/dom'
 import type { CloseableStatus } from '@/common/types'
+import { createWatch } from 'jige-utils'
 import { createRoot, createUniqueId } from 'solid-js'
 import { createStore } from 'solid-js/store'
-import { createComponentState, watch } from 'solid-uses'
+import { createComponentState } from 'solid-tiny-context'
 
 export const GlobalModalStore = createRoot(() => {
   const [state, setState] = createStore({
@@ -10,7 +11,7 @@ export const GlobalModalStore = createRoot(() => {
     preventScrollIds: [] as string[],
     stack: [] as string[],
   })
-  watch(
+  createWatch(
     () => state.preventScrollIds,
     (ids) => {
       preventBodyScroll(ids.length > 0)

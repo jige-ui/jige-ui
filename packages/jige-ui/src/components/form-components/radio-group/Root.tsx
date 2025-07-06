@@ -2,7 +2,7 @@ import { RadioGroupCore } from 'jige-core'
 import type { JSX } from 'solid-js/jsx-runtime'
 
 import css from 'sass:./radio-group.scss'
-import { mountStyle } from 'solid-uses'
+import { mountStyle } from 'jige-utils'
 import { Form } from '~/components/form'
 
 export function RadioFormBind(props: {

@@ -2,14 +2,14 @@ import css from 'sass:./combo-box.scss'
 import { FloatingUiCore } from 'jige-core'
 import type { JSX } from 'solid-js/jsx-runtime'
 
-import { mountStyle, watch } from 'solid-uses'
+import { mountStyle, createWatch } from 'jige-utils'
 import { Form } from '~/components/form'
 import { context } from './context'
 
 function ThiftCheck() {
   const [fState] = FloatingUiCore.useContext()
   const [state, actions] = context.useContext()
-  watch(
+  createWatch(
     () => fState.middlewareData.shift.y,
     (y) => {
       const $scroll = state.scrollElement
@@ -43,7 +43,7 @@ export function Root<T>(props: {
   })
   const [state, actions] = Context.value
 
-  watch(
+  createWatch(
     () => state.value,
     (v) => {
       props.onChange?.(v)

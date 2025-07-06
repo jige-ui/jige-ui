@@ -2,13 +2,12 @@ import dpCss from 'sass:../date-picker/date-picker.scss'
 import inputCss from 'sass:../input/input.scss'
 import css from 'sass:./range-picker.scss'
 import { undefinedOr } from 'jige-core'
-import { isArray } from 'radash'
-import { mountStyle, watch } from 'solid-uses'
 import { Form } from '~/components/form'
 import { Popover } from '~/components/popover'
 import { Panel } from './Panel'
 import { Trigger } from './Trigger'
 import { context } from './context'
+import { createWatch, mountStyle } from 'jige-utils'
 
 export function DateRangePicker(props: {
   disabled?: boolean
@@ -40,7 +39,7 @@ export function DateRangePicker(props: {
 
   const [state, actions] = Context.value
 
-  watch(
+  createWatch(
     () => [...state.value],
     (v) => {
       props.onChange?.(v as [string, string])
@@ -48,7 +47,7 @@ export function DateRangePicker(props: {
     { defer: true },
   )
 
-  watch(
+  createWatch(
     () => props.value,
     (v) => {
       if (v && v[0] !== state.value[0] && v[1] !== state.value[1]) {
@@ -57,7 +56,7 @@ export function DateRangePicker(props: {
     },
   )
 
-  watch(
+  createWatch(
     () => state.type,
     () => {
       actions.clear()
@@ -65,7 +64,7 @@ export function DateRangePicker(props: {
     { defer: true },
   )
 
-  watch(
+  createWatch(
     () => state.focused,
     (focused) => {
       if (focused) {
@@ -86,7 +85,7 @@ export function DateRangePicker(props: {
         }}
         value={state.value}
         setValue={(v) => {
-          if (isArray(v)) {
+          if (Array.isArray(v)) {
             const safeV = ['', ''] as [string, string]
             safeV[0] = v[0] || ''
             safeV[1] = v[1] || ''

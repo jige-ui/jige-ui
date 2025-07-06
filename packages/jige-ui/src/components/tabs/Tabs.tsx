@@ -2,7 +2,7 @@ import styles from 'sass:./tabs.scss'
 import { AnimatedGroup, RadioGroupCore } from 'jige-core'
 import type { ComponentProps, JSX } from 'solid-js'
 import { For, createMemo, createSignal, splitProps } from 'solid-js'
-import { mountStyle, watch } from 'solid-uses'
+import { mountStyle, createWatch } from 'jige-utils'
 
 import { dataIf } from '~/common/dataset'
 import context from './context'
@@ -39,7 +39,7 @@ function Root(
   const [tabState, actions] = Context.value
   const [prevActive, setPrevActive] = createSignal('')
 
-  watch(
+  createWatch(
     () => localProps.active,
     (active, prev) => {
       if (!prev) return

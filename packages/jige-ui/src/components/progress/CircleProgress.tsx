@@ -3,7 +3,7 @@ import { CircleProgressCore } from 'jige-core'
 import type { JSX } from 'solid-js/jsx-runtime'
 
 import { mergeProps } from 'solid-js'
-import { mountStyle } from 'solid-uses'
+import { mountStyle } from 'jige-utils'
 
 export function CircleProgress(props: {
   percent: number

@@ -1,6 +1,6 @@
 import styles from 'sass:./slider.scss'
 import { FloatingUiCore, SliderCore } from 'jige-core'
-import { mountStyle, watch } from 'solid-uses'
+import { mountStyle, createWatch } from 'jige-utils'
 import { dataIf } from '~/common/dataset'
 import { Form } from '~/components/form'
 import { Popover } from '../../popover'
@@ -12,14 +12,14 @@ function ToolTipSliderThumb(props: {
   const floatActs = FloatingUiCore.useContext()[1]
   const [sliderState, sliderActs] = SliderCore.useContext()
 
-  watch(
+  createWatch(
     () => sliderState.value,
     () => {
       floatActs.updatePos()
     },
   )
 
-  watch(
+  createWatch(
     () => sliderState.isDragging,
     (isDragging) => {
       floatActs.setOpen(isDragging)

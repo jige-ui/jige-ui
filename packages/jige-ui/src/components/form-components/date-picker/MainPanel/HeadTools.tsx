@@ -1,10 +1,10 @@
-import { throttle } from 'radash'
 import { type JSX, Show, createMemo } from 'solid-js'
 import { Button } from '~/components/button'
 import IconFluentCaretDown24Filled from '~icons/fluent/caret-down-24-filled'
 import IconFluentCaretUp24Filled from '~icons/fluent/caret-up-24-filled'
 import { NumberToChinese } from '../utils'
 import { panelContext } from './context'
+import { throttle } from 'jige-utils'
 
 export function HeadTools(props: {
   headerRight?: (
@@ -13,12 +13,12 @@ export function HeadTools(props: {
   ) => JSX.Element
 }) {
   const [state, actions] = panelContext.useContext()
-  const throttleMonth = throttle({ interval: 60 }, (e) => {
+  const throttleMonth = throttle((e: WheelEvent) => {
     actions.monthHandle(e.deltaY > 0 ? 1 : -1)
-  })
-  const throttleYear = throttle({ interval: 60 }, (e) => {
+  }, 60)
+  const throttleYear = throttle((e: WheelEvent) => {
     actions.setCurrYear(e.deltaY > 0 ? state.currYear + 1 : state.currYear - 1)
-  })
+  }, 60)
   const monthMode = createMemo(() => {
     return state.defaultPanel === 'month'
   })

@@ -2,7 +2,7 @@ import type { JSX } from 'solid-js/jsx-runtime'
 import { context } from './context'
 
 import css from 'sass:./time-picker.scss'
-import { mountStyle, watch } from 'solid-uses'
+import { mountStyle, createWatch } from 'jige-utils'
 import { Form } from '~/components/form'
 import { Popover } from '~/components/popover'
 
@@ -28,7 +28,7 @@ export function Root(props: {
   })
   const [state, actions] = Context.value
 
-  watch(
+  createWatch(
     () => state.asStr,
     (v) => {
       props.onChange?.(v)
@@ -36,7 +36,7 @@ export function Root(props: {
     { defer: true },
   )
 
-  watch(
+  createWatch(
     () => props.value,
     (value) => {
       if (value && value !== state.asStr) {

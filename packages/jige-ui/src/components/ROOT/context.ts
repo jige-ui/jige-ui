@@ -1,4 +1,4 @@
-import { createComponentState } from 'solid-uses'
+import { createComponentState } from 'solid-tiny-context'
 import type { ThemeVars } from './gen_vars'
 import { defaultThemeColors } from './gen_vars'
 

@@ -1,8 +1,7 @@
-import { mountStyle, watch } from 'solid-uses'
+import { mountStyle, createWatch, list } from 'jige-utils'
 import { context } from './context'
 
 import css from 'sass:./time-panel.scss'
-import { list, max } from 'radash'
 import { Show, createMemo } from 'solid-js'
 import { Button } from '~/components/button'
 import IconFluentCheckmark24Regular from '~icons/fluent/checkmark-24-regular'
@@ -32,7 +31,7 @@ export function TimePanel(props: {
     return ['hour', 'minute', 'second'].indexOf(props.type)
   })
 
-  watch(
+  createWatch(
     () => [state.hour, state.minute, state.second],
     ([h, m, s]) => {
       props.onChange?.(h, m, s)
@@ -127,14 +126,14 @@ export function TimePanel(props: {
             variant='text'
             style={{ width: '100%', 'flex-shrink': 1 }}
             icon={<IconFluentCheckmark24Regular />}
-            size={max([props.width / 5, 24])}
+            size={Math.max(props.width / 5, 24)}
             onClick={() => {
               props.onConfirm?.(state.hour, state.minute, state.second)
             }}
           />
           <Button
             variant='text'
-            size={max([props.width / 5, 24])}
+            size={Math.max(props.width / 5, 24)}
             style={{ width: '100%', 'flex-shrink': 1 }}
             icon={<IconFluentDismiss24Regular />}
             onClick={() => {

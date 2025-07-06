@@ -1,5 +1,5 @@
 import globalStyles from 'sass:../../styles/global.scss'
-import { mountStyle, watch } from 'solid-uses'
+import { mountStyle, createWatch } from 'jige-utils'
 import { RootContext } from './context'
 import type { ThemeVars } from './gen_vars'
 import { defaultThemeColors, genVars } from './gen_vars'
@@ -20,7 +20,7 @@ export function Provider(props: {
 
   const [state] = Context.value
 
-  watch(
+  createWatch(
     () => state.hue,
     (hue) => {
       mountStyle(genVars(hue, state.themeColors), 'jige-ui-vars', true)

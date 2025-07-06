@@ -1,7 +1,7 @@
 import { isUndefined } from '@/common/types'
 import type { JSX } from 'solid-js/jsx-runtime'
-import { watch } from 'solid-uses'
 import { GlobalModalStore, context } from './context'
+import { createWatch } from 'jige-utils'
 
 export function Root(props: {
   children: JSX.Element
@@ -20,7 +20,7 @@ export function Root(props: {
 
   const [globalState] = GlobalModalStore
 
-  watch(
+  createWatch(
     () => props.open,
     (open) => {
       if (isUndefined(open)) return
@@ -28,7 +28,7 @@ export function Root(props: {
     },
   )
 
-  watch(
+  createWatch(
     () => state.status,
     (status) => {
       if (status === 'closed') {
@@ -40,13 +40,13 @@ export function Root(props: {
     },
   )
 
-  watch([() => state.preventScroll, () => state.status], ([p, s]) => {
+  createWatch([() => state.preventScroll, () => state.status], ([p, s]) => {
     const shouldPrevent = p && s.startsWith('open')
 
     actions.preventBodyScroll(shouldPrevent)
   })
 
-  watch(
+  createWatch(
     () => globalState.closeAll,
     (closeAll) => {
       if (closeAll) {

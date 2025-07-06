@@ -13,7 +13,7 @@ import {
 } from 'chart.js'
 import { type Component, createSignal, mergeProps, onCleanup, onMount } from 'solid-js'
 import { unwrap } from 'solid-js/store'
-import { mountStyle, watch } from 'solid-uses'
+import { mountStyle, createWatch } from 'jige-utils'
 import type { ChartContext, ChartProps, TypedChartProps } from './types'
 
 import css from 'sass:./chartjs.scss'
@@ -48,7 +48,7 @@ export const BaseChart: Component<ChartProps> = (rawProps) => {
 
   onMount(() => init())
 
-  watch(
+  createWatch(
     () => props.data,
     (d) => {
       chart()!.data = d
@@ -57,7 +57,7 @@ export const BaseChart: Component<ChartProps> = (rawProps) => {
     { defer: true },
   )
 
-  watch(
+  createWatch(
     () => props.options,
     (opt) => {
       chart()!.options = opt
@@ -66,7 +66,7 @@ export const BaseChart: Component<ChartProps> = (rawProps) => {
     { defer: true },
   )
 
-  watch(
+  createWatch(
     [() => props.width, () => props.height],
     ([w, h]) => {
       chart()!.resize(w, h)
@@ -74,7 +74,7 @@ export const BaseChart: Component<ChartProps> = (rawProps) => {
     { defer: true },
   )
 
-  watch(
+  createWatch(
     () => props.type,
     () => {
       const dimensions = [chart()!.width, chart()!.height]

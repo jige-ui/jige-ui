@@ -1,14 +1,13 @@
 import type { EsDay } from 'esday'
 import type { DateTypes } from '../types'
 
-import { debounce, isFunction, list } from 'radash'
 import { For, createMemo, createSignal } from 'solid-js'
-import { watch } from 'solid-uses'
 import { dataIf } from '~/common/dataset'
 import { dayes } from '~/common/dayes'
 import type { MaybePromise } from '~/common/types'
 import { NumberToChinese, genCalendarDays } from '../utils'
 import { panelContext } from './context'
+import { createWatch, debounce, isFunction, list } from 'jige-utils'
 
 export function DayPanel(props: {
   cellClass: string | ((day: EsDay) => string)
@@ -23,7 +22,7 @@ export function DayPanel(props: {
   const dates = createMemo(() => genCalendarDays(state.currYear, state.currMonth))
 
   // eslint-disable-next-line solid/reactivity
-  const debounceSetHlDates = debounce({ delay: 200 }, async (y: number, m: number) => {
+  const debounceSetHlDates = debounce(async (y: number, m: number) => {
     const getHls = props.highlightDates
     if (isFunction(getHls)) {
       const highlightDates = await getHls(
@@ -42,11 +41,11 @@ export function DayPanel(props: {
         getHls.map((d) => dayes(d).format('YYYY-MM-DD')),
       )
     }
-  })
+  }, 200)
 
   const [isLoadingDsDates, setIsLoadingDsDates] = createSignal(false)
   // eslint-disable-next-line solid/reactivity
-  const debounceSetDsDates = debounce({ delay: 200 }, async (y: number, m: number) => {
+  const debounceSetDsDates = debounce(async (y: number, m: number) => {
     const getDs = props.disabledDates
     if (isFunction(getDs)) {
       setIsLoadingDsDates(true)
@@ -67,21 +66,21 @@ export function DayPanel(props: {
         getDs.map((d) => dayes(d).format('YYYY-MM-DD')),
       )
     }
-  })
+  }, 200)
 
-  watch([() => state.currYear, () => state.currMonth], ([y, m]) => {
+  createWatch([() => state.currYear, () => state.currMonth], ([y, m]) => {
     debounceSetHlDates(y, m)
     debounceSetDsDates(y, m)
   })
 
-  watch(
+  createWatch(
     () => props.highlightDates,
     () => {
       debounceSetHlDates(state.currYear, state.currMonth)
     },
   )
 
-  watch(
+  createWatch(
     () => props.disabledDates,
     () => {
       debounceSetDsDates(state.currYear, state.currMonth)

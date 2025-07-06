@@ -4,7 +4,7 @@ import { makeEventListener } from '@solid-primitives/event-listener'
 import { mergeRefs } from '@solid-primitives/refs'
 import { Show, createSignal, onCleanup, onMount, splitProps } from 'solid-js'
 import type { JSX } from 'solid-js/jsx-runtime'
-import { watch } from 'solid-uses'
+import { createWatch } from 'jige-utils'
 import context from './context'
 
 type ContentProps = { key: string } & JSX.HTMLAttributes<HTMLDivElement>
@@ -20,7 +20,7 @@ function ContentCore(props: ContentProps) {
       setStatus(status().replace('ing', 'ed') as CloseableStatus)
     })
 
-    watch(
+    createWatch(
       () => localProps.key,
       (_, prev) => {
         const h = getElementHeight(ref)
@@ -33,7 +33,7 @@ function ContentCore(props: ContentProps) {
       },
     )
 
-    watch(
+    createWatch(
       () => state.tryClose,
       (v) => {
         if (v === localProps.key) {
@@ -47,7 +47,7 @@ function ContentCore(props: ContentProps) {
       },
     )
 
-    watch(
+    createWatch(
       () => state.tryOpen,
       (v) => {
         if (v === localProps.key) {
@@ -61,7 +61,7 @@ function ContentCore(props: ContentProps) {
       },
     )
 
-    watch(status, (s) => {
+    createWatch(status, (s) => {
       if (s === 'opened') {
         actions.setState({
           height: '',

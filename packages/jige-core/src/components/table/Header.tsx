@@ -1,8 +1,8 @@
 import { type ComponentProps, createMemo, createUniqueId, onCleanup, splitProps } from 'solid-js'
-import { watch } from 'solid-uses'
 import Colgroup from './Colgroup'
 import { NormalTable } from './common'
 import context from './context'
+import { createWatch } from 'jige-utils'
 
 export function TableHeader(props: ComponentProps<'thead'>) {
   const [, actions] = context.useContext()
@@ -41,7 +41,7 @@ export function Column(
     actions.setState('colsKeys', id, undefined!)
   })
 
-  watch([() => local.width, isLeafColumn], ([w, isLeafColumn]) => {
+  createWatch([() => local.width, isLeafColumn], ([w, isLeafColumn]) => {
     actions.setState('colsWidth', id, (isLeafColumn ? w || 80 : undefined)!)
     actions.setState('colsKeys', id, isLeafColumn)
     actions.setState('manualWidths', id, (isLeafColumn ? w || undefined : undefined)!)

@@ -1,4 +1,4 @@
-import { defineGlobalStore } from 'solid-uses'
+import { defineGlobalStore } from 'solid-tiny-context'
 
 const appState = defineGlobalStore('app-state', {
   state: () => ({

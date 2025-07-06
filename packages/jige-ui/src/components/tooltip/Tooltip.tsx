@@ -4,7 +4,7 @@ import type { JSX } from 'solid-js/jsx-runtime'
 import aniFloatCss from 'sass:../../styles/common/ani-floating-ui.scss'
 import css from 'sass:./tooltip.scss'
 
-import { mountStyle } from 'solid-uses'
+import { mountStyle } from 'jige-utils'
 import { RootContext } from '../ROOT/context'
 
 export function Tooltip(props: {

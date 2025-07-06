@@ -1,8 +1,8 @@
 import { type JSX, batch } from 'solid-js'
-import { watch } from 'solid-uses'
 import { formContext } from '../form/context'
 import type { FieldValues } from '../types/field'
 import type { FieldArrayPath } from '../types/path'
+import { createWatch } from 'jige-utils'
 
 let counter = 0
 
@@ -22,7 +22,7 @@ export function JigeFieldArray<
 }) {
   const [formState, formActions] = formContext.useContext()
 
-  watch(
+  createWatch(
     () => formActions.getFieldValue(props.name),
     (value) => {
       const length = value.length

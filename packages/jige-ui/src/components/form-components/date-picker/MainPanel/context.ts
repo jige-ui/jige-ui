@@ -1,6 +1,6 @@
 import type { EsDay } from 'esday'
 import { batch } from 'solid-js'
-import { createComponentState } from 'solid-uses'
+import { createComponentState } from 'solid-tiny-context'
 import { dayes } from '~/common/dayes'
 import type { DateTypes } from '../types'
 

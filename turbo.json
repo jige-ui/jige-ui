@@ -5,6 +5,11 @@
       "dependsOn": ["^build"],
       "outputs": ["dist/**"]
     },
+
+    "jige-utils#build": {
+      "inputs": ["src/**/*.ts"],
+      "outputs": ["dist/**"]
+    },
     "jige-ui#build-dev": {
       "inputs": ["src/**/*.tsx", "src/**/*.scss"],
       "outputs": ["dist/**"],
@@ -12,7 +17,8 @@
       "cache": false
     },
     "jige-core#build": {
-      "outputs": ["dist/**"]
+      "outputs": ["dist/**"],
+      "dependsOn": ["jige-utils#build"]
     },
     "dev": {
       "cache": false,

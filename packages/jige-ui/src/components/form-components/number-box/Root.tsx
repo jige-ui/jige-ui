@@ -1,8 +1,8 @@
 import type { PropsWithContextChild } from 'jige-core'
 import { callMaybeContextChild, undefinedOr } from 'jige-core'
-import { watch } from 'solid-uses'
 import { Form } from '~/components/form'
 import { context } from './context'
+import { createWatch } from 'jige-utils'
 
 export function Root(
   props: PropsWithContextChild<
@@ -27,7 +27,7 @@ export function Root(
   })
   const [state, actions] = Context.value
 
-  watch(
+  createWatch(
     () => state.value,
     (v, prevV) => {
       if (Number.isNaN(v) && Number.isNaN(undefinedOr(prevV, 0))) {
@@ -37,7 +37,7 @@ export function Root(
     },
   )
 
-  watch([() => state.max, () => state.min], () => {
+  createWatch([() => state.max, () => state.min], () => {
     actions.setValue(state.value)
   })
 

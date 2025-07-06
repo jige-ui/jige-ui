@@ -1,9 +1,9 @@
 import { undefinedOr } from 'jige-core'
 import { For, createSignal } from 'solid-js'
 import type { JSX } from 'solid-js/jsx-runtime'
-import { watch } from 'solid-uses'
 import { dataIf } from '~/common/dataset'
 import { Scrollbar } from '../scrollbar'
+import { createWatch } from 'jige-utils'
 
 export function CommonScrollWrapper<T extends any[]>(props: {
   onScroll?: (e: Event) => void
@@ -28,7 +28,7 @@ export function CommonScrollWrapper<T extends any[]>(props: {
   const [hlIndex, setHlIndex] = createSignal(-1)
   const [scrollRef, setScrollRef] = createSignal<HTMLDivElement | null>(null)
 
-  watch(
+  createWatch(
     () => props.selectIndex,
     (index) => {
       const lastItem = index[index.length - 1]
@@ -56,7 +56,7 @@ export function CommonScrollWrapper<T extends any[]>(props: {
     }
   }
 
-  watch([hlIndex, scrollRef], ([index, ref]) => {
+  createWatch([hlIndex, scrollRef], ([index, ref]) => {
     if (!props.preventFocus) {
       listRef?.focus()
     }

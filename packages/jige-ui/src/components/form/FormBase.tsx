@@ -2,7 +2,7 @@ import css from 'sass:./form.scss'
 import { FormCore } from 'jige-core'
 import { splitProps } from 'solid-js'
 
-import { mountStyle } from 'solid-uses'
+import { mountStyle } from 'jige-utils'
 import { formContext } from './context'
 
 export function FormBase(

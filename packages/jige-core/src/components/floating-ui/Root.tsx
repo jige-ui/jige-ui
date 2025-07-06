@@ -1,7 +1,7 @@
 import type { JSX } from 'solid-js/jsx-runtime'
-import { watch } from 'solid-uses'
 import { context } from './context'
 import type { FloatingUiCoreProps } from './props'
+import { createWatch } from 'jige-utils'
 
 export function Root(props: { children: JSX.Element } & FloatingUiCoreProps) {
   const Context = context.initial({
@@ -15,10 +15,13 @@ export function Root(props: { children: JSX.Element } & FloatingUiCoreProps) {
   })
   const [state, actions] = Context.value
 
-  watch([() => state.originalPlacement, () => ({ ...state.plugin }), () => state.arrow], () => {
-    actions.updatePos()
-    console.log('update by ROOT')
-  })
+  createWatch(
+    [() => state.originalPlacement, () => ({ ...state.plugin }), () => state.arrow],
+    () => {
+      actions.updatePos()
+      console.log('update by ROOT')
+    },
+  )
 
   return <Context.Provider>{props.children}</Context.Provider>
 }

@@ -3,7 +3,7 @@ import type { JSX } from 'solid-js/jsx-runtime'
 import styles from 'sass:./collapse.scss'
 import { CollapsibleCore } from 'jige-core'
 import { createMemo } from 'solid-js'
-import { mountStyle } from 'solid-uses'
+import { mountStyle } from 'jige-utils'
 
 export function Arrow1(props: {
   size?: number

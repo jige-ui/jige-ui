@@ -1,4 +1,4 @@
-import { watch } from 'solid-uses'
+import { createWatch } from 'jige-utils'
 import context from './context'
 
 export function Fill(props: {
@@ -11,7 +11,7 @@ export function Fill(props: {
 }) {
   const [state, actions] = context.useContext()
 
-  watch(
+  createWatch(
     () => props.strokeWidth,
     () => {
       actions.setState('fillWidth', props.strokeWidth)

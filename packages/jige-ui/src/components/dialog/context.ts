@@ -1,4 +1,4 @@
-import { createComponentState } from 'solid-uses'
+import { createComponentState } from 'solid-tiny-context'
 import type { DialogInst } from './types'
 
 export const context = createComponentState({

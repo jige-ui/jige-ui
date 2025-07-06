@@ -7,8 +7,8 @@ import { throttle } from '@solid-primitives/scheduled'
 import type { JSX } from 'solid-js'
 import { Show, onMount, splitProps } from 'solid-js'
 import { Portal } from 'solid-js/web'
-import { onClickOutside, watch } from 'solid-uses'
 import { context } from './context'
+import { createClickOutside, createWatch } from 'jige-utils'
 
 function FloatingContentCore(
   props: {
@@ -35,22 +35,22 @@ function FloatingContentCore(
   onMount(() => {
     makeEventListener(window, 'resize', throttleUpdate)
 
-    watch(
+    createWatch(
       () => [{ ...targetBounds }, { ...contentBounds }],
       () => {
         throttleUpdate()
       },
     )
 
-    onClickOutside(
-      state.refContent!,
+    createClickOutside(
+      () => state.refContent,
       () => {
         state.trigger !== 'manual' && actions.setOpen(false)
       },
-      { ignore: [state.refTrigger!] },
+      { ignore: [state.refTrigger] },
     )
 
-    watch(
+    createWatch(
       () => state.status,
       () => {
         if (state.status.endsWith('ing')) {
@@ -61,7 +61,7 @@ function FloatingContentCore(
       },
     )
 
-    watch(
+    createWatch(
       () => state.disabled,
       (d) => {
         if (d) {

@@ -1,6 +1,6 @@
 import type { JSX } from 'solid-js/jsx-runtime'
-import { watch } from 'solid-uses'
 import context from './context'
+import { createWatch } from 'jige-utils'
 
 export function Root<TValue = string | number>(props: {
   children: JSX.Element
@@ -16,7 +16,7 @@ export function Root<TValue = string | number>(props: {
   })
   const [state] = Context.value
 
-  watch(
+  createWatch(
     () => state.value as TValue,
     (v) => {
       props.onChange?.(v)

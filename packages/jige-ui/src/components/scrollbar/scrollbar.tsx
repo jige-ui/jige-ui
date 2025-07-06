@@ -2,7 +2,7 @@ import scrollCss from 'sass:./scrollbar.scss'
 import { ScrollbarCore, runSolidEventHandler } from 'jige-core'
 import type { JSX, Ref } from 'solid-js'
 import { Show, createMemo, createSignal } from 'solid-js'
-import { mountStyle } from 'solid-uses'
+import { mountStyle } from 'jige-utils'
 
 function GmScrollBar(props: {
   type: 'vertical' | 'horizontal'

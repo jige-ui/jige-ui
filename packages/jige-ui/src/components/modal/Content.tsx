@@ -2,11 +2,11 @@ import { ModalCore, callMaybeContextChild, undefinedOr } from 'jige-core'
 import { combineStyle } from 'jige-core'
 import { Show, createSignal } from 'solid-js'
 import type { JSX } from 'solid-js/jsx-runtime'
-import { watch } from 'solid-uses'
 import { RootContext } from '../ROOT/context'
 import { Footer } from './Footer'
 import { Header } from './Header'
 import { context } from './context'
+import { createWatch } from 'jige-utils'
 
 function calcOrigin(triggerRef: HTMLElement, contentRef: HTMLElement) {
   contentRef.style.animationName = 'none'
@@ -61,7 +61,7 @@ export function Content(props: {
       >
         {(stat, acts, staticData) => {
           const [transformOrigin, setTransformOrigin] = createSignal('')
-          watch(
+          createWatch(
             () => stat.status,
             (status) => {
               if (

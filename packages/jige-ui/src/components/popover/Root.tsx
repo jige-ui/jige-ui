@@ -2,7 +2,7 @@ import { FloatingUiCore } from 'jige-core'
 
 import aniFloatCss from 'sass:../../styles/common/ani-floating-ui.scss'
 import css from 'sass:./popover.scss'
-import { mountStyle } from 'solid-uses'
+import { mountStyle } from 'jige-utils'
 
 export function Root(props: Parameters<typeof FloatingUiCore>[0]) {
   mountStyle(css, 'jige-ui-popover')

@@ -2,7 +2,7 @@ import { JigeDialogProvider, JigeProvider, JigeToastProvider } from 'jige-ui'
 
 /* @refresh reload */
 import { render } from 'solid-js/web'
-import { enableGlobalStore } from 'solid-uses'
+import { enableGlobalStore } from 'solid-tiny-context'
 import { App } from './App'
 
 import 'uno.css'

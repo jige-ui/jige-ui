@@ -1,6 +1,6 @@
 import type { JSX } from 'solid-js/jsx-runtime'
-import { watch } from 'solid-uses'
 import context from './context'
+import { createWatch } from 'jige-utils'
 
 export function Root(props: {
   children: JSX.Element
@@ -10,7 +10,7 @@ export function Root(props: {
   const Context = context.initial()
   const [state, actions] = Context.value
 
-  watch(
+  createWatch(
     () => props.gapDegree,
     () => {
       actions.setState('gapDegree', props.gapDegree || 0)

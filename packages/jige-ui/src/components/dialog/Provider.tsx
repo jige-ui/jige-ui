@@ -2,7 +2,7 @@ import css from 'sass:./dialog.scss'
 import { ModalCore } from 'jige-core'
 import { For, onMount } from 'solid-js'
 import type { JSX } from 'solid-js/jsx-runtime'
-import { mountStyle, useEventListener, watch } from 'solid-uses'
+import { mountStyle, createWatch, makeEventListener } from 'jige-utils'
 
 import { Modal } from '../modal'
 import { useModalContext } from '../modal/context'
@@ -17,7 +17,7 @@ function ModalCloseHandle(props: {
   const [state, actions] = context.useContext()
   const [jgModalState, jgModalActs] = useModalContext()
 
-  watch(
+  createWatch(
     () => modalState.status,
     (s) => {
       if (s === 'closed') {
@@ -40,7 +40,7 @@ export function Provider(props: {
   const [state, actions] = Context.value
 
   onMount(() => {
-    useEventListener('mouseup', (e) => {
+    makeEventListener(document, 'mouseup', (e) => {
       if (e.target === document.body) return
 
       actions.setMaybeTriggerRef(e.target as HTMLElement)

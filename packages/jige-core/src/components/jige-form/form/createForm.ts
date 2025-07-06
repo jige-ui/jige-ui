@@ -1,4 +1,4 @@
-import { watch } from 'solid-uses'
+import { createWatch } from 'jige-utils'
 import type { FieldValues } from '../types/field'
 import type { FormOptions } from '../types/form'
 import { formContext } from './context'
@@ -12,14 +12,14 @@ export function createForm<T extends FieldValues>(params?: FormOptions<T>) {
 
   staticData.initialValues = params?.defaultValues?.() || {}
 
-  watch(
+  createWatch(
     () => params?.onSubmit,
     (onSubmit) => {
       staticData.onSubmit = onSubmit || (() => {})
     },
   )
 
-  watch(
+  createWatch(
     () => ({ ...params?.validate }),
     (validate) => {
       actions.setState('validate', validate || {})

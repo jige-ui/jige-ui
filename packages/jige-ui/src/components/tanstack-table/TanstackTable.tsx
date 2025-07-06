@@ -5,7 +5,7 @@ import { Scrollbar } from '../scrollbar'
 import { Spin } from '../spin'
 
 import css from 'sass:./tanstack-table.scss'
-import { mountStyle, watch } from 'solid-uses'
+import { mountStyle, createWatch } from 'jige-utils'
 import IconFluentBoxDismiss24Regular from '~icons/fluent/box-dismiss-24-regular'
 import { Button } from '../button'
 import { Paginator } from '../paginator'
@@ -76,7 +76,7 @@ export function TanstackTable<T>(props: {
 
   const [scrollRef, setScrollRef] = createSignal<HTMLDivElement>()
 
-  watch(
+  createWatch(
     () => props.loading,
     () => {
       const scroll = scrollRef()

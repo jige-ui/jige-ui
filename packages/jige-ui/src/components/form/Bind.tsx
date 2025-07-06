@@ -1,9 +1,9 @@
 import { FormCore } from 'jige-core'
 import { Show } from 'solid-js'
 import type { JSX } from 'solid-js/jsx-runtime'
-import { watch } from 'solid-uses'
 import { isDef } from '~/common/types'
 import { formContext } from './context'
+import { createWatch } from 'jige-utils'
 
 function BindCore(props: {
   isBlur?: boolean
@@ -17,7 +17,7 @@ function BindCore(props: {
   const [fieldState, fieldActions] = FormCore.useField()
   const [state] = formContext.useContext()
 
-  watch([() => fieldState.value, () => fieldState.name], ([value, name]) => {
+  createWatch([() => fieldState.value, () => fieldState.name], ([value, name]) => {
     if (name) {
       props.setName(name)
       if (isDef(value)) {
@@ -27,17 +27,17 @@ function BindCore(props: {
   })
 
   // bind value
-  watch([() => props.value], ([value]) => {
+  createWatch([() => props.value], ([value]) => {
     fieldState.name && fieldActions.handleChange(value)
   })
 
   // bind blur
-  watch([() => props.isBlur], ([isBlur]) => {
+  createWatch([() => props.isBlur], ([isBlur]) => {
     isBlur && fieldActions.handleBlur()
   })
 
   // bind disabled
-  watch(
+  createWatch(
     [() => props.propDisabled, () => state.disabled, () => fieldState.name],
     ([pDisabled, formDisabled, n]) => {
       const propDisabled = pDisabled || false

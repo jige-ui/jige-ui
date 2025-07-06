@@ -1,10 +1,10 @@
 import { getElementHeight, hasAnimation } from 'jige-core'
 import { createSignal, onMount } from 'solid-js'
-import { watch } from 'solid-uses'
 import type { CloseableStatus } from '~/common/types'
 import { Header } from './Header'
 import { context } from './context'
 import type { ToastInst } from './types'
+import { createWatch } from 'jige-utils'
 
 export function Toast(props: {
   inst: ToastInst
@@ -21,7 +21,7 @@ export function Toast(props: {
       $bar.style.width = '0'
     })
 
-    watch(
+    createWatch(
       pause,
       (p) => {
         const percent = $bar.clientWidth / $bar.parentElement!.clientWidth
@@ -36,7 +36,7 @@ export function Toast(props: {
       { defer: true },
     )
 
-    watch(status, (s) => {
+    createWatch(status, (s) => {
       $wrapper.style.setProperty('--height', `${getElementHeight($wrapper)}px`)
       if (s.endsWith('ing')) {
         if (!hasAnimation($wrapper)) {

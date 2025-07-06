@@ -27,7 +27,7 @@
     "pub": "pnpm build && pnpm publish"
   },
   "peerDependencies": {
-    "solid-js": "^1.9"
+    "solid-js": "^1.9.7"
   },
   "dependencies": {
     "@floating-ui/dom": "^1.6.13",
@@ -35,14 +35,13 @@
     "@solid-primitives/event-listener": "^2.4.1",
     "@solid-primitives/refs": "^1.1.0",
     "@solid-primitives/scheduled": "^1.5.1",
-    "solid-uses": "^0.11.0"
+    "solid-tiny-context": "^0.0.2"
   },
   "devDependencies": {
-    "@biomejs/biome": "1.9.4",
-    "commit-and-tag-version": "^12.5.0",
     "esbuild-plugin-solid": "^0.6.0",
     "@floating-ui/core": "^1.6.13",
     "tsup": "^8.2.4",
-    "typescript": "^5.5.4"
+    "typescript": "^5.5.4",
+    "jige-utils": "workspace:*"
   }
 }

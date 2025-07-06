@@ -3,7 +3,7 @@ import { splitProps } from 'solid-js'
 import type { JSX } from 'solid-js/jsx-runtime'
 
 import { combineStyle } from 'jige-core'
-import { mountStyle } from 'solid-uses'
+import { mountStyle } from 'jige-utils'
 
 export function Node(
   props: {

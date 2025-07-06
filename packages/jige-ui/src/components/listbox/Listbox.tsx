@@ -1,9 +1,9 @@
 import css from 'sass:./listbox.scss'
 import type { JSX } from 'solid-js'
 import { Show, createMemo, mergeProps } from 'solid-js'
-import { mountStyle } from 'solid-uses'
+import { mountStyle } from 'jige-utils'
 
-import { isArray } from 'radash'
+import { isArray } from 'jige-utils'
 import { ListInner } from './ListInner'
 import { VirtualInner } from './VirtualInner'
 

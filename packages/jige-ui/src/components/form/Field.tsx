@@ -1,8 +1,8 @@
 import { FormCore, callMaybeCallableChild } from 'jige-core'
 import { type JSX, Show, createMemo, createUniqueId, splitProps } from 'solid-js'
-import { watch } from 'solid-uses'
 import { dataIf } from '~/common/dataset'
 import { fieldContext } from './context'
+import { createWatch } from 'jige-utils'
 
 function ErrorOrDescription(props: { description?: string }) {
   const [fieldState] = FormCore.useField()
@@ -10,7 +10,7 @@ function ErrorOrDescription(props: { description?: string }) {
 
   const errors = createMemo(() => fieldState.errors.map((e) => e.message))
 
-  watch([errors, () => props.description], ([e, d]) => {
+  createWatch([errors, () => props.description], ([e, d]) => {
     actions.setState('hasDescription', e.length > 0 || !!d)
   })
 
