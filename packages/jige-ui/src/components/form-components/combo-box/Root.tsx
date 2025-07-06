@@ -2,7 +2,7 @@ import css from 'sass:./combo-box.scss'
 import { FloatingUiCore } from 'jige-core'
 import type { JSX } from 'solid-js/jsx-runtime'
 
-import { mountStyle, createWatch } from 'jige-utils'
+import { createWatch, mountStyle } from 'jige-utils'
 import { Form } from '~/components/form'
 import { context } from './context'
 

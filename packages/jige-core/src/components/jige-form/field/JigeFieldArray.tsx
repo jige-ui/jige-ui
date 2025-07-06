@@ -1,8 +1,8 @@
+import { createWatch } from 'jige-utils'
 import { type JSX, batch } from 'solid-js'
 import { formContext } from '../form/context'
 import type { FieldValues } from '../types/field'
 import type { FieldArrayPath } from '../types/path'
-import { createWatch } from 'jige-utils'
 
 let counter = 0
 

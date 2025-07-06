@@ -1,10 +1,10 @@
 import { createElementBounds } from '@solid-primitives/bounds'
 import { mergeRefs } from '@solid-primitives/refs'
 import { throttle } from '@solid-primitives/scheduled'
+import { createWatch } from 'jige-utils'
 import type { JSX } from 'solid-js'
 import { createSignal, splitProps } from 'solid-js'
 import context from './context'
-import { createWatch } from 'jige-utils'
 
 export default function Content(props: JSX.HTMLAttributes<HTMLDivElement>) {
   const [, action] = context.useContext()

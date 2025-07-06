@@ -1,8 +1,8 @@
 import { makeEventListener } from '@solid-primitives/event-listener'
 import { Ref, mergeRefs } from '@solid-primitives/refs'
+import { createWatch } from 'jige-utils'
 import type { JSX } from 'solid-js'
 import { context } from './context'
-import { createWatch } from 'jige-utils'
 
 // this is the trgger component
 export function Trigger(props: {

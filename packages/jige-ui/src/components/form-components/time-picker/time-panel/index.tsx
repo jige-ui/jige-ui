@@ -1,4 +1,4 @@
-import { mountStyle, createWatch, list } from 'jige-utils'
+import { createWatch, list, mountStyle } from 'jige-utils'
 import { context } from './context'
 
 import css from 'sass:./time-panel.scss'

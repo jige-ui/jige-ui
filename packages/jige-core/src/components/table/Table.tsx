@@ -1,8 +1,8 @@
 import { createElementBounds } from '@solid-primitives/bounds'
 import { mergeRefs } from '@solid-primitives/refs'
+import { createWatch } from 'jige-utils'
 import { type ComponentProps, createSignal, splitProps } from 'solid-js'
 import context from './context'
-import { createWatch } from 'jige-utils'
 
 export default function Table(props: ComponentProps<'div'>) {
   const Context = context.initial()

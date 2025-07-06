@@ -2,7 +2,7 @@ import type { JSX } from 'solid-js/jsx-runtime'
 import { context } from './context'
 
 import css from 'sass:./time-picker.scss'
-import { mountStyle, createWatch } from 'jige-utils'
+import { createWatch, mountStyle } from 'jige-utils'
 import { Form } from '~/components/form'
 import { Popover } from '~/components/popover'
 

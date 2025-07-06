@@ -1,6 +1,6 @@
 import styles from 'sass:./slider.scss'
 import { FloatingUiCore, SliderCore } from 'jige-core'
-import { mountStyle, createWatch } from 'jige-utils'
+import { createWatch, mountStyle } from 'jige-utils'
 import { dataIf } from '~/common/dataset'
 import { Form } from '~/components/form'
 import { Popover } from '../../popover'

@@ -1,6 +1,6 @@
 import styles from 'sass:./input.scss'
-import { Match, Switch } from 'solid-js'
 import { mountStyle } from 'jige-utils'
+import { Match, Switch } from 'solid-js'
 
 import { NormalInput } from './NormalInput'
 import { PasswordInput } from './PasswordInput'

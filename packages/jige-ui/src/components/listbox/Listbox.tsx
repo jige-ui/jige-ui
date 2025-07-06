@@ -1,7 +1,7 @@
 import css from 'sass:./listbox.scss'
+import { mountStyle } from 'jige-utils'
 import type { JSX } from 'solid-js'
 import { Show, createMemo, mergeProps } from 'solid-js'
-import { mountStyle } from 'jige-utils'
 
 import { isArray } from 'jige-utils'
 import { ListInner } from './ListInner'

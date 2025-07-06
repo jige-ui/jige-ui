@@ -1,8 +1,8 @@
 import styles from 'sass:./tabs.scss'
 import { AnimatedGroup, RadioGroupCore } from 'jige-core'
+import { createWatch, mountStyle } from 'jige-utils'
 import type { ComponentProps, JSX } from 'solid-js'
 import { For, createMemo, createSignal, splitProps } from 'solid-js'
-import { mountStyle, createWatch } from 'jige-utils'
 
 import { dataIf } from '~/common/dataset'
 import context from './context'

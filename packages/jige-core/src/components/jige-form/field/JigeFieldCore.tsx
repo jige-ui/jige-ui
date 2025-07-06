@@ -1,11 +1,11 @@
 import { callMaybeCallableChild } from '@/common/props'
+import { createWatch } from 'jige-utils'
 import { type JSX, mergeProps, onCleanup, onMount } from 'solid-js'
-import type { JigeFormAsyncValidator, JigeFormValidator } from '../validator'
 import { formContext } from '../form/context'
 import { getValueFromPath } from '../utils'
+import type { JigeFormAsyncValidator, JigeFormValidator } from '../validator'
 import { FieldContext } from './context'
 import { createFieldContext, type getFieldContext } from './fieldContext'
-import { createWatch } from 'jige-utils'
 
 export type JigeFieldCoreProps = {
   name: string

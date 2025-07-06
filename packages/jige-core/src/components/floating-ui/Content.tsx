@@ -4,11 +4,11 @@ import { createElementBounds } from '@solid-primitives/bounds'
 import { makeEventListener } from '@solid-primitives/event-listener'
 import { mergeRefs } from '@solid-primitives/refs'
 import { throttle } from '@solid-primitives/scheduled'
+import { createClickOutside, createWatch } from 'jige-utils'
 import type { JSX } from 'solid-js'
 import { Show, onMount, splitProps } from 'solid-js'
 import { Portal } from 'solid-js/web'
 import { context } from './context'
-import { createClickOutside, createWatch } from 'jige-utils'
 
 function FloatingContentCore(
   props: {

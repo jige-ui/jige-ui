@@ -1,6 +1,6 @@
+import { createWatch } from 'jige-utils'
 import type { JSX } from 'solid-js/jsx-runtime'
 import context from './context'
-import { createWatch } from 'jige-utils'
 
 export function Root<TValue = string | number>(props: {
   children: JSX.Element

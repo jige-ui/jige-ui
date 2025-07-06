@@ -1,6 +1,6 @@
+import { createWatch } from 'jige-utils'
 import { createMemo, mergeProps, onCleanup } from 'solid-js'
 import { context } from './context'
-import { createWatch } from 'jige-utils'
 
 export function Arrow(props: {
   size?: number

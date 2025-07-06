@@ -1,4 +1,5 @@
 import { FloatingUiCore, hiddenStyle } from 'jige-core'
+import { createWatch } from 'jige-utils'
 import { createSignal } from 'solid-js'
 import { dataIf } from '~/common/dataset'
 import { Form } from '~/components/form'
@@ -7,7 +8,6 @@ import IconFluentArrowRight24Filled from '~icons/fluent/arrow-right-24-filled'
 import IconFluentCalendar24Regular from '~icons/fluent/calendar-24-regular'
 import { ClearableSuffix } from '../input/ClearableSuffix'
 import { context } from './context'
-import { createWatch } from 'jige-utils'
 
 export function Trigger(props: {
   clearable: boolean

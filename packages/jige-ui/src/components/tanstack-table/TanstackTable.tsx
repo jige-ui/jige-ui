@@ -5,7 +5,7 @@ import { Scrollbar } from '../scrollbar'
 import { Spin } from '../spin'
 
 import css from 'sass:./tanstack-table.scss'
-import { mountStyle, createWatch } from 'jige-utils'
+import { createWatch, mountStyle } from 'jige-utils'
 import IconFluentBoxDismiss24Regular from '~icons/fluent/box-dismiss-24-regular'
 import { Button } from '../button'
 import { Paginator } from '../paginator'

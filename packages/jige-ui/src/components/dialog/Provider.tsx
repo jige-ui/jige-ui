@@ -1,8 +1,8 @@
 import css from 'sass:./dialog.scss'
 import { ModalCore } from 'jige-core'
+import { createWatch, makeEventListener, mountStyle } from 'jige-utils'
 import { For, onMount } from 'solid-js'
 import type { JSX } from 'solid-js/jsx-runtime'
-import { mountStyle, createWatch, makeEventListener } from 'jige-utils'
 
 import { Modal } from '../modal'
 import { useModalContext } from '../modal/context'

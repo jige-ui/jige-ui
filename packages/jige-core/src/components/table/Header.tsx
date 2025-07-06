@@ -1,8 +1,8 @@
+import { createWatch } from 'jige-utils'
 import { type ComponentProps, createMemo, createUniqueId, onCleanup, splitProps } from 'solid-js'
 import Colgroup from './Colgroup'
 import { NormalTable } from './common'
 import context from './context'
-import { createWatch } from 'jige-utils'
 
 export function TableHeader(props: ComponentProps<'thead'>) {
   const [, actions] = context.useContext()

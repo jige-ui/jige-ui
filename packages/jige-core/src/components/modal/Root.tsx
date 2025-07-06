@@ -1,7 +1,7 @@
 import { isUndefined } from '@/common/types'
+import { createWatch } from 'jige-utils'
 import type { JSX } from 'solid-js/jsx-runtime'
 import { GlobalModalStore, context } from './context'
-import { createWatch } from 'jige-utils'
 
 export function Root(props: {
   children: JSX.Element

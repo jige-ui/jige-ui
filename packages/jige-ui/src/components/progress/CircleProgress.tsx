@@ -2,8 +2,8 @@ import styles from 'sass:./progress.scss'
 import { CircleProgressCore } from 'jige-core'
 import type { JSX } from 'solid-js/jsx-runtime'
 
-import { mergeProps } from 'solid-js'
 import { mountStyle } from 'jige-utils'
+import { mergeProps } from 'solid-js'
 
 export function CircleProgress(props: {
   percent: number

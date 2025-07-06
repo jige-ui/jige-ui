@@ -1,10 +1,10 @@
+import { throttle } from 'jige-utils'
 import { type JSX, Show, createMemo } from 'solid-js'
 import { Button } from '~/components/button'
 import IconFluentCaretDown24Filled from '~icons/fluent/caret-down-24-filled'
 import IconFluentCaretUp24Filled from '~icons/fluent/caret-up-24-filled'
 import { NumberToChinese } from '../utils'
 import { panelContext } from './context'
-import { throttle } from 'jige-utils'
 
 export function HeadTools(props: {
   headerRight?: (

@@ -1,9 +1,9 @@
 import { FormCore } from 'jige-core'
 import { ComboBox, Form, Input, NumberBox, Switcher } from 'jige-ui'
+import { createWatch } from 'jige-utils'
 import { isEqual } from 'radash'
 import { For, Match, Switch, createSignal } from 'solid-js'
 import type { SetStoreFunction } from 'solid-js/store'
-import { createWatch } from 'jige-utils'
 
 export function PropertySetting<T extends { [key: string]: any }>(props: {
   properties: T

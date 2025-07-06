@@ -2,9 +2,9 @@ import { getElementHeight, hasAnimation, uiRefreshDo } from '@/common/dom'
 import type { CloseableStatus } from '@/common/types'
 import { makeEventListener } from '@solid-primitives/event-listener'
 import { mergeRefs } from '@solid-primitives/refs'
+import { createWatch } from 'jige-utils'
 import { Show, createSignal, onCleanup, onMount, splitProps } from 'solid-js'
 import type { JSX } from 'solid-js/jsx-runtime'
-import { createWatch } from 'jige-utils'
 import context from './context'
 
 type ContentProps = { key: string } & JSX.HTMLAttributes<HTMLDivElement>

@@ -1,5 +1,5 @@
 import globalStyles from 'sass:../../styles/global.scss'
-import { mountStyle, createWatch } from 'jige-utils'
+import { createWatch, mountStyle } from 'jige-utils'
 import { RootContext } from './context'
 import type { ThemeVars } from './gen_vars'
 import { defaultThemeColors, genVars } from './gen_vars'

@@ -1,7 +1,7 @@
+import { createWatch } from 'jige-utils'
 import { Show, children } from 'solid-js'
 import type { JSX } from 'solid-js/jsx-runtime'
 import { context } from './context'
-import { createWatch } from 'jige-utils'
 
 export function ButtonContent(props: {
   children?: JSX.Element

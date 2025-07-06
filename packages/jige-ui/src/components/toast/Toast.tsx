@@ -1,10 +1,10 @@
 import { getElementHeight, hasAnimation } from 'jige-core'
+import { createWatch } from 'jige-utils'
 import { createSignal, onMount } from 'solid-js'
 import type { CloseableStatus } from '~/common/types'
 import { Header } from './Header'
 import { context } from './context'
 import type { ToastInst } from './types'
-import { createWatch } from 'jige-utils'
 
 export function Toast(props: {
   inst: ToastInst

@@ -1,8 +1,8 @@
 import type { JSX } from 'solid-js/jsx-runtime'
 
 import styles from 'sass:./spin.scss'
-import { Show, mergeProps } from 'solid-js'
 import { mountStyle } from 'jige-utils'
+import { Show, mergeProps } from 'solid-js'
 
 function NormalRotateSpin(props: {
   size?: number

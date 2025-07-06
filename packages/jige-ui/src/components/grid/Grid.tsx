@@ -1,6 +1,6 @@
 import { combineStyle } from 'jige-core'
-import { type ComponentProps, splitProps } from 'solid-js'
 import { mountStyle } from 'jige-utils'
+import { type ComponentProps, splitProps } from 'solid-js'
 import { cssGenerate } from './cssGenerate'
 
 function generateClassNames(cols: number | string) {

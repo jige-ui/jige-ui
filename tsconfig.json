@@ -4,9 +4,7 @@
     "baseUrl": ".",
     "module": "ESNext",
     "moduleResolution": "node",
-    "types": [
-      "node"
-    ],
+    "types": ["node"],
     "strict": true,
     "noEmit": true,
     "allowSyntheticDefaultImports": true,

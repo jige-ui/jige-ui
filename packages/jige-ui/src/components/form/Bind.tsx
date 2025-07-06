@@ -1,9 +1,9 @@
 import { FormCore } from 'jige-core'
+import { createWatch } from 'jige-utils'
 import { Show } from 'solid-js'
 import type { JSX } from 'solid-js/jsx-runtime'
 import { isDef } from '~/common/types'
 import { formContext } from './context'
-import { createWatch } from 'jige-utils'
 
 function BindCore(props: {
   isBlur?: boolean

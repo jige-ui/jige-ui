@@ -2,11 +2,11 @@ import routes from 'virtual:pages'
 import { Router, useCurrentMatches } from '@solidjs/router'
 import { esday } from 'esday'
 import { Scrollbar } from 'jige-ui'
+import { createWatch, makeEventListener } from 'jige-utils'
 import { Suspense, createMemo, onMount } from 'solid-js'
 import { Aside } from './parts/aside'
 import { Header } from './parts/header'
 import { useAppState } from './state/app-state'
-import { createWatch, makeEventListener } from 'jige-utils'
 
 function RouteWrapper(props: {
   children: any

@@ -3,10 +3,10 @@ import type { PropsWithContextChild } from '@/common/props'
 import { callMaybeContextChild } from '@/common/props'
 import { runSolidEventHandler } from '@/common/solidjs'
 import { mergeRefs } from '@solid-primitives/refs'
+import { createWatch } from 'jige-utils'
 import type { JSX } from 'solid-js'
 import { Show, createSignal, onMount, splitProps } from 'solid-js'
 import context from './context'
-import { createWatch } from 'jige-utils'
 
 function CollapsibleContentMain(
   props: PropsWithContextChild<

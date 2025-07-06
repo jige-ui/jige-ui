@@ -1,8 +1,8 @@
 import css from 'sass:./button.scss'
 import type { ButtonElement, ButtonProps } from './types'
 
+import { createWatch, mountStyle } from 'jige-utils'
 import { splitProps } from 'solid-js'
-import { mountStyle, createWatch } from 'jige-utils'
 import { Form } from '../form'
 import { ButtonContent } from './ButtonContent'
 import { ButtonWrapper } from './ButtonWrapper'

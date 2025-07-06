@@ -1,6 +1,6 @@
+import { createWatch } from 'jige-utils'
 import type { JSX } from 'solid-js'
 import context from './context'
-import { createWatch } from 'jige-utils'
 
 export function Root(props: {
   value?: string

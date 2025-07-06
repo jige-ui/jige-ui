@@ -1,7 +1,7 @@
+import { createWatch } from 'jige-utils'
 import type { JSX } from 'solid-js/jsx-runtime'
 import { context } from './context'
 import type { FloatingUiCoreProps } from './props'
-import { createWatch } from 'jige-utils'
 
 export function Root(props: { children: JSX.Element } & FloatingUiCoreProps) {
   const Context = context.initial({

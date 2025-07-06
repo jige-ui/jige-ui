@@ -1,7 +1,7 @@
 import styles from 'sass:./progress.scss'
 
-import { createMemo } from 'solid-js'
 import { mountStyle } from 'jige-utils'
+import { createMemo } from 'solid-js'
 
 export function LineProgress(props: {
   percent?: number

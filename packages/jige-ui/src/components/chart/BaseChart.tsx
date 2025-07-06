@@ -11,9 +11,9 @@ import {
   Legend,
   Tooltip,
 } from 'chart.js'
+import { createWatch, mountStyle } from 'jige-utils'
 import { type Component, createSignal, mergeProps, onCleanup, onMount } from 'solid-js'
 import { unwrap } from 'solid-js/store'
-import { mountStyle, createWatch } from 'jige-utils'
 import type { ChartContext, ChartProps, TypedChartProps } from './types'
 
 import css from 'sass:./chartjs.scss'

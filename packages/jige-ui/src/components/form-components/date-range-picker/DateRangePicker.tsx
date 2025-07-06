@@ -2,12 +2,12 @@ import dpCss from 'sass:../date-picker/date-picker.scss'
 import inputCss from 'sass:../input/input.scss'
 import css from 'sass:./range-picker.scss'
 import { undefinedOr } from 'jige-core'
+import { createWatch, mountStyle } from 'jige-utils'
 import { Form } from '~/components/form'
 import { Popover } from '~/components/popover'
 import { Panel } from './Panel'
 import { Trigger } from './Trigger'
 import { context } from './context'
-import { createWatch, mountStyle } from 'jige-utils'
 
 export function DateRangePicker(props: {
   disabled?: boolean

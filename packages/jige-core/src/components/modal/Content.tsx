@@ -4,10 +4,10 @@ import { callMaybeContextChild } from '@/common/props'
 import type { CloseableStatus } from '@/common/types'
 import { makeEventListener } from '@solid-primitives/event-listener'
 import { Ref } from '@solid-primitives/refs'
+import { createWatch } from 'jige-utils'
 import { createMemo, onCleanup, onMount, splitProps } from 'solid-js'
 import type { JSX } from 'solid-js/jsx-runtime'
 import { GlobalModalStore, context } from './context'
-import { createWatch } from 'jige-utils'
 
 export function Content(
   props: PropsWithContextChild<

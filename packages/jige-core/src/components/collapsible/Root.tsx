@@ -1,7 +1,7 @@
+import { createWatch } from 'jige-utils'
 import type { JSX } from 'solid-js'
 import { createUniqueId } from 'solid-js'
 import context, { CollapsibleParents } from './context'
-import { createWatch } from 'jige-utils';
 
 export function Root(props: { children: JSX.Element; parentID?: string }) {
   const Context = context.initial({
