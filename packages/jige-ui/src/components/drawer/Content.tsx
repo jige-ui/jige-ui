@@ -8,8 +8,6 @@ export function Content(props: {
   style?: string | JSX.CSSProperties
   zIndex?: number
   width?: string
-  header?: JSX.Element
-  footer?: JSX.Element
   position?: 'left' | 'right' | 'top' | 'bottom'
 }) {
   const [rs] = RootContext.useContext()
