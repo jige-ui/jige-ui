@@ -1,24 +1,28 @@
-import { Show } from 'solid-js'
+import { children, type JSX, Show } from 'solid-js'
 import IconFluentDismiss24Regular from '~icons/fluent/dismiss-24-regular'
 import { Button } from '../button'
 import { Close } from './Close'
 
 export function Header(props: {
   hideClose?: boolean
-  title: string
+  class?: string
+  style?: string | JSX.CSSProperties
+  children?: JSX.Element
+  title?: string
 }) {
+  const child = children(() => props.children)
   return (
-    <div class='jg-drawer-header'>
+    <div class={['jg-drawer-header', props.class].join(' ')} style={props.style}>
       <Show when={!props.hideClose}>
         <Close>
-          <Button
-            class='jg-drawer-close'
-            variant='text'
-            icon={<IconFluentDismiss24Regular />}
-          />
+          <Button class='jg-drawer-close' variant='text' icon={<IconFluentDismiss24Regular />} />
         </Close>
       </Show>
-      <div>{props.title}</div>
+      <div>
+        <Show when={child()} fallback={<span>{props.title}</span>}>
+          {child()}
+        </Show>
+      </div>
     </div>
   )
 }

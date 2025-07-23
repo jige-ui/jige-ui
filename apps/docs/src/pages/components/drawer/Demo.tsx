@@ -17,7 +17,9 @@ export function Demo() {
               <Button label='Open Drawer' />
             </Drawer.Trigger>
             <Drawer.Content position={s.position} width={`${s.width}px`}>
-              <Drawer.Header title='Drawer Header' />
+              <Drawer.Header title='Drawer Header'>
+                <Button label='HEllo' />
+              </Drawer.Header>
               <Drawer.InnerContent>
                 <div class='h-3000px'>Content</div>
                 <Modal closeOnClickMask closeOnEsc>
