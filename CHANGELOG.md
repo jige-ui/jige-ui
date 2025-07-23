@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.33.0](https://github.com/jige-ui/jige-ui/compare/v0.32.4...v0.33.0) (2025-07-23)
+
+
+### Features
+
+* drawer provided 'Footer', 'Header' and 'InnerContent' components ([0375efd](https://github.com/jige-ui/jige-ui/commit/0375efd1190418a8463fb2941fb730b3f831380b))
+
 ## [0.32.4](https://github.com/jige-ui/jige-ui/compare/v0.32.3...v0.32.4) (2025-07-05)
 
 ## [0.32.3](https://github.com/jige-ui/jige-ui/compare/v0.32.2...v0.32.3) (2025-07-03)
