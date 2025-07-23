@@ -1,8 +1,7 @@
 import { ModalCore, callMaybeContextChild, combineStyle, undefinedOr } from 'jige-core'
-import { Show, createMemo, mergeProps } from 'solid-js'
+import { createMemo, mergeProps } from 'solid-js'
 import type { JSX } from 'solid-js/jsx-runtime'
 import { RootContext } from '../ROOT/context'
-import { Scrollbar } from '../scrollbar'
 
 export function Content(props: {
   children: Parameters<typeof ModalCore.Content>['0']['children']
@@ -72,15 +71,7 @@ export function Content(props: {
             data-status={state.status}
             style={combineStyle(styles(), props.style)}
           >
-            <Show when={realProps.header}>
-              <div class='jg-drawer-header'>{realProps.header}</div>
-            </Show>
-            <Scrollbar height='100%'>
-              {callMaybeContextChild([state, actions, staticData], props.children)}
-            </Scrollbar>
-            <Show when={realProps.footer}>
-              <div class='jg-drawer-footer'>{realProps.footer}</div>
-            </Show>
+            {callMaybeContextChild([state, actions, staticData], props.children)}
           </div>
         )}
       </ModalCore.Content>

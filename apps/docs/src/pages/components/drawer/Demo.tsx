@@ -16,21 +16,22 @@ export function Demo() {
             <Drawer.Trigger>
               <Button label='Open Drawer' />
             </Drawer.Trigger>
-            <Drawer.Content
-              position={s.position}
-              width={`${s.width}px`}
-              header='Header'
-              footer='Footer'
-            >
-              <div class='h-3000px'>Content</div>
-              <Modal closeOnClickMask closeOnEsc>
-                <Modal.Trigger>
-                  <Button label='Open Modal' />
-                </Modal.Trigger>
-                <Modal.Content>
-                  <div>Modal Content</div>
-                </Modal.Content>
-              </Modal>
+            <Drawer.Content position={s.position} width={`${s.width}px`}>
+              <Drawer.Header title='Drawer Header' />
+              <Drawer.InnerContent>
+                <div class='h-3000px'>Content</div>
+                <Modal closeOnClickMask closeOnEsc>
+                  <Modal.Trigger>
+                    <Button label='Open Modal' />
+                  </Modal.Trigger>
+                  <Modal.Content>
+                    <div>Modal Content</div>
+                  </Modal.Content>
+                </Modal>
+              </Drawer.InnerContent>
+              <Drawer.Footer>
+                <Button label='Footer Button' />
+              </Drawer.Footer>
             </Drawer.Content>
           </Drawer>
         </div>
