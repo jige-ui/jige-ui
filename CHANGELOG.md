@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.33.2](https://github.com/jige-ui/jige-ui/compare/v0.33.1...v0.33.2) (2025-07-23)
+
+
+### Features
+
+* add class, style props to Footer and Header components ([3a870b3](https://github.com/jige-ui/jige-ui/commit/3a870b3556a63a0da6b72f43a490fb4c3cb31a2b))
+
 ## [0.33.1](https://github.com/jige-ui/jige-ui/compare/v0.33.0...v0.33.1) (2025-07-23)
 
 
