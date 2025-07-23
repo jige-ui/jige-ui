@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.33.1](https://github.com/jige-ui/jige-ui/compare/v0.33.0...v0.33.1) (2025-07-23)
+
+
+### Bug Fixes
+
+* remove useless props ([114e114](https://github.com/jige-ui/jige-ui/commit/114e11447f69b41f1ec3245a5ccf717cbae64887))
+
 ## [0.33.0](https://github.com/jige-ui/jige-ui/compare/v0.32.4...v0.33.0) (2025-07-23)
 
 
