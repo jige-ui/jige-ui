@@ -32,6 +32,9 @@ const defaultColumns: ColumnDef<Person>[] = [
           e.preventDefault()
           e.stopPropagation()
         }}
+        onDblClick={(e) => {
+          e.stopPropagation()
+        }}
       />
     ),
     meta: {
