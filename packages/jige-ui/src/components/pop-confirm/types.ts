@@ -1,7 +1,7 @@
 import type { JSX } from 'solid-js'
 
 export type PopConfirmProps = {
-  title: string
+  title?: string
   children: JSX.Element
   description?: string
   icon?: JSX.Element
