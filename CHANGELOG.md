@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.33.3](https://github.com/jige-ui/jige-ui/compare/v0.33.2...v0.33.3) (2025-07-24)
+
+
+### Bug Fixes
+
+* pop-confirm prop 'title' should be optional ([30f8af0](https://github.com/jige-ui/jige-ui/commit/30f8af0f873b0cda2b3307cbfd260b11d483c62d))
+
 ## [0.33.2](https://github.com/jige-ui/jige-ui/compare/v0.33.1...v0.33.2) (2025-07-23)
 
 
