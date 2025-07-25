@@ -1,16 +1,12 @@
-import { type RowData, type Table, flexRender } from '@tanstack/solid-table'
-import { TableCore, dataIf } from 'jige-core'
-import { For, type JSX, Show, createMemo, createSignal } from 'solid-js'
-import { Scrollbar } from '../scrollbar'
-import { Spin } from '../spin'
+import { type RowData, flexRender, type Table as TansTable } from '@tanstack/solid-table'
+import { For, type JSX, Show, createMemo } from 'solid-js'
 
 import css from 'sass:./tanstack-table.scss'
-import { createWatch, mountStyle } from 'jige-utils'
+import { mountStyle } from 'jige-utils'
 import IconFluentBoxDismiss24Regular from '~icons/fluent/box-dismiss-24-regular'
-import { Button } from '../button'
 import { Paginator } from '../paginator'
-import { AddNewRow } from './AddNewRow'
 import { getMergeHeaderGroups } from './utils'
+import { Table } from '../table'
 
 declare module '@tanstack/solid-table' {
   // biome-ignore lint/correctness/noUnusedVariables: <explanation>
@@ -27,7 +23,7 @@ declare module '@tanstack/solid-table' {
 }
 
 export function TanstackTable<T>(props: {
-  staticTableInstance: Table<T>
+  staticTableInstance: TansTable<T>
   loading?: boolean
   height?: string
   maxHeight?: string
@@ -51,8 +47,6 @@ export function TanstackTable<T>(props: {
 
   const rows = createMemo(() => tableInst.getRowModel().rows)
 
-  let headRef!: HTMLDivElement
-
   const fontSize = createMemo(() => {
     const size = props.size
 
@@ -72,139 +66,77 @@ export function TanstackTable<T>(props: {
     }
   })
 
-  const [showNewRow, setShowNewRow] = createSignal(false)
-
-  const [scrollRef, setScrollRef] = createSignal<HTMLDivElement>()
-
-  createWatch(
-    () => props.loading,
-    () => {
-      const scroll = scrollRef()
-      if (!scroll) return
-      scroll.scrollTop = 0
-    },
-  )
-
   return (
-    <Spin spinning={props.loading}>
-      <div
-        class='jg-data-table'
-        style={{
-          'border-color': props.bordered ? 'var(--jg-t-border)' : 'transparent',
-          'font-size': fontSize(),
-        }}
-        data-bordered={dataIf(props.bordered)}
-      >
-        <TableCore>
-          <div style={{ overflow: 'hidden' }} ref={headRef}>
-            <TableCore.Header>
-              <For each={getMergeHeaderGroups(tableInst.getHeaderGroups())}>
-                {(headerGroup) => (
-                  <TableCore.Row>
-                    <For each={headerGroup.headers}>
-                      {(header) => {
-                        return (
-                          <TableCore.Column
-                            rowSpan={header.rowSpan || undefined}
-                            colSpan={header.colSpan}
-                            width={header.column.columnDef.meta?.width}
-                            class='jg-data-table-head'
-                          >
-                            {header.isPlaceholder
-                              ? null
-                              : flexRender(header.column.columnDef.header, header.getContext())}
-                          </TableCore.Column>
-                        )
-                      }}
-                    </For>
-                  </TableCore.Row>
-                )}
-              </For>
-            </TableCore.Header>
-          </div>
-
-          <Scrollbar
-            onScroll={(e) => {
-              if (headRef) {
-                headRef.scrollLeft = e.target.scrollLeft
-              }
-            }}
-            height={props.height}
-            maxHeight={props.maxHeight}
-            scrollRef={setScrollRef}
-          >
-            <Show when={rows().length === 0 && !showNewRow()}>
-              <div class='jg-data-table-empty'>
-                <div>
-                  <IconFluentBoxDismiss24Regular />
-                </div>
-                <div style={{ 'margin-top': '8px' }}>什么都没有哦</div>
-              </div>
-            </Show>
-            <TableCore.Body>
-              <Show when={rows().length > 0 || showNewRow()}>
-                <For each={rows()}>
-                  {(row, index) => (
-                    <TableCore.Row
-                      class='jg-data-table-row'
-                      onClick={() => props.onRowClick?.(row.original, index())}
-                      onDblClick={() => props.onRowDbClick?.(row.original, index())}
+    <Table
+      style={{ 'font-size': fontSize() }}
+      height={props.height}
+      maxHeight={props.maxHeight}
+      bordered={props.bordered}
+      loading={props.loading}
+    >
+      <Table.Header>
+        <For each={getMergeHeaderGroups(tableInst.getHeaderGroups())}>
+          {(headerGroup) => (
+            <Table.Row>
+              <For each={headerGroup.headers}>
+                {(header) => {
+                  return (
+                    <Table.Column
+                      rowSpan={header.rowSpan || undefined}
+                      colSpan={header.colSpan}
+                      width={header.column.columnDef.meta?.width}
                     >
-                      <For each={row.getVisibleCells()}>
-                        {(cell) => {
-                          return (
-                            <TableCore.Cell class='jg-data-table-item'>
-                              {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                            </TableCore.Cell>
-                          )
-                        }}
-                      </For>
-                    </TableCore.Row>
-                  )}
-                </For>
-              </Show>
-              <Show when={showNewRow()}>
-                <AddNewRow
-                  staticTableInstance={tableInst}
-                  onCancel={() => {
-                    setShowNewRow(false)
-                  }}
-                  onConfirm={async (data) => {
-                    if (await props.onAddNewRow?.(data)) setShowNewRow(false)
-                  }}
-                />
-              </Show>
-            </TableCore.Body>
-          </Scrollbar>
-        </TableCore>
-        <Show when={props.onAddNewRow}>
-          <div>
-            <Button
-              style={{
-                width: '100%',
-                margin: '4px 0',
-              }}
-              label='新增一行'
-              onClick={() => {
-                setShowNewRow(true)
-                scrollRef()?.scrollTo({
-                  top: scrollRef()?.scrollHeight,
-                  behavior: 'smooth',
-                })
-              }}
-            />
-          </div>
-        </Show>
+                      {header.isPlaceholder
+                        ? null
+                        : flexRender(header.column.columnDef.header, header.getContext())}
+                    </Table.Column>
+                  )
+                }}
+              </For>
+            </Table.Row>
+          )}
+        </For>
+      </Table.Header>
 
-        <Show when={props.pagination || props.footer}>
-          <div class='jg-data-table-footer'>
-            <div>{props.footer || ''}</div>
-            <Show when={props.pagination}>
-              <Paginator {...props.pagination!} />
-            </Show>
+      <Show when={rows().length === 0}>
+        <div class='jg-data-table-empty'>
+          <div>
+            <IconFluentBoxDismiss24Regular />
           </div>
+          <div style={{ 'margin-top': '8px' }}>什么都没有哦</div>
+        </div>
+      </Show>
+      <Table.Body>
+        <Show when={rows().length > 0}>
+          <For each={rows()}>
+            {(row, index) => (
+              <Table.Row
+                onClick={() => props.onRowClick?.(row.original, index())}
+                onDblClick={() => props.onRowDbClick?.(row.original, index())}
+              >
+                <For each={row.getVisibleCells()}>
+                  {(cell) => {
+                    return (
+                      <Table.Cell>
+                        {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                      </Table.Cell>
+                    )
+                  }}
+                </For>
+              </Table.Row>
+            )}
+          </For>
         </Show>
-      </div>
-    </Spin>
+      </Table.Body>
+
+      <Show when={props.pagination || props.footer}>
+        <Table.Footer>
+          <div>{props.footer || ''}</div>
+          <Show when={props.pagination}>
+            <Paginator {...props.pagination!} />
+          </Show>
+        </Table.Footer>
+      </Show>
+    </Table>
   )
 }

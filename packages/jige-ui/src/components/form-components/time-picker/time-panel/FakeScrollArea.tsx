@@ -46,7 +46,9 @@ export function FakeScrollArea<TValue extends string | number>(props: {
     const index = currIndex()
     const newIndex = deltaY > 0 ? index + 1 : index - 1
     if (shouldFake()) {
-      setCurrIndex(newIndex)
+      if (newIndex >= -overScan() + 3 && newIndex < realProps.items.length + overScan() - 3) {
+        setCurrIndex(newIndex)
+      }
     } else {
       if (newIndex >= 0 && newIndex < realProps.items.length) {
         setCurrIndex(newIndex)
@@ -112,6 +114,17 @@ export function FakeScrollArea<TValue extends string | number>(props: {
     })
   })
 
+  let timeout: NodeJS.Timeout | undefined
+
+  const setIsScrollingDebounced = () => {
+    if (timeout) {
+      clearTimeout(timeout)
+    }
+    timeout = setTimeout(() => {
+      setIsScrolling(false)
+    }, 350)
+  }
+
   return (
     <div
       class='jg-fake-scroll-area'
@@ -147,14 +160,14 @@ export function FakeScrollArea<TValue extends string | number>(props: {
         }}
         onTransitionEnd={() => {
           checkPos()
-          setIsScrolling(false)
+          setIsScrollingDebounced()
         }}
         onTransitionStart={() => {
           setIsScrolling(true)
         }}
       >
         <For each={renderItems()}>
-          {(item) => {
+          {(item, index) => {
             return (
               <div
                 class='jg-fake-scroll-item'
@@ -162,7 +175,7 @@ export function FakeScrollArea<TValue extends string | number>(props: {
                   height: `${realProps.itemHeight}px`,
                 }}
                 onClick={() => {
-                  props.onChange(item.value)
+                  setCurrIndex(index() - overScan())
                 }}
                 data-selected={dataIf(item.value === currItem().value)}
               >
