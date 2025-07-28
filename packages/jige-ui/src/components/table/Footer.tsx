@@ -1,7 +1,20 @@
-import { type ComponentProps, splitProps } from 'solid-js'
+import { createElementBounds } from '@solid-primitives/bounds'
+import { createWatch } from 'jige-utils'
+import { type ComponentProps, createSignal, splitProps } from 'solid-js'
+import { context } from './context'
 
 export function Footer(props: ComponentProps<'div'>) {
   const [localProps, others] = splitProps(props, ['class'])
+  const [, acts] = context.useContext()
+  const [ref, setRef] = createSignal<HTMLDivElement | null>(null)
+  const bounds = createElementBounds(ref)
 
-  return <div class={['jg-table-footer', localProps.class].join(' ')} {...others} />
+  createWatch(
+    () => bounds.height,
+    (h) => {
+      acts.setState('footerHeight', h || 0)
+    },
+  )
+
+  return <div ref={setRef} class={['jg-table-footer', localProps.class].join(' ')} {...others} />
 }

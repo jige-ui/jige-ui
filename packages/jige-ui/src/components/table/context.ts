@@ -4,6 +4,7 @@ export const context = createComponentState({
   state: () => ({
     refHeader: null as HTMLDivElement | null,
     headerHeight: 0,
+    footerHeight: 0,
     height: '',
     maxHeight: '',
   }),
@@ -12,13 +13,13 @@ export const context = createComponentState({
       if (!this.state.height) {
         return undefined
       }
-      return `calc(${this.state.height} - ${this.state.headerHeight}px)`
+      return `calc(${this.state.height} - ${this.state.headerHeight + 2 + this.state.footerHeight}px)`
     },
     scrollMaxHeight() {
       if (!this.state.maxHeight) {
         return undefined
       }
-      return `calc(${this.state.maxHeight} - ${this.state.headerHeight}px)`
+      return `calc(${this.state.maxHeight} - ${this.state.headerHeight + 2 + this.state.footerHeight}px)`
     },
   },
 })
