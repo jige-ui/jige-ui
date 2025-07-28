@@ -66,6 +66,8 @@ export function TanstackTable<T>(props: {
     }
   })
 
+  const hdGroups = createMemo(() => getMergeHeaderGroups(tableInst.getHeaderGroups()))
+
   return (
     <Table
       style={{ 'font-size': fontSize() }}
@@ -75,7 +77,7 @@ export function TanstackTable<T>(props: {
       loading={props.loading}
     >
       <Table.Header>
-        <For each={getMergeHeaderGroups(tableInst.getHeaderGroups())}>
+        <For each={hdGroups()}>
           {(headerGroup) => (
             <Table.Row>
               <For each={headerGroup.headers}>
@@ -98,14 +100,6 @@ export function TanstackTable<T>(props: {
         </For>
       </Table.Header>
 
-      <Show when={rows().length === 0}>
-        <div class='jg-data-table-empty'>
-          <div>
-            <IconFluentBoxDismiss24Regular />
-          </div>
-          <div style={{ 'margin-top': '8px' }}>什么都没有哦</div>
-        </div>
-      </Show>
       <Table.Body>
         <Show when={rows().length > 0}>
           <For each={rows()}>
@@ -126,6 +120,16 @@ export function TanstackTable<T>(props: {
               </Table.Row>
             )}
           </For>
+        </Show>
+        <Show when={rows().length === 0}>
+          <Table.Row>
+            <Table.Cell colSpan={'100%'}>
+              <div class='jg-data-table-empty'>
+                <IconFluentBoxDismiss24Regular />
+                <span>没有数据</span>
+              </div>
+            </Table.Cell>
+          </Table.Row>
         </Show>
       </Table.Body>
 
