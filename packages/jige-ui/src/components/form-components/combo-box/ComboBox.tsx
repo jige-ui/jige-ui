@@ -5,7 +5,7 @@ import { ListBox } from './ListBox'
 import { Root } from './Root'
 import { Trigger } from './Trigger'
 
-function normalizeOptions<T extends SimpleType>(
+export function normalizeOptions<T extends SimpleType>(
   options: (T | { label: string; value: T })[],
 ): { label: string; value: T }[] {
   return options.map((option) => {
