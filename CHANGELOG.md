@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.35.0](https://github.com/jige-ui/jige-ui/compare/v0.34.2...v0.35.0) (2025-07-29)
+
+
+### Features
+
+* add component 'checkbox-group' ([e98939e](https://github.com/jige-ui/jige-ui/commit/e98939ea3757f42ae033b814260edaea11ad638f))
+
+
+### Bug Fixes
+
+* spinner should above other components ([f867855](https://github.com/jige-ui/jige-ui/commit/f86785529876942871d7431b0b240210c0385a48))
+
 ## [0.34.2](https://github.com/jige-ui/jige-ui/compare/v0.34.1...v0.34.2) (2025-07-28)
 
 
