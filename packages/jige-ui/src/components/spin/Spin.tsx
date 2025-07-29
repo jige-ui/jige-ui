@@ -56,6 +56,7 @@ export function Spin(props: {
             'align-items': 'center',
             'justify-content': 'center',
             inset: 0,
+            'z-index': 1000,
           }}
         >
           <NormalRotateSpin size={props.size} />
