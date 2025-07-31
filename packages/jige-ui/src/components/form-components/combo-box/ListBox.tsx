@@ -1,4 +1,6 @@
 import { FloatingUiCore, dataIf } from 'jige-core'
+import { createWatch } from 'jige-utils'
+import { batch } from 'solid-js'
 import { RootContext } from '~/components/ROOT/context'
 import { Listbox as LB } from '../../listbox'
 import { context } from './context'
@@ -9,7 +11,50 @@ export function ListBox(props: {
   const [rootState] = RootContext.useContext()
   const [state, actions] = context.useContext()
 
-  const [, floatActs] = FloatingUiCore.useContext()
+  const [floatState, floatActs] = FloatingUiCore.useContext()
+
+  createWatch(
+    () => [floatState.status, floatState.middlewareData.shift.y] as const,
+    ([s, y]) => {
+      if (s === 'opening') {
+        actions.setState('isCalculating', true)
+        const $scrollEl = floatState.refContent?.querySelector('.jg-combo-box-scrollarea')
+          ?.firstChild as HTMLElement
+        if ($scrollEl) {
+          if (state.valueIndex === -1) {
+            actions.setState('offset', 0)
+          } else {
+            const floatHeight = floatState.refContent?.clientHeight || 0
+            const totalHeight = state.valueIndex * state.listItemHeight
+            const scrollTop = totalHeight - floatHeight / 2 + state.listItemHeight / 2
+            console.log(scrollTop)
+
+            $scrollEl.scrollTop = scrollTop
+            const toTop = totalHeight - $scrollEl.scrollTop + state.listItemHeight
+
+            batch(() => {
+              actions.setState('scrollElement', $scrollEl)
+              actions.setState('originY', totalHeight - $scrollEl.scrollTop)
+              actions.setState('offset', -toTop - 8)
+            })
+
+            if (y) {
+              const scrollTop = $scrollEl.scrollTop
+              $scrollEl.scrollTop = scrollTop + y
+              actions.setState('originY', state.originY - y)
+            }
+          }
+        }
+        const height = state.refTrigger?.clientHeight || 20
+        const width = state.refTrigger?.clientWidth || 200
+        batch(() => {
+          actions.setState('listItemHeight', height + 4)
+          actions.setState('listItemWidth', width)
+          actions.setState('isCalculating', false)
+        })
+      }
+    },
+  )
 
   return (
     <FloatingUiCore.Content
@@ -17,6 +62,7 @@ export function ListBox(props: {
       style={{
         '--jg-combo-box-list-transform-origin': `center ${state.originY}px`,
         width: `${state.listItemWidth}px`,
+        opacity: state.isCalculating ? 0 : 1,
       }}
       zindex={rootState.zIndexConfig.popover}
       data-small={dataIf(props.size === 'small')}

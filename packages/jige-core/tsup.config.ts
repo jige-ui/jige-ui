@@ -20,8 +20,7 @@ function generateConfig(jsx: boolean): Options {
       }
 
       options.chunkNames = '[name]/[hash]'
-      // @ts-ignore
-      if (process.env.DROP_CONSOLE === 'true') {
+      if (process.env.DEV_MODE !== 'true') {
         options.drop = ['console', 'debugger']
       }
     },

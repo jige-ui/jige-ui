@@ -1,4 +1,4 @@
-import { children, type JSX, Show } from 'solid-js'
+import { type JSX, Show, children } from 'solid-js'
 import IconFluentDismiss24Regular from '~icons/fluent/dismiss-24-regular'
 import { Button } from '../button'
 import { Close } from './Close'

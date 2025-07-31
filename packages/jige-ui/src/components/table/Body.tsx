@@ -1,5 +1,5 @@
 import { TableCore } from 'jige-core'
-import { splitProps, type ComponentProps } from 'solid-js'
+import { type ComponentProps, splitProps } from 'solid-js'
 import { Scrollbar } from '../scrollbar'
 import { context } from './context'
 

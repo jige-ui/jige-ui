@@ -1,5 +1,5 @@
 import { TableCore } from 'jige-core'
-import { splitProps, type ComponentProps } from 'solid-js'
+import { type ComponentProps, splitProps } from 'solid-js'
 
 export function Row(props: ComponentProps<'tr'>) {
   const [localProps, others] = splitProps(props, ['class'])

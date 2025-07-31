@@ -1,6 +1,7 @@
 import { FormCore } from 'jige-core'
 import {
   Button,
+  CheckboxGroup,
   ComboBox,
   DatePicker,
   DateRangePicker,
@@ -65,6 +66,7 @@ export function Demo() {
       sex: 'male',
       date: '',
       dateRange: ['2024-01-01', '2024-12-27'],
+      checkbox: [1, 2, 3],
     }),
     onSubmit: async (value) => {
       await sleep(2000)
@@ -135,6 +137,14 @@ export function Demo() {
           </Form.Field>
           <Form.Field label={p.noLabel ? undefined : 'dateRange'} name='dateRange'>
             <DateRangePicker disableBind={p.disableBind} type='datetime' />
+          </Form.Field>
+          <Form.Field label={p.noLabel ? undefined : 'Checkbox'} name='checkbox'>
+            <CheckboxGroup>
+              <CheckboxGroup.Item value={1}>Option 1</CheckboxGroup.Item>
+              <CheckboxGroup.Item value={2}>Option 2</CheckboxGroup.Item>
+              <CheckboxGroup.Item value={3}>Option 3</CheckboxGroup.Item>
+              <CheckboxGroup.Item value={4}>Option 4</CheckboxGroup.Item>
+            </CheckboxGroup>
           </Form.Field>
           <Form.Field name='remember'>
             <div class='flex items-center'>

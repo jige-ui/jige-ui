@@ -10,7 +10,10 @@ export const context = createComponentState({
     originY: 0,
     placeholder: '',
     name: 'combo-box',
+    isCalculating: true,
     scrollElement: null as HTMLElement | null,
+    offset: 0,
+    refTrigger: null as HTMLElement | null,
   }),
   getters: {
     valueIndex() {

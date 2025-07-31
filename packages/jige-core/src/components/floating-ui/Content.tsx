@@ -81,6 +81,7 @@ function FloatingContentCore(
         'z-index': localProps.zindex ?? 'auto',
         'min-width': 'max-content',
         'pointer-events': 'auto',
+        opacity: state.initialized ? 1 : 0,
       }}
       ref={(el) => {
         actions.setState('refContent', el)

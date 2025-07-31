@@ -1,9 +1,9 @@
+import css from 'sass:./checkbox-group.scss'
 import { CheckboxGroupCore } from 'jige-core'
-import { splitProps, type ComponentProps, type JSX } from 'solid-js'
+import { mountStyle } from 'jige-utils'
+import { type ComponentProps, type JSX, splitProps } from 'solid-js'
 import type { SimpleType } from '~/common/types'
 import { Form } from '~/components/form'
-import { mountStyle } from 'jige-utils'
-import css from 'sass:./checkbox-group.scss'
 import { context } from './context'
 
 function CheckboxGroupBind(props: {

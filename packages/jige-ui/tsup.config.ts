@@ -73,7 +73,6 @@ function generateConfig(jsx: boolean, dts?: boolean, watch?: boolean): Options {
 }
 
 export default defineConfig(() => {
-  // @ts-ignore
   if (process.env.DEV_MODE === 'true') {
     return generateConfig(true, true, true)
   }

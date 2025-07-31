@@ -10,7 +10,7 @@ export function Trigger(props: {
   class?: string
   size: 'small' | 'medium' | 'large'
 }) {
-  const [state] = context.useContext()
+  const [state, actions] = context.useContext()
   return (
     <div>
       <input
@@ -26,6 +26,9 @@ export function Trigger(props: {
         <button
           style={props.style}
           type='button'
+          ref={(el) => {
+            actions.setState('refTrigger', el)
+          }}
           class={['jg-combo-box-trigger', props.class].join(' ')}
           data-disabled={dataIf(state.disabled)}
           data-small={dataIf(props.size === 'small')}

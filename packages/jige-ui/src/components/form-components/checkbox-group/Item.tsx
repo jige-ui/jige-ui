@@ -1,8 +1,8 @@
 import { CheckboxGroupCore, dataIf } from 'jige-core'
-import { createMemo, Show, type JSX } from 'solid-js'
+import { type JSX, Show, createMemo } from 'solid-js'
 import type { SimpleType } from '~/common/types'
-import { context } from './context'
 import { AnimatedChecked } from '~/components/icons'
+import { context } from './context'
 
 export function Item<T extends SimpleType>(props: {
   disabled?: boolean

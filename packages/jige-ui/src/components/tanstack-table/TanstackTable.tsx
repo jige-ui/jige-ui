@@ -1,12 +1,12 @@
-import { type RowData, flexRender, type Table as TansTable } from '@tanstack/solid-table'
+import { type RowData, type Table as TansTable, flexRender } from '@tanstack/solid-table'
 import { For, type JSX, Show, createMemo } from 'solid-js'
 
 import css from 'sass:./tanstack-table.scss'
 import { mountStyle } from 'jige-utils'
 import IconFluentBoxDismiss24Regular from '~icons/fluent/box-dismiss-24-regular'
 import { Paginator } from '../paginator'
-import { getMergeHeaderGroups } from './utils'
 import { Table } from '../table'
+import { getMergeHeaderGroups } from './utils'
 
 declare module '@tanstack/solid-table' {
   // biome-ignore lint/correctness/noUnusedVariables: <explanation>

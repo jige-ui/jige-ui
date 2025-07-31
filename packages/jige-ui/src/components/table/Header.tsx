@@ -1,8 +1,8 @@
+import { createElementBounds } from '@solid-primitives/bounds'
 import { TableCore } from 'jige-core'
+import { createWatch } from 'jige-utils'
 import type { ComponentProps } from 'solid-js'
 import { context } from './context'
-import { createElementBounds } from '@solid-primitives/bounds'
-import { createWatch } from 'jige-utils'
 
 export function Header(props: ComponentProps<'thead'>) {
   const [state, acts] = context.useContext()

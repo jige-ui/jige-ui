@@ -13,10 +13,10 @@
     "jige-ui#build-dev": {
       "inputs": ["src/**/*.tsx", "src/**/*.scss"],
       "outputs": ["dist/**"],
-      "dependsOn": ["jige-core#build"],
+      "dependsOn": ["jige-core#build-dev"],
       "cache": false
     },
-    "jige-core#build": {
+    "jige-core#build-dev": {
       "outputs": ["dist/**"],
       "dependsOn": ["jige-utils#build"]
     },

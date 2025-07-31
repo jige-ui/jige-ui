@@ -24,6 +24,7 @@
     "lint-commits": "commitlint --edit",
     "type-check": "tsc --noEmit --skipLibCheck",
     "build": "tsup --dts",
+    "build-dev": "cross-env DEV_MODE=true tsup --dts",
     "pub": "pnpm build && pnpm publish"
   },
   "peerDependencies": {
@@ -35,13 +36,14 @@
     "@solid-primitives/event-listener": "^2.4.1",
     "@solid-primitives/refs": "^1.1.0",
     "@solid-primitives/scheduled": "^1.5.1",
-    "solid-tiny-context": "^0.0.2"
+    "solid-tiny-context": "^0.1.0"
   },
   "devDependencies": {
     "esbuild-plugin-solid": "^0.6.0",
     "@floating-ui/core": "^1.6.13",
     "tsup": "^8.2.4",
     "typescript": "^5.5.4",
-    "jige-utils": "workspace:*"
+    "jige-utils": "workspace:*",
+    "cross-env": "^7.0.3"
   }
 }

@@ -1,9 +1,9 @@
-import { dataIf, TableCore } from 'jige-core'
-import { context } from './context'
-import { splitProps, type ComponentProps } from 'solid-js'
-import { Spin } from '../spin'
 import css from 'sass:./table.scss'
+import { TableCore, dataIf } from 'jige-core'
 import { mountStyle } from 'jige-utils'
+import { type ComponentProps, splitProps } from 'solid-js'
+import { Spin } from '../spin'
+import { context } from './context'
 
 export function Root(
   props: ComponentProps<'div'> & {

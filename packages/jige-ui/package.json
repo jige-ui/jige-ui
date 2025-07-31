@@ -22,9 +22,7 @@
   "module": "dist/build.js",
   "types": "dist/build.d.ts",
   "typesVersions": {},
-  "files": [
-    "dist"
-  ],
+  "files": ["dist"],
   "scripts": {
     "build": "tsup",
     "build-dev": "cross-env DEV_MODE=true tsup",
@@ -41,7 +39,7 @@
     "@solid-primitives/refs": "^1.1.1",
     "esday": "^0.4.1",
     "oklch-colors": "^0.0.1",
-    "solid-tiny-context": "^0.0.2"
+    "solid-tiny-context": "^0.1.0"
   },
   "devDependencies": {
     "@iconify-json/fluent": "^1.2.26",

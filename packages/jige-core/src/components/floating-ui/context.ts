@@ -33,6 +33,7 @@ export const context = createComponentState({
         y: 0,
       },
     },
+    initialized: false,
     plugin: {
       shift: true as ShiftOptions | Derivable<ShiftOptions> | boolean,
       flip: true as FlipOptions | Derivable<FlipOptions> | boolean,
@@ -112,6 +113,7 @@ export const context = createComponentState({
           placement,
         })
         actions.setState('middlewareData', middlewareData)
+        actions.setState('initialized', true)
       })
     },
   },
