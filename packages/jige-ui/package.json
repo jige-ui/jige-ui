@@ -1,7 +1,7 @@
 {
   "name": "jige-ui",
   "type": "module",
-  "version": "0.35.1",
+  "version": "0.35.2",
   "private": false,
   "description": "a solidjs component library",
   "license": "MIT",
@@ -39,7 +39,7 @@
     "@solid-primitives/refs": "^1.1.1",
     "esday": "^0.4.1",
     "oklch-colors": "^0.0.1",
-    "solid-tiny-context": "^0.1.0"
+    "solid-tiny-context": "^0.1.2"
   },
   "devDependencies": {
     "@iconify-json/fluent": "^1.2.26",

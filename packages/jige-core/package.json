@@ -1,7 +1,7 @@
 {
   "name": "jige-core",
   "type": "module",
-  "version": "0.40.8",
+  "version": "0.40.9",
   "packageManager": "pnpm@9.15.7",
   "description": "jige-ui's core primitives",
   "license": "MIT",
@@ -36,7 +36,7 @@
     "@solid-primitives/event-listener": "^2.4.1",
     "@solid-primitives/refs": "^1.1.0",
     "@solid-primitives/scheduled": "^1.5.1",
-    "solid-tiny-context": "^0.1.0"
+    "solid-tiny-context": "^0.1.2"
   },
   "devDependencies": {
     "esbuild-plugin-solid": "^0.6.0",

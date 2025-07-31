@@ -18,7 +18,7 @@
     "esday": "^0.4.1",
     "jige-core": "workspace:^",
     "@tanstack/solid-table": "^8.21.3",
-    "solid-tiny-context": "^0.0.2",
+    "solid-tiny-context": "^0.1.2",
     "jige-ui": "workspace:^",
     "radash": "^12.1.0",
     "chart.js": "^4.4.9",
