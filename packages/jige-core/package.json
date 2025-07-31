@@ -44,6 +44,6 @@
     "tsup": "^8.2.4",
     "typescript": "^5.5.4",
     "jige-utils": "workspace:*",
-    "cross-env": "^7.0.3"
+    "cross-env": "^10.0.0"
   }
 }
