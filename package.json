@@ -9,7 +9,7 @@
     "build:docs": "cd apps/docs && pnpm build",
     "build:ui": "cd packages/jige-ui && pnpm build",
     "build:utils": "cd packages/jige-utils && pnpm build",
-    "build:core": "cd packages/jige-core && cross-env DROP_CONSOLE=true pnpm build",
+    "build:core": "cd packages/jige-core && pnpm build",
     "clean": "pnpm exec rimraf .turbo node_modules",
     "dev": "turbo watch dev jige-ui#build-dev",
     "lint": "pnpm exec biome check .",
