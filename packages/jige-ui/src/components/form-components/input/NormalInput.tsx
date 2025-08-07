@@ -74,6 +74,7 @@ export function NormalInput(props: Omit<JigeInputProps, 'type'>) {
         focused={focused()}
         readonly={localProps.readonly || false}
         size={undefinedOr(localProps.size, 'medium')}
+        style={localProps.style}
       >
         <InputCore.Native
           {...(otherProps as any)}

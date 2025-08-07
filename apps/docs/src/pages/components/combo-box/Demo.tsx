@@ -8,6 +8,7 @@ export function Demo() {
   const [p, setP] = createStore({
     disabled: false,
     size: 'medium' as 'small' | 'medium' | 'large',
+    editable: false,
   })
   const [value, setValue] = createSignal<number>()
   return (
@@ -19,7 +20,8 @@ export function Demo() {
             <span>{value()}</span>
           </div>
           <ComboBox
-            style={{ width: '100%' }}
+            editable={p.editable}
+            style={{ width: '128px' }}
             value={value()}
             options={list(20000).map((v) => ({
               value: v,
@@ -28,8 +30,6 @@ export function Demo() {
             disabled={p.disabled}
             onChange={setValue}
             size={p.size}
-            onFocus={() => console.log('focus')}
-            onBlur={() => console.log('blur')}
           />
         </div>
       </Playground.MainArea>

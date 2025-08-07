@@ -37,6 +37,16 @@
   padding: 0 4px;
 }
 
+.jg-combo-box-empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 50px;
+  overflow: hidden;
+
+}
+
 .jg-combo-box-item {
   padding: 2px 0;
   color: funcs.get-var('fg3');

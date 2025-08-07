@@ -26,6 +26,7 @@ export function ComboBox<T extends SimpleType>(props: {
   class?: string
   style?: string | JSX.CSSProperties
   size?: 'small' | 'medium' | 'large'
+  editable?: boolean
 }) {
   return (
     <Root
@@ -35,6 +36,7 @@ export function ComboBox<T extends SimpleType>(props: {
       onChange={props.onChange}
       placeholder={props.placeholder || '请选择...'}
       disableBind={props.disableBind || false}
+      editable={props.editable || false}
     >
       <Trigger class={props.class} style={props.style} size={undefinedOr(props.size, 'medium')} />
       <ListBox size={undefinedOr(props.size, 'medium')} />

@@ -11,4 +11,4 @@ export type JigeInputProps = {
   readonly?: boolean
   suffix?: JSX.Element
   size?: 'small' | 'medium' | 'large'
-} & Omit<ComponentProps<'input'>, 'type' | 'value' | 'onChange' | 'onInput' | 'disabled'>
+} & Omit<ComponentProps<'input'>, 'type' | 'value' | 'onChange' | 'disabled'>
