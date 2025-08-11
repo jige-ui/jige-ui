@@ -44,7 +44,7 @@
   "devDependencies": {
     "@iconify-json/fluent": "^1.2.26",
     "browserslist": "^4.25.1",
-    "cross-env": "^7.0.3",
+    "cross-env": "^10.0.0",
     "esbuild-plugin-inline-import": "^1.1.0",
     "esbuild-plugin-solid": "^0.6.0",
     "lightningcss": "^1.30.1",
