@@ -1,0 +1,60 @@
+@use '../../../styles/funcs';
+
+.jg-segment {
+  position: relative;
+  display: flex;
+  background: funcs.get-var('t-bg2');
+  border: 1px solid funcs.get-var('t-border');
+  border-radius: .25em;
+
+  &[data-disabled] {
+    pointer-events: none;
+    opacity: .6;
+  }
+}
+
+.jg-segment-thumb {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  border-radius: .25em;
+  box-shadow: funcs.get-var('shadow4');
+  transition: transform 150ms, width 150ms
+}
+
+.jg-segment-item {
+  position: relative;
+  flex: 1;
+  padding: 2px 12px;
+  font-size: .9em;
+  color: funcs.get-var('fg2');
+  text-align: center;
+  cursor: pointer;
+
+
+  &:not(:first-of-type)::before {
+    position: absolute;
+    top: 20%;
+    bottom: 20%;
+    left: 0;
+    display: block;
+    width: 1px;
+    content: '';
+    background: funcs.get-var('t-border');
+  }
+
+  &.hide-divider::before {
+    opacity: 0;
+  }
+
+  &:not([data-checked]):hover {
+    color: funcs.get-var('fg3');
+  }
+
+  &[data-checked] {
+    color: funcs.get-var('fg1');
+  }
+
+
+}

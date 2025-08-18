@@ -1,0 +1,25 @@
+.jg-dialog-content {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.jg-dialog-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 48px;
+  padding: 0 12px;
+}
+
+.jg-dialog-body {
+  flex: 1;
+  padding: 12px;
+}
+
+.jg-dialog-footer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 8px 12px;
+}

@@ -1,0 +1,53 @@
+@use '../../styles/funcs';
+
+.jg-paginator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 28px;
+  font-size: funcs.get-var('fs-12');
+  user-select: none;
+
+}
+
+.jg-paginator-pager {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 24px;
+  height: 24px;
+  padding: 0 2px;
+  margin: 0 2px;
+  font-size: 13px;
+  color: funcs.get-var('fg2');
+  cursor: pointer;
+  border: 1px solid transparent;
+  border-radius: 4px;
+
+  &:hover {
+    background-color: funcs.get-var('t-bg4');
+  }
+
+  &[data-checked] {
+    color: funcs.get-var('t-hl-lighter');
+    background-color: inherit;
+    border-color: funcs.get-var('t-hl-darker');
+  }
+
+  &[data-disabled] {
+    color: funcs.get-var('fg4');
+    pointer-events: none;
+    opacity: .8;
+  }
+}
+
+.jg-paginator-pager-blank {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  margin: 0 2px;
+  color: funcs.get-var('fg3');
+  cursor: pointer;
+}

@@ -1,0 +1,64 @@
+
+@use '../../styles/funcs';
+
+.jg-popover-content {
+  padding: 6px;
+  margin: 6px;
+  color: var(--jg-popover-color);
+  background: var(--jg-popover-bg);
+  border-radius: 6px;
+  filter: drop-shadow(funcs.get-var('shadow3'));
+
+
+  &[data-floating-placement^="left"] {
+    margin-right: 0;
+
+    &[data-floating-placement$="start"] {
+      margin-top: 0;
+    }
+
+    &[data-floating-placement$="end"] {
+      margin-bottom: 0;
+    }
+  }
+
+  &[data-floating-placement^="right"] {
+    margin-left: 0;
+
+    &[data-floating-placement$="start"] {
+      margin-top: 0;
+    }
+
+    &[data-floating-placement$="end"] {
+      margin-bottom: 0;
+    }
+  }
+
+  &[data-floating-placement^="top"] {
+    margin-bottom: 0;
+
+    &[data-floating-placement$="start"] {
+      margin-left: 0;
+    }
+
+    &[data-floating-placement$="end"] {
+      margin-right: 0;
+    }
+  }
+
+  &[data-floating-placement^="bottom"] {
+    margin-top: 0;
+
+    &[data-floating-placement$="start"] {
+      margin-left: 0;
+    }
+
+    &[data-floating-placement$="end"] {
+      margin-right: 0;
+    }
+  }
+}
+
+.jg-popover-arrow {
+  background: var(--jg-popover-bg);
+}

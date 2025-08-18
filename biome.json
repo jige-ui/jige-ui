@@ -1,0 +1,23 @@
+{
+  "$schema": "https://biomejs.dev/schemas/2.1.2/schema.json",
+  "extends": ["ultracite"],
+  "linter": {
+    "rules": {
+      "suspicious": {
+        "noExplicitAny": "warn",
+        "noConsole": "warn",
+        "useGuardForIn": "off",
+        "noEmptyBlockStatements": "off"
+      },
+      "a11y": {
+        "noStaticElementInteractions": "off",
+        "useKeyWithClickEvents": "off",
+        "useSemanticElements": "off"
+      },
+      "nursery": "off",
+      "style": {
+        "noNonNullAssertion": "off"
+      }
+    }
+  }
+}

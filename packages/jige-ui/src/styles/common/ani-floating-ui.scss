@@ -1,0 +1,102 @@
+@use '../funcs';
+
+.ani-floating-ui-move {
+  animation-duration: 150ms;
+  animation-timing-function: funcs.get-var('bezier');
+
+
+  &[data-floating-status="opening"] {
+    animation-name: float-open;
+  }
+
+  &[data-floating-status="closing"] {
+    animation-name: float-close;
+  }
+
+  &[data-floating-placement^="left"] {
+    margin-right: 0;
+
+    --translate-3d: 6px, 0, 0;
+  }
+
+  &[data-floating-placement^="right"] {
+    margin-left: 0;
+
+    --translate-3d: -6px, 0, 0;
+  }
+
+  &[data-floating-placement^="top"] {
+    margin-bottom: 0;
+
+    --translate-3d: 0, 6px, 0;
+  }
+
+  &[data-floating-placement^="bottom"] {
+    margin-top: 0;
+
+    --translate-3d: 0, -6px, 0;
+  }
+}
+
+.ani-floating-ui-scale {
+  transform-origin: var(--jg-transform-origin);
+  animation-duration: 100ms;
+  animation-timing-function: funcs.get-var('bezier');
+
+  &[data-floating-status="closing"] {
+    animation-name: scale-close;
+  }
+
+  &[data-floating-status="opening"] {
+    animation-name: scale-open;
+  }
+}
+
+@keyframes float-open {
+  0% {
+    opacity: 0;
+    transform: translate3d(var(--translate-3d));
+  }
+
+  100% {
+    opacity: 1;
+    transform: translate3d(0 ,0, 0);
+  }
+}
+
+@keyframes float-close {
+  0% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate3d(var(--translate-3d));
+  }
+}
+
+
+@keyframes scale-open {
+  0% {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes scale-close {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  100% {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+}

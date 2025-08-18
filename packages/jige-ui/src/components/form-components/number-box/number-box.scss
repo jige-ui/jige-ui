@@ -1,0 +1,18 @@
+
+@use '../../../styles/funcs';
+
+.jg-number-box-tools {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  padding: 0 4px;
+  font-size: .75em;
+
+  > button {
+    height: 100%;
+    color: funcs.get-var('fg4');
+  }
+}

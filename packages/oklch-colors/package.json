@@ -1,0 +1,33 @@
+{
+  "name": "oklch-colors",
+  "type": "module",
+  "version": "0.0.1",
+  "description": "a solidjs component library",
+  "license": "MIT",
+  "sideEffects": false,
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "typesVersions": {},
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsup --dts",
+    "test": "vitest",
+    "test:watch": "vitest --watch",
+    "test:run": "vitest run"
+  },
+  "dependencies": {
+    "radash": "^12.1.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.5.2",
+    "tsup": "^8.5.0",
+    "typescript": "catalog:",
+    "vitest": "catalog:"
+  },
+  "browser": {
+    "./dist/server.js": "./dist/index.js"
+  }
+}

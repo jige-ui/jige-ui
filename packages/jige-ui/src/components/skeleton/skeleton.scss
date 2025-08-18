@@ -1,0 +1,30 @@
+.jg-sk {
+  --jg-sk-gradient-from-color: rgb(0 0 0 / 6%);
+  --jg-sk-gradient-to-color: rgb(0 0 0 / 15%);
+
+  background: var(--jg-sk-gradient-from-color);
+
+  &.jg-sk-animated {
+    background: linear-gradient(90deg, var(--jg-sk-gradient-from-color) 25%, var(--jg-sk-gradient-to-color) 37%, var(--jg-sk-gradient-from-color) 63%);
+    background-size: 400% 100%;
+    animation-name: skeleton-loading;
+    animation-duration: 1.4s;
+    animation-timing-function: ease;
+    animation-iteration-count: infinite;
+  }
+}
+
+.dark .jg-sk {
+  --jg-sk-gradient-from-color: rgb(255 255 255 / 12%);
+  --jg-sk-gradient-to-color: rgb(255 255 255 / 18%);
+}
+
+@keyframes skeleton-loading {
+  0% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0 50%;
+  }
+}

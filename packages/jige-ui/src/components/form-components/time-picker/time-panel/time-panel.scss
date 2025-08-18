@@ -1,0 +1,37 @@
+.jg-fake-scroll-item-inner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+
+  &:hover {
+    background: var(--jg-t-bg4);
+  }
+}
+
+.jg-fake-scroll-item {
+  padding: 2px;
+  cursor: pointer;
+  user-select: none;
+  color: var(--jg-fg3);
+
+  &[data-selected] {
+    color: var(--jg-fg2);
+    .jg-fake-scroll-item-inner {
+      background: inherit;
+    }
+  }
+}
+
+.jg-fake-scroll-area {
+  position: relative;
+  overflow: hidden;
+
+  &[data-scrolling] {
+    .jg-fake-scroll-item {
+      pointer-events: none;
+      background: inherit;
+    }
+  }
+}

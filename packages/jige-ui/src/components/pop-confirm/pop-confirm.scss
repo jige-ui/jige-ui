@@ -1,0 +1,26 @@
+.jg-pop-confirm-content {
+    display: flex;
+    flex-direction: column;
+    min-width: 200px;
+}
+
+.jg-pop-confirm-title {
+    display: flex;
+    align-items: center;
+    margin-bottom: 4px;
+    font-size: 13px;
+    color: var(--jg-fg1);
+}
+
+.jg-pop-confirm-description {
+    font-size: 13px;
+    color: var(--jg-fg2);
+}
+
+.jg-pop-confirm-actions {
+    display: flex;
+    gap: 4px;
+    align-items: center;
+    justify-content: end;
+    margin-top: 4px;
+}

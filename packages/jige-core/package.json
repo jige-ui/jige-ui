@@ -1,0 +1,51 @@
+{
+  "name": "jige-core",
+  "type": "module",
+  "version": "0.41.0",
+  "description": "jige-ui's core primitives",
+  "license": "MIT",
+  "sideEffects": false,
+  "exports": {
+    ".": {
+      "types": "./dist/build.d.ts",
+      "solid": "./dist/build.jsx",
+      "default": "./dist/build.js"
+    }
+  },
+  "main": "dist/build.js",
+  "module": "dist/build.js",
+  "types": "dist/build.d.ts",
+  "typesVersions": {},
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "lint": "pnpm exec biome check .",
+    "lint:fix": "pnpm exec biome check --write .",
+    "lint-commits": "commitlint --edit",
+    "type-check": "tsc --noEmit --skipLibCheck",
+    "build": "tsup --dts",
+    "build-dev": "cross-env DEV_MODE=true tsup --dts",
+    "prepublish": "pnpm build",
+    "bump": "bumpp --no-push -t jige-core@ -c \"chore(release): jige-core@\""
+  },
+  "peerDependencies": {
+    "solid-js": "catalog:"
+  },
+  "dependencies": {
+    "@floating-ui/dom": "^1.6.13",
+    "@solid-primitives/bounds": "catalog:",
+    "@solid-primitives/refs": "catalog:",
+    "@solid-primitives/scheduled": "catalog:",
+    "solid-tiny-context": "catalog:",
+    "solid-tiny-utils": "catalog:"
+  },
+  "devDependencies": {
+    "esbuild-plugin-solid": "^0.6.0",
+    "@floating-ui/core": "^1.6.13",
+    "tsup": "^8.2.4",
+    "typescript": "^5.5.4",
+    "cross-env": "^10.0.0",
+    "bumpp": "catalog:"
+  }
+}

@@ -1,0 +1,81 @@
+@use '../../../styles/funcs';
+
+.jg-radio-group-text {
+  font-size: .95em;
+  color: funcs.get-var('fg3');
+}
+
+.jg-radio-group-item {
+  display: flex;
+  cursor: pointer;
+  align-items: center;
+  padding: 2px 4px;
+}
+
+.jg-radio-group-circle {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.33em;
+  height: 1.33em;
+  margin-right: 4px;
+  cursor: pointer;
+  background: funcs.get-var('bg4');
+  border: 1px solid funcs.get-var('t-border');
+  border-radius: 50%;
+  transition: background 0.3s;
+
+  &::after {
+    position: absolute;
+    display: block;
+    width: 0;
+    height: 0;
+    content: '';
+    background: funcs.get-var('t-bg1');
+    border-radius: 50%;
+    transition: width 0.2s, height 0.2s;
+  }
+
+
+}
+
+.jg-radio-group-item[data-checked] {
+  .jg-radio-group-circle {
+    background: funcs.get-var('t-hl');
+    border-color: funcs.get-var('t-hl');
+  }
+
+  .jg-radio-group-circle::after {
+    width: .725em;
+    height: .725em;
+  }
+}
+
+.jg-radio-group-item[data-disabled] {
+  pointer-events: none;
+  opacity: .8;
+
+  .jg-radio-group-circle {
+    background: funcs.get-var('t-bg4');
+    border-color: funcs.get-var('t-bg4');
+  }
+}
+
+.jg-radio-group-item:not([data-disabled]) {
+  .jg-radio-group-circle:active {
+      &::after {
+        width: .835em;
+        height: .835em;
+      }
+  }
+
+  &:not([data-checked]){
+    .jg-radio-group-circle:active {
+      background: funcs.get-var('t-bg4');
+    }
+
+    .jg-radio-group-circle:hover {
+    background: funcs.get-var('t-bg4');
+  }}
+}

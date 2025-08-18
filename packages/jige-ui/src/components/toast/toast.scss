@@ -1,0 +1,93 @@
+@use '../../styles/funcs';
+
+.jg-toast-container {
+  position: fixed;
+  top: 0;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.jg-toast-wrapper {
+  overflow: hidden;
+
+  &[data-status="opening"] {
+    animation: toast-opening 250ms ease-out;
+  }
+
+  &[data-status="closing"] {
+    animation: toast-closing 250ms ease-out;
+  }
+}
+
+.jg-toast {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 350px;
+  padding: 1em;
+  padding-top: .7em;
+  background: funcs.get-var('t-bg1');
+  border-radius: .25em;
+  box-shadow: funcs.get-var('shadow4');
+}
+
+.jg-toast-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.jg-toast-body {
+  flex: 1;
+  color: funcs.get-var('fg2');
+}
+
+.jg-toast-progress {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  overflow: hidden;
+  border-bottom-right-radius: 5px;
+  border-bottom-left-radius: 5px;
+
+  .jg-toast-progress-bar {
+    display: flex;
+    width: 100%;
+    height: 0.25em;
+    background: funcs.get-var('t-bg4');
+  }
+}
+
+
+@keyframes toast-opening {
+  0% {
+    opacity: 0;
+    scale: 0.6;
+  }
+
+  80% {
+    opacity: 1;
+    scale: 1.03;
+  }
+
+  100% {
+    opacity: 1;
+    scale: 1;
+  }
+}
+
+@keyframes toast-closing {
+  0% {
+    max-height: var(--height);
+    opacity: 1;
+  }
+
+  100% {
+    max-height: 0;
+    opacity: 0;
+  }
+}

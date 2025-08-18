@@ -1,0 +1,13 @@
+@use '../../styles/funcs';
+
+.jg-tooltip-content {
+  position: relative;
+  padding: 4px 8px;
+  margin: 4px;
+  font-size: 12px;
+  font-weight: 400;
+  color: white;
+  background: funcs.get-var('t-hl');
+  border-radius: 4px;
+  box-shadow: funcs.get-var('shadow4');
+}

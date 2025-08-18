@@ -1,0 +1,51 @@
+$shadow-light:(
+  shadow1: #{0 0 1px rgb(0 0 0 / 10%)},
+  shadow2: #{0 0 2px rgb(0 0 0 / 10%), 0 1px 2px rgb(0 0 0 / 14%)},
+  shadow3: #{0 1px 3px rgb(0 0 0 / 14%)},
+  shadow4: #{0 0 2px rgb(0 0 0 / 10%), 0 2px 4px rgb(0 0 0 / 14%)},
+  shadow8: #{0 0 2px rgb(0 0 0 / 10%), 0 4px 8px rgb(0 0 0 / 14%)},
+);
+$shadow-dark: (
+  shadow1: #{0 0 1px rgb(0 0 0 / 24%)},
+  shadow2: #{0 0 2px rgb(0 0 0 / 24%), 0 1px 2px rgb(0 0 0 / 28%)},
+  shadow3: #{0 1px 3px rgb(0 0 0 / 28%)},
+  shadow4: #{0 0 2px rgb(0 0 0 / 24%), 0 2px 4px rgb(0 0 0 / 28%)},
+  shadow8: #{0 0 2px rgb(0 0 0 / 24%), 0 4px 8px rgb(0 0 0 / 28%)},
+);
+$colors-light: (
+  fg1: #242424,
+  fg2: #5c5c5c,
+  fg3: #8c8c8c,
+  fg4: #a4a4a4,
+  fg-link: #115ea3,
+  fg-info: #0078d4,
+  fg-danger: #d32f2f,
+  fg-success: #388e3c,
+  fg-warning: #f57c00,
+);
+$colors-dark: (
+  fg1: #fff,
+  fg2: #cfcfcf,
+  fg3: #a2a2a2,
+  fg4: #878787,
+  fg-link: #479ef5,
+  fg-info: #4cc2ff,
+  fg-danger: #f44336,
+  fg-success: #4caf50,
+  fg-warning: #ff9800,
+);
+$text-ramp: (
+  10: (10px, 14px),
+  12: (12px, 16px),
+  14: (14px, 20px),
+  16: (16px, 22px),
+  20: (20px, 26px),
+  24: (24px, 32px),
+  28: (28px, 36px),
+  32: (32px, 40px),
+);
+$height-ramp: (
+  small: 24px,
+  medium: 32px,
+  large: 40px,
+);

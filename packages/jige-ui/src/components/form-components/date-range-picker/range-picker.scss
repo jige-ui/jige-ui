@@ -1,0 +1,21 @@
+.jg-dp-range-panel {
+    display: flex;
+}
+
+.jg-dp-divider {
+    width: 1px;
+    background-color: var(--jg-t-border);
+}
+
+.jg-dp-cell-in-range {
+    position: relative;
+
+    &::before {
+        position: absolute;
+        inset: 0;
+        z-index: -1;
+        content: '';
+        background: var(--jg-t-bg6);
+        opacity: 0.5;
+    }
+}
