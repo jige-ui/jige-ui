@@ -44,7 +44,6 @@
     "@solid-primitives/refs": "catalog:",
     "@solid-primitives/scheduled": "catalog:",
     "esday": "^0.5.0",
-    "oklch-colors": "^0.0.1",
     "solid-tiny-context": "catalog:",
     "solid-tiny-utils": "catalog:"
   },

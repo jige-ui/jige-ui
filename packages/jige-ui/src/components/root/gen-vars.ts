@@ -1,4 +1,4 @@
-import { oklch2web } from 'oklch-colors';
+import { oklchToRgb } from 'solid-tiny-utils';
 
 const colorPrefix = '--jg-';
 
@@ -49,4 +49,12 @@ export function genVars(hue: number, themeColors: ThemeVars) {
   css += '}';
   cssDark += '}';
   return css + cssDark;
+}
+
+export function oklch2web(l: number, c: number, h: number, a?: number) {
+  const { r, g, b } = oklchToRgb({ l: l / 100, c, h });
+  if (a) {
+    return `rgba(${r}, ${g}, ${b}, ${a})`;
+  }
+  return `rgb(${r}, ${g}, ${b})`;
 }

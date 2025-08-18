@@ -17,7 +17,3 @@ Core primitives and building blocks for creating accessible UI components. This 
 ### 🎨 [jige-ui](./packages/jige-ui)
 
 A complete set of UI components built on top of jige-core. Includes buttons, dialogs, forms, tables, and more.
-
-### 🌈 [oklch-colors](./packages/oklch-colors)
-
-A color utility library for working with OKLCH color space, providing better perceptual uniformity than traditional RGB/HSL.
