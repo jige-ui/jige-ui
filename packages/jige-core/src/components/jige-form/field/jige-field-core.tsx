@@ -5,7 +5,7 @@ import { formContext } from '../form/context';
 import { getValueFromPath } from '../utils';
 import type { JigeFormAsyncValidator, JigeFormValidator } from '../validator';
 import { FieldContext } from './context';
-import { createFieldContext, type getFieldContext } from './field-context';
+import { createFieldContext } from './field-context';
 
 export type JigeFieldCoreProps = {
   name: string;
@@ -18,8 +18,8 @@ export type JigeFieldCoreProps = {
   children:
     | JSX.Element
     | ((
-        state: ReturnType<typeof getFieldContext>[0],
-        actions: ReturnType<typeof getFieldContext>[1]
+        state: ReturnType<typeof createFieldContext>[0],
+        actions: ReturnType<typeof createFieldContext>[1]
       ) => JSX.Element);
 };
 

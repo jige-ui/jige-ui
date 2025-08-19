@@ -9,6 +9,7 @@ export const formContext = createComponentState({
   state: () => ({
     isTouched: false,
     isSubmitting: false,
+    disabled: false,
     formData: {} as Record<string, any>,
     dirtyFields: {} as Record<string, boolean>,
     errorFields: {} as Record<string, JigeFormValidatorCorrectReturn[]>,
@@ -25,7 +26,7 @@ export const formContext = createComponentState({
     },
     canSubmit() {
       return (
-        !this.state.isSubmitting &&
+        !(this.state.disabled || this.state.isSubmitting) &&
         Object.values(this.state.errorFields).every(
           (v) => !v.filter((e) => e.type === 'error').length
         )
@@ -66,6 +67,9 @@ export const formContext = createComponentState({
       this.actions.setState('formData', ...keys, undefined);
     },
     async handleSubmit() {
+      if (this.state.disabled) {
+        return;
+      }
       await this.actions.validateFields();
       this.actions.setState('isTouched', true);
       if (!this.state.canSubmit) {
@@ -76,6 +80,9 @@ export const formContext = createComponentState({
       this.actions.setState('isSubmitting', false);
     },
     handleReset() {
+      if (this.state.disabled) {
+        return;
+      }
       batch(() => {
         const cloneInitialValues = JSON.parse(
           JSON.stringify(this.nowrapData.initialValues)
@@ -87,13 +94,11 @@ export const formContext = createComponentState({
 
         // dirty fields reset
         for (const key in this.state.dirtyFields) {
-          // biome-ignore lint/style/noNonNullAssertion: SolidJS store setter requires non-null assertion for undefined values
           this.actions.setState('dirtyFields', key, undefined!);
         }
 
         // error fields reset
         for (const key in this.state.errorFields) {
-          // biome-ignore lint/style/noNonNullAssertion: SolidJS store setter requires non-null assertion for undefined values
           this.actions.setState('errorFields', key, undefined!);
         }
 
@@ -127,11 +132,8 @@ export const formContext = createComponentState({
 
     clearState(path: string) {
       batch(() => {
-        // biome-ignore lint/style/noNonNullAssertion: SolidJS store setter requires non-null assertion for undefined values
         this.actions.setState('dirtyFields', path, undefined!);
-        // biome-ignore lint/style/noNonNullAssertion: SolidJS store setter requires non-null assertion for undefined values
         this.actions.setState('errorFields', path, undefined!);
-        // biome-ignore lint/style/noNonNullAssertion: SolidJS store setter requires non-null assertion for undefined values
         this.actions.setState('validateFields', path, undefined!);
       });
     },

@@ -1,5 +1,5 @@
 import { CheckboxGroupCore, dataIf } from 'jige-core';
-import { createMemo, type JSX, Show } from 'solid-js';
+import { createMemo, createUniqueId, type JSX, Show } from 'solid-js';
 import type { SimpleType } from '~/common/types';
 import { AnimatedChecked } from '~/components/icons';
 import { context } from './context';
@@ -10,12 +10,13 @@ export function Item<T extends SimpleType>(props: {
   children: JSX.Element;
 }) {
   const [groupState] = context.useContext();
+  const itemID = `checkbox_item__${createUniqueId()}`;
   return (
     <CheckboxGroupCore.Item
       disabled={props.disabled}
       value={props.value as string}
     >
-      <CheckboxGroupCore.ItemNative />
+      <CheckboxGroupCore.ItemNative id={itemID} />
       <CheckboxGroupCore.ItemControl>
         {(state) => {
           const checked = createMemo(() =>
@@ -42,13 +43,14 @@ export function Item<T extends SimpleType>(props: {
                   </i>
                 </Show>
               </div>
-              <div
+              <label
+                for={itemID}
                 style={{
                   'margin-left': '.5em',
                 }}
               >
                 {props.children}
-              </div>
+              </label>
             </div>
           );
         }}

@@ -1,21 +1,20 @@
 import { FormCore } from 'jige-core';
 import type { ComponentProps } from 'solid-js';
-import { NumberBox } from '../../form-components';
+import { DatePicker } from '../../form-components';
 
 /**
- * NumberBox component which is already bind with form.
+ * Input component which is already bind with form.
  */
-export function FormNumberBox(
-  props: Omit<ComponentProps<typeof NumberBox>, 'onChange' | 'value'>
+export function FormDatePicker(
+  props: Omit<ComponentProps<typeof DatePicker>, 'onChange' | 'value'>
 ) {
   const [fieldState, fieldActs] = FormCore.useField();
-
   return (
-    <NumberBox
+    <DatePicker
       disabled={fieldState.isDisabled}
-      {...props}
       onChange={fieldActs.handleChange}
       value={fieldState.value}
+      {...props}
     />
   );
 }

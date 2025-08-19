@@ -1,7 +1,7 @@
 import css from 'sass:./button.scss';
 import { splitProps } from 'solid-js';
 
-import { createWatch, mountStyle } from 'solid-tiny-utils';
+import { mountStyle } from 'solid-tiny-utils';
 import { ButtonContent } from './button-content';
 import { ButtonWrapper } from './button-wrapper';
 import { context } from './context';
@@ -33,16 +33,6 @@ export function Button<T extends string | undefined = undefined>(
     variant: () => local.variant,
     color: () => local.color,
     disabled: () => local.disabled,
-  });
-
-  const [, actions] = Context.value;
-
-  createWatch([() => local.disabled, () => local.type], ([pD, type]) => {
-    if (type === 'submit' || type === 'reset') {
-      actions.setState('disabled', true);
-    } else {
-      actions.setState('disabled', pD ?? false);
-    }
   });
 
   return (

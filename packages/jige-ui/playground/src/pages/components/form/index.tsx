@@ -1,21 +1,23 @@
 import { FormCore } from 'jige-core';
 import { For } from 'solid-js';
 import { createStore } from 'solid-js/store';
+import { createWatch, sleep } from 'solid-tiny-utils';
 // biome-ignore lint/performance/noNamespaceImport: valibot exports many schemas
 import * as v from 'valibot';
 import {
   Button,
-  CheckboxGroup,
-  ComboBox,
-  DatePicker,
-  DateRangePicker,
   Form,
-  Input,
-  NumberBox,
-  RadioGroup,
-  Switcher,
+  FormCheckboxGroup,
+  FormComboBox,
+  FormDatePicker,
+  FormDateRangePicker,
+  FormInput,
+  FormNumberBox,
+  FormRadioGroup,
+  FormSegment,
+  FormSlider,
+  FormSwitcher,
 } from '~/build';
-
 import { Playground } from '../../../components/playground';
 
 function valiFieldAdapter(schema: v.GenericSchema | v.GenericSchemaAsync) {
@@ -40,6 +42,7 @@ function valiForm(
   return finalValidate;
 }
 
+// biome-ignore lint/complexity/noExcessiveCognitiveComplexity: ha ha
 export default function Demo() {
   const [p, setP] = createStore({
     disabled: false,
@@ -71,16 +74,24 @@ export default function Demo() {
       date: '',
       dateRange: ['2024-01-01', '2024-12-27'],
       checkbox: [1, 2, 3],
+      segment: 'option1',
+      slider: 50,
     }),
     onSubmit: async (value) => {
       await sleep(2000);
-
       setData(value);
     },
     validate: valiForm(formSchema),
   });
 
   const [formState] = form.context;
+
+  createWatch(
+    () => formState.canSubmit,
+    () => {
+      console.log(formState.canSubmit);
+    }
+  );
 
   return (
     <Playground>
@@ -91,17 +102,17 @@ export default function Demo() {
             name="username"
             required
           >
-            <Input placeholder={p.noLabel ? 'Username' : ''} type="text" />
+            <FormInput placeholder={p.noLabel ? 'Username' : ''} type="text" />
           </Form.Field>
           <Form.Field label={p.noLabel ? undefined : 'Age'} name="age" required>
-            <NumberBox placeholder={p.noLabel ? 'Age' : ''} />
+            <FormNumberBox placeholder={p.noLabel ? 'Age' : ''} />
           </Form.Field>
           <Form.Field
             label={p.noLabel ? undefined : 'City'}
             name="city"
             required
           >
-            <ComboBox
+            <FormComboBox
               options={['beijing', 'shanghai', 'guangzhou']}
               placeholder={p.noLabel ? 'City' : ''}
             />
@@ -110,7 +121,10 @@ export default function Demo() {
             label={p.noLabel ? undefined : 'Password'}
             name={'password'}
           >
-            <Input placeholder={p.noLabel ? 'Password' : ''} type="password" />
+            <FormInput
+              placeholder={p.noLabel ? 'Password' : ''}
+              type="password"
+            />
           </Form.Field>
           <Form.Field
             label={p.noLabel ? undefined : 'Confirm Password'}
@@ -125,41 +139,55 @@ export default function Demo() {
               },
             ]}
           >
-            <Input
+            <FormInput
               placeholder={p.noLabel ? 'Confirm Password' : ''}
               type="password"
             />
           </Form.Field>
           <Form.Field label={p.noLabel ? undefined : 'Sex'} name="sex">
-            <RadioGroup>
+            <FormRadioGroup>
               <For each={['male', 'female']}>
-                {(item) => <RadioGroup.Item label={item} value={item} />}
+                {(item) => <FormRadioGroup.Item label={item} value={item} />}
               </For>
-            </RadioGroup>
+            </FormRadioGroup>
           </Form.Field>
           <Form.Field label={p.noLabel ? undefined : 'date'} name="date">
-            <DatePicker type="second" />
+            <FormDatePicker type="second" />
           </Form.Field>
           <Form.Field
             label={p.noLabel ? undefined : 'dateRange'}
             name="dateRange"
           >
-            <DateRangePicker type="datetime" />
+            <FormDateRangePicker type="datetime" />
           </Form.Field>
           <Form.Field
             label={p.noLabel ? undefined : 'Checkbox'}
             name="checkbox"
           >
-            <CheckboxGroup>
-              <CheckboxGroup.Item value={1}>Option 1</CheckboxGroup.Item>
-              <CheckboxGroup.Item value={2}>Option 2</CheckboxGroup.Item>
-              <CheckboxGroup.Item value={3}>Option 3</CheckboxGroup.Item>
-              <CheckboxGroup.Item value={4}>Option 4</CheckboxGroup.Item>
-            </CheckboxGroup>
+            <FormCheckboxGroup>
+              <FormCheckboxGroup.Item value={1}>
+                Option 1
+              </FormCheckboxGroup.Item>
+              <FormCheckboxGroup.Item value={2}>
+                Option 2
+              </FormCheckboxGroup.Item>
+              <FormCheckboxGroup.Item value={3}>
+                Option 3
+              </FormCheckboxGroup.Item>
+              <FormCheckboxGroup.Item value={4}>
+                Option 4
+              </FormCheckboxGroup.Item>
+            </FormCheckboxGroup>
+          </Form.Field>
+          <Form.Field label={p.noLabel ? undefined : 'Segment'} name="segment">
+            <FormSegment options={['option1', 'option2', 'option3']} />
+          </Form.Field>
+          <Form.Field label={p.noLabel ? undefined : 'Slider'} name="slider">
+            <FormSlider />
           </Form.Field>
           <Form.Field name="remember">
             <div class="flex items-center">
-              <Switcher type="checkbox" /> Remember me
+              <FormSwitcher type="checkbox" /> Remember me
             </div>
           </Form.Field>
 
@@ -186,7 +214,4 @@ export default function Demo() {
       <Playground.PropertySetting onChange={setP} properties={p} />
     </Playground>
   );
-}
-function sleep(arg0: number) {
-  return new Promise((resolve) => setTimeout(resolve, arg0));
 }

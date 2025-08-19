@@ -1,29 +1,35 @@
+import strip from '@rollup/plugin-strip';
 import solid from 'rolldown-plugin-solid';
 import inlinePlugin from 'rollup-plugin-inline-import';
 import { defineConfig } from 'tsdown';
-import Icons from 'unplugin-icons/rollup';
 
-// biome-ignore lint/suspicious/noExplicitAny: rollup plugins have complex types
-const getPlugins = (jsx: boolean): any[] => {
+const getPlugins = (jsx: boolean) => {
+  const isDev = process.env.DEV_MODE === 'true';
+  const plugins: any[] = [];
+
   if (!jsx) {
-    return [
-      Icons({ compiler: 'solid' }),
-      solid({ solid: { generate: 'dom' } }),
-      inlinePlugin(),
-    ] as any[];
+    plugins.push(solid({ solid: { generate: 'dom' } }));
   }
 
-  return [Icons({ compiler: 'solid' }), inlinePlugin()] as any[];
+  plugins.push(inlinePlugin());
+
+  if (isDev) {
+    plugins.push(
+      strip({
+        functions: ['console.*', 'debugger'],
+      })
+    );
+  }
+
+  return plugins;
 };
+
+const entry = ['src/build.ts', 'src/components/*/index.ts'];
 
 // export both js and jsx
 export default defineConfig([
   {
-    entry: [
-      'src/build.ts',
-      'src/components/*/index.ts',
-      'src/components/form-components/*/index.ts',
-    ],
+    entry,
     platform: 'browser',
     dts: true,
     plugins: [getPlugins(false)],
@@ -32,11 +38,7 @@ export default defineConfig([
     },
   },
   {
-    entry: [
-      'src/build.ts',
-      'src/components/*/index.ts',
-      'src/components/form-components/*/index.ts',
-    ],
+    entry,
     platform: 'browser',
     dts: false,
     inputOptions: {

@@ -24,8 +24,8 @@
     "lint:fix": "pnpm exec biome check --write .",
     "lint-commits": "commitlint --edit",
     "type-check": "tsc --noEmit --skipLibCheck",
-    "build": "tsup --dts",
-    "build-dev": "cross-env DEV_MODE=true tsup --dts",
+    "build": "tsdown",
+    "build-dev": "cross-env DEV_MODE=true tsdown",
     "prepublish": "pnpm build",
     "bump": "bumpp --no-push -t jige-core@ -c \"chore(release): jige-core@\""
   },
@@ -41,11 +41,15 @@
     "solid-tiny-utils": "catalog:"
   },
   "devDependencies": {
-    "esbuild-plugin-solid": "^0.6.0",
     "@floating-ui/core": "^1.6.13",
-    "tsup": "^8.2.4",
-    "typescript": "^5.5.4",
+    "@rollup/plugin-strip": "^3.0.4",
+    "bumpp": "catalog:",
     "cross-env": "^10.0.0",
-    "bumpp": "catalog:"
+    "esbuild-plugin-solid": "^0.6.0",
+    "rolldown-plugin-solid": "catalog:",
+    "rollup-plugin-inline-import": "^0.3.0",
+    "tsdown": "catalog:",
+    "tsup": "^8.2.4",
+    "typescript": "^5.5.4"
   }
 }

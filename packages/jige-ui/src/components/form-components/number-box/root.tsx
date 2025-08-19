@@ -13,7 +13,6 @@ export function Root(
       disabled?: boolean;
       placeholder?: string;
       onChange?: (value: number) => void;
-      disableBind?: boolean;
     }
   >
 ) {

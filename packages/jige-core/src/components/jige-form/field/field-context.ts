@@ -46,7 +46,6 @@ export function getFieldContext(
     const validationErrors = [] as JigeFormValidatorCorrectReturn[];
     for (const validator of options.validators) {
       const error = normalizeValidator(
-        // biome-ignore lint/nursery/noAwaitInLoop: Sequential validation needed for validateFirst option
         await validator(fieldValue(), formState.formData)
       );
       if (error) {
@@ -154,7 +153,6 @@ export function createFieldContext(
     const validationErrors = [] as JigeFormValidatorCorrectReturn[];
     for (const validator of options.validators()) {
       const error = normalizeValidator(
-        // biome-ignore lint/nursery/noAwaitInLoop: Sequential validation needed for validateFirst option
         await validator(fieldValue(), formState.formData)
       );
       if (error) {
@@ -212,6 +210,9 @@ export function createFieldContext(
       },
       get errors() {
         return errors();
+      },
+      get isDisabled() {
+        return formState.disabled;
       },
     },
     {

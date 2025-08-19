@@ -21,6 +21,7 @@ export const FieldContext = createContext<
       value: any;
       isDirty: boolean;
       errors: any[];
+      isDisabled: boolean;
     },
     {
       setValue: (value: unknown) => boolean;
@@ -37,6 +38,7 @@ export const FieldContext = createContext<
     value: undefined,
     isDirty: false,
     errors: [] as any[],
+    isDisabled: false,
   },
   {
     setValue: (() => false) as (value: unknown) => boolean,

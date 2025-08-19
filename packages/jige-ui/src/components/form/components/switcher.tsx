@@ -1,17 +1,22 @@
 import { FormCore } from 'jige-core';
+import type { ComponentProps } from 'solid-js';
 import { Switcher } from '../../form-components';
 
 /**
  * Switcher component which is already bind with form.
  */
-export function FormSwitcher(props: { type?: 'checkbox' | 'switcher' }) {
+export function FormSwitcher(
+  props: Omit<ComponentProps<typeof Switcher>, 'onChange' | 'value'>
+) {
   const [fieldState, fieldActs] = FormCore.useField();
+
   return (
     <Switcher
+      disabled={fieldState.isDisabled}
+      {...props}
       onChange={(v: any) => {
         fieldActs.handleChange(v);
       }}
-      type={props.type}
       value={fieldState.value}
     />
   );

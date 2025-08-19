@@ -14,6 +14,8 @@ catalog:
   solid-tiny-utils: ^0.6.0
   typescript: ^5.9.2
   vitest: ^3.2.4
+  tsdown: ^0.14.1
+  rolldown-plugin-solid: ^0.2.1
 
 onlyBuiltDependencies:
   - "@parcel/watcher"

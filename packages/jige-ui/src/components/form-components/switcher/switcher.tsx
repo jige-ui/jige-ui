@@ -10,7 +10,6 @@ export function Switcher(props: {
   value?: boolean;
   type?: 'checkbox' | 'switcher';
   disabled?: boolean;
-  disableBind?: boolean;
 }) {
   mountStyle(styles, 'jige-ui-switcher');
 

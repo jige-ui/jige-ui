@@ -1,18 +1,16 @@
 import { FormCore } from 'jige-core';
 import type { ComponentProps } from 'solid-js';
-import type { SimpleType } from '~/common/types';
-import { ComboBox } from '../../form-components';
+import { RadioGroup } from '../../form-components';
 
 /**
- * Combo-box component which is already bind with form.
+ * Radio group component which is already bind with form.
  */
-export function FormComboBox<T extends SimpleType>(
-  props: Omit<ComponentProps<typeof ComboBox<T>>, 'onChange' | 'value'>
+function Root(
+  props: Omit<ComponentProps<typeof RadioGroup>, 'onChange' | 'value'>
 ) {
   const [fieldState, fieldActs] = FormCore.useField();
-
   return (
-    <ComboBox
+    <RadioGroup
       disabled={fieldState.isDisabled}
       {...props}
       onChange={fieldActs.handleChange}
@@ -20,3 +18,7 @@ export function FormComboBox<T extends SimpleType>(
     />
   );
 }
+
+export const FormRadioGroup = Object.assign(Root, {
+  Item: RadioGroup.Item,
+});
