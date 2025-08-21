@@ -1,7 +1,6 @@
-import { CheckboxGroupCore, dataIf } from 'jige-core';
-import { createMemo, createUniqueId, type JSX, Show } from 'solid-js';
+import type { JSX } from 'solid-js';
 import type { SimpleType } from '~/common/types';
-import { AnimatedChecked } from '~/components/icons';
+import { Checkbox } from '../checkbox';
 import { context } from './context';
 
 export function Item<T extends SimpleType>(props: {
@@ -9,52 +8,23 @@ export function Item<T extends SimpleType>(props: {
   value: T;
   children: JSX.Element;
 }) {
-  const [groupState] = context.useContext();
-  const itemID = `checkbox_item__${createUniqueId()}`;
+  const [state, acts] = context.useContext();
+
   return (
-    <CheckboxGroupCore.Item
-      disabled={props.disabled}
-      value={props.value as string}
+    <Checkbox
+      checked={state.value.includes(props.value as string)}
+      disabled={Boolean(state.disabled || props.disabled)}
+      name={state.name}
+      onChange={(checked) => {
+        if (checked) {
+          acts.pushValue(props.value as string);
+        } else {
+          acts.removeValue(props.value as string);
+        }
+      }}
+      size={state.size}
     >
-      <CheckboxGroupCore.ItemNative id={itemID} />
-      <CheckboxGroupCore.ItemControl>
-        {(state) => {
-          const checked = createMemo(() =>
-            state.value.includes(props.value as string)
-          );
-          return (
-            <div
-              class="jg-checkbox-item"
-              data-disabled={dataIf(state.disabled)}
-              data-large={dataIf(groupState.size === 'large')}
-              data-medium={dataIf(
-                groupState.size !== 'small' && groupState.size !== 'large'
-              )}
-              data-small={dataIf(groupState.size === 'small')}
-            >
-              <div
-                class="jg-checkbox-box"
-                data-checked={dataIf(checked())}
-                data-disabled={dataIf(state.disabled)}
-              >
-                <Show when={checked()}>
-                  <i class="jg-checkbox-icon">
-                    <AnimatedChecked />
-                  </i>
-                </Show>
-              </div>
-              <label
-                for={itemID}
-                style={{
-                  'margin-left': '.5em',
-                }}
-              >
-                {props.children}
-              </label>
-            </div>
-          );
-        }}
-      </CheckboxGroupCore.ItemControl>
-    </CheckboxGroupCore.Item>
+      {props.children}
+    </Checkbox>
   );
 }

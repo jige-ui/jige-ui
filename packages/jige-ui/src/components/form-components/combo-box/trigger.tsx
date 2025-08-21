@@ -2,7 +2,7 @@ import { FloatingUiCore, hiddenStyle } from 'jige-core';
 import { Show } from 'solid-js';
 import type { JSX } from 'solid-js/jsx-runtime';
 import { dataIf } from '~/common/dataset';
-import IconFluentChevronDown24Filled from '~icons/fluent/chevron-down-24-filled';
+import { IconFluentChevronDown24Filled } from '~/components/icons/fluent-chevron-down-24-filled';
 import { Input } from '../input';
 import { context } from './context';
 

@@ -2,9 +2,9 @@ import { FloatingUiCore, hiddenStyle } from 'jige-core';
 import { createSignal } from 'solid-js';
 import { createDebouncedWatch, createWatch } from 'solid-tiny-utils';
 import { dataIf } from '~/common/dataset';
+import { IconFluentArrowRight24Filled } from '~/components/icons/fluent-arrow-right-24-filled';
+import { IconFluentCalendar24Regular } from '~/components/icons/fluent-calendar-24-regular';
 import { Popover } from '~/components/popover';
-import IconFluentArrowRight24Filled from '~icons/fluent/arrow-right-24-filled';
-import IconFluentCalendar24Regular from '~icons/fluent/calendar-24-regular';
 import { ClearableSuffix } from '../input/clearable-suffix';
 import { context } from './context';
 

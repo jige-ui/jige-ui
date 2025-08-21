@@ -8,14 +8,7 @@ import context from './context';
 export default function Native(
   props: Omit<
     JSX.InputHTMLAttributes<HTMLInputElement>,
-    | 'style'
-    | 'type'
-    | 'role'
-    | 'aria-checked'
-    | 'value'
-    | 'name'
-    | 'checked'
-    | 'disabled'
+    'style' | 'type' | 'role' | 'value' | 'checked' | 'disabled'
   >
 ) {
   const [state, actions] = context.useContext();
@@ -27,11 +20,10 @@ export default function Native(
   ]);
   return (
     <input
-      {...otherProps}
       aria-checked={state.checked}
+      {...otherProps}
       checked={state.checked}
       disabled={state.disabled}
-      name={state.name}
       onBlur={(e) => {
         actions.setState('focused', false);
         runSolidEventHandler(e, localProps.onBlur);

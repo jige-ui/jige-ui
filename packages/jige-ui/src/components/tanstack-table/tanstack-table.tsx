@@ -6,7 +6,7 @@ import {
 } from '@tanstack/solid-table';
 import { createMemo, For, type JSX, Show } from 'solid-js';
 import { mountStyle } from 'solid-tiny-utils';
-import IconFluentBoxDismiss24Regular from '~icons/fluent/box-dismiss-24-regular';
+import { IconFluentBoxDismiss24Regular } from '../icons/fluent-box-dismiss-24-regular';
 import { Paginator } from '../paginator';
 import { Table } from '../table';
 import { getMergeHeaderGroups } from './utils';

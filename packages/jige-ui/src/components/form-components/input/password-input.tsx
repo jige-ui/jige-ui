@@ -5,8 +5,8 @@ import {
   undefinedOr,
 } from 'jige-core';
 import { createSignal, Show, splitProps } from 'solid-js';
-import IconFluentEye24Regular from '~icons/fluent/eye-24-regular';
-import IconFluentEyeOff24Filled from '~icons/fluent/eye-off-24-filled';
+import { IconFluentEye24Regular } from '~/components/icons/fluent-eye-24-regular';
+import { IconFluentEyeOff24Filled } from '~/components/icons/fluent-eye-off-24-filled';
 import { InputWrapper } from './input-wrapper';
 import type { JigeInputProps } from './types';
 

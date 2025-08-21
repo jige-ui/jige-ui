@@ -1,5 +1,5 @@
 import { type JSX, Show } from 'solid-js';
-import IconFluentDismissCircle24Filled from '~icons/fluent/dismiss-circle-24-filled';
+import { IconFluentDismissCircle24Filled } from '~/components/icons/fluent-dismiss-circle-24-filled';
 
 export function ClearableSuffix(props: {
   showClearable: boolean;

@@ -1,8 +1,8 @@
 import { throttle } from '@solid-primitives/scheduled';
 import { createMemo, type JSX, Show } from 'solid-js';
 import { Button } from '~/components/button';
-import IconFluentCaretDown24Filled from '~icons/fluent/caret-down-24-filled';
-import IconFluentCaretUp24Filled from '~icons/fluent/caret-up-24-filled';
+import { IconFluentCaretDown24Filled } from '~/components/icons/fluent-caret-down-24-filled';
+import { IconFluentCaretUp24Filled } from '~/components/icons/fluent-caret-up-24-filled';
 import { NumberToChinese } from '../utils';
 import { panelContext } from './context';
 

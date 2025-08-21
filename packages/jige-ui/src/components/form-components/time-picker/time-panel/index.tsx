@@ -2,8 +2,8 @@ import css from 'sass:./time-panel.scss';
 import { createMemo, Show } from 'solid-js';
 import { createWatch, list, mountStyle } from 'solid-tiny-utils';
 import { Button } from '~/components/button';
-import IconFluentCheckmark24Regular from '~icons/fluent/checkmark-24-regular';
-import IconFluentDismiss24Regular from '~icons/fluent/dismiss-24-regular';
+import { IconFluentCheckmark24Regular } from '~/components/icons/fluent-checkmark-24-regular';
+import { IconFluentDismiss24Regular } from '~/components/icons/fluent-dismiss-24-regular';
 import { context } from './context';
 import { FakeScrollArea } from './fake-scroll-area';
 

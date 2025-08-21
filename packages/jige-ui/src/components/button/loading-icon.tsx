@@ -1,5 +1,5 @@
 import { Show } from 'solid-js';
-import IconFluentMoreHorizontal24Filled from '~icons/fluent/more-horizontal-24-filled';
+import { IconFluentMoreHorizontal24Filled } from '~/components/icons/fluent-more-horizontal-24-filled';
 import { context } from './context';
 
 export function LoadingIcon() {

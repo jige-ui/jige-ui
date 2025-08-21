@@ -6,7 +6,6 @@ import { browserslistToTargets, transform as lightCss } from 'lightningcss';
 import { compileAsync } from 'sass-embedded';
 import type { Options } from 'tsup';
 import { defineConfig } from 'tsup';
-import Icons from 'unplugin-icons/esbuild';
 
 const inlinePlugin = inlineImportPlugin({
   filter: /^sass:/,
@@ -27,14 +26,10 @@ const inlinePlugin = inlineImportPlugin({
 });
 
 const getPlugins = (jsx: boolean) => {
-  let plugins = [inlinePlugin, Icons({ compiler: 'solid' })];
+  let plugins = [inlinePlugin];
 
   if (!jsx) {
-    plugins = [
-      Icons({ compiler: 'solid' }),
-      solidPlugin({ solid: { generate: 'dom' } }),
-      inlinePlugin,
-    ];
+    plugins = [solidPlugin({ solid: { generate: 'dom' } }), inlinePlugin];
   }
 
   return plugins;

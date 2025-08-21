@@ -2,7 +2,7 @@ import { FloatingUiCore, FormCore } from 'jige-core';
 import { batch, createSignal } from 'solid-js';
 import { createWatch } from 'solid-tiny-utils';
 import { dataIf } from '~/common/dataset';
-import IconFluentCalendar24Regular from '~icons/fluent/calendar-24-regular';
+import { IconFluentCalendar24Regular } from '~/components/icons/fluent-calendar-24-regular';
 import { Popover } from '../../popover';
 import { ClearableSuffix } from '../input/clearable-suffix';
 import { context } from './context';

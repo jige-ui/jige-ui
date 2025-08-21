@@ -1,4 +1,5 @@
 import { FormCore, RadioGroupCore } from 'jige-core';
+import { createUniqueId } from 'solid-js';
 import { dataIf } from '~/common/dataset';
 
 export function Item(props: {
@@ -8,9 +9,11 @@ export function Item(props: {
 }) {
   const [state] = RadioGroupCore.useContext();
   const [, fieldCoreActs] = FormCore.useField();
+  const itemID = `radio_item__${createUniqueId()}`;
   return (
     <RadioGroupCore.Item disabled={props.disabled} value={props.value}>
       <RadioGroupCore.ItemNative
+        id={itemID}
         onBlur={() => {
           fieldCoreActs.handleBlur?.();
         }}
@@ -22,7 +25,9 @@ export function Item(props: {
           data-disabled={dataIf(state.disabled || props.disabled)}
         >
           <button class="jg-radio-group-circle" type="button" />
-          <div class="jg-radio-group-text">{props.label}</div>
+          <label class="jg-radio-group-text" for={itemID}>
+            {props.label}
+          </label>
         </div>
       </RadioGroupCore.ItemControl>
     </RadioGroupCore.Item>

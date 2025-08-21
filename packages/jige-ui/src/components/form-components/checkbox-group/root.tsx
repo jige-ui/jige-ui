@@ -1,7 +1,5 @@
-import css from 'sass:./checkbox-group.scss';
-import { CheckboxGroupCore } from 'jige-core';
 import { type ComponentProps, splitProps } from 'solid-js';
-import { mountStyle } from 'solid-tiny-utils';
+import { createWatch } from 'solid-tiny-utils';
 import type { SimpleType } from '~/common/types';
 import { context } from './context';
 
@@ -13,7 +11,6 @@ export function Root<T extends SimpleType>(
     size?: 'small' | 'medium' | 'large';
   } & ComponentProps<'div'>
 ) {
-  mountStyle(css, 'jige-ui-checkbox-group');
   const [localProps, others] = splitProps(props, [
     'value',
     'disabled',
@@ -22,16 +19,23 @@ export function Root<T extends SimpleType>(
   ]);
   const Context = context.initial({
     size: () => localProps.size,
+    disabled: () => localProps.disabled,
+    value: () => localProps.value as string[],
   });
+
+  const [state] = Context.value;
+
+  createWatch(
+    () => state.value,
+    () => {
+      localProps.onChange?.(state.value as T[]);
+    },
+    { defer: true }
+  );
+
   return (
     <Context.Provider>
-      <CheckboxGroupCore
-        disabled={localProps.disabled}
-        onChange={localProps.onChange as any}
-        value={localProps.value as string[]}
-      >
-        <div {...others} />
-      </CheckboxGroupCore>
+      <div {...others} />
     </Context.Provider>
   );
 }

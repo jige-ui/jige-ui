@@ -4,11 +4,11 @@ import { createMemo, createSignal, Match, Show, Switch } from 'solid-js';
 import { isNumber, mountStyle } from 'solid-tiny-utils';
 import { dataIf } from '~/common/dataset';
 import { isDef } from '~/common/types';
-import IconFluentChevronDoubleLeft16Filled from '~icons/fluent/chevron-double-left-16-filled';
-import IconFluentChevronDoubleRight16Filled from '~icons/fluent/chevron-double-right-16-filled';
-import IconFluentChevronLeft24Regular from '~icons/fluent/chevron-left-24-regular';
-import IconFluentChevronRight24Regular from '~icons/fluent/chevron-right-24-regular';
-import IconFluentMoreHorizontal24Filled from '~icons/fluent/more-horizontal-24-filled';
+import { IconFluentChevronDoubleLeft16Filled } from '../icons/fluent-chevron-double-left-16-filled';
+import { IconFluentChevronDoubleRight16Filled } from '../icons/fluent-chevron-double-right-16-filled';
+import { IconFluentChevronLeft24Filled } from '../icons/fluent-chevron-left-24-filled';
+import { IconFluentChevronRight24Filled } from '../icons/fluent-chevron-right-24-filled';
+import { IconFluentMoreHorizontal24Filled } from '../icons/fluent-more-horizontal-24-filled';
 
 function Pager(props: {
   page: number;
@@ -58,8 +58,8 @@ function PageArrow(props: {
         color: 'var(--jg-fg3)',
       }}
     >
-      <Show fallback={<IconFluentChevronRight24Regular />} when={props.isLeft}>
-        <IconFluentChevronLeft24Regular />
+      <Show fallback={<IconFluentChevronRight24Filled />} when={props.isLeft}>
+        <IconFluentChevronLeft24Filled />
       </Show>
     </div>
   );

@@ -1,3 +1,4 @@
+export * from './checkbox';
 export * from './checkbox-group';
 export * from './combo-box';
 export * from './date-picker';

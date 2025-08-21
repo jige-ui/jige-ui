@@ -48,7 +48,9 @@ export function Root(
   createWatch(
     () => state.checked,
     (c) => {
-      props.onChange?.(c);
+      if (c !== props.checked) {
+        props.onChange?.(c);
+      }
     }
   );
 

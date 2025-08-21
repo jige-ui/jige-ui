@@ -3,8 +3,8 @@ import { FloatingUiCore } from 'jige-core';
 import { mergeProps } from 'solid-js';
 import type { JSX } from 'solid-js/jsx-runtime';
 import { mountStyle } from 'solid-tiny-utils';
-import IconFluentErrorCircle24Filled from '~icons/fluent/error-circle-24-filled';
 import { Button } from '../button';
+import { IconFluentErrorCircle24Filled } from '../icons/fluent-error-circle-24-filled';
 
 export function Content(props: {
   title?: string;

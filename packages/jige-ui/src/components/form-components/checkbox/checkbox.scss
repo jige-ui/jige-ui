@@ -1,0 +1,73 @@
+@use "../../../styles/funcs";
+
+.jg-checkbox {
+  display: flex;
+  align-items: center;
+
+  &[data-size="small"] {
+    height: 24px;
+    font-size: 13px;
+  }
+
+  &[data-size="medium"] {
+    height: 32px;
+    font-size: 14px;
+  }
+
+  &[data-size="large"] {
+    height: 40px;
+    font-size: 16px;
+  }
+}
+
+.jg-checkbox-icon {
+  font-size: 1em;
+  animation: icon-in 0.2s ease-in-out;
+}
+
+@keyframes icon-in {
+  0% {
+    transform: scale(0.5);
+    opacity: 0;
+  }
+
+  50% {
+    transform: scale(1.15);
+    opacity: 1;
+  }
+
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.jg-checkbox-control {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.275em;
+  height: 1.275em;
+  background: funcs.get-var("t-bg1");
+  border: 1px solid funcs.get-var("t-border");
+  border-radius: 0.25em;
+
+  &:not([data-checked]):hover {
+    background: funcs.get-var("t-bg3");
+  }
+
+  &:not([data-indeterminate])[data-checked] {
+    background: funcs.get-var("t-hl");
+  }
+
+  &[data-disabled] {
+    pointer-events: none;
+    opacity: 0.6;
+  }
+}
+
+.jg-checkbox-native:focus-visible + .jg-checkbox-control {
+  outline: 1px solid funcs.get-var("t-hl");
+  outline-offset: 1px;
+}

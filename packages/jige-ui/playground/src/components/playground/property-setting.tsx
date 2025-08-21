@@ -4,10 +4,10 @@ import type { SetStoreFunction } from 'solid-js/store';
 import { createWatch } from 'solid-tiny-utils';
 import {
   Form,
+  FormCheckbox,
   FormComboBox,
   FormInput,
   FormNumberBox,
-  FormSwitcher,
 } from '~/build';
 
 export function PropertySetting<T extends { [key: string]: unknown }>(props: {
@@ -53,7 +53,7 @@ export function PropertySetting<T extends { [key: string]: unknown }>(props: {
                 <Switch>
                   <Match when={checkType(item) === 'boolean'}>
                     <div>{item}</div>
-                    <FormSwitcher type="checkbox" />
+                    <FormCheckbox />
                   </Match>
                   <Match when={checkType(item) === 'string'}>
                     <div>{item}</div>

@@ -1,6 +1,6 @@
 import { children, type JSX, Show } from 'solid-js';
-import IconFluentDismiss24Regular from '~icons/fluent/dismiss-24-regular';
 import { Button } from '../button';
+import { IconFluentDismiss24Regular } from '../icons/fluent-dismiss-24-regular';
 import { Close } from './close';
 
 export function Header(props: {

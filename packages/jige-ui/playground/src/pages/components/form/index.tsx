@@ -187,7 +187,7 @@ export default function Demo() {
           </Form.Field>
           <Form.Field name="remember">
             <div class="flex items-center">
-              <FormSwitcher type="checkbox" /> Remember me
+              <FormSwitcher>Remember me</FormSwitcher>
             </div>
           </Form.Field>
 

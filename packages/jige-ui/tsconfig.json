@@ -13,8 +13,7 @@
     "noEmit": true,
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
-    "isolatedModules": true,
-    "types": ["unplugin-icons/types/solid"]
+    "isolatedModules": true
   },
   "exclude": ["dist"]
 }

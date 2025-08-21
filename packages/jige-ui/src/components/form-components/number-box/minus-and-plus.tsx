@@ -1,5 +1,5 @@
-import IconFluentChevronDown24Regular from '~icons/fluent/chevron-down-24-regular';
-import IconFluentChevronUp24Regular from '~icons/fluent/chevron-up-24-regular';
+import { IconFluentChevronDown24Filled } from '~/components/icons/fluent-chevron-down-24-filled';
+import { IconFluentChevronUp24Filled } from '~/components/icons/fluent-chevron-up-24-filled';
 import { context } from './context';
 
 export function MinusAndPlus(props: { class?: string }) {
@@ -12,7 +12,7 @@ export function MinusAndPlus(props: { class?: string }) {
         onMouseDown={(e) => e.preventDefault()}
         type="button"
       >
-        <IconFluentChevronUp24Regular />
+        <IconFluentChevronUp24Filled />
       </button>
       <button
         disabled={state.value <= state.min}
@@ -20,7 +20,7 @@ export function MinusAndPlus(props: { class?: string }) {
         onMouseDown={(e) => e.preventDefault()}
         type="button"
       >
-        <IconFluentChevronDown24Regular />
+        <IconFluentChevronDown24Filled />
       </button>
     </div>
   );
