@@ -23,7 +23,7 @@ export const context = createComponentState({
       } else if (value < this.state.min) {
         this.actions.setState('value', this.state.min);
       } else {
-        this.actions.setState('value', value);
+        value !== this.state.value && this.actions.setState('value', value);
       }
     },
   },

@@ -31,8 +31,9 @@ export function Root(
       if (Number.isNaN(v) && Number.isNaN(undefinedOr(prevV, 0))) {
         return;
       }
-      props.onChange?.(v);
-    }
+      v !== props.value && props.onChange?.(v);
+    },
+    { defer: true }
   );
 
   createWatch([() => state.max, () => state.min], () => {

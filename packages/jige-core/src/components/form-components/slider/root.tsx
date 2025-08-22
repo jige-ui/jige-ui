@@ -26,9 +26,10 @@ export default function Root(props: {
 
   createWatch(
     () => state.value,
-    () => {
-      state.value !== props.value && props.onChange?.(state.value);
-    }
+    (v) => {
+      v !== props.value && props.onChange?.(v);
+    },
+    { defer: true }
   );
 
   return <Context.Provider>{props.children}</Context.Provider>;

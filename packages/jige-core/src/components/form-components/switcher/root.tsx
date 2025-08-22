@@ -48,10 +48,9 @@ export function Root(
   createWatch(
     () => state.checked,
     (c) => {
-      if (c !== props.checked) {
-        props.onChange?.(c);
-      }
-    }
+      c !== props.checked && props.onChange?.(c);
+    },
+    { defer: true }
   );
 
   return (
