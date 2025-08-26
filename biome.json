@@ -19,5 +19,8 @@
         "noNonNullAssertion": "off"
       }
     }
+  },
+  "javascript": {
+    "globals": ["IS_DEV"]
   }
 }

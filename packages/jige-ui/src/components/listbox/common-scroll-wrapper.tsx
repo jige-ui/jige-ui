@@ -81,7 +81,6 @@ export function CommonScrollWrapper<T extends any[]>(props: {
     ([scrollTop, ref]) => {
       if (isDef(scrollTop) && ref) {
         ref.scrollTop = scrollTop;
-        console.log(ref.scrollTop);
       }
     }
   );

@@ -1,7 +1,6 @@
 import path from 'node:path';
 import inline from 'rollup-plugin-inline-import';
 import UnoCSS from 'unocss/vite';
-import icon from 'unplugin-icons/vite';
 import { defineConfig } from 'vite';
 import solidPlugin from 'vite-plugin-solid';
 import solidPagesPlugin from 'vite-plugin-solid-pages';
@@ -21,7 +20,6 @@ export default defineConfig({
   },
   plugins: [
     inline(),
-    icon({ compiler: 'solid' }),
     UnoCSS(),
     solidPlugin(),
     solidPagesPlugin({

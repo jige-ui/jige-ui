@@ -1,0 +1,34 @@
+# Button Component
+
+The Button component is a versatile, accessible button implementation that supports various styles, sizes, and states.
+
+## Basic Usage
+
+```tsx
+import { Button } from "jige-ui";
+
+function App() {
+  return <Button onClick={() => console.log("Clicked!")}>Click me</Button>;
+}
+```
+
+## Features
+
+- **Accessible**: Full keyboard navigation and screen reader support
+- **Customizable**: Multiple variants, sizes, and states
+- **TypeScript**: Full type safety and IntelliSense support
+
+## API Reference
+
+### Props
+
+| Prop       | Type                                    | Default     | Description                            |
+| ---------- | --------------------------------------- | ----------- | -------------------------------------- |
+| `variant`  | `'primary' \| 'secondary' \| 'outline'` | `'primary'` | Button style variant                   |
+| `size`     | `'sm' \| 'md' \| 'lg'`                  | `'md'`      | Button size                            |
+| `disabled` | `boolean`                               | `false`     | Whether the button is disabled         |
+| `loading`  | `boolean`                               | `false`     | Whether the button shows loading state |
+
+## Examples
+
+More examples and interactive demos coming soon!

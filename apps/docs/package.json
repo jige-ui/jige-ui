@@ -1,0 +1,30 @@
+{
+  "name": "docs",
+  "private": "true",
+  "type": "module",
+  "scripts": {
+    "dev": "vinxi dev --port 5090",
+    "build": "vinxi build",
+    "start": "vinxi start"
+  },
+  "dependencies": {
+    "@mdx-js/mdx": "^2.3.0",
+    "@solidjs/router": "^0.15.0",
+    "@solidjs/start": "^1.1.0",
+    "@vinxi/plugin-mdx": "^3.7.1",
+    "jige-core": "workspace:*",
+    "jige-ui": "workspace:*",
+    "solid-js": "^1.9.9",
+    "solid-mdx": "^0.0.7",
+    "solid-tiny-context": "catalog:",
+    "solid-tiny-utils": "catalog:",
+    "vinxi": "^0.5.7"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "devDependencies": {
+    "@iconify-json/fluent": "^1.2.29",
+    "unocss": "^66.4.2"
+  }
+}

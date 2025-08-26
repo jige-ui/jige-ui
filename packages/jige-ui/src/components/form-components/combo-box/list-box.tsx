@@ -31,8 +31,6 @@ export function ListBox(props: { size: 'small' | 'medium' | 'large' }) {
     () => [floatState.status] as const,
     ([s]) => {
       if (s === 'opening') {
-        console.log('s');
-
         actions.setState('isCalculating', true);
         const height = state.refTrigger?.clientHeight || 20;
         const width = state.refTrigger?.clientWidth || 200;

@@ -26,7 +26,9 @@ export function Root(props: { children: JSX.Element } & FloatingUiCoreProps) {
     ],
     () => {
       actions.updatePos();
-      console.log('float pos updated by root');
+      if (IS_DEV) {
+        console.log('float pos updated by root');
+      }
     }
   );
 
