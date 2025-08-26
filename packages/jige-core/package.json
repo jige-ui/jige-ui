@@ -43,12 +43,9 @@
   "devDependencies": {
     "@floating-ui/core": "^1.6.13",
     "bumpp": "catalog:",
-    "cross-env": "^10.0.0",
-    "esbuild-plugin-solid": "^0.6.0",
     "rolldown-plugin-solid": "catalog:",
     "rollup-plugin-inline-import": "^0.3.0",
     "tsdown": "catalog:",
-    "tsup": "^8.2.4",
     "typescript": "^5.5.4"
   }
 }
