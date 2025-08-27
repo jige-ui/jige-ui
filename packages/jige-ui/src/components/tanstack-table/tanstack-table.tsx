@@ -4,8 +4,8 @@ import {
   type RowData,
   type Table as TansTable,
 } from '@tanstack/solid-table';
-import { createMemo, For, type JSX, Show } from 'solid-js';
-import { mountStyle } from 'solid-tiny-utils';
+import { createMemo, createSignal, For, type JSX, Show } from 'solid-js';
+import { createWatch, mountStyle } from 'solid-tiny-utils';
 import { IconFluentBoxDismiss24Regular } from '../icons/fluent-box-dismiss-24-regular';
 import { Paginator } from '../paginator';
 import { Table } from '../table';
@@ -42,9 +42,10 @@ export function TanstackTable<T>(props: {
     currPage: number;
   };
   footer?: JSX.Element;
-  onAddNewRow?: (data: Record<string, any>) => boolean | Promise<boolean>;
 }) {
   mountStyle(css, 'jige-ui-tanstack-table');
+
+  const [scrollRef, setScrollRef] = createSignal<HTMLDivElement>();
 
   // non-reactive
   const tableInst = props.staticTableInstance;
@@ -73,6 +74,14 @@ export function TanstackTable<T>(props: {
   const hdGroups = createMemo(() =>
     getMergeHeaderGroups(tableInst.getHeaderGroups())
   );
+
+  createWatch(rows, () => {
+    scrollRef()?.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: 'instant',
+    });
+  });
 
   return (
     <Table
@@ -109,7 +118,7 @@ export function TanstackTable<T>(props: {
         </For>
       </Table.Header>
 
-      <Table.Body>
+      <Table.Body scrollRef={setScrollRef}>
         <Show when={rows().length > 0}>
           <For each={rows()}>
             {(row, index) => (

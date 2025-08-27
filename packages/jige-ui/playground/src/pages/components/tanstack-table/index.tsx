@@ -171,7 +171,7 @@ export default function Demo() {
 
   const table = createSolidTable({
     get data() {
-      return data();
+      return data.latest;
     },
     columns: defaultColumns,
     getCoreRowModel: getCoreRowModel(),

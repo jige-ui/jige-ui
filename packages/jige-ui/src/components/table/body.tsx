@@ -3,9 +3,13 @@ import { type ComponentProps, splitProps } from 'solid-js';
 import { Scrollbar } from '../scrollbar';
 import { context } from './context';
 
-export function Body(props: ComponentProps<'tbody'>) {
+export function Body(
+  props: ComponentProps<'tbody'> & {
+    scrollRef?: (val: HTMLDivElement) => void;
+  }
+) {
   const [state] = context.useContext();
-  const [localProps, others] = splitProps(props, ['class']);
+  const [localProps, others] = splitProps(props, ['class', 'scrollRef']);
   return (
     <Scrollbar
       height={state.scrollHeight}
@@ -15,6 +19,7 @@ export function Body(props: ComponentProps<'tbody'>) {
           state.refHeader.scrollLeft = e.target.scrollLeft;
         }
       }}
+      scrollRef={localProps.scrollRef}
     >
       <TableCore.Body
         class={['jg-table-body', localProps.class].join(' ')}

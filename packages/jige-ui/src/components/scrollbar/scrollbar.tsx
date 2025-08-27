@@ -1,6 +1,6 @@
 import scrollCss from 'sass:./scrollbar.scss';
 import { runSolidEventHandler, ScrollbarCore } from 'jige-core';
-import type { JSX, Ref } from 'solid-js';
+import type { JSX } from 'solid-js';
 import { createMemo, createSignal, Show } from 'solid-js';
 import { mountStyle } from 'solid-tiny-utils';
 
@@ -77,7 +77,7 @@ export function Scrollbar(props: {
   onScroll?: JSX.EventHandlerUnion<HTMLDivElement, Event>;
   onClick?: JSX.EventHandlerUnion<HTMLDivElement, MouseEvent>;
   contentStyle?: string | JSX.CSSProperties;
-  scrollRef?: Ref<HTMLDivElement>;
+  scrollRef?: (val: HTMLDivElement) => void;
 }) {
   mountStyle(scrollCss, 'jige-ui-scrollbar');
   const [hidden, setHidden] = createSignal(true);
