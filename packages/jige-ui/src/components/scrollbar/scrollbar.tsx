@@ -81,6 +81,7 @@ export function Scrollbar(props: {
 }) {
   mountStyle(scrollCss, 'jige-ui-scrollbar');
   const [hidden, setHidden] = createSignal(true);
+
   return (
     <ScrollbarCore
       class={props.class}
@@ -98,7 +99,9 @@ export function Scrollbar(props: {
         onScroll={(e) => {
           runSolidEventHandler(e, props.onScroll);
         }}
-        ref={props.scrollRef}
+        ref={(el) => {
+          props.scrollRef?.(el);
+        }}
       >
         <ScrollbarCore.Content style={props.contentStyle}>
           {props.children}
