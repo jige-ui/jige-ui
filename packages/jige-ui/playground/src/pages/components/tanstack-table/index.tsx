@@ -7,7 +7,7 @@ import {
 import { createResource, createSignal } from 'solid-js';
 import { createStore } from 'solid-js/store';
 import { random, sleep, uid } from 'solid-tiny-utils';
-import { Button, Form, Input, Modal, NumberBox, TanstackTable } from '~/build';
+import { Button, Form, Input, NumberBox, TanstackTable } from '~/build';
 import { Playground } from '../../../components/playground';
 
 type Person = {
@@ -161,7 +161,7 @@ export default function Demo() {
     bordered: false,
   });
 
-  const [data, { refetch, mutate }] = createResource(
+  const [data, { refetch }] = createResource(
     async () => {
       await sleep(1000);
       return genData(100);
@@ -171,7 +171,7 @@ export default function Demo() {
 
   const table = createSolidTable({
     get data() {
-      return [];
+      return data();
     },
     columns: defaultColumns,
     getCoreRowModel: getCoreRowModel(),
@@ -182,7 +182,6 @@ export default function Demo() {
     },
   });
 
-  const [open, setOpen] = createSignal(false);
   const [showItem, setShowItem] = createSignal<Person>();
   const [currPage, setCurrPage] = createSignal(1);
 
@@ -194,27 +193,8 @@ export default function Demo() {
             bordered={p.bordered}
             loading={data.loading}
             maxHeight="355px"
-            onAddNewRow={(rowData) => {
-              if (rowData.age < 18) {
-                alert('Age must be greater than 18');
-                return false;
-              }
-              mutate((old) => [
-                ...old,
-                {
-                  firstName: rowData.firstName || '',
-                  lastName: rowData.lastName || '',
-                  age: rowData.age || 0,
-                  visits: rowData.visits || 0,
-                  status: rowData.status || 'unsigned',
-                  progress: rowData.progress || 10,
-                },
-              ]);
-              return true;
-            }}
-            onRowDbClick={(row) => {
+            onRowClick={(row) => {
               setShowItem(row);
-              setOpen(true);
             }}
             pagination={{
               total: 10_000,
@@ -225,21 +205,10 @@ export default function Demo() {
               },
               currPage: currPage(),
             }}
+            rowClass={(row) => (row === showItem() ? 'bg-blue-100' : '')}
             size={p.size}
             staticTableInstance={table}
           />
-          <Modal
-            closeOnClickMask
-            closeOnEsc
-            onOpenChange={setOpen}
-            open={open()}
-          >
-            <Modal.Content title="Row Data" width="30vw">
-              <div>
-                <div class="mt-2">{JSON.stringify(showItem(), null, 2)}</div>
-              </div>
-            </Modal.Content>
-          </Modal>
         </div>
       </Playground.MainArea>
       <Playground.PropertySetting

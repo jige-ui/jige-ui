@@ -30,6 +30,7 @@ export function TanstackTable<T>(props: {
   loading?: boolean;
   height?: string;
   maxHeight?: string;
+  rowClass?: (row: T) => string;
   size?: 'small' | 'medium' | 'large' | number;
   bordered?: boolean;
   onRowClick?: (row: T, index: number) => void;
@@ -113,6 +114,7 @@ export function TanstackTable<T>(props: {
           <For each={rows()}>
             {(row, index) => (
               <Table.Row
+                class={props.rowClass?.(row.original)}
                 onClick={() => props.onRowClick?.(row.original, index())}
                 onDblClick={() => props.onRowDbClick?.(row.original, index())}
               >
