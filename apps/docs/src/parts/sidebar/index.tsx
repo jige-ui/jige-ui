@@ -35,7 +35,7 @@ export function Sidebar(props: { sections: SideSection[] }) {
 
   return (
     <aside class="bg-t-bg2 border-r border-t-border w-64 h-full">
-      <Scrollbar>
+      <Scrollbar color="var(--jg-fg4)">
         <div class="p-4">
           <nav class="space-y-6">
             <For each={props.sections}>
