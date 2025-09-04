@@ -16,7 +16,6 @@ export * from '~/components/skeleton';
 export * from '~/components/spin';
 export * from '~/components/table';
 export * from '~/components/tabs';
-export * from '~/components/tanstack-table';
 export * from '~/components/tiny-table';
 export * from '~/components/toast';
 export * from '~/components/tooltip';

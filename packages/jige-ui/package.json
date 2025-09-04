@@ -34,7 +34,6 @@
     "prepublish": "pnpm build"
   },
   "peerDependencies": {
-    "@tanstack/solid-table": "^8.21.3",
     "jige-core": "workspace:^",
     "solid-js": "catalog:"
   },
