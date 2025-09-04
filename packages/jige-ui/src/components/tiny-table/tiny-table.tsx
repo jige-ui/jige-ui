@@ -1,4 +1,5 @@
 import css from 'sass:./tiny-table.scss';
+import { TableCore } from 'jige-core';
 import {
   type Accessor,
   createMemo,
@@ -18,6 +19,31 @@ declare module 'solid-tiny-table' {
   interface ColumnMeta<TData extends RowData, TValue> {
     width?: number;
   }
+}
+
+function Empty() {
+  const [state] = TableCore.useContext();
+
+  return (
+    <Table.Row>
+      <Table.Cell
+        colSpan={'100%'}
+        style={{
+          padding: '0',
+        }}
+      >
+        <div
+          class="jg-data-table-empty"
+          style={{
+            width: `${state.wrapperWidth}px`,
+          }}
+        >
+          <IconFluentBoxDismiss24Regular />
+          <span>没有数据</span>
+        </div>
+      </Table.Cell>
+    </Table.Row>
+  );
 }
 
 export function TinyTable<T extends RowData>(props: {
@@ -124,14 +150,7 @@ export function TinyTable<T extends RowData>(props: {
           </For>
         </Show>
         <Show when={table.rows().length === 0}>
-          <Table.Row>
-            <Table.Cell colSpan={'100%'}>
-              <div class="jg-data-table-empty">
-                <IconFluentBoxDismiss24Regular />
-                <span>没有数据</span>
-              </div>
-            </Table.Cell>
-          </Table.Row>
+          <Empty />
         </Show>
       </Table.Body>
 

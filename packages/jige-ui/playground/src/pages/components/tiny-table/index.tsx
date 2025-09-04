@@ -117,6 +117,7 @@ export default function Demo() {
   const [p, setP] = createStore({
     size: 'medium' as const,
     bordered: false,
+    empty: false,
   });
 
   const [data, { refetch }] = createResource(
@@ -137,7 +138,7 @@ export default function Demo() {
           <TinyTable
             bordered={p.bordered}
             columns={() => defaultColumns}
-            data={() => data.latest}
+            data={() => (p.empty ? [] : data.latest)}
             loading={data.loading}
             maxHeight="355px"
             onRowClick={(row) => {
