@@ -137,8 +137,8 @@ export default function Demo() {
         <div class="w-full p-4">
           <TinyTable
             bordered={p.bordered}
-            columns={() => defaultColumns}
-            data={() => (p.empty ? [] : data.latest)}
+            columns={defaultColumns}
+            data={p.empty ? [] : data.latest}
             loading={data.loading}
             maxHeight="355px"
             onRowClick={(row) => {

@@ -1,13 +1,6 @@
 import css from 'sass:./tiny-table.scss';
 import { TableCore } from 'jige-core';
-import {
-  type Accessor,
-  createMemo,
-  createSignal,
-  For,
-  type JSX,
-  Show,
-} from 'solid-js';
+import { createMemo, createSignal, For, type JSX, Show } from 'solid-js';
 import { type ColumnDef, createTable, type RowData } from 'solid-tiny-table';
 import { createWatch, mountStyle } from 'solid-tiny-utils';
 import { IconFluentBoxDismiss24Regular } from '../icons/fluent-box-dismiss-24-regular';
@@ -47,8 +40,8 @@ function Empty() {
 }
 
 export function TinyTable<T extends RowData>(props: {
-  data: Accessor<T[]>;
-  columns: Accessor<ColumnDef<T, any>[]>;
+  data: T[];
+  columns: ColumnDef<T, any>[];
   loading?: boolean;
   height?: string;
   maxHeight?: string;
@@ -70,8 +63,8 @@ export function TinyTable<T extends RowData>(props: {
   const [scrollRef, setScrollRef] = createSignal<HTMLDivElement>();
 
   const table = createTable({
-    data: props.data,
-    columns: props.columns,
+    data: () => props.data,
+    columns: () => props.columns,
   });
 
   const fontSize = createMemo(() => {
