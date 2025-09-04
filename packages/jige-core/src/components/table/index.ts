@@ -1,4 +1,5 @@
 import { Cell } from './cell';
+import context from './context';
 import { Column, TableHeader } from './header';
 import { Row } from './row';
 import Root from './table';
@@ -10,4 +11,5 @@ export const TableCore = Object.assign(Root, {
   Row,
   Cell,
   Column,
+  useContext: context.useContext,
 });

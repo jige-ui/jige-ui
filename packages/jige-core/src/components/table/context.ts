@@ -6,6 +6,7 @@ const context = createComponentState({
     colsWidth: {} as Record<string, number>,
     headerScrollRef: null as HTMLDivElement | null,
     manualWidths: {} as Record<string, number>,
+    wrapperWidth: 0,
     width: 0,
   }),
   getters: {

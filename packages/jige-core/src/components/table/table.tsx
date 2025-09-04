@@ -15,6 +15,7 @@ export default function Table(props: ComponentProps<'div'>) {
     [() => bounds.width, () => ({ ...state.manualWidths })],
     ([w]) => {
       if (w) {
+        actions.setState('wrapperWidth', w);
         actions.refresh(w);
       }
     }
