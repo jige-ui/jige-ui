@@ -122,6 +122,7 @@ export function DatePicker(props: {
   onChange?: (value: string) => void;
   onFocus?: () => void;
   onBlur?: () => void;
+  size?: 'small' | 'medium' | 'large';
   disabled?: boolean;
   placeholder?: string;
   type?: DatePickerType;
@@ -160,7 +161,10 @@ export function DatePicker(props: {
       type={props.type}
       value={props.value}
     >
-      <Trigger clearable={undefinedOr(props.clearable, true)} />
+      <Trigger
+        clearable={undefinedOr(props.clearable, true)}
+        size={props.size || 'medium'}
+      />
       <Wrapper>
         <WrapperMainPanel
           cellClass={props.cellClass || ''}

@@ -7,6 +7,7 @@ export default function Demo() {
   const [p, setP] = createStore({
     disabled: false,
     type: 'date' as const,
+    size: 'medium' as 'small' | 'medium' | 'large',
   });
 
   const [value, setValue] = createSignal('');
@@ -21,6 +22,7 @@ export default function Demo() {
             onBlur={() => {}}
             onChange={setValue}
             onFocus={() => {}}
+            size={p.size}
             type={p.type}
             value={value()}
           />
@@ -31,6 +33,7 @@ export default function Demo() {
         properties={p}
         typeDeclaration={{
           type: ['date', 'month', 'hour', 'minute', 'second'],
+          size: ['small', 'medium', 'large'],
         }}
       />
     </Playground>

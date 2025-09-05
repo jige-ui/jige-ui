@@ -1,6 +1,7 @@
-@use '../../../styles/funcs';
+@use "../../../styles/funcs";
 
-.jg-input-suffix, .jg-input-prefix {
+.jg-input-suffix,
+.jg-input-prefix {
   position: relative;
   display: inline-flex;
   flex-shrink: 0;
@@ -9,7 +10,7 @@
   justify-content: center;
   color: funcs.get-var("fg4");
   white-space: nowrap;
-  transition: color .3s funcs.get-var("bezier");
+  transition: color 0.3s funcs.get-var("bezier");
 }
 
 .jg-input-prefix {
@@ -20,23 +21,22 @@
   margin-right: 8px;
 }
 
-
 .jg-input-clear {
   position: absolute;
   inset-inline-end: 0;
   top: 50%;
   right: 8px;
-  color: funcs.get-var('fg4');
+  color: funcs.get-var("fg4");
   pointer-events: none;
   cursor: pointer;
   opacity: 0;
   transform: translateY(-50%);
-  transition-timing-function: funcs.get-var('bezier');
+  transition-timing-function: funcs.get-var("bezier");
   transition-duration: 250ms;
   transition-property: opacity, color;
 
   &:hover {
-    color: funcs.get-var('t-fg1');
+    color: funcs.get-var("t-fg1");
   }
 }
 
@@ -45,15 +45,15 @@
   inset-inline-end: 0;
   top: 50%;
   right: 8px;
-  color: funcs.get-var('fg4');
+  color: funcs.get-var("fg4");
   cursor: pointer;
   transform: translateY(-50%);
-  transition-timing-function: funcs.get-var('bezier');
+  transition-timing-function: funcs.get-var("bezier");
   transition-duration: 250ms;
   transition-property: opacity, color;
 
   &:hover {
-    color: funcs.get-var('t-fg1');
+    color: funcs.get-var("t-fg1");
   }
 }
 
@@ -63,31 +63,31 @@
   align-items: center;
   width: 100%;
   min-width: 3em;
-  height: funcs.get-var('h-medium');
-  font-size: funcs.get-var('fs-14');
-  line-height: funcs.get-var('lh-14');
+  height: funcs.get-var("h-medium");
+  font-size: funcs.get-var("fs-14");
+  line-height: funcs.get-var("lh-14");
   border: 0;
 
   &::before {
     position: absolute;
     inset: 0;
-    content: '';
-    background: funcs.get-var('t-bg2');
-    border: 1px solid funcs.get-var('t-border');
-    border-bottom-color: funcs.get-var('fg4');
-    border-radius: .25em;
+    content: "";
+    background: funcs.get-var("t-bg2");
+    border: 1px solid funcs.get-var("t-border");
+    border-bottom-color: funcs.get-var("fg4");
+    border-radius: 0.25em;
   }
 
-  &[data-small] {
-    height: funcs.get-var('h-small');
-    font-size: funcs.get-var('fs-12');
-    line-height: funcs.get-var('lh-12');
+  &[data-size="small"] {
+    height: funcs.get-var("h-small");
+    font-size: funcs.get-var("fs-12");
+    line-height: funcs.get-var("lh-12");
   }
 
-  &[data-large] {
-    height: funcs.get-var('h-large');
-    font-size: funcs.get-var('fs-16');
-    line-height: funcs.get-var('lh-16');
+  &[data-size="large"] {
+    height: funcs.get-var("h-large");
+    font-size: funcs.get-var("fs-16");
+    line-height: funcs.get-var("lh-16");
   }
 
   &:hover {
@@ -103,7 +103,7 @@
 
   &[data-disabled] {
     pointer-events: none;
-    opacity: .6;
+    opacity: 0.6;
   }
 
   &[data-readonly] {
@@ -112,28 +112,22 @@
 
   &[data-focused] {
     &::before {
-      background: funcs.get-var('t-bg1');
-      border-bottom-color: funcs.get-var('t-hl');
+      background: funcs.get-var("t-bg1");
+      border-bottom-color: funcs.get-var("t-hl");
       border-bottom-width: 2px;
     }
 
     .jg-input-clear {
-      background: funcs.get-var('t-bg1');
+      background: funcs.get-var("t-bg1");
     }
   }
 
   &:not([data-focused]):hover {
     &::before {
-      background: funcs.get-var('t-bg3');
+      background: funcs.get-var("t-bg3");
     }
   }
 }
-
-
-
-
-
-
 
 .jg-input-native {
   position: relative;
@@ -150,4 +144,3 @@
     color: funcs.get-var("fg4");
   }
 }
-

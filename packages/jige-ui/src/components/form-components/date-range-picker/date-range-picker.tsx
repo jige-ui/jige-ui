@@ -16,6 +16,7 @@ export function DateRangePicker(props: {
   onFocus?: () => void;
   placeholder?: [string, string];
   clearable?: boolean;
+  size?: 'small' | 'medium' | 'large';
   type?: 'datetime' | 'date';
   presets?: [
     {
@@ -81,7 +82,10 @@ export function DateRangePicker(props: {
         placement="bottom-start"
         trigger="manual"
       >
-        <Trigger clearable={undefinedOr(props.clearable, true)} />
+        <Trigger
+          clearable={undefinedOr(props.clearable, true)}
+          size={props.size || 'medium'}
+        />
         <Popover.Content
           onMouseDown={(e) => {
             e.preventDefault();

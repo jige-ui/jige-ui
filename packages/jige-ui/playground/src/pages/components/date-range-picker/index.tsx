@@ -8,6 +8,7 @@ export default function Demo() {
   const [p, setP] = createStore({
     disabled: false,
     type: 'date' as 'datetime' | 'date',
+    size: 'medium' as 'small' | 'medium' | 'large',
   });
 
   const [value, setValue] = createSignal<[string, string]>(['', '']);
@@ -32,6 +33,7 @@ export default function Demo() {
                 ],
               },
             ]}
+            size={p.size}
             type={p.type}
             value={value()}
           />
@@ -42,6 +44,7 @@ export default function Demo() {
         properties={p}
         typeDeclaration={{
           type: ['date', 'datetime'],
+          size: ['small', 'medium', 'large'],
         }}
       />
     </Playground>

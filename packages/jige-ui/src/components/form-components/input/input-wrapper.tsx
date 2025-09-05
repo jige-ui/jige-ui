@@ -15,10 +15,8 @@ export function InputWrapper(props: {
       class="jg-input-wrapper"
       data-disabled={dataIf(state.disabled)}
       data-focused={dataIf(props.focused)}
-      data-large={dataIf(props.size === 'large')}
-      data-medium={dataIf(props.size === 'medium')}
       data-readonly={dataIf(props.readonly)}
-      data-small={dataIf(props.size === 'small')}
+      data-size={props.size}
       style={props.style}
     >
       {props.children}

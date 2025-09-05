@@ -7,7 +7,10 @@ import { Popover } from '../../popover';
 import { ClearableSuffix } from '../input/clearable-suffix';
 import { context } from './context';
 
-export function Trigger(props: { clearable: boolean }) {
+export function Trigger(props: {
+  clearable: boolean;
+  size: 'small' | 'medium' | 'large';
+}) {
   const [state, actions] = context.useContext();
   const [floatState, floatActions] = FloatingUiCore.useContext();
   const [, fieldCoreActs] = FormCore.useField();
@@ -39,6 +42,7 @@ export function Trigger(props: { clearable: boolean }) {
         data-disabled={dataIf(state.disabled)}
         data-focused={dataIf(focused())}
         data-preview={dataIf(state.previewMode)}
+        data-size={props.size}
         onClick={() => {
           state.triggerRef?.focus();
         }}

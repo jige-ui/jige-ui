@@ -8,7 +8,10 @@ import { Popover } from '~/components/popover';
 import { ClearableSuffix } from '../input/clearable-suffix';
 import { context } from './context';
 
-export function Trigger(props: { clearable: boolean }) {
+export function Trigger(props: {
+  clearable: boolean;
+  size: 'small' | 'medium' | 'large';
+}) {
   const [state, actions] = context.useContext();
   const [floatState, floatActions] = FloatingUiCore.useContext();
   const [focused, setFocused] = createSignal(false);
@@ -47,6 +50,7 @@ export function Trigger(props: { clearable: boolean }) {
         data-disabled={dataIf(state.disabled)}
         data-focused={dataIf(focused())}
         data-preview={dataIf(state.previewMode)}
+        data-size={props.size}
       >
         <input name={state.name} style={hiddenStyle} type="text" />
         <input
