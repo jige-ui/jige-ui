@@ -55,7 +55,6 @@ function WrapperMainPanel(props: {
           state.isDateTime
             ? () => (
                 <TimePicker
-                  disableBind
                   onChange={(v) => {
                     if (v === state.timeValue) {
                       return;

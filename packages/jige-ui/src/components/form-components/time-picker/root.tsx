@@ -7,7 +7,6 @@ import { context } from './context';
 export function Root(props: {
   children: JSX.Element;
   type?: 'hour' | 'minute' | 'second';
-  disableBind?: boolean;
   disabled?: boolean;
   size?: 'small' | 'medium';
   value?: string;

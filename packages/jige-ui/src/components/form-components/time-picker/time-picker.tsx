@@ -36,7 +36,6 @@ function FloatingContent() {
 
 export function TimePicker(props: {
   disabled?: boolean;
-  disableBind?: boolean;
   type?: 'hour' | 'minute' | 'second';
   size?: 'small' | 'medium';
   value?: string;
@@ -44,7 +43,6 @@ export function TimePicker(props: {
 }) {
   return (
     <Root
-      disableBind={props.disableBind}
       disabled={props.disabled}
       onChange={props.onChange}
       size={props.size}

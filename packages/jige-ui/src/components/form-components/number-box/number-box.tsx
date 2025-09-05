@@ -17,7 +17,6 @@ export function NumberBox(props: {
   onFocus?: () => void;
   onBlur?: () => void;
   size?: 'small' | 'medium' | 'large';
-  disableBind?: boolean;
 }) {
   mountStyle(inputCss, 'jige-ui-input');
   mountStyle(css, 'jige-ui-number-box');

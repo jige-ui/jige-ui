@@ -8,7 +8,6 @@ export function Root(props: {
   value?: string;
   onChange?: (value: string) => void;
   disabled?: boolean;
-  disableBind?: boolean;
 }) {
   mountStyle(css, 'jige-ui-radio-group');
   return (

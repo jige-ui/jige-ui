@@ -113,7 +113,6 @@ export function Panel(props: {
             state.isDateTime
               ? () => (
                   <TimePicker
-                    disableBind
                     onChange={(v) => {
                       actions.setState('timeValue', 0, v);
                     }}
@@ -145,7 +144,6 @@ export function Panel(props: {
             state.isDateTime
               ? () => (
                   <TimePicker
-                    disableBind
                     onChange={(v) => {
                       actions.setState('timeValue', 1, v);
                     }}

@@ -70,7 +70,6 @@ export function Slider(props: {
   max?: number;
   step?: number;
   disabled?: boolean;
-  disableBind?: boolean;
 }) {
   mountStyle(styles, 'jige-ui-slider');
   return (

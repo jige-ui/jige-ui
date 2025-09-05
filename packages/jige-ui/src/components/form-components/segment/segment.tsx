@@ -72,7 +72,6 @@ export function Segment(props: {
   class?: string;
   thumbClass?: string;
   disabled?: boolean;
-  disableBind?: boolean;
 }) {
   mountStyle(css, 'jige-ui-segment');
 
