@@ -1,3 +1,4 @@
+export * from '~/components/badge';
 export * from '~/components/button';
 export * from '~/components/collapse';
 export * from '~/components/dialog';
