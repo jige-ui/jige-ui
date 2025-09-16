@@ -19,7 +19,8 @@
     "README.md"
   ],
   "scripts": {
-    "build": "tsdown"
+    "build": "tsdown",
+    "prepublish": "pnpm build"
   },
   "keywords": [
     "unocss",
