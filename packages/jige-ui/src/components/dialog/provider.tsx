@@ -55,7 +55,7 @@ export function Provider(props: { children: JSX.Element }) {
           return (
             <Modal open={true}>
               <ModalCloseHandle id={item.id} />
-              <Modal.Content footer={null} header={null} width="450px">
+              <Modal.Content width="450px">
                 <div class="jg-dialog-content">
                   <div class="jg-dialog-header">
                     <Header

@@ -1,4 +1,4 @@
-@use '../../styles/funcs';
+@use "../../styles/funcs";
 
 /* content */
 .jg-modal-content-wrapper {
@@ -10,15 +10,15 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  max-width: calc(100vw - 32px);
+  height: max-content;
   padding: 8px;
   margin: 0 auto;
-  background: funcs.get-var('t-bg2');
-  border: 1px solid funcs.get-var('t-border');
+  background: funcs.get-var("t-bg2");
+  border: 1px solid funcs.get-var("t-border");
   border-radius: 6px;
-  box-shadow: funcs.get-var('shadow8');
+  box-shadow: funcs.get-var("shadow8");
   animation-duration: 200ms;
-  animation-timing-function: funcs.get-var('bezier');
+  animation-timing-function: funcs.get-var("bezier");
 
   &[data-modal-status="closing"] {
     pointer-events: none;
@@ -79,7 +79,6 @@
 
 /* mask end */
 
-
 .jg-modal-header {
   display: flex;
   align-items: center;
@@ -90,7 +89,7 @@
 
 .jg-modal-header-title {
   font-weight: 600;
-  color: funcs.get-var('fg1');
+  color: funcs.get-var("fg1");
 }
 
 .jg-modal-header-close {

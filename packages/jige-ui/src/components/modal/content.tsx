@@ -4,13 +4,12 @@ import {
   ModalCore,
   undefinedOr,
 } from 'jige-core';
-import { createSignal, Show } from 'solid-js';
+import { createSignal } from 'solid-js';
 import type { JSX } from 'solid-js/jsx-runtime';
 import { createWatch } from 'solid-tiny-utils';
 import { RootContext } from '../root/context';
+import { Scrollbar } from '../scrollbar';
 import { context } from './context';
-import { Footer } from './footer';
-import { Header } from './header';
 
 function calcOrigin(triggerRef: HTMLElement, contentRef: HTMLElement) {
   contentRef.style.animationName = 'none';
@@ -38,14 +37,6 @@ export function Content(props: {
   style?: string | JSX.CSSProperties;
   zIndex?: number;
   width?: string;
-  title?: string;
-  header?: JSX.Element;
-  hideClose?: boolean;
-  footer?: JSX.Element;
-  okText?: string;
-  cancelText?: string;
-  onOk?: () => void | Promise<void>;
-  onCancel?: () => void | Promise<void>;
 }) {
   const [state, actions] = context.useContext();
   const [rs] = RootContext.useContext();
@@ -88,39 +79,29 @@ export function Content(props: {
           );
 
           return (
-            <div
-              class="jg-modal-content"
-              data-modal-status={stat.status}
-              ref={(el) => {
-                actions.setState('contentRef', el);
-              }}
-              style={combineStyle(
-                {
-                  'transform-origin': transformOrigin(),
-                  width: props.width || '520px',
-                  top: '100px',
-                  position: 'relative',
-                },
-                props.style
-              )}
-            >
-              <Show when={props.header !== null}>
-                <Header hideClose={props.hideClose} label={props.title}>
-                  {props.header}
-                </Header>
-              </Show>
-              {callMaybeContextChild([stat, acts, staticData], props.children)}
-              <Show when={props.footer !== null}>
-                <Footer
-                  cancelText={props.cancelText}
-                  okText={props.okText}
-                  onCancel={props.onCancel}
-                  onOk={props.onOk}
-                >
-                  {props.footer}
-                </Footer>
-              </Show>
-            </div>
+            <Scrollbar>
+              <div
+                class="jg-modal-content"
+                data-modal-status={stat.status}
+                ref={(el) => {
+                  actions.setState('contentRef', el);
+                }}
+                style={combineStyle(
+                  {
+                    'transform-origin': transformOrigin(),
+                    width: props.width || '520px',
+                    top: '100px',
+                    position: 'relative',
+                  },
+                  props.style
+                )}
+              >
+                {callMaybeContextChild(
+                  [stat, acts, staticData],
+                  props.children
+                )}
+              </div>
+            </Scrollbar>
           );
         }}
       </ModalCore.Content>
