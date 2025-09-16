@@ -16,7 +16,6 @@ export function ListBox(props: { size: "small" | "medium" | "large" }) {
     }
     const currentValueHeight = state.valueIndex * state.listItemHeight;
     const toTop = currentValueHeight - scrollTop + state.listItemHeight;
-    console.log(toTop, scrollTop);
 
     return -toTop - 8;
   };
