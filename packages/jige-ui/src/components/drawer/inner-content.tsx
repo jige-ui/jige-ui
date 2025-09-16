@@ -1,11 +1,11 @@
-import type { JSX } from 'solid-js';
-import { Scrollbar } from '../scrollbar';
+import type { JSX } from "solid-js";
+import { Scrollbar } from "../scrollbar";
 
 export function InnerContent(props: { children: JSX.Element }) {
   return (
     <Scrollbar
       contentStyle={{
-        padding: '8px',
+        padding: "8px",
       }}
       height="100%"
     >

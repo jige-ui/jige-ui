@@ -1,7 +1,7 @@
-import type { JSX } from 'solid-js/jsx-runtime';
-import { createWatch } from 'solid-tiny-utils';
-import { isUndefined } from '@/common/types';
-import { context, GlobalModalStore } from './context';
+import type { JSX } from "solid-js/jsx-runtime";
+import { createWatch } from "solid-tiny-utils";
+import { isUndefined } from "@/common/types";
+import { context, GlobalModalStore } from "./context";
 
 export function Root(props: {
   children: JSX.Element;
@@ -33,17 +33,17 @@ export function Root(props: {
   createWatch(
     () => state.status,
     (status) => {
-      if (status === 'closed') {
+      if (status === "closed") {
         props.onOpenChange?.(false);
       }
-      if (status === 'opened') {
+      if (status === "opened") {
         props.onOpenChange?.(true);
       }
     }
   );
 
   createWatch([() => state.preventScroll, () => state.status], ([p, s]) => {
-    const shouldPrevent = p && s.startsWith('open');
+    const shouldPrevent = p && s.startsWith("open");
 
     actions.preventBodyScroll(shouldPrevent);
   });

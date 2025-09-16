@@ -1,11 +1,11 @@
-import css from 'sass:./number-box.scss';
-import inputCss from 'sass:../input/input.scss';
-import { mountStyle } from 'solid-tiny-utils';
+import css from "sass:./number-box.scss";
+import inputCss from "sass:../input/input.scss";
+import { mountStyle } from "solid-tiny-utils";
 
-import { dataIf } from '~/common/dataset';
-import { MinusAndPlus } from './minus-and-plus';
-import { NumberInput } from './number-input';
-import { Root } from './root';
+import { dataIf } from "~/common/dataset";
+import { MinusAndPlus } from "./minus-and-plus";
+import { NumberInput } from "./number-input";
+import { Root } from "./root";
 
 export function NumberBox(props: {
   disabled?: boolean;
@@ -16,10 +16,10 @@ export function NumberBox(props: {
   onChange?: (value: number) => void;
   onFocus?: () => void;
   onBlur?: () => void;
-  size?: 'small' | 'medium' | 'large';
+  size?: "small" | "medium" | "large";
 }) {
-  mountStyle(inputCss, 'jige-ui-input');
-  mountStyle(css, 'jige-ui-number-box');
+  mountStyle(inputCss, "jige-ui-input");
+  mountStyle(css, "jige-ui-number-box");
   return (
     <Root {...props}>
       {(state) => (
@@ -27,9 +27,9 @@ export function NumberBox(props: {
           class="jg-input-wrapper"
           data-disabled={dataIf(state.disabled)}
           data-focused={dataIf(state.focused)}
-          data-large={dataIf(props.size === 'large')}
-          data-medium={dataIf(props.size === 'medium')}
-          data-small={dataIf(props.size === 'small')}
+          data-large={dataIf(props.size === "large")}
+          data-medium={dataIf(props.size === "medium")}
+          data-small={dataIf(props.size === "small")}
         >
           <NumberInput
             class="jg-input-native"

@@ -1,7 +1,7 @@
-import type { JSX } from 'solid-js';
-import type { SimpleType } from '~/common/types';
-import { Checkbox } from '../checkbox';
-import { context } from './context';
+import type { JSX } from "solid-js";
+import type { SimpleType } from "~/common/types";
+import { Checkbox } from "../checkbox";
+import { context } from "./context";
 
 export function Item<T extends SimpleType>(props: {
   disabled?: boolean;

@@ -1,4 +1,4 @@
-import { createComponentState } from 'solid-tiny-context';
+import { createComponentState } from "solid-tiny-context";
 
 export const context = createComponentState({
   state: () => ({
@@ -6,8 +6,8 @@ export const context = createComponentState({
     disabled: false,
     min: Number.MIN_SAFE_INTEGER,
     max: Number.MAX_SAFE_INTEGER,
-    name: '',
-    placeholder: '',
+    name: "",
+    placeholder: "",
     focused: false,
   }),
   getters: {
@@ -19,11 +19,11 @@ export const context = createComponentState({
   methods: {
     setValue(value: number) {
       if (value > this.state.max) {
-        this.actions.setState('value', this.state.max);
+        this.actions.setState("value", this.state.max);
       } else if (value < this.state.min) {
-        this.actions.setState('value', this.state.min);
+        this.actions.setState("value", this.state.min);
       } else {
-        value !== this.state.value && this.actions.setState('value', value);
+        value !== this.state.value && this.actions.setState("value", value);
       }
     },
   },

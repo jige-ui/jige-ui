@@ -1,17 +1,17 @@
-import { undefinedOr } from 'jige-core';
-import { onCleanup, onMount } from 'solid-js';
-import { dayes } from '~/common/dayes';
-import type { MaybePromise } from '~/common/types';
-import { Button } from '~/components/button';
-import { IconFluentCheckmark24Regular } from '~/components/icons/fluent-checkmark-24-regular';
-import { IconFluentDismiss24Regular } from '~/components/icons/fluent-dismiss-24-regular';
-import { TimePicker } from '../time-picker';
-import { context } from './context';
-import { MainPanel } from './main-panel';
-import { Root } from './root';
-import { Trigger } from './trigger';
-import type { DatePickerType, DateTypes } from './types';
-import { Wrapper } from './wrapper';
+import { undefinedOr } from "jige-core";
+import { onCleanup, onMount } from "solid-js";
+import { dayes } from "~/common/dayes";
+import type { MaybePromise } from "~/common/types";
+import { Button } from "~/components/button";
+import { IconFluentCheckmark24Regular } from "~/components/icons/fluent-checkmark-24-regular";
+import { IconFluentDismiss24Regular } from "~/components/icons/fluent-dismiss-24-regular";
+import { TimePicker } from "../time-picker";
+import { context } from "./context";
+import { MainPanel } from "./main-panel";
+import { Root } from "./root";
+import { Trigger } from "./trigger";
+import type { DatePickerType, DateTypes } from "./types";
+import { Wrapper } from "./wrapper";
 
 function WrapperMainPanel(props: {
   highlightYears:
@@ -37,11 +37,11 @@ function WrapperMainPanel(props: {
   const [state, actions] = context.useContext();
 
   onMount(() => {
-    actions.setState('previewMode', true);
+    actions.setState("previewMode", true);
   });
 
   onCleanup(() => {
-    actions.setState('previewMode', false);
+    actions.setState("previewMode", false);
   });
 
   return (
@@ -59,7 +59,7 @@ function WrapperMainPanel(props: {
                     if (v === state.timeValue) {
                       return;
                     }
-                    actions.setState('timeValue', v);
+                    actions.setState("timeValue", v);
                   }}
                   size="small"
                   type={state.type as any}
@@ -73,11 +73,11 @@ function WrapperMainPanel(props: {
           if (v[0] === state.dateValue) {
             return;
           }
-          if (state.type === 'month') {
-            actions.setState('dateValue', dayes(v[0]).format('YYYY-MM'));
+          if (state.type === "month") {
+            actions.setState("dateValue", dayes(v[0]).format("YYYY-MM"));
             return;
           }
-          actions.setState('dateValue', v[0]);
+          actions.setState("dateValue", v[0]);
         }}
         type={state.type as any}
         value={[state.dateValue]}
@@ -86,10 +86,10 @@ function WrapperMainPanel(props: {
       />
       <div
         style={{
-          display: 'flex',
-          'justify-content': 'space-between',
-          padding: '4px',
-          'border-top': '1px solid var(--jg-t-border)',
+          display: "flex",
+          "justify-content": "space-between",
+          padding: "4px",
+          "border-top": "1px solid var(--jg-t-border)",
         }}
       >
         <Button
@@ -99,7 +99,7 @@ function WrapperMainPanel(props: {
             state.triggerRef?.blur();
           }}
           size={30}
-          style={{ width: '100%', 'flex-shrink': 1 }}
+          style={{ width: "100%", "flex-shrink": 1 }}
           variant="text"
         />
         <Button
@@ -108,7 +108,7 @@ function WrapperMainPanel(props: {
             state.triggerRef?.blur();
           }}
           size={30}
-          style={{ width: '100%', 'flex-shrink': 1 }}
+          style={{ width: "100%", "flex-shrink": 1 }}
           variant="text"
         />
       </div>
@@ -121,7 +121,7 @@ export function DatePicker(props: {
   onChange?: (value: string) => void;
   onFocus?: () => void;
   onBlur?: () => void;
-  size?: 'small' | 'medium' | 'large';
+  size?: "small" | "medium" | "large";
   disabled?: boolean;
   placeholder?: string;
   type?: DatePickerType;
@@ -162,11 +162,11 @@ export function DatePicker(props: {
     >
       <Trigger
         clearable={undefinedOr(props.clearable, true)}
-        size={props.size || 'medium'}
+        size={props.size || "medium"}
       />
       <Wrapper>
         <WrapperMainPanel
-          cellClass={props.cellClass || ''}
+          cellClass={props.cellClass || ""}
           disabledDates={props.disabledDates || []}
           highlightDates={props.highlightDates || []}
           highlightMonths={props.highlightMonths || []}

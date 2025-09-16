@@ -1,4 +1,4 @@
-import { IconSvgWrapper } from './shared';
+import { IconSvgWrapper } from "./shared";
 
 export function IconFluentMoreHorizontal24Filled() {
   return (

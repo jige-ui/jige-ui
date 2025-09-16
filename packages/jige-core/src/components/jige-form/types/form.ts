@@ -1,6 +1,6 @@
-import type { Maybe, MaybePromise } from '@/common/types';
-import type { JigeFormValidatorReturn } from '../validator';
-import type { FieldValue, FieldValues } from './field';
+import type { Maybe, MaybePromise } from "@/common/types";
+import type { JigeFormValidatorReturn } from "../validator";
+import type { FieldValue, FieldValues } from "./field";
 
 /**
  * Value type of the partial field values.

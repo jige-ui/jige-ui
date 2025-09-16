@@ -1,14 +1,14 @@
-import { createStore } from 'solid-js/store';
-import { Input } from '~/build';
-import { Playground } from '../../../components/playground';
+import { createStore } from "solid-js/store";
+import { Input } from "~/build";
+import { Playground } from "../../../components/playground";
 
 export default function Demo() {
   const [p, setP] = createStore({
     disabled: false,
     clearable: false,
     readonly: false,
-    type: 'text' as 'text' | 'textarea' | 'password',
-    size: 'medium' as 'small' | 'medium' | 'large',
+    type: "text" as "text" | "textarea" | "password",
+    size: "medium" as "small" | "medium" | "large",
   });
 
   return (
@@ -31,8 +31,8 @@ export default function Demo() {
         onChange={setP}
         properties={p}
         typeDeclaration={{
-          type: ['text', 'textarea', 'password'],
-          size: ['small', 'medium', 'large'],
+          type: ["text", "textarea", "password"],
+          size: ["small", "medium", "large"],
         }}
       />
     </Playground>

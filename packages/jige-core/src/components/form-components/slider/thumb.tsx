@@ -1,12 +1,12 @@
-import { mergeRefs } from '@solid-primitives/refs';
-import type { JSX } from 'solid-js';
-import { onMount, splitProps } from 'solid-js';
-import { makeEventListener } from 'solid-tiny-utils';
-import { runSolidEventHandler } from '@/common/solidjs';
-import context from './context';
+import { mergeRefs } from "@solid-primitives/refs";
+import type { JSX } from "solid-js";
+import { onMount, splitProps } from "solid-js";
+import { makeEventListener } from "solid-tiny-utils";
+import { runSolidEventHandler } from "@/common/solidjs";
+import context from "./context";
 
 export default function Thumb(props: JSX.HTMLAttributes<HTMLDivElement>) {
-  const [localProps, otherProps] = splitProps(props, ['ref', 'onMouseDown']);
+  const [localProps, otherProps] = splitProps(props, ["ref", "onMouseDown"]);
   const [state, actions] = context.useContext();
   let isDragging = false;
   let startPos = 0;
@@ -15,7 +15,7 @@ export default function Thumb(props: JSX.HTMLAttributes<HTMLDivElement>) {
   let ref!: HTMLDivElement;
 
   onMount(() => {
-    makeEventListener(document, 'mousemove', (e) => {
+    makeEventListener(document, "mousemove", (e) => {
       if (!isDragging) {
         return;
       }
@@ -38,9 +38,9 @@ export default function Thumb(props: JSX.HTMLAttributes<HTMLDivElement>) {
       actions.setValue(startValue + (diff / parent) * (state.max - state.min));
     });
 
-    makeEventListener(document, 'mouseup', () => {
+    makeEventListener(document, "mouseup", () => {
       isDragging = false;
-      actions.setState('isDragging', false);
+      actions.setState("isDragging", false);
     });
   });
 
@@ -52,7 +52,7 @@ export default function Thumb(props: JSX.HTMLAttributes<HTMLDivElement>) {
         e.preventDefault();
         state.$nativeEl?.focus();
         isDragging = true;
-        actions.setState('isDragging', true);
+        actions.setState("isDragging", true);
         startPos = state.vertical ? e.clientY : e.clientX;
         startValue = state.value;
         runSolidEventHandler(e, localProps.onMouseDown);

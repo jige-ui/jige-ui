@@ -1,6 +1,6 @@
-import { FloatingUiCore } from 'jige-core';
-import { Content } from './content';
-import { Root } from './root';
+import { FloatingUiCore } from "jige-core";
+import { Content } from "./content";
+import { Root } from "./root";
 
 export const Popover = Object.assign(Root, {
   Content,

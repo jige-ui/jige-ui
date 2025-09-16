@@ -1,12 +1,12 @@
-import css from 'sass:./segment.scss';
-import { RadioGroupCore } from 'jige-core';
-import type { JSX } from 'solid-js';
-import { createMemo, For, mergeProps, onMount } from 'solid-js';
-import { createStore, type SetStoreFunction } from 'solid-js/store';
-import { mountStyle } from 'solid-tiny-utils';
-import { dataIf } from '~/common/dataset';
-import { Thumb } from './thumb';
-import type { RadioOption } from './types';
+import css from "sass:./segment.scss";
+import { RadioGroupCore } from "jige-core";
+import type { JSX } from "solid-js";
+import { createMemo, For, mergeProps, onMount } from "solid-js";
+import { createStore, type SetStoreFunction } from "solid-js/store";
+import { mountStyle } from "solid-tiny-utils";
+import { dataIf } from "~/common/dataset";
+import { Thumb } from "./thumb";
+import type { RadioOption } from "./types";
 
 function SegmentWrapper(props: {
   children: JSX.Element;
@@ -51,7 +51,7 @@ function Item(props: {
     <button
       class="jg-segment-item"
       classList={{
-        'hide-divider': hideDivider(),
+        "hide-divider": hideDivider(),
       }}
       data-checked={dataIf(props.checked)}
       ref={ref}
@@ -73,11 +73,11 @@ export function Segment(props: {
   thumbClass?: string;
   disabled?: boolean;
 }) {
-  mountStyle(css, 'jige-ui-segment');
+  mountStyle(css, "jige-ui-segment");
 
   const normalizeOptions = createMemo(() => {
     return props.options.map((option) => {
-      if (typeof option === 'string') {
+      if (typeof option === "string") {
         return { label: option, value: option };
       }
       return option;
@@ -86,9 +86,9 @@ export function Segment(props: {
 
   const finalProps = mergeProps(
     {
-      thumbBg: 'var(--jg-t-bg1)',
-      railBg: 'var(--jg-t-bg3)',
-      class: '',
+      thumbBg: "var(--jg-t-bg1)",
+      railBg: "var(--jg-t-bg3)",
+      class: "",
     },
     props
   );

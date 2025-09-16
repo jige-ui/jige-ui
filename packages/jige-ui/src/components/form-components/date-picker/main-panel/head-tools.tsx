@@ -1,10 +1,10 @@
-import { throttle } from '@solid-primitives/scheduled';
-import { createMemo, type JSX, Show } from 'solid-js';
-import { Button } from '~/components/button';
-import { IconFluentCaretDown24Filled } from '~/components/icons/fluent-caret-down-24-filled';
-import { IconFluentCaretUp24Filled } from '~/components/icons/fluent-caret-up-24-filled';
-import { NumberToChinese } from '../utils';
-import { panelContext } from './context';
+import { throttle } from "@solid-primitives/scheduled";
+import { createMemo, type JSX, Show } from "solid-js";
+import { Button } from "~/components/button";
+import { IconFluentCaretDown24Filled } from "~/components/icons/fluent-caret-down-24-filled";
+import { IconFluentCaretUp24Filled } from "~/components/icons/fluent-caret-up-24-filled";
+import { NumberToChinese } from "../utils";
+import { panelContext } from "./context";
 
 export function HeadTools(props: {
   headerRight?: (
@@ -20,7 +20,7 @@ export function HeadTools(props: {
     actions.setCurrYear(e.deltaY > 0 ? state.currYear + 1 : state.currYear - 1);
   }, 60);
   const monthMode = createMemo(() => {
-    return state.defaultPanel === 'month';
+    return state.defaultPanel === "month";
   });
   return (
     <div class="jg-dp-head-tools">
@@ -29,8 +29,8 @@ export function HeadTools(props: {
           label={`${state.currYear}年`}
           onClick={() => {
             actions.setState(
-              'activePanel',
-              state.activePanel === 'year' ? state.defaultPanel : 'year'
+              "activePanel",
+              state.activePanel === "year" ? state.defaultPanel : "year"
             );
           }}
           onWheel={(e) => {
@@ -38,15 +38,15 @@ export function HeadTools(props: {
             throttleYear(e);
           }}
           size={26}
-          style={{ 'font-size': '15px', padding: '0 4px' }}
+          style={{ "font-size": "15px", padding: "0 4px" }}
           variant="text"
         />
         <Show when={!monthMode()}>
           <Button
             onClick={() => {
               actions.setState(
-                'activePanel',
-                state.activePanel === 'month' ? state.defaultPanel : 'month'
+                "activePanel",
+                state.activePanel === "month" ? state.defaultPanel : "month"
               );
             }}
             onWheel={(e) => {
@@ -54,7 +54,7 @@ export function HeadTools(props: {
               throttleMonth(e);
             }}
             size={26}
-            style={{ 'font-size': '14px', padding: '0 4px' }}
+            style={{ "font-size": "14px", padding: "0 4px" }}
             variant="text"
           >
             {NumberToChinese(state.currMonth + 1)}月
@@ -73,7 +73,7 @@ export function HeadTools(props: {
                 ? actions.setCurrYear(state.currYear + 1)
                 : actions.monthHandle(1);
             }}
-            style={{ 'font-size': '12px' }}
+            style={{ "font-size": "12px" }}
             variant="text"
           />
           <Button
@@ -83,7 +83,7 @@ export function HeadTools(props: {
                 ? actions.setCurrYear(state.currYear - 1)
                 : actions.monthHandle(-1);
             }}
-            style={{ 'font-size': '12px' }}
+            style={{ "font-size": "12px" }}
             variant="text"
           />
         </Show>

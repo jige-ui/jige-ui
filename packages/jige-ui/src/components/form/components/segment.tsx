@@ -1,12 +1,12 @@
-import { FormCore } from 'jige-core';
-import type { ComponentProps } from 'solid-js';
-import { Segment } from '../../form-components';
+import { FormCore } from "jige-core";
+import type { ComponentProps } from "solid-js";
+import { Segment } from "../../form-components";
 
 /**
  * Segment component which is already bind with form.
  */
 export function FormSegment(
-  props: Omit<ComponentProps<typeof Segment>, 'onChange' | 'value'>
+  props: Omit<ComponentProps<typeof Segment>, "onChange" | "value">
 ) {
   const [fieldState, fieldActs] = FormCore.useField();
 

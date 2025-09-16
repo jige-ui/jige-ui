@@ -1,4 +1,4 @@
-import { createComponentState } from 'solid-tiny-context';
+import { createComponentState } from "solid-tiny-context";
 
 const context = createComponentState({
   state: () => ({
@@ -27,9 +27,9 @@ const context = createComponentState({
         }
         // check if the th's rowIndex+rowSpan is equal to total row count
         const rowIndex = (th.parentElement as HTMLTableRowElement)?.rowIndex;
-        const rowSpan = th.getAttribute('rowSpan');
+        const rowSpan = th.getAttribute("rowSpan");
         const rowSpanNum = rowSpan ? Number(rowSpan) : 1;
-        const rowCount = headerDom.querySelectorAll('tr').length;
+        const rowCount = headerDom.querySelectorAll("tr").length;
         if (rowIndex + rowSpanNum < rowCount) {
           return false;
         }
@@ -72,9 +72,9 @@ const context = createComponentState({
 
       const minWidth = needSetWidth.length * 80 + constWidthCount;
       if (wrapperWidth < minWidth) {
-        actions.setState('width', minWidth);
+        actions.setState("width", minWidth);
       } else {
-        actions.setState('width', 0);
+        actions.setState("width", 0);
       }
 
       // calculate the width of each column which is not set manually
@@ -85,7 +85,7 @@ const context = createComponentState({
         );
       }
 
-      actions.setState('colsWidth', { ...state.colsWidth, ...widths });
+      actions.setState("colsWidth", { ...state.colsWidth, ...widths });
     },
   },
 });

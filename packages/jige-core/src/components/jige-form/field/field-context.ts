@@ -1,14 +1,14 @@
-import { createMemo, createSignal } from 'solid-js';
-import { formContext } from '../form/context';
+import { createMemo, createSignal } from "solid-js";
+import { formContext } from "../form/context";
 import {
   type JigeFormValidatorCorrectReturn,
   normalizeValidator,
-} from '../validator';
+} from "../validator";
 
 export function getFieldContext(
   pathName: string,
   options: {
-    validateOn: 'change' | 'blur';
+    validateOn: "change" | "blur";
     validateDebounceMs: number;
     validators: any[];
     validateFirst: boolean;
@@ -50,15 +50,15 @@ export function getFieldContext(
       );
       if (error) {
         validationErrors.push(error);
-        if (options.validateFirst && error.type === 'error') {
+        if (options.validateFirst && error.type === "error") {
           break;
         }
       }
     }
-    formActs.setState('errorFields', pathName, validationErrors);
+    formActs.setState("errorFields", pathName, validationErrors);
   };
 
-  formActs.setState('validateFields', pathName, () => validate);
+  formActs.setState("validateFields", pathName, () => validate);
 
   const handleChange = (value: any) => {
     if (!setValue(value)) {
@@ -67,7 +67,7 @@ export function getFieldContext(
     if (!isTouched()) {
       setIsTouched(true);
     }
-    if (options.validateOn === 'change') {
+    if (options.validateOn === "change") {
       handleValidate();
     }
   };
@@ -115,7 +115,7 @@ export function getFieldContext(
 export function createFieldContext(
   pathName: () => string,
   options: {
-    validateOn: () => 'change' | 'blur';
+    validateOn: () => "change" | "blur";
     validateDebounceMs: () => number;
     validators: () => any[];
     validateFirst: () => boolean;
@@ -157,15 +157,15 @@ export function createFieldContext(
       );
       if (error) {
         validationErrors.push(error);
-        if (options.validateFirst() && error.type === 'error') {
+        if (options.validateFirst() && error.type === "error") {
           break;
         }
       }
     }
-    formActs.setState('errorFields', pathName(), validationErrors);
+    formActs.setState("errorFields", pathName(), validationErrors);
   };
 
-  formActs.setState('validateFields', pathName(), () => validate);
+  formActs.setState("validateFields", pathName(), () => validate);
 
   const handleChange = (value: any) => {
     if (!setValue(value)) {
@@ -174,7 +174,7 @@ export function createFieldContext(
     if (!isTouched()) {
       setIsTouched(true);
     }
-    if (options.validateOn() === 'change') {
+    if (options.validateOn() === "change") {
       handleValidate();
     }
   };

@@ -1,16 +1,16 @@
-import type { JSX } from 'solid-js/jsx-runtime';
+import type { JSX } from "solid-js/jsx-runtime";
 
 export type InputProps = Omit<
   JSX.InputHTMLAttributes<HTMLInputElement>,
-  'value'
+  "value"
 >;
 
 export type TextareaProps = Omit<
   JSX.TextareaHTMLAttributes<HTMLTextAreaElement>,
-  'value'
+  "value"
 >;
 
 export type InputNativeProps = {
-  type?: 'text' | 'password' | 'number' | 'textarea';
-} & Omit<InputProps, 'type'> &
+  type?: "text" | "password" | "number" | "textarea";
+} & Omit<InputProps, "type"> &
   TextareaProps;

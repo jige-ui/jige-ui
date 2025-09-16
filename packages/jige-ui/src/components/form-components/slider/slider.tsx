@@ -1,8 +1,8 @@
-import styles from 'sass:./slider.scss';
-import { FloatingUiCore, SliderCore } from 'jige-core';
-import { createWatch, mountStyle } from 'solid-tiny-utils';
-import { dataIf } from '~/common/dataset';
-import { Popover } from '../../popover';
+import styles from "sass:./slider.scss";
+import { FloatingUiCore, SliderCore } from "jige-core";
+import { createWatch, mountStyle } from "solid-tiny-utils";
+import { dataIf } from "~/common/dataset";
+import { Popover } from "../../popover";
 
 function ToolTipSliderThumb() {
   const floatActs = FloatingUiCore.useContext()[1];
@@ -71,7 +71,7 @@ export function Slider(props: {
   step?: number;
   disabled?: boolean;
 }) {
-  mountStyle(styles, 'jige-ui-slider');
+  mountStyle(styles, "jige-ui-slider");
   return (
     <SliderCore {...props}>
       <Popover placement="top" trigger="manual">

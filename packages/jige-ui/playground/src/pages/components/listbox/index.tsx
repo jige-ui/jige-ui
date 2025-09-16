@@ -1,8 +1,8 @@
-import { createSignal } from 'solid-js';
-import { createStore } from 'solid-js/store';
-import { list } from 'solid-tiny-utils';
-import { Listbox } from '~/build';
-import { Playground } from '../../../components/playground';
+import { createSignal } from "solid-js";
+import { createStore } from "solid-js/store";
+import { list } from "solid-tiny-utils";
+import { Listbox } from "~/build";
+import { Playground } from "../../../components/playground";
 
 export default function Demo() {
   const [s, setS] = createStore({
@@ -18,7 +18,7 @@ export default function Demo() {
         <div>
           <div
             style={{
-              width: '250px',
+              width: "250px",
             }}
           >
             <Listbox

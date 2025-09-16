@@ -1,10 +1,10 @@
 /* eslint-disable solid/reactivity */
-import { ModalCore } from 'jige-core';
-import { createMemo, Show } from 'solid-js';
-import { Button } from '../button';
+import { ModalCore } from "jige-core";
+import { createMemo, Show } from "solid-js";
+import { Button } from "../button";
 
 export function Footer(props: {
-  type: 'error' | 'warning' | 'success' | 'info';
+  type: "error" | "warning" | "success" | "info";
   positiveText: string;
   negativeText: string;
   onPositiveClick?: () => void | Promise<void>;
@@ -13,15 +13,15 @@ export function Footer(props: {
   const [, actions] = ModalCore.useContext();
 
   const color = createMemo(() => {
-    return `var(--jg-fg-${props.type === 'error' ? 'danger' : props.type})`;
+    return `var(--jg-fg-${props.type === "error" ? "danger" : props.type})`;
   });
   return (
     <div
       style={{
-        display: 'flex',
-        'align-items': 'center',
-        gap: '8px',
-        padding: '8px',
+        display: "flex",
+        "align-items": "center",
+        gap: "8px",
+        padding: "8px",
       }}
     >
       <Show when={props.negativeText}>

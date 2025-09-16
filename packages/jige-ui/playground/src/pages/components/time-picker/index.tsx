@@ -1,16 +1,16 @@
-import { createSignal } from 'solid-js';
-import { createStore } from 'solid-js/store';
-import { TimePicker } from '~/build';
-import { Playground } from '../../../components/playground';
+import { createSignal } from "solid-js";
+import { createStore } from "solid-js/store";
+import { TimePicker } from "~/build";
+import { Playground } from "../../../components/playground";
 
 export default function Demo() {
   const [p, setP] = createStore({
     disabled: false,
-    size: 'medium' as 'small' | 'medium',
-    type: 'second' as 'hour' | 'second' | 'minute',
+    size: "medium" as "small" | "medium",
+    type: "second" as "hour" | "second" | "minute",
   });
 
-  const [value, setValue] = createSignal('');
+  const [value, setValue] = createSignal("");
 
   return (
     <Playground>
@@ -30,8 +30,8 @@ export default function Demo() {
         onChange={setP}
         properties={p}
         typeDeclaration={{
-          type: ['hour', 'minute', 'second'],
-          size: ['small', 'medium'],
+          type: ["hour", "minute", "second"],
+          size: ["small", "medium"],
         }}
       />
     </Playground>

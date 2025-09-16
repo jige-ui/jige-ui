@@ -1,10 +1,10 @@
-import css from 'sass:./tooltip.scss';
-import aniFloatCss from 'sass:../../styles/common/ani-floating-ui.scss';
-import { FloatingUiCore } from 'jige-core';
-import type { JSX } from 'solid-js/jsx-runtime';
+import css from "sass:./tooltip.scss";
+import aniFloatCss from "sass:../../styles/common/ani-floating-ui.scss";
+import { FloatingUiCore } from "jige-core";
+import type { JSX } from "solid-js/jsx-runtime";
 
-import { mountStyle } from 'solid-tiny-utils';
-import { RootContext } from '../root/context';
+import { mountStyle } from "solid-tiny-utils";
+import { RootContext } from "../root/context";
 
 export function Tooltip(props: {
   content: string;
@@ -14,13 +14,13 @@ export function Tooltip(props: {
    */
   openDelay?: number;
   closeDelay?: number;
-  placement?: 'top' | 'bottom' | 'left' | 'right';
+  placement?: "top" | "bottom" | "left" | "right";
   zIndex?: number;
-  trigger?: 'hover' | 'click';
+  trigger?: "hover" | "click";
   disabled?: boolean;
 }) {
-  mountStyle(css, 'jige-ui-tooltip');
-  mountStyle(aniFloatCss, 'jige-ui-ani-floating-ui');
+  mountStyle(css, "jige-ui-tooltip");
+  mountStyle(aniFloatCss, "jige-ui-ani-floating-ui");
   const [state] = RootContext.useContext();
   return (
     <FloatingUiCore

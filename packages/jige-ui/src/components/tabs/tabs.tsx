@@ -1,11 +1,11 @@
-import styles from 'sass:./tabs.scss';
-import { AnimatedGroup, RadioGroupCore } from 'jige-core';
-import type { ComponentProps, JSX } from 'solid-js';
-import { createMemo, createSignal, For, splitProps } from 'solid-js';
-import { createWatch, mountStyle } from 'solid-tiny-utils';
+import styles from "sass:./tabs.scss";
+import { AnimatedGroup, RadioGroupCore } from "jige-core";
+import type { ComponentProps, JSX } from "solid-js";
+import { createMemo, createSignal, For, splitProps } from "solid-js";
+import { createWatch, mountStyle } from "solid-tiny-utils";
 
-import { dataIf } from '~/common/dataset';
-import context from './context';
+import { dataIf } from "~/common/dataset";
+import context from "./context";
 
 function Content(props: { children: JSX.Element; key: string }) {
   const [state] = context.useContext();
@@ -25,20 +25,20 @@ function Root(
     active: string;
     onChange: (key: string) => void;
     options: string[];
-  } & ComponentProps<'div'>
+  } & ComponentProps<"div">
 ) {
-  mountStyle(styles, 'jige-ui-tabs');
+  mountStyle(styles, "jige-ui-tabs");
 
   const [localProps, otherProps] = splitProps(props, [
-    'active',
-    'onChange',
-    'options',
-    'class',
-    'children',
+    "active",
+    "onChange",
+    "options",
+    "class",
+    "children",
   ]);
   const Context = context.initial();
   const [tabState, actions] = Context.value;
-  const [prevActive, setPrevActive] = createSignal('');
+  const [prevActive, setPrevActive] = createSignal("");
 
   createWatch(
     () => localProps.active,
@@ -50,16 +50,16 @@ function Root(
       if (
         localProps.options.indexOf(prev) < localProps.options.indexOf(active)
       ) {
-        actions.setState('dir', 'right');
+        actions.setState("dir", "right");
       } else {
-        actions.setState('dir', 'left');
+        actions.setState("dir", "left");
       }
     }
   );
 
   const normalizeOptions = createMemo(() => {
     return localProps.options.map((option) => {
-      if (typeof option === 'string') {
+      if (typeof option === "string") {
         return { label: option, value: option };
       }
       return option;
@@ -67,7 +67,7 @@ function Root(
   });
   return (
     <Context.Provider>
-      <div class={['jg-tabs', localProps.class].join(' ')} {...otherProps}>
+      <div class={["jg-tabs", localProps.class].join(" ")} {...otherProps}>
         <RadioGroupCore
           onChange={localProps.onChange}
           value={localProps.active}

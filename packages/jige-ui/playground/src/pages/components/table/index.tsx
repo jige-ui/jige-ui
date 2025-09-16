@@ -1,12 +1,12 @@
-import { createSignal, For } from 'solid-js';
-import { createStore } from 'solid-js/store';
-import { Table } from '~/build';
-import { Playground } from '../../../components/playground';
+import { createSignal, For } from "solid-js";
+import { createStore } from "solid-js/store";
+import { Table } from "~/build";
+import { Playground } from "../../../components/playground";
 
 export default function Demo() {
   const [p, setP] = createStore({
     disabled: false,
-    size: 'medium' as 'small' | 'medium' | 'large',
+    size: "medium" as "small" | "medium" | "large",
   });
   const [value, setValue] = createSignal<
     {
@@ -107,7 +107,7 @@ export default function Demo() {
                   onClick={() =>
                     setValue((prev) => [
                       ...prev,
-                      { name: '', age: 0, address: '', email: '' },
+                      { name: "", age: 0, address: "", email: "" },
                     ])
                   }
                   type="button"
@@ -123,7 +123,7 @@ export default function Demo() {
         onChange={setP}
         properties={p}
         typeDeclaration={{
-          size: ['small', 'medium', 'large'],
+          size: ["small", "medium", "large"],
         }}
       />
     </Playground>

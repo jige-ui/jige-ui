@@ -1,36 +1,36 @@
-import { mergeRefs } from '@solid-primitives/refs';
-import { throttle } from '@solid-primitives/scheduled';
+import { mergeRefs } from "@solid-primitives/refs";
+import { throttle } from "@solid-primitives/scheduled";
 import {
   combineStyle,
   InputCore,
   runSolidEventHandler,
   ScrollbarCore,
-} from 'jige-core';
-import { createSignal, splitProps } from 'solid-js';
-import { dataIf } from '~/common/dataset';
-import type { JigeInputProps } from './types';
+} from "jige-core";
+import { createSignal, splitProps } from "solid-js";
+import { dataIf } from "~/common/dataset";
+import type { JigeInputProps } from "./types";
 
 function ScrollInput(
-  props: Omit<JigeInputProps, 'type'> & {
+  props: Omit<JigeInputProps, "type"> & {
     setFocused: (focused: boolean) => void;
   }
 ) {
   const [localProps, otherProps] = splitProps(props, [
-    'value',
-    'onChange',
-    'disabled',
-    'clearable',
-    'onFocus',
-    'onBlur',
-    'class',
-    'style',
-    'readonly',
-    'suffix',
-    'size',
-    'setFocused',
-    'ref',
-    'onScroll',
-    'onScrollEnd',
+    "value",
+    "onChange",
+    "disabled",
+    "clearable",
+    "onFocus",
+    "onBlur",
+    "class",
+    "style",
+    "readonly",
+    "suffix",
+    "size",
+    "setFocused",
+    "ref",
+    "onScroll",
+    "onScrollEnd",
   ]);
   const [state, actions] = ScrollbarCore.useContext();
   const throttleSetValue = throttle(actions.setValue, 30);
@@ -39,7 +39,7 @@ function ScrollInput(
     <InputCore.Native
       {...(otherProps as any)}
       autocomplete="off"
-      class={['jg-input-native', localProps.class].join(' ')}
+      class={["jg-input-native", localProps.class].join(" ")}
       onBlur={(e: Event) => {
         localProps.setFocused(false);
         runSolidEventHandler(e, localProps.onBlur);
@@ -59,19 +59,19 @@ function ScrollInput(
       readonly={props.readonly}
       ref={
         mergeRefs(localProps.ref, (el) => {
-          actions.setState('refContent', el);
+          actions.setState("refContent", el);
         }) as any
       }
       style={combineStyle(
         {
-          position: 'relative',
-          overflow: 'auto',
-          'scrollbar-width': 'none',
+          position: "relative",
+          overflow: "auto",
+          "scrollbar-width": "none",
           height: state.height,
-          'max-height': state.maxHeight,
-          'user-select': state.isDragging ? 'none' : undefined,
-          resize: 'none',
-          width: '100%',
+          "max-height": state.maxHeight,
+          "user-select": state.isDragging ? "none" : undefined,
+          resize: "none",
+          width: "100%",
         },
         localProps.style
       )}
@@ -99,23 +99,23 @@ function ScrollBar(props: {
       {props.children}
       <ScrollbarCore.Bar
         style={{
-          position: 'absolute',
-          width: '6px',
-          top: '4px',
-          right: '3px',
-          bottom: '4px',
-          background: 'transparent',
-          transition: 'opacity 300ms',
-          opacity: hidden() ? '0' : '.7',
+          position: "absolute",
+          width: "6px",
+          top: "4px",
+          right: "3px",
+          bottom: "4px",
+          background: "transparent",
+          transition: "opacity 300ms",
+          opacity: hidden() ? "0" : ".7",
         }}
         type="vertical"
       >
         <ScrollbarCore.Thumb
           style={{
-            background: 'var(--jg-t-hl-lighter)',
-            cursor: 'pointer',
-            'border-radius': '6px',
-            transition: 'all 30ms',
+            background: "var(--jg-t-hl-lighter)",
+            cursor: "pointer",
+            "border-radius": "6px",
+            transition: "all 30ms",
           }}
           type="vertical"
         />
@@ -124,7 +124,7 @@ function ScrollBar(props: {
   );
 }
 
-export function Textarea(props: Omit<JigeInputProps, 'type'>) {
+export function Textarea(props: Omit<JigeInputProps, "type">) {
   const [focused, setFocused] = createSignal(false);
   return (
     <InputCore

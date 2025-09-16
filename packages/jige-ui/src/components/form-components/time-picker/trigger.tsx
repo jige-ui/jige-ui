@@ -1,8 +1,8 @@
-import { combineStyle, dataIf, hiddenStyle } from 'jige-core';
-import { Show } from 'solid-js';
-import type { JSX } from 'solid-js/jsx-runtime';
-import { Popover } from '~/components/popover';
-import { context } from './context';
+import { combineStyle, dataIf, hiddenStyle } from "jige-core";
+import { Show } from "solid-js";
+import type { JSX } from "solid-js/jsx-runtime";
+import { Popover } from "~/components/popover";
+import { context } from "./context";
 
 export function Trigger(props: {
   style?: string | JSX.CSSProperties;
@@ -21,7 +21,7 @@ export function Trigger(props: {
       />
       <Popover.Trigger>
         <button
-          class={['jg-time-picker-trigger', props.class].join(' ')}
+          class={["jg-time-picker-trigger", props.class].join(" ")}
           data-disabled={dataIf(state.disabled)}
           style={combineStyle(
             {
@@ -35,23 +35,23 @@ export function Trigger(props: {
           <div class="jg-time-picker-overlay" />
           <div
             style={{
-              display: 'flex',
-              'align-items': 'center',
-              width: '100%',
+              display: "flex",
+              "align-items": "center",
+              width: "100%",
               opacity: state.asStr ? 1 : 0.5,
             }}
           >
             <div class="jg-time-picker-trigger-item">
-              {state.hourStr || '时'}
+              {state.hourStr || "时"}
             </div>
             <Show when={state.typeIndex > 0}>
               <div class="jg-time-picker-trigger-item">
-                {state.minuteStr || '分'}
+                {state.minuteStr || "分"}
               </div>
             </Show>
             <Show when={state.typeIndex > 1}>
               <div class="jg-time-picker-trigger-item">
-                {state.secondStr || '秒'}
+                {state.secondStr || "秒"}
               </div>
             </Show>
           </div>

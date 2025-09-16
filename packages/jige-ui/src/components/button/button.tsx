@@ -1,31 +1,31 @@
-import css from 'sass:./button.scss';
-import { splitProps } from 'solid-js';
+import css from "sass:./button.scss";
+import { splitProps } from "solid-js";
 
-import { mountStyle } from 'solid-tiny-utils';
-import { ButtonContent } from './button-content';
-import { ButtonWrapper } from './button-wrapper';
-import { context } from './context';
-import { LoadingIcon } from './loading-icon';
-import type { ButtonElement, ButtonProps } from './types';
+import { mountStyle } from "solid-tiny-utils";
+import { ButtonContent } from "./button-content";
+import { ButtonWrapper } from "./button-wrapper";
+import { context } from "./context";
+import { LoadingIcon } from "./loading-icon";
+import type { ButtonElement, ButtonProps } from "./types";
 
 export function Button<T extends string | undefined = undefined>(
   props: ButtonProps & {
     href?: T;
   } & ButtonElement<T>
 ) {
-  mountStyle(css, 'jige-ui-btn');
+  mountStyle(css, "jige-ui-btn");
 
   const [local, others] = splitProps(props, [
-    'loading',
-    'variant',
-    'color',
-    'disabled',
-    'type',
-    'size',
-    'icon',
-    'label',
-    'children',
-    'href',
+    "loading",
+    "variant",
+    "color",
+    "disabled",
+    "type",
+    "size",
+    "icon",
+    "label",
+    "children",
+    "href",
   ]);
 
   const Context = context.initial({
@@ -40,8 +40,8 @@ export function Button<T extends string | undefined = undefined>(
       <ButtonWrapper
         {...others}
         href={local.href}
-        size={local.size || 'medium'}
-        type={local.type || 'button'}
+        size={local.size || "medium"}
+        type={local.type || "button"}
       >
         <div class="jg-btn-overlay" />
         <ButtonContent icon={local.icon} label={local.label}>

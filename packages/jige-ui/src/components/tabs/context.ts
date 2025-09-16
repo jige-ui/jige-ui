@@ -1,8 +1,8 @@
-import { createComponentState } from 'solid-tiny-context';
+import { createComponentState } from "solid-tiny-context";
 
 const context = createComponentState({
   state: () => ({
-    dir: '' as 'left' | 'right',
+    dir: "" as "left" | "right",
   }),
 });
 

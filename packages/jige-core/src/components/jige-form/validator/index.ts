@@ -23,10 +23,10 @@ export type JigeFormAsyncValidator = (
 export function normalizeValidator(
   validateReturn: JigeFormValidatorReturn
 ): JigeFormValidatorCorrectReturn | undefined {
-  if (typeof validateReturn === 'string' && validateReturn) {
+  if (typeof validateReturn === "string" && validateReturn) {
     return {
       message: validateReturn,
-      type: 'error',
+      type: "error",
     };
   }
   return validateReturn as JigeFormValidatorCorrectReturn | undefined;

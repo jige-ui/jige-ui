@@ -1,17 +1,17 @@
-import { esday } from 'esday';
-import { createSignal } from 'solid-js';
-import { createStore } from 'solid-js/store';
-import { DateRangePicker } from '~/build';
-import { Playground } from '../../../components/playground';
+import { esday } from "esday";
+import { createSignal } from "solid-js";
+import { createStore } from "solid-js/store";
+import { DateRangePicker } from "~/build";
+import { Playground } from "../../../components/playground";
 
 export default function Demo() {
   const [p, setP] = createStore({
     disabled: false,
-    type: 'date' as 'datetime' | 'date',
-    size: 'medium' as 'small' | 'medium' | 'large',
+    type: "date" as "datetime" | "date",
+    size: "medium" as "small" | "medium" | "large",
   });
 
-  const [value, setValue] = createSignal<[string, string]>(['', '']);
+  const [value, setValue] = createSignal<[string, string]>(["", ""]);
 
   return (
     <Playground>
@@ -26,10 +26,10 @@ export default function Demo() {
             onFocus={() => {}}
             presets={[
               {
-                label: '本周',
+                label: "本周",
                 value: () => [
-                  esday().startOf('week').format('YYYY-MM-DD HH:mm:ss'),
-                  esday().endOf('week').format('YYYY-MM-DD HH:mm:ss'),
+                  esday().startOf("week").format("YYYY-MM-DD HH:mm:ss"),
+                  esday().endOf("week").format("YYYY-MM-DD HH:mm:ss"),
                 ],
               },
             ]}
@@ -43,8 +43,8 @@ export default function Demo() {
         onChange={setP}
         properties={p}
         typeDeclaration={{
-          type: ['date', 'datetime'],
-          size: ['small', 'medium', 'large'],
+          type: ["date", "datetime"],
+          size: ["small", "medium", "large"],
         }}
       />
     </Playground>

@@ -1,6 +1,6 @@
-import styles from 'sass:./progress.scss';
-import { createMemo } from 'solid-js';
-import { mountStyle } from 'solid-tiny-utils';
+import styles from "sass:./progress.scss";
+import { createMemo } from "solid-js";
+import { mountStyle } from "solid-tiny-utils";
 
 export function LineProgress(props: {
   percent?: number;
@@ -9,7 +9,7 @@ export function LineProgress(props: {
   height?: string;
   width?: string;
 }) {
-  mountStyle(styles, 'jige-ui-progress');
+  mountStyle(styles, "jige-ui-progress");
 
   const normalizedPercent = createMemo(() => {
     if (props.percent === undefined) {
@@ -21,7 +21,7 @@ export function LineProgress(props: {
   const isIndeterminate = createMemo(() => props.percent === undefined);
 
   const background = createMemo(() => {
-    const color = props.fillColor || 'var(--jg-t-hl)';
+    const color = props.fillColor || "var(--jg-t-hl)";
     if (isIndeterminate()) {
       return `linear-gradient(90deg, transparent, ${color} 30%, ${color} 65%, transparent)`;
     }
@@ -33,16 +33,16 @@ export function LineProgress(props: {
     <div
       class="jg-progress-line"
       style={{
-        height: props.height || '8px',
-        width: props.width || '100%',
-        background: props.railColor || 'var(--jg-t-bg3)',
-        overflow: 'hidden',
+        height: props.height || "8px",
+        width: props.width || "100%",
+        background: props.railColor || "var(--jg-t-bg3)",
+        overflow: "hidden",
       }}
     >
       <div
         class="jg-progress-line-fill"
         classList={{
-          'jg-progress-line-fill-indeterminate': isIndeterminate(),
+          "jg-progress-line-fill-indeterminate": isIndeterminate(),
         }}
         style={{
           width: `${normalizedPercent()}%`,

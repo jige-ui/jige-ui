@@ -1,12 +1,12 @@
-import { FormCore } from 'jige-core';
-import type { ComponentProps } from 'solid-js';
-import { NumberBox } from '../../form-components';
+import { FormCore } from "jige-core";
+import type { ComponentProps } from "solid-js";
+import { NumberBox } from "../../form-components";
 
 /**
  * NumberBox component which is already bind with form.
  */
 export function FormNumberBox(
-  props: Omit<ComponentProps<typeof NumberBox>, 'onChange' | 'value'>
+  props: Omit<ComponentProps<typeof NumberBox>, "onChange" | "value">
 ) {
   const [fieldState, fieldActs] = FormCore.useField();
 

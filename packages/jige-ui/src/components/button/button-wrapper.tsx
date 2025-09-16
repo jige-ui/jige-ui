@@ -1,10 +1,10 @@
-import { combineStyle } from 'jige-core';
-import { createMemo, splitProps } from 'solid-js';
-import { Dynamic } from 'solid-js/web';
-import { dataIf } from '~/common/dataset';
+import { combineStyle } from "jige-core";
+import { createMemo, splitProps } from "solid-js";
+import { Dynamic } from "solid-js/web";
+import { dataIf } from "~/common/dataset";
 
-import { context } from './context';
-import type { ButtonElement, ButtonSize } from './types';
+import { context } from "./context";
+import type { ButtonElement, ButtonSize } from "./types";
 
 export function ButtonWrapper<T = string | undefined>(
   props: {
@@ -14,10 +14,10 @@ export function ButtonWrapper<T = string | undefined>(
   } & ButtonElement<T>
 ) {
   const [local, others] = splitProps(props, [
-    'onClick',
-    'size',
-    'style',
-    'class',
+    "onClick",
+    "size",
+    "style",
+    "class",
   ]);
   const [state, actions] = context.useContext();
   const isAnchor = createMemo(() => {
@@ -25,61 +25,61 @@ export function ButtonWrapper<T = string | undefined>(
   });
 
   const finalClasses = createMemo(() => {
-    const classes = ['jg-btn', `jg-btn-${state.variant}`];
+    const classes = ["jg-btn", `jg-btn-${state.variant}`];
 
     if (state.iconOnly) {
-      classes.push('jg-btn-icon-only');
+      classes.push("jg-btn-icon-only");
     }
     if (props.class) {
       classes.push(props.class);
     }
 
-    return classes.join(' ');
+    return classes.join(" ");
   });
 
   const fontSize = createMemo(() => {
     const size = props.size;
 
-    if (typeof size === 'number') {
+    if (typeof size === "number") {
       return `${size / 4 + 6}px`;
     }
 
     switch (size) {
-      case 'small':
-        return '13px';
-      case 'large':
-        return '16px';
-      case 'medium':
-        return '14px';
+      case "small":
+        return "13px";
+      case "large":
+        return "16px";
+      case "medium":
+        return "14px";
       default:
-        return '14px';
+        return "14px";
     }
   });
 
   const thisHeight = createMemo(() => {
     const size = props.size;
-    if (state.variant === 'solid' || state.variant === 'text') {
-      if (size === 'small') {
-        return '24px';
+    if (state.variant === "solid" || state.variant === "text") {
+      if (size === "small") {
+        return "24px";
       }
-      if (size === 'large') {
-        return '40px';
+      if (size === "large") {
+        return "40px";
       }
-      if (typeof size === 'number') {
+      if (typeof size === "number") {
         return `${size}px`;
       }
-      return '32px';
+      return "32px";
     }
 
-    return 'initial';
+    return "initial";
   });
 
   return (
     <Dynamic
       {...others}
-      class={[finalClasses(), local.class].join(' ')}
+      class={[finalClasses(), local.class].join(" ")}
       // biome-ignore lint/suspicious/noExplicitAny: dynamic component type
-      component={(isAnchor() ? 'a' : 'button') as any}
+      component={(isAnchor() ? "a" : "button") as any}
       data-disabled={dataIf(state.disabled)}
       data-loading={dataIf(state.loading)}
       disabled={state.disabled}
@@ -89,13 +89,13 @@ export function ButtonWrapper<T = string | undefined>(
         }
         if (local.onClick) {
           const doClick = async () => {
-            actions.setState('loading', true);
+            actions.setState("loading", true);
             try {
               if (local.onClick) {
                 await local.onClick(e);
               }
             } finally {
-              actions.setState('loading', false);
+              actions.setState("loading", false);
             }
           };
           doClick();
@@ -103,13 +103,13 @@ export function ButtonWrapper<T = string | undefined>(
       }}
       style={combineStyle(
         {
-          '--jg-btn-fg': state.color ? 'white' : 'var(--jg-fg2)',
-          '--jg-btn-bg': state.color || 'var(--jg-t-bg1)',
-          '--jg-btn-link-fg': state.color || 'var(--jg-fg-link)',
-          '--jg-btn-text-fg': state.color || 'var(--jg-fg2)',
-          '--jg-height': thisHeight(),
-          '--jg-font-size': fontSize(),
-          'border-radius': '.25em',
+          "--jg-btn-fg": state.color ? "white" : "var(--jg-fg2)",
+          "--jg-btn-bg": state.color || "var(--jg-t-bg1)",
+          "--jg-btn-link-fg": state.color || "var(--jg-fg-link)",
+          "--jg-btn-text-fg": state.color || "var(--jg-fg2)",
+          "--jg-height": thisHeight(),
+          "--jg-font-size": fontSize(),
+          "border-radius": ".25em",
         },
         local.style
       )}

@@ -1,7 +1,7 @@
-import type { JSX } from 'solid-js';
-import { createUniqueId } from 'solid-js';
-import { createWatch } from 'solid-tiny-utils';
-import context, { CollapsibleParents } from './context';
+import type { JSX } from "solid-js";
+import { createUniqueId } from "solid-js";
+import { createWatch } from "solid-tiny-utils";
+import context, { CollapsibleParents } from "./context";
 
 export function Root(props: { children: JSX.Element; parentID?: string }) {
   const Context = context.initial({
@@ -12,7 +12,7 @@ export function Root(props: { children: JSX.Element; parentID?: string }) {
   const [pstate, psetState] = CollapsibleParents;
 
   createWatch([() => state.status, () => state.parentId], ([status, pid]) => {
-    if (pid && status.startsWith('open')) {
+    if (pid && status.startsWith("open")) {
       psetState(pid, state.id);
     }
   });

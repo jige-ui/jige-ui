@@ -1,6 +1,6 @@
 export function flattenObject<T extends {}>(
   obj: T,
-  parent = '',
+  parent = "",
   res: { [key: string]: unknown } = {}
 ) {
   for (const key in obj) {
@@ -8,7 +8,7 @@ export function flattenObject<T extends {}>(
     if (obj.hasOwnProperty(key)) {
       const propName = parent ? `${parent}.${key}` : key;
       if (
-        typeof obj[key] === 'object' &&
+        typeof obj[key] === "object" &&
         obj[key] !== null &&
         !Array.isArray(obj[key])
       ) {

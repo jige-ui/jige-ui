@@ -1,7 +1,7 @@
-import type { PropsWithContextChild } from 'jige-core';
-import { callMaybeContextChild, undefinedOr } from 'jige-core';
-import { createWatch } from 'solid-tiny-utils';
-import { context } from './context';
+import type { PropsWithContextChild } from "jige-core";
+import { callMaybeContextChild, undefinedOr } from "jige-core";
+import { createWatch } from "solid-tiny-utils";
+import { context } from "./context";
 
 export function Root(
   props: PropsWithContextChild<

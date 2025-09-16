@@ -1,12 +1,12 @@
-import { createComponentState } from 'solid-tiny-context';
+import { createComponentState } from "solid-tiny-context";
 
 const context = createComponentState({
   state: () => ({
-    active: '',
-    tryClose: '',
-    tryOpen: '',
-    height: '',
-    maxHeight: '',
+    active: "",
+    tryClose: "",
+    tryOpen: "",
+    height: "",
+    maxHeight: "",
     refHeights: {} as Record<string, number>,
   }),
   getters: {

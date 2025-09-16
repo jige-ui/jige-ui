@@ -1,6 +1,6 @@
-import { FormCore, RadioGroupCore } from 'jige-core';
-import { createUniqueId } from 'solid-js';
-import { dataIf } from '~/common/dataset';
+import { FormCore, RadioGroupCore } from "jige-core";
+import { createUniqueId } from "solid-js";
+import { dataIf } from "~/common/dataset";
 
 export function Item(props: {
   value: string;

@@ -1,16 +1,16 @@
-import { createStore } from 'solid-js/store';
-import { Button } from '~/build';
-import { Playground } from '../../../components/playground';
+import { createStore } from "solid-js/store";
+import { Button } from "~/build";
+import { Playground } from "../../../components/playground";
 
 export default function Demo() {
   const [p, setP] = createStore({
     loading: false,
     disabled: false,
     icon: true,
-    color: '',
-    variant: 'solid' as const,
-    size: 'medium' as const,
-    label: 'Button',
+    color: "",
+    variant: "solid" as const,
+    size: "medium" as const,
+    label: "Button",
   });
 
   return (
@@ -30,8 +30,8 @@ export default function Demo() {
         onChange={setP}
         properties={p}
         typeDeclaration={{
-          size: ['small', 'medium', 'large', 50] as string[],
-          variant: ['solid', 'text', 'link'],
+          size: ["small", "medium", "large", 50] as string[],
+          variant: ["solid", "text", "link"],
         }}
       />
     </Playground>

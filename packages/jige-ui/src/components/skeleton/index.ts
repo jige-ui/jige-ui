@@ -1,5 +1,5 @@
-import { Node } from './node';
-import { Text } from './text';
+import { Node } from "./node";
+import { Text } from "./text";
 
 export const Skeleton = {
   Node,

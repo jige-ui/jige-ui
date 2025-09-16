@@ -4,9 +4,9 @@
  * thanks for the idea from Hexo
  */
 
-import context from './context';
-import { Pager } from './pager';
-import { Root } from './root';
+import context from "./context";
+import { Pager } from "./pager";
+import { Root } from "./root";
 
 export const PaginatorCore = Object.assign(Root, {
   Pager,

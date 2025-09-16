@@ -1,7 +1,7 @@
-import { children, type JSX, Show } from 'solid-js';
-import { Button } from '../button';
-import { IconFluentDismiss24Regular } from '../icons/fluent-dismiss-24-regular';
-import { Close } from './close';
+import { children, type JSX, Show } from "solid-js";
+import { Button } from "../button";
+import { IconFluentDismiss24Regular } from "../icons/fluent-dismiss-24-regular";
+import { Close } from "./close";
 
 export function Header(props: {
   hideClose?: boolean;
@@ -13,7 +13,7 @@ export function Header(props: {
   const child = children(() => props.children);
   return (
     <div
-      class={['jg-drawer-header', props.class].join(' ')}
+      class={["jg-drawer-header", props.class].join(" ")}
       style={props.style}
     >
       <Show when={!props.hideClose}>

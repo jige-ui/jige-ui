@@ -1,13 +1,13 @@
-import { createSignal } from 'solid-js';
-import { createStore } from 'solid-js/store';
-import { list } from 'solid-tiny-utils';
-import { ComboBox } from '~/build';
-import { Playground } from '../../../components/playground';
+import { createSignal } from "solid-js";
+import { createStore } from "solid-js/store";
+import { list } from "solid-tiny-utils";
+import { ComboBox } from "~/build";
+import { Playground } from "../../../components/playground";
 
 export default function Demo() {
   const [p, setP] = createStore({
     disabled: false,
-    size: 'medium' as 'small' | 'medium' | 'large',
+    size: "medium" as "small" | "medium" | "large",
     editable: false,
   });
   const [value, setValue] = createSignal<number>();
@@ -28,7 +28,7 @@ export default function Demo() {
               label: `Option ${v}`,
             }))}
             size={p.size}
-            style={{ width: '128px' }}
+            style={{ width: "128px" }}
             value={value()}
           />
         </div>
@@ -37,7 +37,7 @@ export default function Demo() {
         onChange={setP}
         properties={p}
         typeDeclaration={{
-          size: ['small', 'medium', 'large'],
+          size: ["small", "medium", "large"],
         }}
       />
     </Playground>

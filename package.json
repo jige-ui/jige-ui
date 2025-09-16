@@ -13,20 +13,20 @@
     "build:ui": "pnpm -F jige-ui build",
     "build:core": "pnpm -F jige-core build",
     "clean": "pnpm exec rimraf ./packages/**/node_modules ./apps/**/node_modules node_modules pnpm-lock.yaml --glob",
-    "lint": "npx ultracite lint",
+    "lint": "pnpm dlx ultracite check",
     "lint:error": "pnpm exec biome check --diagnostic-level error",
-    "lint:fix": "npx ultracite format",
+    "lint:fix": "pnpm dlx ultracite fix",
     "tc:core": "pnpm -F jige-core type-check",
     "tc:ui": "pnpm -F jige-ui type-check",
     "tc": "pnpm tc:core && pnpm tc:ui",
     "prepare": "husky"
   },
   "devDependencies": {
-    "@biomejs/biome": "2.1.2",
+    "@biomejs/biome": "2.2.2",
     "@commitlint/cli": "^19.8.1",
     "@commitlint/config-conventional": "^19.8.1",
     "@types/node": "^24.3.0",
     "husky": "^9.1.7",
-    "ultracite": "5.1.2"
+    "ultracite": "5.3.3"
   }
 }

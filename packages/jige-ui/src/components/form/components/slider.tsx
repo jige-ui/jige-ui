@@ -1,12 +1,12 @@
-import { FormCore } from 'jige-core';
-import type { ComponentProps } from 'solid-js';
-import { Slider } from '../../form-components';
+import { FormCore } from "jige-core";
+import type { ComponentProps } from "solid-js";
+import { Slider } from "../../form-components";
 
 /**
  * Slider component which is already bind with form.
  */
 export function FormSlider(
-  props: Omit<ComponentProps<typeof Slider>, 'onChange' | 'value'>
+  props: Omit<ComponentProps<typeof Slider>, "onChange" | "value">
 ) {
   const [fieldState, fieldActs] = FormCore.useField();
 

@@ -1,26 +1,26 @@
-import type { EsDay } from 'esday';
-import { batch } from 'solid-js';
-import { createComponentState } from 'solid-tiny-context';
-import { dayes } from '~/common/dayes';
-import type { DateTypes } from './types';
-import { checkTimeValue, parseDateStr, valiDateStr } from './utils';
+import type { EsDay } from "esday";
+import { batch } from "solid-js";
+import { createComponentState } from "solid-tiny-context";
+import { dayes } from "~/common/dayes";
+import type { DateTypes } from "./types";
+import { checkTimeValue, parseDateStr, valiDateStr } from "./utils";
 
 const today = dayes();
 
 export const context = createComponentState({
   state: () => ({
-    value: '',
-    dateValue: '',
-    timeValue: '00:00:00',
+    value: "",
+    dateValue: "",
+    timeValue: "00:00:00",
     previewMode: false,
-    valueFormat: 'YYYY-MM-DD',
-    name: '',
-    placeholder: '',
+    valueFormat: "YYYY-MM-DD",
+    name: "",
+    placeholder: "",
     currYear: today.year(),
     currMonth: today.month(),
-    activePanel: 'day',
-    type: 'date',
-    dateRange: ['1800-01-01', '2200-01-01'] as [DateTypes, DateTypes],
+    activePanel: "day",
+    type: "date",
+    dateRange: ["1800-01-01", "2200-01-01"] as [DateTypes, DateTypes],
     hlDates: [] as string[],
     dsDates: [] as string[],
     hlYears: [] as number[],
@@ -41,20 +41,20 @@ export const context = createComponentState({
     },
     defaultPanel() {
       switch (this.state.type) {
-        case 'month':
-          return 'month';
-        case 'year':
-          return 'year';
+        case "month":
+          return "month";
+        case "year":
+          return "year";
         default:
-          return 'day';
+          return "day";
       }
     },
     isDateTime() {
-      return ['hour', 'minute', 'second'].includes(this.state.type);
+      return ["hour", "minute", "second"].includes(this.state.type);
     },
     previewValue() {
       if (!this.state.dateValue) {
-        return '';
+        return "";
       }
 
       if (this.state.isDateTime) {
@@ -65,14 +65,14 @@ export const context = createComponentState({
   },
   methods: {
     syncPreviewToValue() {
-      this.actions.setState('value', this.state.previewValue);
+      this.actions.setState("value", this.state.previewValue);
     },
 
     syncValueToPreview() {
       const [date, time] = parseDateStr(this.state.value);
       this.actions.setState({
         dateValue: date,
-        timeValue: time || '00:00:00',
+        timeValue: time || "00:00:00",
       });
     },
 
@@ -80,8 +80,8 @@ export const context = createComponentState({
       if (!value.trim()) {
         batch(() => {
           this.actions.setState({
-            dateValue: '',
-            timeValue: '00:00:00',
+            dateValue: "",
+            timeValue: "00:00:00",
           });
           this.actions.syncPreviewToValue();
         });
@@ -96,7 +96,7 @@ export const context = createComponentState({
       batch(() => {
         this.actions.setState({
           dateValue: date,
-          timeValue: time || '00:00:00',
+          timeValue: time || "00:00:00",
         });
         this.actions.syncPreviewToValue();
       });
@@ -107,7 +107,7 @@ export const context = createComponentState({
         year >= this.state.fromInst.year() &&
         year <= this.state.toInst.year()
       ) {
-        this.actions.setState('currYear', year);
+        this.actions.setState("currYear", year);
         return true;
       }
 
@@ -116,7 +116,7 @@ export const context = createComponentState({
 
     setCurrMonth(month: number) {
       if (month >= 0 && month <= 11) {
-        this.actions.setState('currMonth', month);
+        this.actions.setState("currMonth", month);
         return true;
       }
       return false;
@@ -131,38 +131,38 @@ export const context = createComponentState({
     },
 
     setName(name: string) {
-      this.actions.setState('name', name);
+      this.actions.setState("name", name);
     },
 
     setDisabled(disabled: boolean) {
-      this.actions.setState('disabled', disabled);
+      this.actions.setState("disabled", disabled);
     },
 
     setActivePanel(panel: string) {
-      this.actions.setState('activePanel', panel);
+      this.actions.setState("activePanel", panel);
     },
 
     setPreviewMode(mode: boolean) {
-      this.actions.setState('previewMode', mode);
+      this.actions.setState("previewMode", mode);
     },
 
     checkDateStr(value: string) {
       const isDate = valiDateStr(
-        value.split(' ')[0],
-        this.state.type === 'month' ? 'month' : 'date'
+        value.split(" ")[0],
+        this.state.type === "month" ? "month" : "date"
       );
       if (isDate && this.state.isDateTime) {
-        const timeStr = value.split(' ')[1];
+        const timeStr = value.split(" ")[1];
         return checkTimeValue(
           timeStr,
-          this.state.type as 'hour' | 'minute' | 'second'
+          this.state.type as "hour" | "minute" | "second"
         );
       }
       return isDate;
     },
 
     clear() {
-      this.actions.setValue('');
+      this.actions.setValue("");
     },
   },
 });

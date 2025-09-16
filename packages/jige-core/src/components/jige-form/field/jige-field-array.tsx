@@ -1,8 +1,8 @@
-import { batch, type JSX } from 'solid-js';
-import { createWatch } from 'solid-tiny-utils';
-import { formContext } from '../form/context';
-import type { FieldValues } from '../types/field';
-import type { FieldArrayPath } from '../types/path';
+import { batch, type JSX } from "solid-js";
+import { createWatch } from "solid-tiny-utils";
+import { formContext } from "../form/context";
+import type { FieldValues } from "../types/field";
+import type { FieldArrayPath } from "../types/path";
 
 let counter = 0;
 
@@ -34,18 +34,18 @@ export function JigeFieldArray<
         for (const err of errors) {
           // remove start `{props.name}.`
           const removeName = err.substring(props.name.length + 1);
-          const index = Number(removeName.split('.')[0]);
+          const index = Number(removeName.split(".")[0]);
           if (index >= length) {
-            formActions.setState('errorFields', err, undefined!);
+            formActions.setState("errorFields", err, undefined!);
           }
         }
 
         for (const dirty of dirties) {
           // remove start `{props.name}.`
           const removeName = dirty.substring(props.name.length + 1);
-          const index = Number(removeName.split('.')[0]);
+          const index = Number(removeName.split(".")[0]);
           if (index >= length) {
-            formActions.setState('dirtyFields', dirty, undefined!);
+            formActions.setState("dirtyFields", dirty, undefined!);
           }
         }
       });

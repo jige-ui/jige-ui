@@ -1,27 +1,27 @@
-import { splitProps } from 'solid-js';
-import type { JSX } from 'solid-js/jsx-runtime';
-import { hiddenStyle } from '@/common/dom';
-import { runSolidEventHandler } from '@/common/solidjs';
-import context from './context';
+import { splitProps } from "solid-js";
+import type { JSX } from "solid-js/jsx-runtime";
+import { hiddenStyle } from "@/common/dom";
+import { runSolidEventHandler } from "@/common/solidjs";
+import context from "./context";
 
 export default function Native(
   props: Omit<
     JSX.InputHTMLAttributes<HTMLInputElement>,
-    | 'style'
-    | 'type'
-    | 'max'
-    | 'aria-checked'
-    | 'value'
-    | 'name'
-    | 'min'
-    | 'disabled'
+    | "style"
+    | "type"
+    | "max"
+    | "aria-checked"
+    | "value"
+    | "name"
+    | "min"
+    | "disabled"
   >
 ) {
   const [state, actions] = context.useContext();
   const [localProps, otherProps] = splitProps(props, [
-    'ref',
-    'onInput',
-    'onKeyDown',
+    "ref",
+    "onInput",
+    "onKeyDown",
   ]);
   return (
     <input
@@ -37,9 +37,9 @@ export default function Native(
       onKeyDown={(e) => {
         if (state.reverse) {
           e.preventDefault();
-          if (e.key === 'ArrowUp' || e.key === 'ArrowRight') {
+          if (e.key === "ArrowUp" || e.key === "ArrowRight") {
             actions.setValue(state.value - state.step);
-          } else if (e.key === 'ArrowDown' || e.key === 'ArrowLeft') {
+          } else if (e.key === "ArrowDown" || e.key === "ArrowLeft") {
             actions.setValue(state.value + state.step);
           }
         }
@@ -47,7 +47,7 @@ export default function Native(
         runSolidEventHandler(e, localProps.onInput);
       }}
       ref={(el) => {
-        actions.setState('$nativeEl', el);
+        actions.setState("$nativeEl", el);
       }}
       step={state.step}
       style={hiddenStyle}

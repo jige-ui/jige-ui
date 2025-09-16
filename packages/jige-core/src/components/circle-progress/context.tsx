@@ -1,5 +1,5 @@
-import type { JSX } from 'solid-js/jsx-runtime';
-import { createComponentState } from 'solid-tiny-context';
+import type { JSX } from "solid-js/jsx-runtime";
+import { createComponentState } from "solid-tiny-context";
 
 const context = createComponentState({
   state: () => ({
@@ -35,10 +35,10 @@ const context = createComponentState({
       const gapDegree = this.state.gapDegree;
       const len = Math.PI * 2 * radius;
       const pathStyle: JSX.CSSProperties = {
-        stroke: percent ? strokeColor : 'transparent',
-        'stroke-dasharray': `${(percent / 100) * (len - gapDegree)}px ${viewBoxWidth * 8}px`,
-        'stroke-dashoffset': `-${gapDegree / 2}px`,
-        'transform-origin': 'center',
+        stroke: percent ? strokeColor : "transparent",
+        "stroke-dasharray": `${(percent / 100) * (len - gapDegree)}px ${viewBoxWidth * 8}px`,
+        "stroke-dashoffset": `-${gapDegree / 2}px`,
+        "transform-origin": "center",
         transform: `rotate(${offsetDegree + 180}deg)`,
       };
 

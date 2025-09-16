@@ -1,4 +1,4 @@
-import { createComponentState } from 'solid-tiny-context';
+import { createComponentState } from "solid-tiny-context";
 
 export const context = createComponentState({
   state: () => ({
@@ -8,13 +8,13 @@ export const context = createComponentState({
   }),
   methods: {
     setHour(hour: number) {
-      this.actions.setState('hour', hour);
+      this.actions.setState("hour", hour);
     },
     setMinute(minute: number) {
-      this.actions.setState('minute', minute);
+      this.actions.setState("minute", minute);
     },
     setSecond(second: number) {
-      this.actions.setState('second', second);
+      this.actions.setState("second", second);
     },
   },
 });

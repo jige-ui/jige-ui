@@ -1,15 +1,15 @@
-import { splitProps } from 'solid-js';
-import { runSolidEventHandler } from '@/common/solidjs';
-import context from './context';
-import type { TextareaProps } from './types';
+import { splitProps } from "solid-js";
+import { runSolidEventHandler } from "@/common/solidjs";
+import context from "./context";
+import type { TextareaProps } from "./types";
 
-export function Textarea(props: Omit<TextareaProps, 'disabled'>) {
+export function Textarea(props: Omit<TextareaProps, "disabled">) {
   const [state, actions] = context.useContext();
   const [localProps, otherProps] = splitProps(props, [
-    'aria-label',
-    'onInput',
-    'rows',
-    'name',
+    "aria-label",
+    "onInput",
+    "rows",
+    "name",
   ]);
 
   const inputHandler = (e: Event) => {
@@ -19,7 +19,7 @@ export function Textarea(props: Omit<TextareaProps, 'disabled'>) {
   return (
     <textarea
       {...otherProps}
-      aria-label={localProps['aria-label'] || state.name || 'input'}
+      aria-label={localProps["aria-label"] || state.name || "input"}
       disabled={state.disabled}
       name={localProps.name || state.name}
       onInput={inputHandler}

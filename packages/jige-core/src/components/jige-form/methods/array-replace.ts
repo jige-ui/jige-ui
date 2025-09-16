@@ -1,6 +1,6 @@
-import type { createForm } from '../form';
-import type { FieldValues } from '../types/field';
-import type { FieldArrayPath, FieldArrayPathValue } from '../types/path';
+import type { createForm } from "../form";
+import type { FieldValues } from "../types/field";
+import type { FieldArrayPath, FieldArrayPathValue } from "../types/path";
 
 export function arrayReplace<TFieldValues extends FieldValues>(
   form: ReturnType<typeof createForm>,

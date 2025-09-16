@@ -1,19 +1,19 @@
-import type { FloatingUiCoreProps } from 'jige-core';
-import { splitProps } from 'solid-js';
-import { Popover } from '../popover';
-import { Content } from './content';
-import type { PopConfirmProps } from './types';
+import type { FloatingUiCoreProps } from "jige-core";
+import { splitProps } from "solid-js";
+import { Popover } from "../popover";
+import { Content } from "./content";
+import type { PopConfirmProps } from "./types";
 
 export function PopConfirm(props: PopConfirmProps & FloatingUiCoreProps) {
   const [localProps, otherProps] = splitProps(props, [
-    'title',
-    'description',
-    'onConfirm',
-    'onCancel',
-    'icon',
-    'cancelText',
-    'okText',
-    'children',
+    "title",
+    "description",
+    "onConfirm",
+    "onCancel",
+    "icon",
+    "cancelText",
+    "okText",
+    "children",
   ]);
 
   return (

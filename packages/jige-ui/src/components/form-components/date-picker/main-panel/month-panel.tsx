@@ -1,12 +1,12 @@
-import { debounce } from '@solid-primitives/scheduled';
-import { esday } from 'esday';
-import { For } from 'solid-js';
-import { createWatch, isFn, list } from 'solid-tiny-utils';
-import { dataIf } from '~/common/dataset';
-import { dayes } from '~/common/dayes';
-import type { MaybePromise } from '~/common/types';
-import { NumberToChinese } from '../utils';
-import { panelContext } from './context';
+import { debounce } from "@solid-primitives/scheduled";
+import { esday } from "esday";
+import { For } from "solid-js";
+import { createWatch, isFn, list } from "solid-tiny-utils";
+import { dataIf } from "~/common/dataset";
+import { dayes } from "~/common/dayes";
+import type { MaybePromise } from "~/common/types";
+import { NumberToChinese } from "../utils";
+import { panelContext } from "./context";
 
 export function MonthPanel(props: {
   highlightMonths: string[] | ((visibleYear: number) => MaybePromise<string[]>);
@@ -16,16 +16,16 @@ export function MonthPanel(props: {
     const getHls = props.highlightMonths;
     if (isFn(getHls)) {
       const mons = await getHls(y);
-      actions.setState('hlMonths', mons);
+      actions.setState("hlMonths", mons);
     } else {
-      actions.setState('hlMonths', getHls);
+      actions.setState("hlMonths", getHls);
     }
   }, 200);
 
   const isHl = (m: number) => {
     const inst = esday().year(state.currYear).month(m);
 
-    return state.hlMonths.includes(inst.format('YYYY-MM'));
+    return state.hlMonths.includes(inst.format("YYYY-MM"));
   };
 
   const checkMonth = (month: number) => {
@@ -42,7 +42,7 @@ export function MonthPanel(props: {
           <div
             class="jg-dp-month-panel-month"
             classList={{
-              'jg-dp-month-panel-month-hl': isHl(month),
+              "jg-dp-month-panel-month-hl": isHl(month),
             }}
             data-disabled={dataIf(!checkMonth(month))}
             data-selected={dataIf(
@@ -55,9 +55,9 @@ export function MonthPanel(props: {
               }
               actions.setCurrMonth(month);
               actions.setActivePanel(state.defaultPanel);
-              if (state.defaultPanel === 'month') {
+              if (state.defaultPanel === "month") {
                 actions.setValue([
-                  dayes([state.currYear, month, 1]).format('YYYY-MM-DD'),
+                  dayes([state.currYear, month, 1]).format("YYYY-MM-DD"),
                 ]);
               }
             }}

@@ -1,11 +1,11 @@
-import { debounce, throttle } from '@solid-primitives/scheduled';
-import { createSignal, For } from 'solid-js';
-import { createWatch, isArray } from 'solid-tiny-utils';
-import { dataIf } from '~/common/dataset';
-import { dayes } from '~/common/dayes';
-import type { MaybePromise } from '~/common/types';
-import { genYears } from '../utils';
-import { panelContext } from './context';
+import { debounce, throttle } from "@solid-primitives/scheduled";
+import { createSignal, For } from "solid-js";
+import { createWatch, isArray } from "solid-tiny-utils";
+import { dataIf } from "~/common/dataset";
+import { dayes } from "~/common/dayes";
+import type { MaybePromise } from "~/common/types";
+import { genYears } from "../utils";
+import { panelContext } from "./context";
 
 export function YearPanel(props: {
   highlightYears:
@@ -31,10 +31,10 @@ export function YearPanel(props: {
   const debounceSetHlYears = debounce(async (ys: number[]) => {
     const getHls = props.highlightYears;
     if (isArray(getHls)) {
-      actions.setState('hlYears', getHls);
+      actions.setState("hlYears", getHls);
     } else {
       const hlYears = await getHls([ys[0], ys.at(-1)!]);
-      actions.setState('hlYears', hlYears);
+      actions.setState("hlYears", hlYears);
     }
   }, 200);
 
@@ -56,7 +56,7 @@ export function YearPanel(props: {
           <div
             class="jg-dp-year-panel-year"
             classList={{
-              'jg-dp-year-panel-year-hl': state.hlYears.includes(year),
+              "jg-dp-year-panel-year-hl": state.hlYears.includes(year),
             }}
             data-disabled={dataIf(!checkYear(year))}
             data-selected={dataIf(dayes(state.value).year() === year)}

@@ -1,2 +1,2 @@
-export * from './pop-confirm';
-export * from './types';
+export * from "./pop-confirm";
+export * from "./types";

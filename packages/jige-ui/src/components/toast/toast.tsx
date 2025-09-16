@@ -1,10 +1,10 @@
-import { getElementHeight, hasAnimation } from 'jige-core';
-import { createSignal, onMount } from 'solid-js';
-import { createWatch } from 'solid-tiny-utils';
-import type { CloseableStatus } from '~/common/types';
-import { context } from './context';
-import { Header } from './header';
-import type { ToastInst } from './types';
+import { getElementHeight, hasAnimation } from "jige-core";
+import { createSignal, onMount } from "solid-js";
+import { createWatch } from "solid-tiny-utils";
+import type { CloseableStatus } from "~/common/types";
+import { context } from "./context";
+import { Header } from "./header";
+import type { ToastInst } from "./types";
 
 export function Toast(props: { inst: ToastInst }) {
   const [, actions] = context.useContext();
@@ -12,11 +12,11 @@ export function Toast(props: { inst: ToastInst }) {
   let $wrapper!: HTMLDivElement;
 
   const [pause, setPause] = createSignal(false);
-  const [status, setStatus] = createSignal<CloseableStatus>('opening');
+  const [status, setStatus] = createSignal<CloseableStatus>("opening");
 
   onMount(() => {
     requestAnimationFrame(() => {
-      $bar.style.width = '0';
+      $bar.style.width = "0";
     });
 
     createWatch(
@@ -25,9 +25,9 @@ export function Toast(props: { inst: ToastInst }) {
         const percent = $bar.clientWidth / $bar.parentElement!.clientWidth;
         if (p) {
           $bar.style.width = `${percent * 100}%`;
-          $bar.style.transition = 'none';
+          $bar.style.transition = "none";
         } else {
-          $bar.style.width = '0';
+          $bar.style.width = "0";
           $bar.style.transition = `width ${props.inst.timeout! * percent}ms linear`;
         }
       },
@@ -35,12 +35,12 @@ export function Toast(props: { inst: ToastInst }) {
     );
 
     createWatch(status, (s) => {
-      $wrapper.style.setProperty('--height', `${getElementHeight($wrapper)}px`);
-      if (s.endsWith('ing') && !hasAnimation($wrapper)) {
-        setStatus(status().replace('ing', 'ed') as CloseableStatus);
+      $wrapper.style.setProperty("--height", `${getElementHeight($wrapper)}px`);
+      if (s.endsWith("ing") && !hasAnimation($wrapper)) {
+        setStatus(status().replace("ing", "ed") as CloseableStatus);
       }
 
-      if (s === 'closed') {
+      if (s === "closed") {
         actions.removeInst(props.inst.id);
       }
     });
@@ -51,16 +51,16 @@ export function Toast(props: { inst: ToastInst }) {
       class="jg-toast-wrapper"
       data-status={status()}
       onAnimationEnd={() => {
-        setStatus(status().replace('ing', 'ed') as CloseableStatus);
+        setStatus(status().replace("ing", "ed") as CloseableStatus);
       }}
       ref={$wrapper}
     >
       <div
         style={{
-          'padding-top': '1em',
-          'padding-right': '1em',
-          'padding-left': '1em',
-          'padding-bottom': '4px',
+          "padding-top": "1em",
+          "padding-right": "1em",
+          "padding-left": "1em",
+          "padding-bottom": "4px",
         }}
       >
         <div
@@ -71,7 +71,7 @@ export function Toast(props: { inst: ToastInst }) {
           <div class="jg-toast-header">
             <Header
               onCloseClick={() => {
-                setStatus('closing');
+                setStatus("closing");
               }}
               title={props.inst.title}
               type={props.inst.type}
@@ -82,7 +82,7 @@ export function Toast(props: { inst: ToastInst }) {
             <div
               class="jg-toast-progress-bar"
               onTransitionEnd={() => {
-                setStatus('closing');
+                setStatus("closing");
               }}
               ref={$bar}
               style={{

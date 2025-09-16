@@ -1,6 +1,6 @@
-import type { JSX } from 'solid-js/jsx-runtime';
-import { createWatch } from 'solid-tiny-utils';
-import context from './context';
+import type { JSX } from "solid-js/jsx-runtime";
+import { createWatch } from "solid-tiny-utils";
+import context from "./context";
 
 export function Root(props: {
   active: string;
@@ -14,7 +14,7 @@ export function Root(props: {
     () => props.active,
     () => {
       actions.setState({
-        active: '',
+        active: "",
         tryClose: state.active,
         tryOpen: props.active,
       });
@@ -26,8 +26,8 @@ export function Root(props: {
       class={props.class}
       style={{
         height: state.height,
-        'max-height': state.maxHeight,
-        position: 'relative',
+        "max-height": state.maxHeight,
+        position: "relative",
       }}
     >
       <Context.Provider>{props.children}</Context.Provider>

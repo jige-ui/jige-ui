@@ -1,7 +1,7 @@
-import { createSignal } from 'solid-js';
-import { createStore } from 'solid-js/store';
-import { Paginator } from '~/build';
-import { Playground } from '../../../components/playground';
+import { createSignal } from "solid-js";
+import { createStore } from "solid-js/store";
+import { Paginator } from "~/build";
+import { Playground } from "../../../components/playground";
 
 export default function Demo() {
   const [p, setP] = createStore({

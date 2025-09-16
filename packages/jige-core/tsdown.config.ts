@@ -1,12 +1,12 @@
-import solid from 'rolldown-plugin-solid';
-import inlinePlugin from 'rollup-plugin-inline-import';
-import { defineConfig, type UserConfig } from 'tsdown';
+import solid from "rolldown-plugin-solid";
+import inlinePlugin from "rollup-plugin-inline-import";
+import { defineConfig, type UserConfig } from "tsdown";
 
 const getPlugins = (jsx: boolean) => {
   const plugins: any[] = [];
 
   if (!jsx) {
-    plugins.push(solid({ solid: { generate: 'dom' } }));
+    plugins.push(solid({ solid: { generate: "dom" } }));
   }
 
   plugins.push(inlinePlugin());
@@ -14,42 +14,42 @@ const getPlugins = (jsx: boolean) => {
   return plugins;
 };
 
-const entry = ['src/build.ts', 'src/components/*/index.ts'];
+const entry = ["src/build.ts", "src/components/*/index.ts"];
 
 // export both js and jsx
 export default defineConfig(({ env }) => {
-  const isDev = env?.NODE_ENV === 'development';
+  const isDev = env?.NODE_ENV === "development";
   return [
     {
       entry,
-      platform: 'browser',
+      platform: "browser",
       dts: true,
       plugins: getPlugins(false),
       inputOptions: {
         define: {
-          IS_DEV: isDev ? 'true' : 'false',
+          IS_DEV: isDev ? "true" : "false",
         },
       },
       outputOptions: {
-        chunkFileNames: 'chunks/[hash].js',
+        chunkFileNames: "chunks/[hash].js",
       },
     },
     {
       entry,
-      platform: 'browser',
+      platform: "browser",
       dts: false,
       inputOptions: {
-        jsx: 'preserve',
+        jsx: "preserve",
         define: {
-          IS_DEV: isDev ? 'true' : 'false',
+          IS_DEV: isDev ? "true" : "false",
         },
       },
       outputOptions: {
-        chunkFileNames: 'chunks/[hash].jsx',
+        chunkFileNames: "chunks/[hash].jsx",
       },
       plugins: getPlugins(true),
       outExtensions: () => ({
-        js: '.jsx',
+        js: ".jsx",
       }),
     },
   ] satisfies UserConfig;

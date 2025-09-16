@@ -1,7 +1,7 @@
-import { batch } from 'solid-js';
-import type { createForm } from '../form';
-import type { FieldValues } from '../types/field';
-import type { FieldArrayPath } from '../types/path';
+import { batch } from "solid-js";
+import type { createForm } from "../form";
+import type { FieldValues } from "../types/field";
+import type { FieldArrayPath } from "../types/path";
 
 export function arraySwap<TFieldValues extends FieldValues>(
   form: ReturnType<typeof createForm>,

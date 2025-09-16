@@ -1,14 +1,14 @@
-import css from 'sass:./dialog.scss';
-import { ModalCore } from 'jige-core';
-import { For, onMount } from 'solid-js';
-import type { JSX } from 'solid-js/jsx-runtime';
-import { createWatch, makeEventListener, mountStyle } from 'solid-tiny-utils';
+import css from "sass:./dialog.scss";
+import { ModalCore } from "jige-core";
+import { For, onMount } from "solid-js";
+import type { JSX } from "solid-js/jsx-runtime";
+import { createWatch, makeEventListener, mountStyle } from "solid-tiny-utils";
 
-import { Modal } from '../modal';
-import { useModalContext } from '../modal/context';
-import { context } from './context';
-import { Footer } from './footer';
-import { Header } from './header';
+import { Modal } from "../modal";
+import { useModalContext } from "../modal/context";
+import { context } from "./context";
+import { Footer } from "./footer";
+import { Header } from "./header";
 
 function ModalCloseHandle(props: { id: string }) {
   const [modalState] = ModalCore.useContext();
@@ -18,27 +18,27 @@ function ModalCloseHandle(props: { id: string }) {
   createWatch(
     () => modalState.status,
     (s) => {
-      if (s === 'closed') {
+      if (s === "closed") {
         actions.removeInst(props.id);
       }
     }
   );
 
   if (!jgModalState.triggerRef) {
-    jgModalActs.setState('triggerRef', state.maybeTriggerRef);
+    jgModalActs.setState("triggerRef", state.maybeTriggerRef);
   }
 
   return null;
 }
 
 export function Provider(props: { children: JSX.Element }) {
-  mountStyle(css, 'jige-ui-dialog');
+  mountStyle(css, "jige-ui-dialog");
 
   const Context = context.initial();
   const [state, actions] = Context.value;
 
   onMount(() => {
-    makeEventListener(document, 'mouseup', (e) => {
+    makeEventListener(document, "mouseup", (e) => {
       if (e.target === document.body) {
         return;
       }
@@ -69,14 +69,14 @@ export function Provider(props: { children: JSX.Element }) {
                     <Footer
                       negativeText={
                         item.negativeText === undefined
-                          ? '取消'
+                          ? "取消"
                           : item.negativeText
                       }
                       onNegativeClick={item.onNegativeClick}
                       onPositiveClick={item.onPositiveClick}
                       positiveText={
                         item.positiveText === undefined
-                          ? '确定'
+                          ? "确定"
                           : item.positiveText
                       }
                       type={item.type}

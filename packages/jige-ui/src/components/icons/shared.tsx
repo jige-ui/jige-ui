@@ -1,4 +1,4 @@
-import { createMemo } from 'solid-js';
+import { createMemo } from "solid-js";
 
 export function IconSvgWrapper(props: { children: any; viewBoxSize?: number }) {
   const size = createMemo(() => props.viewBoxSize || 24);

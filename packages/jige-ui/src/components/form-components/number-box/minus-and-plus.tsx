@@ -1,6 +1,6 @@
-import { IconFluentChevronDown24Filled } from '~/components/icons/fluent-chevron-down-24-filled';
-import { IconFluentChevronUp24Filled } from '~/components/icons/fluent-chevron-up-24-filled';
-import { context } from './context';
+import { IconFluentChevronDown24Filled } from "~/components/icons/fluent-chevron-down-24-filled";
+import { IconFluentChevronUp24Filled } from "~/components/icons/fluent-chevron-up-24-filled";
+import { context } from "./context";
 
 export function MinusAndPlus(props: { class?: string }) {
   const [state, actions] = context.useContext();

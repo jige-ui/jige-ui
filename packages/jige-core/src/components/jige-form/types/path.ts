@@ -1,5 +1,5 @@
-import type { ArrayKey, IsTuple, TupleKeys } from '@/common/types';
-import type { FieldValue, FieldValues } from './field';
+import type { ArrayKey, IsTuple, TupleKeys } from "@/common/types";
+import type { FieldValue, FieldValues } from "./field";
 
 type ValuePath<TKey extends string | number, TValue> = TValue extends string[]
   ? `${TKey}` | `${TKey}.${ValuePaths<TValue>}`

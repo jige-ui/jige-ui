@@ -1,7 +1,7 @@
-import type { JSX } from 'solid-js';
-import { splitProps } from 'solid-js';
-import type { DOMElement } from 'solid-js/jsx-runtime';
-import context from './context';
+import type { JSX } from "solid-js";
+import { splitProps } from "solid-js";
+import type { DOMElement } from "solid-js/jsx-runtime";
+import context from "./context";
 
 export default function Root(
   props: {
@@ -14,7 +14,7 @@ export default function Root(
         target: DOMElement;
       }
     ) => void;
-  } & Omit<JSX.HTMLAttributes<HTMLDivElement>, 'style' | 'onMouseEnter'>
+  } & Omit<JSX.HTMLAttributes<HTMLDivElement>, "style" | "onMouseEnter">
 ) {
   const Context = context.initial({
     height: () => props.height,
@@ -22,11 +22,11 @@ export default function Root(
   });
   const [state, actions] = Context.value;
   const [local, others] = splitProps(props, [
-    'children',
-    'height',
-    'maxHeight',
-    'onScroll',
-    'onScrollEnd',
+    "children",
+    "height",
+    "maxHeight",
+    "onScroll",
+    "onScrollEnd",
   ]);
 
   return (
@@ -38,10 +38,10 @@ export default function Root(
           others.onMouseEnter?.(e);
         }}
         style={{
-          overflow: 'hidden',
-          position: 'relative',
+          overflow: "hidden",
+          position: "relative",
           height: state.height,
-          'max-height': state.maxHeight,
+          "max-height": state.maxHeight,
         }}
       >
         {local.children}

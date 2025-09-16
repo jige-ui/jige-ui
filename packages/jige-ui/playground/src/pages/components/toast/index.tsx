@@ -1,14 +1,14 @@
-import { createStore } from 'solid-js/store';
-import type { ToastType } from '~/build';
-import { Button, useToast } from '~/build';
-import { Playground } from '../../../components/playground';
+import { createStore } from "solid-js/store";
+import type { ToastType } from "~/build";
+import { Button, useToast } from "~/build";
+import { Playground } from "../../../components/playground";
 
 export default function Demo() {
   const [s, setS] = createStore({
-    title: 'title',
-    content: 'content',
+    title: "title",
+    content: "content",
     timeout: 3000,
-    type: 'info' as ToastType,
+    type: "info" as ToastType,
   });
   const $t = useToast();
   return (
@@ -31,7 +31,7 @@ export default function Demo() {
         onChange={setS}
         properties={s}
         typeDeclaration={{
-          type: ['error', 'warning', 'success', 'info'],
+          type: ["error", "warning", "success", "info"],
         }}
       />
     </Playground>

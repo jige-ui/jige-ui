@@ -1,12 +1,12 @@
-import css from 'sass:./toast.scss';
-import { For } from 'solid-js';
-import type { JSX } from 'solid-js/jsx-runtime';
-import { Portal } from 'solid-js/web';
+import css from "sass:./toast.scss";
+import { For } from "solid-js";
+import type { JSX } from "solid-js/jsx-runtime";
+import { Portal } from "solid-js/web";
 
-import { mountStyle } from 'solid-tiny-utils';
-import { JigeRootContext } from '../root';
-import { context } from './context';
-import { Toast } from './toast';
+import { mountStyle } from "solid-tiny-utils";
+import { JigeRootContext } from "../root";
+import { context } from "./context";
+import { Toast } from "./toast";
 
 export function Provider(props: {
   children: JSX.Element;
@@ -18,7 +18,7 @@ export function Provider(props: {
   defaultTimeout?: number;
   zIndex?: number;
 }) {
-  mountStyle(css, 'jige-ui-toast');
+  mountStyle(css, "jige-ui-toast");
 
   const Context = context.initial({
     defaultTimeout: () => props.defaultTimeout,
@@ -33,7 +33,7 @@ export function Provider(props: {
         <div
           class="jg-toast-container"
           style={{
-            'z-index': rootState.zIndexConfig.toast,
+            "z-index": rootState.zIndexConfig.toast,
           }}
         >
           <For each={state.insts}>

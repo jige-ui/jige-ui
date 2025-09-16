@@ -1,4 +1,4 @@
-import { context } from './context';
+import { context } from "./context";
 
 export function NumberInput(props: {
   class?: string;
@@ -14,21 +14,21 @@ export function NumberInput(props: {
       disabled={state.disabled}
       name={state.name}
       onBlur={() => {
-        actions.setState('focused', false);
+        actions.setState("focused", false);
         props.onBlur?.();
       }}
       onChange={(e) => {
         e.currentTarget.value = Number.isNaN(state.value)
-          ? ''
+          ? ""
           : String(state.value);
       }}
       onFocus={() => {
-        actions.setState('focused', true);
+        actions.setState("focused", true);
         props.onFocus?.();
       }}
       onInput={(e) => {
         const v = e.currentTarget.value;
-        if (v === '') {
+        if (v === "") {
           actions.setValue(Number.NaN);
           return;
         }
@@ -40,7 +40,7 @@ export function NumberInput(props: {
       }}
       placeholder={state.placeholder}
       type="text"
-      value={Number.isNaN(state.value) ? '' : state.value}
+      value={Number.isNaN(state.value) ? "" : state.value}
     />
   );
 }

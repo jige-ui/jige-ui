@@ -1,6 +1,6 @@
-import { createComponentState } from 'solid-tiny-context';
-import type { ThemeVars } from './gen-vars';
-import { defaultThemeColors } from './gen-vars';
+import { createComponentState } from "solid-tiny-context";
+import type { ThemeVars } from "./gen-vars";
+import { defaultThemeColors } from "./gen-vars";
 
 const context = createComponentState({
   state: () => ({
@@ -17,7 +17,7 @@ const context = createComponentState({
       if (normalized > 360) {
         normalized = 360;
       }
-      this.actions.setState('hue', normalized);
+      this.actions.setState("hue", normalized);
     },
   },
 });

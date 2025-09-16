@@ -1,7 +1,7 @@
-import css from 'sass:./drawer.scss';
-import { ModalCore } from 'jige-core';
-import type { JSX } from 'solid-js/jsx-runtime';
-import { mountStyle } from 'solid-tiny-utils';
+import css from "sass:./drawer.scss";
+import { ModalCore } from "jige-core";
+import type { JSX } from "solid-js/jsx-runtime";
+import { mountStyle } from "solid-tiny-utils";
 
 export function Root(props: {
   children: JSX.Element;
@@ -11,6 +11,6 @@ export function Root(props: {
   closeOnClickMask?: boolean;
   closeOnEsc?: boolean;
 }) {
-  mountStyle(css, 'jige-ui-drawer');
+  mountStyle(css, "jige-ui-drawer");
   return <ModalCore {...props} />;
 }

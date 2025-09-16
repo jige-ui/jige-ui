@@ -1,9 +1,9 @@
-import { mergeRefs, Ref } from '@solid-primitives/refs';
-import { onMount } from 'solid-js';
-import { makeEventListener } from 'solid-tiny-utils';
-import type { MaybeContextChild } from '@/common/props';
-import { callMaybeContextChild } from '@/common/props';
-import { context } from './context';
+import { mergeRefs, Ref } from "@solid-primitives/refs";
+import { onMount } from "solid-js";
+import { makeEventListener } from "solid-tiny-utils";
+import type { MaybeContextChild } from "@/common/props";
+import { callMaybeContextChild } from "@/common/props";
+import { context } from "./context";
 
 export function Trigger(props: {
   children: MaybeContextChild<ReturnType<typeof context.useContext>>;
@@ -13,7 +13,7 @@ export function Trigger(props: {
   const [, actions] = context.useContext();
 
   onMount(() => {
-    makeEventListener(ref, 'click', () => {
+    makeEventListener(ref, "click", () => {
       actions.setOpen(true);
     });
   });

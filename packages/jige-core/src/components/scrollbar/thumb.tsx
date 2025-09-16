@@ -1,13 +1,13 @@
-import type { JSX } from 'solid-js';
-import { createMemo, createSignal, onMount, splitProps } from 'solid-js';
-import { makeEventListener } from 'solid-tiny-utils';
-import { combineStyle } from '@/build';
-import context from './context';
+import type { JSX } from "solid-js";
+import { createMemo, createSignal, onMount, splitProps } from "solid-js";
+import { makeEventListener } from "solid-tiny-utils";
+import { combineStyle } from "@/build";
+import context from "./context";
 
 export default function Thumb(
-  props: { class?: string; type: 'vertical' | 'horizontal' } & Omit<
+  props: { class?: string; type: "vertical" | "horizontal" } & Omit<
     JSX.HTMLAttributes<HTMLDivElement>,
-    'ref' | 'onClick' | 'children' | 'onMouseDown'
+    "ref" | "onClick" | "children" | "onMouseDown"
   >
 ) {
   let isMove = false;
@@ -19,7 +19,7 @@ export default function Thumb(
   const [state, action] = context.useContext();
   const [shouldUpdate, setShouldUpdate] = createSignal(0);
 
-  const isVertical = () => props.type === 'vertical';
+  const isVertical = () => props.type === "vertical";
 
   const barLength = createMemo(() => {
     const $bar = ref?.parentElement;
@@ -50,7 +50,7 @@ export default function Thumb(
 
   onMount(() => {
     setShouldUpdate(shouldUpdate() + 1);
-    makeEventListener(document, 'mousemove', (e) => {
+    makeEventListener(document, "mousemove", (e) => {
       if (!isMove) {
         return;
       }
@@ -69,13 +69,13 @@ export default function Thumb(
       }
     });
 
-    makeEventListener(document, 'mouseup', () => {
+    makeEventListener(document, "mouseup", () => {
       isMove = false;
-      action.setState('isDragging', false);
+      action.setState("isDragging", false);
     });
   });
 
-  const [local, others] = splitProps(props, ['style']);
+  const [local, others] = splitProps(props, ["style"]);
 
   return (
     <div
@@ -83,7 +83,7 @@ export default function Thumb(
       data-scrollbar-dragging={state.isDragging}
       onMouseDown={(e) => {
         e.preventDefault();
-        action.setState('isDragging', true);
+        action.setState("isDragging", true);
         isMove = true;
         startX = e.clientX;
         startY = e.clientY;
@@ -94,9 +94,9 @@ export default function Thumb(
       ref={ref}
       style={combineStyle(
         {
-          transform: `translate${isVertical() ? 'Y' : 'X'}(${transforms()}%)`,
-          height: `${isVertical() ? `${length()}px` : '100%'}`,
-          width: `${isVertical() ? '100%' : `${length()}px`}`,
+          transform: `translate${isVertical() ? "Y" : "X"}(${transforms()}%)`,
+          height: `${isVertical() ? `${length()}px` : "100%"}`,
+          width: `${isVertical() ? "100%" : `${length()}px`}`,
         },
         local.style
       )}

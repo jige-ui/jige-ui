@@ -1,5 +1,5 @@
-import { createWatch } from 'solid-tiny-utils';
-import context from './context';
+import { createWatch } from "solid-tiny-utils";
+import context from "./context";
 
 export function Rail(props: {
   radius: number;
@@ -11,7 +11,7 @@ export function Rail(props: {
   createWatch(
     () => props.strokeWidth,
     () => {
-      actions.setState('railWidth', props.strokeWidth);
+      actions.setState("railWidth", props.strokeWidth);
     }
   );
 

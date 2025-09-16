@@ -1,8 +1,8 @@
-import { Arrow } from './arrow';
-import { Content } from './content';
-import { context } from './context';
-import { Root } from './root';
-import { Trigger } from './trigger';
+import { Arrow } from "./arrow";
+import { Content } from "./content";
+import { context } from "./context";
+import { Root } from "./root";
+import { Trigger } from "./trigger";
 
 export const FloatingUiCore = Object.assign(Root, {
   Trigger,
@@ -11,4 +11,4 @@ export const FloatingUiCore = Object.assign(Root, {
   useContext: context.useContext,
 });
 
-export * from './props';
+export * from "./props";

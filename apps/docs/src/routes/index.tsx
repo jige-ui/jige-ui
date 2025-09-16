@@ -70,7 +70,7 @@ export default function Index() {
           Then import and use components in your SolidJS application. Check out
           the
           <a class="text-fg-link hover:underline" href="/components/button">
-            {' '}
+            {" "}
             components section
           </a>
           to see all available components with examples and API documentation.

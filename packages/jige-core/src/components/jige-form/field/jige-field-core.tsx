@@ -1,11 +1,11 @@
-import { type JSX, mergeProps, onCleanup, onMount } from 'solid-js';
-import { createWatch } from 'solid-tiny-utils';
-import { callMaybeCallableChild } from '@/common/props';
-import { formContext } from '../form/context';
-import { getValueFromPath } from '../utils';
-import type { JigeFormAsyncValidator, JigeFormValidator } from '../validator';
-import { FieldContext } from './context';
-import { createFieldContext } from './field-context';
+import { type JSX, mergeProps, onCleanup, onMount } from "solid-js";
+import { createWatch } from "solid-tiny-utils";
+import { callMaybeCallableChild } from "@/common/props";
+import { formContext } from "../form/context";
+import { getValueFromPath } from "../utils";
+import type { JigeFormAsyncValidator, JigeFormValidator } from "../validator";
+import { FieldContext } from "./context";
+import { createFieldContext } from "./field-context";
 
 export type JigeFieldCoreProps = {
   name: string;
@@ -13,7 +13,7 @@ export type JigeFieldCoreProps = {
   // default is true
   keepState?: boolean;
   validators?: (JigeFormValidator | JigeFormAsyncValidator)[];
-  validateOn?: 'change' | 'blur';
+  validateOn?: "change" | "blur";
   validateRelatedFields?: string[];
   children:
     | JSX.Element
@@ -36,7 +36,7 @@ function FieldCore(props: JigeFieldCoreProps) {
 
   const context = createFieldContext(() => realProps.name, {
     validateDebounceMs: () => realProps.validateDebounceMs || 50,
-    validateOn: () => realProps.validateOn || 'change',
+    validateOn: () => realProps.validateOn || "change",
     validators: () => realProps.validators || [],
     validateFirst: () => true,
   });
@@ -51,9 +51,9 @@ function FieldCore(props: JigeFieldCoreProps) {
     () => context[0].value,
     (v) => {
       if (v !== getValueFromPath(formStatic.initialValues, realProps.name)) {
-        formActs.setState('dirtyFields', realProps.name, true);
+        formActs.setState("dirtyFields", realProps.name, true);
       } else {
-        formActs.setState('dirtyFields', realProps.name, false);
+        formActs.setState("dirtyFields", realProps.name, false);
       }
     }
   );
@@ -61,7 +61,7 @@ function FieldCore(props: JigeFieldCoreProps) {
   createWatch(
     () => context[0].isTouched,
     (v) => {
-      v && formActs.setState('isTouched', v);
+      v && formActs.setState("isTouched", v);
     }
   );
 

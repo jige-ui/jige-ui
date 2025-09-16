@@ -1,15 +1,15 @@
-import { useContext } from 'solid-js';
-import { JigeFieldArray, JigeFieldCore } from './field';
-import { FieldContext } from './field/context';
-import { JigeFormCore as Core, createForm } from './form';
-import { formContext } from './form/context';
+import { useContext } from "solid-js";
+import { JigeFieldArray, JigeFieldCore } from "./field";
+import { FieldContext } from "./field/context";
+import { JigeFormCore as Core, createForm } from "./form";
+import { formContext } from "./form/context";
 import {
   arrayInsert,
   arrayMove,
   arrayRemove,
   arrayReplace,
   arraySwap,
-} from './methods';
+} from "./methods";
 
 const methods = {
   arrayInsert,

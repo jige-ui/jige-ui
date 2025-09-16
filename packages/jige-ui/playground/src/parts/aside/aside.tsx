@@ -1,7 +1,7 @@
-import routeInfo from 'virtual:route-info';
-import { For } from 'solid-js';
-import { camel } from 'solid-tiny-utils';
-import { Scrollbar } from '~/build';
+import routeInfo from "virtual:route-info";
+import { For } from "solid-js";
+import { camel } from "solid-tiny-utils";
+import { Scrollbar } from "~/build";
 
 function ItemHeader(props: { title: string }) {
   return <div class="b-b b-t-border c-fg3 mt-2 pb-1">{props.title}</div>;
@@ -20,7 +20,7 @@ export function Aside() {
     <Scrollbar class="h-full p-2">
       <ItemHeader title="Components" />
       <div class="p-1">
-        <For each={routeInfo.filter((v) => v.path.startsWith('component'))}>
+        <For each={routeInfo.filter((v) => v.path.startsWith("component"))}>
           {({ path, info }) => (
             <Item path={`/${path}`} title={camel(info.title)} />
           )}

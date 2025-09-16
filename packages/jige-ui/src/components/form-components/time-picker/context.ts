@@ -1,9 +1,9 @@
-import { createComponentState } from 'solid-tiny-context';
+import { createComponentState } from "solid-tiny-context";
 
 export const context = createComponentState({
   state: () => ({
-    name: '',
-    type: 'second' as 'hour' | 'minute' | 'second',
+    name: "",
+    type: "second" as "hour" | "minute" | "second",
     disabled: false,
     hour: -1,
     minute: 0,
@@ -13,50 +13,50 @@ export const context = createComponentState({
   }),
   getters: {
     typeIndex() {
-      return ['hour', 'minute', 'second'].indexOf(this.state.type);
+      return ["hour", "minute", "second"].indexOf(this.state.type);
     },
     hasValue() {
       return this.state.hour >= 0;
     },
     hourStr() {
       if (this.state.hasValue) {
-        return this.state.hour.toString().padStart(2, '0');
+        return this.state.hour.toString().padStart(2, "0");
       }
-      return '';
+      return "";
     },
     minuteStr() {
       if (this.state.hasValue) {
-        return this.state.minute.toString().padStart(2, '0');
+        return this.state.minute.toString().padStart(2, "0");
       }
-      return '';
+      return "";
     },
     secondStr() {
       if (this.state.hasValue) {
-        return this.state.second.toString().padStart(2, '0');
+        return this.state.second.toString().padStart(2, "0");
       }
-      return '';
+      return "";
     },
     asStr() {
       if (this.state.hasValue) {
         return [this.state.hourStr, this.state.minuteStr, this.state.secondStr]
           .slice(0, this.state.typeIndex + 1)
-          .join(':');
+          .join(":");
       }
-      return '';
+      return "";
     },
   },
   methods: {
     setDisabled(bool: boolean) {
-      this.actions.setState('disabled', bool);
+      this.actions.setState("disabled", bool);
     },
     setName(name: string) {
-      this.actions.setState('name', name);
+      this.actions.setState("name", name);
     },
     setValue(value: string) {
       let hour = 0;
       let minute = 0;
       let second = 0;
-      const arr = value.split(':');
+      const arr = value.split(":");
       if (arr.length > 0) {
         const v = Number.parseInt(arr[0], 10);
         if (v >= 0 && v < 24) {

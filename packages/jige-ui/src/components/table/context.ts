@@ -1,12 +1,12 @@
-import { createComponentState } from 'solid-tiny-context';
+import { createComponentState } from "solid-tiny-context";
 
 export const context = createComponentState({
   state: () => ({
     refHeader: null as HTMLDivElement | null,
     headerHeight: 0,
     footerHeight: 0,
-    height: '',
-    maxHeight: '',
+    height: "",
+    maxHeight: "",
   }),
   getters: {
     scrollHeight() {

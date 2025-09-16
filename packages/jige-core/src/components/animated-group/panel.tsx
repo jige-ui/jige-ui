@@ -1,33 +1,33 @@
-import { mergeRefs } from '@solid-primitives/refs';
-import { createSignal, onCleanup, onMount, Show, splitProps } from 'solid-js';
-import type { JSX } from 'solid-js/jsx-runtime';
-import { createWatch, makeEventListener } from 'solid-tiny-utils';
-import { getElementHeight, hasAnimation, uiRefreshDo } from '@/common/dom';
-import type { CloseableStatus } from '@/common/types';
-import context from './context';
+import { mergeRefs } from "@solid-primitives/refs";
+import { createSignal, onCleanup, onMount, Show, splitProps } from "solid-js";
+import type { JSX } from "solid-js/jsx-runtime";
+import { createWatch, makeEventListener } from "solid-tiny-utils";
+import { getElementHeight, hasAnimation, uiRefreshDo } from "@/common/dom";
+import type { CloseableStatus } from "@/common/types";
+import context from "./context";
 
 type ContentProps = { key: string } & JSX.HTMLAttributes<HTMLDivElement>;
 
 function ContentCore(props: ContentProps) {
   const [state, actions] = context.useContext();
-  const [status, setStatus] = createSignal<CloseableStatus>('closed');
-  const [localProps, otherProps] = splitProps(props, ['ref', 'key']);
+  const [status, setStatus] = createSignal<CloseableStatus>("closed");
+  const [localProps, otherProps] = splitProps(props, ["ref", "key"]);
   let ref!: HTMLDivElement;
 
   onMount(() => {
-    makeEventListener(ref, 'animationend', () => {
-      setStatus(status().replace('ing', 'ed') as CloseableStatus);
+    makeEventListener(ref, "animationend", () => {
+      setStatus(status().replace("ing", "ed") as CloseableStatus);
     });
 
     createWatch(
       () => localProps.key,
       (_, prev) => {
         const h = getElementHeight(ref);
-        actions.setState('refHeights', localProps.key, h);
+        actions.setState("refHeights", localProps.key, h);
         if (prev) {
           const newRefHeights = { ...state.refHeights };
           delete newRefHeights[prev];
-          actions.setState('refHeights', newRefHeights);
+          actions.setState("refHeights", newRefHeights);
         }
       }
     );
@@ -36,10 +36,10 @@ function ContentCore(props: ContentProps) {
       () => state.tryClose,
       (v) => {
         if (v === localProps.key) {
-          setStatus('closing');
+          setStatus("closing");
           uiRefreshDo(() => {
             if (!hasAnimation) {
-              setStatus('closed');
+              setStatus("closed");
             }
           });
         }
@@ -50,10 +50,10 @@ function ContentCore(props: ContentProps) {
       () => state.tryOpen,
       (v) => {
         if (v === localProps.key) {
-          setStatus('opening');
+          setStatus("opening");
           uiRefreshDo(() => {
             if (!hasAnimation) {
-              setStatus('opened');
+              setStatus("opened");
             }
           });
         }
@@ -61,28 +61,28 @@ function ContentCore(props: ContentProps) {
     );
 
     createWatch(status, (s) => {
-      if (s === 'opened') {
+      if (s === "opened") {
         actions.setState({
-          height: '',
-          maxHeight: '',
+          height: "",
+          maxHeight: "",
           active: localProps.key,
-          tryOpen: '',
+          tryOpen: "",
         });
       }
 
-      if (s === 'closed') {
-        actions.setState('tryClose', '');
+      if (s === "closed") {
+        actions.setState("tryClose", "");
       }
 
       const h = state.refHeights[localProps.key];
-      if (s === 'closing') {
+      if (s === "closing") {
         actions.setState({
           maxHeight: `${h}px`,
           height: `${state.contentHeight}px`,
         });
       }
 
-      if (s === 'opening') {
+      if (s === "opening") {
         requestAnimationFrame(() => {
           actions.setState({
             maxHeight: `${h}px`,
@@ -95,7 +95,7 @@ function ContentCore(props: ContentProps) {
 
   onCleanup(() => {
     // @ts-expect-error xxx
-    actions.setState('refHeights', localProps.key, undefined);
+    actions.setState("refHeights", localProps.key, undefined);
   });
 
   return (
@@ -106,7 +106,7 @@ function ContentCore(props: ContentProps) {
         ref = r;
       })}
       style={{
-        position: status().endsWith('ing') ? 'absolute' : 'relative',
+        position: status().endsWith("ing") ? "absolute" : "relative",
         top: 0,
         left: 0,
         right: 0,

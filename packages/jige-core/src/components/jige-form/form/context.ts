@@ -1,9 +1,9 @@
-import { batch } from 'solid-js';
-import { createComponentState } from 'solid-tiny-context';
-import type { AsyncFn, MaybeAsyncFn } from '@/common/types';
-import { isUndefined } from '@/common/types';
-import { getValueFromPath } from '../utils';
-import type { JigeFormValidatorCorrectReturn } from '../validator';
+import { batch } from "solid-js";
+import { createComponentState } from "solid-tiny-context";
+import type { AsyncFn, MaybeAsyncFn } from "@/common/types";
+import { isUndefined } from "@/common/types";
+import { getValueFromPath } from "../utils";
+import type { JigeFormValidatorCorrectReturn } from "../validator";
 
 export const formContext = createComponentState({
   state: () => ({
@@ -28,7 +28,7 @@ export const formContext = createComponentState({
       return (
         !(this.state.disabled || this.state.isSubmitting) &&
         Object.values(this.state.errorFields).every(
-          (v) => !v.filter((e) => e.type === 'error').length
+          (v) => !v.filter((e) => e.type === "error").length
         )
       );
     },
@@ -42,7 +42,7 @@ export const formContext = createComponentState({
         return;
       }
       // key probably has a dot-separated path
-      const keys = key.split('.') as [string];
+      const keys = key.split(".") as [string];
 
       // make sure every key in the path exists
       let current = this.state.formData;
@@ -52,32 +52,32 @@ export const formContext = createComponentState({
         tempKeys.push(currentKey);
         if (isUndefined(current[currentKey])) {
           if (Number.isNaN(Number(keys[i + 1]))) {
-            this.actions.setState('formData', ...tempKeys, {});
+            this.actions.setState("formData", ...tempKeys, {});
           } else {
-            this.actions.setState('formData', ...tempKeys, []);
+            this.actions.setState("formData", ...tempKeys, []);
           }
         }
         current = current[currentKey];
       }
 
-      this.actions.setState('formData', ...keys, value);
+      this.actions.setState("formData", ...keys, value);
     },
     removeField(key: string) {
-      const keys = key.split('.') as [string];
-      this.actions.setState('formData', ...keys, undefined);
+      const keys = key.split(".") as [string];
+      this.actions.setState("formData", ...keys, undefined);
     },
     async handleSubmit() {
       if (this.state.disabled) {
         return;
       }
       await this.actions.validateFields();
-      this.actions.setState('isTouched', true);
+      this.actions.setState("isTouched", true);
       if (!this.state.canSubmit) {
         return;
       }
-      this.actions.setState('isSubmitting', true);
+      this.actions.setState("isSubmitting", true);
       await this.nowrapData.onSubmit(this.state.formData);
-      this.actions.setState('isSubmitting', false);
+      this.actions.setState("isSubmitting", false);
     },
     handleReset() {
       if (this.state.disabled) {
@@ -94,15 +94,15 @@ export const formContext = createComponentState({
 
         // dirty fields reset
         for (const key in this.state.dirtyFields) {
-          this.actions.setState('dirtyFields', key, undefined!);
+          this.actions.setState("dirtyFields", key, undefined!);
         }
 
         // error fields reset
         for (const key in this.state.errorFields) {
-          this.actions.setState('errorFields', key, undefined!);
+          this.actions.setState("errorFields", key, undefined!);
         }
 
-        this.actions.setState('isTouched', false);
+        this.actions.setState("isTouched", false);
       });
     },
     async validateFields(
@@ -132,9 +132,9 @@ export const formContext = createComponentState({
 
     clearState(path: string) {
       batch(() => {
-        this.actions.setState('dirtyFields', path, undefined!);
-        this.actions.setState('errorFields', path, undefined!);
-        this.actions.setState('validateFields', path, undefined!);
+        this.actions.setState("dirtyFields", path, undefined!);
+        this.actions.setState("errorFields", path, undefined!);
+        this.actions.setState("validateFields", path, undefined!);
       });
     },
   },

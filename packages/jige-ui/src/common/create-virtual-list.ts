@@ -1,5 +1,5 @@
-import type { Accessor } from 'solid-js';
-import { createMemo, createSignal } from 'solid-js';
+import type { Accessor } from "solid-js";
+import { createMemo, createSignal } from "solid-js";
 
 export function createVirtualList<T>(params: {
   items: Accessor<T[]>;

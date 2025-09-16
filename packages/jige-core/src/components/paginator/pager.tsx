@@ -1,9 +1,9 @@
-import { createMemo, For } from 'solid-js';
-import type { JSX } from 'solid-js/jsx-runtime';
-import context from './context';
+import { createMemo, For } from "solid-js";
+import type { JSX } from "solid-js/jsx-runtime";
+import context from "./context";
 
 function paginationPartShow(totalPages: number, currPage: number) {
-  const tags: (number | 'space-right' | 'space-left')[] = [];
+  const tags: (number | "space-right" | "space-left")[] = [];
   const endSize = 1;
   const midSize = 2;
 
@@ -19,7 +19,7 @@ function paginationPartShow(totalPages: number, currPage: number) {
 
   // Display spaces between edges and middle pages
   if (leftMid - leftEnd > 1) {
-    tags.push('space-left');
+    tags.push("space-left");
   }
 
   // Display left middle pages
@@ -37,7 +37,7 @@ function paginationPartShow(totalPages: number, currPage: number) {
 
   // Display spaces between edges and middle pages
   if (rightEnd - rightMid > 1) {
-    tags.push('space-right');
+    tags.push("space-right");
   }
 
   // Display pages on the right edge
@@ -53,7 +53,7 @@ function paginationPartShow(totalPages: number, currPage: number) {
  * NaN for ... (ellipsis page)
  */
 export function Pager(props: {
-  children: (pages: number | 'space-right' | 'space-left') => JSX.Element;
+  children: (pages: number | "space-right" | "space-left") => JSX.Element;
 }) {
   const [state] = context.useContext();
 

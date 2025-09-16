@@ -1,19 +1,19 @@
-import { createComponentState } from 'solid-tiny-context';
+import { createComponentState } from "solid-tiny-context";
 
 const context = createComponentState({
   state: () => ({
     value: [] as string[],
-    name: '',
+    name: "",
     disabled: false,
   }),
   methods: {
     removeValue(value: string) {
-      this.actions.setState('value', [
+      this.actions.setState("value", [
         ...this.state.value.filter((v) => v !== value),
       ]);
     },
     pushValue(value: string) {
-      this.actions.setState('value', [...this.state.value, value]);
+      this.actions.setState("value", [...this.state.value, value]);
     },
   },
 });

@@ -1,7 +1,7 @@
-import { mergeRefs, Ref } from '@solid-primitives/refs';
-import type { JSX } from 'solid-js';
-import { createWatch, makeEventListener } from 'solid-tiny-utils';
-import { context } from './context';
+import { mergeRefs, Ref } from "@solid-primitives/refs";
+import type { JSX } from "solid-js";
+import { createWatch, makeEventListener } from "solid-tiny-utils";
+import { context } from "./context";
 
 // this is the trgger component
 export function Trigger(props: {
@@ -17,16 +17,16 @@ export function Trigger(props: {
         return;
       }
 
-      makeEventListener(refTrigger, 'mouseenter', () => {
-        state.trigger === 'hover' && actions.setTimerOpen(true);
+      makeEventListener(refTrigger, "mouseenter", () => {
+        state.trigger === "hover" && actions.setTimerOpen(true);
       });
 
-      makeEventListener(refTrigger, 'mouseleave', () => {
-        state.trigger === 'hover' && actions.setTimerOpen(false);
+      makeEventListener(refTrigger, "mouseleave", () => {
+        state.trigger === "hover" && actions.setTimerOpen(false);
       });
 
-      makeEventListener(refTrigger, 'click', () => {
-        state.trigger === 'click' && actions.setOpen(state.status === 'closed');
+      makeEventListener(refTrigger, "click", () => {
+        state.trigger === "click" && actions.setOpen(state.status === "closed");
       });
     }
   );
@@ -39,8 +39,8 @@ export function Trigger(props: {
         return;
       }
 
-      refTrigger.setAttribute('data-floating-status', status);
-      refTrigger.setAttribute('data-floating-placement', placement);
+      refTrigger.setAttribute("data-floating-status", status);
+      refTrigger.setAttribute("data-floating-placement", placement);
     }
   );
 
@@ -48,7 +48,7 @@ export function Trigger(props: {
     <Ref
       ref={
         mergeRefs(props.ref, (el) => {
-          actions.setState('refTrigger', el);
+          actions.setState("refTrigger", el);
         }) as any
       }
     >

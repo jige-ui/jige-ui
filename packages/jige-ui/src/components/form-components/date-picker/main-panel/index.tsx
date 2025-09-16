@@ -1,14 +1,14 @@
-import type { EsDay } from 'esday';
-import { AnimatedGroup } from 'jige-core';
-import { batch, type ComponentProps, createSignal } from 'solid-js';
-import { createWatch } from 'solid-tiny-utils';
-import type { MaybePromise } from '~/common/types';
-import type { DateTypes } from '../types';
-import { panelContext } from './context';
-import { DayPanel } from './day-panel';
-import { HeadTools } from './head-tools';
-import { MonthPanel } from './month-panel';
-import { YearPanel } from './year-panel';
+import type { EsDay } from "esday";
+import { AnimatedGroup } from "jige-core";
+import { batch, type ComponentProps, createSignal } from "solid-js";
+import { createWatch } from "solid-tiny-utils";
+import type { MaybePromise } from "~/common/types";
+import type { DateTypes } from "../types";
+import { panelContext } from "./context";
+import { DayPanel } from "./day-panel";
+import { HeadTools } from "./head-tools";
+import { MonthPanel } from "./month-panel";
+import { YearPanel } from "./year-panel";
 
 function AnimatedPanel(props: {
   width: number;
@@ -33,12 +33,12 @@ function AnimatedPanel(props: {
       ) => MaybePromise<DateTypes[]>);
 }) {
   const [state] = panelContext.useContext();
-  const [className, setClassName] = createSignal('');
+  const [className, setClassName] = createSignal("");
 
   createWatch(
     () => state.activePanel,
     () => {
-      setClassName('jg-dp-animated-panel');
+      setClassName("jg-dp-animated-panel");
     },
     { defer: true }
   );
@@ -52,7 +52,7 @@ function AnimatedPanel(props: {
       >
         <AnimatedGroup.Panel class={className()} key="day">
           <DayPanel
-            cellClass={props.cellClass || ''}
+            cellClass={props.cellClass || ""}
             disabledDates={props.disabledDates || []}
             highlightDates={props.highlightDates || []}
           />
@@ -70,12 +70,12 @@ function AnimatedPanel(props: {
 
 export function MainPanel(props: {
   onCurrYearMonthChange?: (year: number, month: number) => void;
-  headerRight?: ComponentProps<typeof HeadTools>['headerRight'];
+  headerRight?: ComponentProps<typeof HeadTools>["headerRight"];
   value: string[];
   width?: number;
   onChange: (value: string[]) => void;
   disabled: boolean;
-  type: 'date' | 'month';
+  type: "date" | "month";
   currYear: number;
   currMonth: number;
   dateRange: [DateTypes, DateTypes];
@@ -109,10 +109,10 @@ export function MainPanel(props: {
     multiple: () => props.multiple,
     activePanel: () => {
       switch (props.type) {
-        case 'month':
-          return 'month';
+        case "month":
+          return "month";
         default:
-          return 'day';
+          return "day";
       }
     },
   });

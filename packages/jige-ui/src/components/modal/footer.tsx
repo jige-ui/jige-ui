@@ -1,7 +1,7 @@
-import { ModalCore } from 'jige-core';
-import { children, Show } from 'solid-js';
-import type { JSX } from 'solid-js/jsx-runtime';
-import { Button } from '../button';
+import { ModalCore } from "jige-core";
+import { children, Show } from "solid-js";
+import type { JSX } from "solid-js/jsx-runtime";
+import { Button } from "../button";
 
 export function Footer(props: {
   okText?: string;
@@ -21,7 +21,7 @@ export function Footer(props: {
           <div class="jg-modal-footer">
             <Button
               color="var(--jg-fg3)"
-              label={props.cancelText || '取消'}
+              label={props.cancelText || "取消"}
               onClick={async () => {
                 await props.onCancel?.();
                 modalActs.setOpen(false);
@@ -30,7 +30,7 @@ export function Footer(props: {
             />
             <Button
               color="var(--jg-t-hl"
-              label={props.okText || '确认'}
+              label={props.okText || "确认"}
               onClick={async () => {
                 await props.onOk?.();
                 modalActs.setOpen(false);

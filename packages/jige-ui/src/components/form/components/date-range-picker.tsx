@@ -1,12 +1,12 @@
-import { FormCore } from 'jige-core';
-import type { ComponentProps } from 'solid-js';
-import { DateRangePicker } from '../../form-components';
+import { FormCore } from "jige-core";
+import type { ComponentProps } from "solid-js";
+import { DateRangePicker } from "../../form-components";
 
 /**
  * Input component which is already bind with form.
  */
 export function FormDateRangePicker(
-  props: Omit<ComponentProps<typeof DateRangePicker>, 'onChange' | 'value'>
+  props: Omit<ComponentProps<typeof DateRangePicker>, "onChange" | "value">
 ) {
   const [fieldState, fieldActs] = FormCore.useField();
 

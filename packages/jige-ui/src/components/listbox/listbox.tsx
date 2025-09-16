@@ -1,9 +1,9 @@
-import css from 'sass:./listbox.scss';
-import type { JSX } from 'solid-js';
-import { createMemo, mergeProps, Show } from 'solid-js';
-import { isArray, mountStyle } from 'solid-tiny-utils';
-import { ListInner } from './list-inner';
-import { VirtualInner } from './virtual-inner';
+import css from "sass:./listbox.scss";
+import type { JSX } from "solid-js";
+import { createMemo, mergeProps, Show } from "solid-js";
+import { isArray, mountStyle } from "solid-tiny-utils";
+import { ListInner } from "./list-inner";
+import { VirtualInner } from "./virtual-inner";
 
 export function Listbox<T extends any[]>(props: {
   virtual?: boolean;
@@ -15,18 +15,18 @@ export function Listbox<T extends any[]>(props: {
   children: (item: T[number], index: number) => JSX.Element;
   onSelect?: (item: T[number], index: number) => void;
   selectIndex?: number | number[];
-  selectTrigger?: 'click' | 'arrow';
+  selectTrigger?: "click" | "arrow";
   itemClass?: string;
   class?: string;
   scrollToSelected?: boolean;
   preventFocus?: boolean;
   scrollTop?: number;
 }) {
-  mountStyle(css, 'jige-ui-listbox');
+  mountStyle(css, "jige-ui-listbox");
   const realProps = mergeProps(
     {
       selectIndex: -1,
-      selectTrigger: 'click' as 'click' | 'arrow',
+      selectTrigger: "click" as "click" | "arrow",
       onSelect: () => {},
       scrollToSelected: true,
       preventFocus: false,

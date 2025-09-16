@@ -1,15 +1,15 @@
-import { FloatingUiCore, FormCore } from 'jige-core';
-import { batch, createSignal } from 'solid-js';
-import { createWatch } from 'solid-tiny-utils';
-import { dataIf } from '~/common/dataset';
-import { IconFluentCalendar24Regular } from '~/components/icons/fluent-calendar-24-regular';
-import { Popover } from '../../popover';
-import { ClearableSuffix } from '../input/clearable-suffix';
-import { context } from './context';
+import { FloatingUiCore, FormCore } from "jige-core";
+import { batch, createSignal } from "solid-js";
+import { createWatch } from "solid-tiny-utils";
+import { dataIf } from "~/common/dataset";
+import { IconFluentCalendar24Regular } from "~/components/icons/fluent-calendar-24-regular";
+import { Popover } from "../../popover";
+import { ClearableSuffix } from "../input/clearable-suffix";
+import { context } from "./context";
 
 export function Trigger(props: {
   clearable: boolean;
-  size: 'small' | 'medium' | 'large';
+  size: "small" | "medium" | "large";
 }) {
   const [state, actions] = context.useContext();
   const [floatState, floatActions] = FloatingUiCore.useContext();
@@ -19,9 +19,9 @@ export function Trigger(props: {
   createWatch(
     () => floatState.status,
     (status) => {
-      if (status === 'closed') {
+      if (status === "closed") {
         batch(() => {
-          actions.setState('focused', false);
+          actions.setState("focused", false);
           actions.setActivePanel(state.defaultPanel);
           const inst = state.inst;
           actions.setCurrYear(inst.year());
@@ -29,8 +29,8 @@ export function Trigger(props: {
           actions.syncValueToPreview();
         });
       }
-      if (status === 'opened') {
-        actions.setState('focused', true);
+      if (status === "opened") {
+        actions.setState("focused", true);
       }
     }
   );
@@ -52,7 +52,7 @@ export function Trigger(props: {
         <input
           autocomplete="off"
           class="jg-input-native"
-          name={state.name || 'datepicker'}
+          name={state.name || "datepicker"}
           onBlur={(e) => {
             e.currentTarget.value = state.value;
             floatActions.setOpen(false);
@@ -65,16 +65,16 @@ export function Trigger(props: {
           }}
           onInput={(e) => {
             const v = e.currentTarget.value;
-            if (v.trim() === '') {
-              actions.setValue('');
+            if (v.trim() === "") {
+              actions.setValue("");
             }
             if (actions.checkDateStr(v)) {
               actions.setValue(e.currentTarget.value);
             }
           }}
-          placeholder={state.placeholder || '请选择日期'}
+          placeholder={state.placeholder || "请选择日期"}
           ref={(el) => {
-            actions.setState('triggerRef', el);
+            actions.setState("triggerRef", el);
           }}
           type="text"
           value={state.previewValue}

@@ -1,13 +1,13 @@
-import { createContext } from 'solid-js';
-import { createComponentState } from 'solid-tiny-context';
+import { createContext } from "solid-js";
+import { createComponentState } from "solid-tiny-context";
 
 export const fieldNameContext = createComponentState({
   state: () => ({
-    name: '',
+    name: "",
   }),
   methods: {
     setName(name: string) {
-      this.actions.setState('name', name);
+      this.actions.setState("name", name);
     },
   },
 });
@@ -32,7 +32,7 @@ export const FieldContext = createContext<
   ]
 >([
   {
-    name: '',
+    name: "",
     isTouched: false,
     isValidating: false,
     value: undefined,

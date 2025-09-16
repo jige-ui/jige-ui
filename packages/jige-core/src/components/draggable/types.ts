@@ -1,1 +1,1 @@
-export type DraggableStatus = 'start' | 'darg' | 'stop';
+export type DraggableStatus = "start" | "darg" | "stop";

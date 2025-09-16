@@ -1,13 +1,13 @@
 export type Fn = () => void;
 export type AnyFn = (...args: any[]) => any;
-export type CloseableStatus = 'closed' | 'closing' | 'opened' | 'opening';
+export type CloseableStatus = "closed" | "closing" | "opened" | "opening";
 export const isUndefined = (value: any): value is undefined =>
   value === undefined;
 export type MaybeAsyncFn<T = undefined, U = void> = (args: T) => U | Promise<U>;
 export type AsyncFn<T = undefined, U = void> = (args: T) => Promise<U>;
 export type Maybe<T> = T | undefined;
 export type MaybePromise<T> = T | Promise<T>;
-export type IsTuple<T extends any[]> = number extends T['length']
+export type IsTuple<T extends any[]> = number extends T["length"]
   ? false
   : true;
 export type TupleKeys<T extends any[]> = Exclude<keyof T, keyof any[]>;

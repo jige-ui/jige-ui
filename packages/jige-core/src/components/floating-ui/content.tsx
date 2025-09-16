@@ -1,18 +1,18 @@
-import { createElementBounds } from '@solid-primitives/bounds';
-import { mergeRefs } from '@solid-primitives/refs';
-import { throttle } from '@solid-primitives/scheduled';
-import type { JSX } from 'solid-js';
-import { onMount, Show, splitProps } from 'solid-js';
-import { Portal } from 'solid-js/web';
+import { createElementBounds } from "@solid-primitives/bounds";
+import { mergeRefs } from "@solid-primitives/refs";
+import { throttle } from "@solid-primitives/scheduled";
+import type { JSX } from "solid-js";
+import { onMount, Show, splitProps } from "solid-js";
+import { Portal } from "solid-js/web";
 import {
   createClickOutside,
   createVisibilityObserver,
   createWatch,
   makeEventListener,
-} from 'solid-tiny-utils';
-import { hasAnimation } from '@/common/dom';
-import { runSolidEventHandler } from '@/common/solidjs';
-import { context } from './context';
+} from "solid-tiny-utils";
+import { hasAnimation } from "@/common/dom";
+import { runSolidEventHandler } from "@/common/solidjs";
+import { context } from "./context";
 
 function FloatingContentCore(
   props: {
@@ -21,12 +21,12 @@ function FloatingContentCore(
 ) {
   const [state, actions] = context.useContext();
   const [localProps, otherProps] = splitProps(props, [
-    'children',
-    'zindex',
-    'ref',
-    'onMouseEnter',
-    'onMouseLeave',
-    'onAnimationEnd',
+    "children",
+    "zindex",
+    "ref",
+    "onMouseEnter",
+    "onMouseLeave",
+    "onAnimationEnd",
   ]);
 
   let rootContent!: HTMLDivElement;
@@ -39,7 +39,7 @@ function FloatingContentCore(
   createClickOutside(
     () => state.refContent,
     () => {
-      if (state.trigger !== 'manual') {
+      if (state.trigger !== "manual") {
         actions.setOpen(false);
       }
     },
@@ -51,13 +51,13 @@ function FloatingContentCore(
   });
 
   createWatch(isVisible, (v) => {
-    if (!v && state.status.startsWith('open')) {
+    if (!v && state.status.startsWith("open")) {
       actions.setOpen(false);
     }
   });
 
   onMount(() => {
-    makeEventListener('resize', throttleUpdate);
+    makeEventListener("resize", throttleUpdate);
 
     createWatch(
       () => [{ ...targetBounds }, { ...contentBounds }],
@@ -69,8 +69,8 @@ function FloatingContentCore(
     createWatch(
       () => state.status,
       () => {
-        if (state.status.endsWith('ing') && !hasAnimation(rootContent)) {
-          actions.setStatus(state.status.replace('ing', 'ed') as any);
+        if (state.status.endsWith("ing") && !hasAnimation(rootContent)) {
+          actions.setStatus(state.status.replace("ing", "ed") as any);
         }
       }
     );
@@ -88,16 +88,16 @@ function FloatingContentCore(
   return (
     <div
       ref={(el) => {
-        actions.setState('refContent', el);
+        actions.setState("refContent", el);
       }}
       style={{
         transform: `translate3d(${state.x}px, ${state.y}px, 0px)`,
         top: 0,
         left: 0,
-        position: 'fixed',
-        'z-index': localProps.zindex ?? 'auto',
-        'min-width': 'max-content',
-        'pointer-events': 'auto',
+        position: "fixed",
+        "z-index": localProps.zindex ?? "auto",
+        "min-width": "max-content",
+        "pointer-events": "auto",
         opacity: state.initialized ? 1 : 0,
       }}
     >
@@ -106,22 +106,22 @@ function FloatingContentCore(
         data-floating-placement={state.placement}
         data-floating-status={state.status}
         onAnimationEnd={(e) => {
-          if (state.status.startsWith('clos')) {
-            actions.setStatus('closed');
+          if (state.status.startsWith("clos")) {
+            actions.setStatus("closed");
           }
-          if (state.status.startsWith('open')) {
-            actions.setStatus('opened');
+          if (state.status.startsWith("open")) {
+            actions.setStatus("opened");
           }
           runSolidEventHandler(e, localProps.onAnimationEnd);
         }}
         onMouseEnter={(e) => {
-          if (state.canHoverContent && state.trigger === 'hover') {
+          if (state.canHoverContent && state.trigger === "hover") {
             actions.setTimerOpen(true);
           }
           runSolidEventHandler(e, localProps.onMouseEnter);
         }}
         onMouseLeave={(e) => {
-          if (state.canHoverContent && state.trigger === 'hover') {
+          if (state.canHoverContent && state.trigger === "hover") {
             actions.setTimerOpen(false);
           }
           runSolidEventHandler(e, localProps.onMouseLeave);
@@ -145,7 +145,7 @@ export function Content(
 
   return (
     <Portal mount={document.body}>
-      <Show when={state.status !== 'closed'}>
+      <Show when={state.status !== "closed"}>
         <FloatingContentCore {...props} />
       </Show>
     </Portal>

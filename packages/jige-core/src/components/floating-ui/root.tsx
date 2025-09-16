@@ -1,7 +1,7 @@
-import type { JSX } from 'solid-js/jsx-runtime';
-import { createWatch } from 'solid-tiny-utils';
-import { context } from './context';
-import type { FloatingUiCoreProps } from './props';
+import type { JSX } from "solid-js/jsx-runtime";
+import { createWatch } from "solid-tiny-utils";
+import { context } from "./context";
+import type { FloatingUiCoreProps } from "./props";
 
 export function Root(props: { children: JSX.Element } & FloatingUiCoreProps) {
   const Context = context.initial({
@@ -27,7 +27,7 @@ export function Root(props: { children: JSX.Element } & FloatingUiCoreProps) {
     () => {
       actions.updatePos();
       if (IS_DEV) {
-        console.log('float pos updated by root');
+        console.log("float pos updated by root");
       }
     }
   );

@@ -1,8 +1,8 @@
-import { useLocation } from '@solidjs/router';
-import { Scrollbar } from 'jige-ui';
-import type { ParentComponent } from 'solid-js';
-import { defaultSections, Sidebar, type SideSection } from './sidebar';
-import '../styles/mdx.css';
+import { useLocation } from "@solidjs/router";
+import { Scrollbar } from "jige-ui";
+import type { ParentComponent } from "solid-js";
+import { defaultSections, Sidebar, type SideSection } from "./sidebar";
+import "../styles/mdx.css";
 
 interface LayoutProps {
   sections?: SideSection[];
@@ -18,16 +18,16 @@ export const Layout: ParentComponent<LayoutProps> = (props) => {
   const isMDXRoute = () => {
     const path = location.pathname;
     return (
-      path.startsWith('/components/') ||
-      path.startsWith('/installation') ||
-      path.startsWith('/quick-start') ||
-      path.startsWith('/about') ||
-      path.startsWith('/theming') ||
-      path.startsWith('/customization') ||
-      path.startsWith('/typescript') ||
-      path.startsWith('/examples') ||
-      path.startsWith('/migration') ||
-      path.startsWith('/contributing')
+      path.startsWith("/components/") ||
+      path.startsWith("/installation") ||
+      path.startsWith("/quick-start") ||
+      path.startsWith("/about") ||
+      path.startsWith("/theming") ||
+      path.startsWith("/customization") ||
+      path.startsWith("/typescript") ||
+      path.startsWith("/examples") ||
+      path.startsWith("/migration") ||
+      path.startsWith("/contributing")
     );
   };
 
@@ -37,7 +37,7 @@ export const Layout: ParentComponent<LayoutProps> = (props) => {
       <main class="flex-1 h-full bg-t-bg1">
         <Scrollbar>
           <div
-            class={`max-w-4xl mx-auto p-6 ${isMDXRoute() ? 'mdx-content' : ''}`}
+            class={`max-w-4xl mx-auto p-6 ${isMDXRoute() ? "mdx-content" : ""}`}
           >
             {props.children}
           </div>

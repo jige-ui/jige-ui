@@ -1,16 +1,16 @@
-import { FloatingUiCore, hiddenStyle } from 'jige-core';
-import { createSignal } from 'solid-js';
-import { createDebouncedWatch, createWatch } from 'solid-tiny-utils';
-import { dataIf } from '~/common/dataset';
-import { IconFluentArrowRight24Filled } from '~/components/icons/fluent-arrow-right-24-filled';
-import { IconFluentCalendar24Regular } from '~/components/icons/fluent-calendar-24-regular';
-import { Popover } from '~/components/popover';
-import { ClearableSuffix } from '../input/clearable-suffix';
-import { context } from './context';
+import { FloatingUiCore, hiddenStyle } from "jige-core";
+import { createSignal } from "solid-js";
+import { createDebouncedWatch, createWatch } from "solid-tiny-utils";
+import { dataIf } from "~/common/dataset";
+import { IconFluentArrowRight24Filled } from "~/components/icons/fluent-arrow-right-24-filled";
+import { IconFluentCalendar24Regular } from "~/components/icons/fluent-calendar-24-regular";
+import { Popover } from "~/components/popover";
+import { ClearableSuffix } from "../input/clearable-suffix";
+import { context } from "./context";
 
 export function Trigger(props: {
   clearable: boolean;
-  size: 'small' | 'medium' | 'large';
+  size: "small" | "medium" | "large";
 }) {
   const [state, actions] = context.useContext();
   const [floatState, floatActions] = FloatingUiCore.useContext();
@@ -23,14 +23,14 @@ export function Trigger(props: {
   createWatch(
     () => floatState.status,
     (s) => {
-      if (s === 'closed') {
-        actions.setState('focused', false);
+      if (s === "closed") {
+        actions.setState("focused", false);
         actions.syncValueToPreview();
       }
-      if (s === 'opened') {
-        actions.setState('focused', true);
+      if (s === "opened") {
+        actions.setState("focused", true);
       }
-      if (s === 'closing') {
+      if (s === "closing") {
         const [ref1, ref2] = state.triggerRefs;
         if (ref1) {
           ref1.value = state.value[0];
@@ -64,8 +64,8 @@ export function Trigger(props: {
           }}
           onInput={(e) => {
             const value = e.currentTarget.value;
-            if (value.trim() === '') {
-              actions.setValue(['', state.previewValue[1]]);
+            if (value.trim() === "") {
+              actions.setValue(["", state.previewValue[1]]);
               return;
             }
             if (actions.checkDateStr(value)) {
@@ -74,14 +74,14 @@ export function Trigger(props: {
           }}
           placeholder={state.placeholder[0]}
           ref={(el) => {
-            actions.setState('triggerRefs', 0, el);
+            actions.setState("triggerRefs", 0, el);
           }}
           type="text"
           value={state.previewValue[0]}
         />
         <div
           style={{
-            position: 'relative',
+            position: "relative",
           }}
         >
           <IconFluentArrowRight24Filled />
@@ -97,8 +97,8 @@ export function Trigger(props: {
           }}
           onInput={(e) => {
             const value = e.currentTarget.value;
-            if (value.trim() === '') {
-              actions.setValue([state.previewValue[0], '']);
+            if (value.trim() === "") {
+              actions.setValue([state.previewValue[0], ""]);
               return;
             }
             if (actions.checkDateStr(value)) {
@@ -107,7 +107,7 @@ export function Trigger(props: {
           }}
           placeholder={state.placeholder[1]}
           ref={(el) => {
-            actions.setState('triggerRefs', 1, el);
+            actions.setState("triggerRefs", 1, el);
           }}
           type="text"
           value={state.previewValue[1]}

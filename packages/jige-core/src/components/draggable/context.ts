@@ -1,10 +1,10 @@
-import { createComponentState } from 'solid-tiny-context';
-import { isUndefined } from '@/common/types';
-import type { DraggableStatus } from './types';
+import { createComponentState } from "solid-tiny-context";
+import { isUndefined } from "@/common/types";
+import type { DraggableStatus } from "./types";
 
 export const context = createComponentState({
   state: () => ({
-    status: 'ready' as DraggableStatus | 'ready',
+    status: "ready" as DraggableStatus | "ready",
     /**
      * the threshold of the distance before the drag starts. 'px'
      */
@@ -32,7 +32,7 @@ export const context = createComponentState({
   },
   methods: {
     setStatus(status: DraggableStatus) {
-      this.actions.setState('status', status);
+      this.actions.setState("status", status);
     },
     setX(x: number) {
       let realX = x;
@@ -45,7 +45,7 @@ export const context = createComponentState({
         realX = Math.min(realX, maxX);
       }
 
-      this.actions.setState('x', realX);
+      this.actions.setState("x", realX);
     },
     setY(y: number) {
       let realY = y;
@@ -58,7 +58,7 @@ export const context = createComponentState({
         realY = Math.min(realY, maxY);
       }
 
-      this.actions.setState('y', realY);
+      this.actions.setState("y", realY);
     },
     calcInitial() {
       const ref = this.state.targetElement;
@@ -66,7 +66,7 @@ export const context = createComponentState({
         return;
       }
       const transform = ref.style.transform;
-      ref.style.transform = 'none';
+      ref.style.transform = "none";
       const rect = ref.getBoundingClientRect();
       this.actions.setState({
         initialX: rect.x,

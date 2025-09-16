@@ -1,7 +1,7 @@
-import css from 'sass:./radio-group.scss';
-import { RadioGroupCore } from 'jige-core';
-import type { JSX } from 'solid-js/jsx-runtime';
-import { mountStyle } from 'solid-tiny-utils';
+import css from "sass:./radio-group.scss";
+import { RadioGroupCore } from "jige-core";
+import type { JSX } from "solid-js/jsx-runtime";
+import { mountStyle } from "solid-tiny-utils";
 
 export function Root(props: {
   children: JSX.Element;
@@ -9,7 +9,7 @@ export function Root(props: {
   onChange?: (value: string) => void;
   disabled?: boolean;
 }) {
-  mountStyle(css, 'jige-ui-radio-group');
+  mountStyle(css, "jige-ui-radio-group");
   return (
     <RadioGroupCore
       disabled={props.disabled}

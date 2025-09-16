@@ -1,10 +1,10 @@
-import { undefinedOr } from 'jige-core';
-import { createSignal, For } from 'solid-js';
-import type { JSX } from 'solid-js/jsx-runtime';
-import { createWatch } from 'solid-tiny-utils';
-import { dataIf } from '~/common/dataset';
-import { isDef } from '~/common/types';
-import { Scrollbar } from '../scrollbar';
+import { undefinedOr } from "jige-core";
+import { createSignal, For } from "solid-js";
+import type { JSX } from "solid-js/jsx-runtime";
+import { createWatch } from "solid-tiny-utils";
+import { dataIf } from "~/common/dataset";
+import { isDef } from "~/common/types";
+import { Scrollbar } from "../scrollbar";
 
 export function CommonScrollWrapper<T extends any[]>(props: {
   onScroll?: (e: Event) => void;
@@ -15,7 +15,7 @@ export function CommonScrollWrapper<T extends any[]>(props: {
   children: (item: T[number], index: number) => JSX.Element;
   selectIndex: number[];
   onSelect: (item: T[number], index: number) => void;
-  selectTrigger: 'click' | 'arrow';
+  selectTrigger: "click" | "arrow";
   visibleItems?: { value: T[number]; index: number }[];
   items: T;
   fallback: JSX.Element;
@@ -42,19 +42,19 @@ export function CommonScrollWrapper<T extends any[]>(props: {
     if (props.preventFocus) {
       return;
     }
-    if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
+    if (e.key === "ArrowDown" || e.key === "ArrowUp") {
       e.preventDefault(); // 防止滚动区域滚动
     }
-    if (e.key === 'ArrowDown') {
+    if (e.key === "ArrowDown") {
       setHlIndex((prev) => Math.min(prev + 1, props.items.length - 1));
-    } else if (e.key === 'ArrowUp') {
+    } else if (e.key === "ArrowUp") {
       setHlIndex((prev) => Math.max(prev - 1, 0));
-    } else if (e.key === 'Enter') {
+    } else if (e.key === "Enter") {
       props.onSelect(props.items[hlIndex()], hlIndex());
     }
     const $item = listRef?.querySelector(`[data-index="${hlIndex()}"]`);
     if ($item) {
-      $item.scrollIntoView({ block: 'nearest' });
+      $item.scrollIntoView({ block: "nearest" });
     }
   }
 
@@ -65,13 +65,13 @@ export function CommonScrollWrapper<T extends any[]>(props: {
     if (props.scrollToSelected) {
       const $item = listRef?.querySelector(`[data-index="${index}"]`);
       if ($item) {
-        $item.scrollIntoView({ block: 'nearest' });
+        $item.scrollIntoView({ block: "nearest" });
       } else if (ref) {
         ref.scrollTop =
           index * props.rowHeight - (props.rootHeight - props.rowHeight);
       }
     }
-    if (props.selectTrigger === 'arrow') {
+    if (props.selectTrigger === "arrow") {
       props.onSelect(props.items[index], index);
     }
   });
@@ -113,7 +113,7 @@ export function CommonScrollWrapper<T extends any[]>(props: {
             return (
               <div
                 aria-selected={props.selectIndex.includes(item.index)}
-                class={props.itemClass || 'jg-listbox-item'}
+                class={props.itemClass || "jg-listbox-item"}
                 data-highlight={dataIf(item.index === hlIndex())}
                 data-index={item.index}
                 data-selected={dataIf(props.selectIndex.includes(item.index))}

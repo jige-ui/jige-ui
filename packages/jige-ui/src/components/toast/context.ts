@@ -1,5 +1,5 @@
-import { createComponentState } from 'solid-tiny-context';
-import type { ToastInst } from './types';
+import { createComponentState } from "solid-tiny-context";
+import type { ToastInst } from "./types";
 
 export const context = createComponentState({
   state: () => ({
@@ -8,11 +8,11 @@ export const context = createComponentState({
   }),
   methods: {
     addInst(inst: ToastInst) {
-      this.actions.setState('insts', (prev) => [...prev, inst]);
+      this.actions.setState("insts", (prev) => [...prev, inst]);
     },
 
     removeInst(id: string) {
-      this.actions.setState('insts', (prev) =>
+      this.actions.setState("insts", (prev) =>
         prev.filter((inst) => inst.id !== id)
       );
     },

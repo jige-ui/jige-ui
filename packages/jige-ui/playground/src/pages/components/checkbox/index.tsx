@@ -1,11 +1,11 @@
-import { createStore } from 'solid-js/store';
-import { Checkbox } from '~/build';
-import { Playground } from '../../../components/playground';
+import { createStore } from "solid-js/store";
+import { Checkbox } from "~/build";
+import { Playground } from "../../../components/playground";
 
 export default function Demo() {
   const [p, setP] = createStore({
     disabled: false,
-    size: 'medium' as 'small' | 'medium' | 'large',
+    size: "medium" as "small" | "medium" | "large",
     indeterminate: false,
   });
   return (
@@ -25,7 +25,7 @@ export default function Demo() {
         onChange={setP}
         properties={p}
         typeDeclaration={{
-          size: ['small', 'medium', 'large'],
+          size: ["small", "medium", "large"],
         }}
       />
     </Playground>

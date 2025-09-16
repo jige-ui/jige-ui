@@ -1,9 +1,9 @@
-import { createRoot, createUniqueId } from 'solid-js';
-import { createStore } from 'solid-js/store';
-import { createComponentState } from 'solid-tiny-context';
-import { createWatch } from 'solid-tiny-utils';
-import { preventBodyScroll } from '@/common/dom';
-import type { CloseableStatus } from '@/common/types';
+import { createRoot, createUniqueId } from "solid-js";
+import { createStore } from "solid-js/store";
+import { createComponentState } from "solid-tiny-context";
+import { createWatch } from "solid-tiny-utils";
+import { preventBodyScroll } from "@/common/dom";
+import type { CloseableStatus } from "@/common/types";
 
 export const GlobalModalStore = createRoot(() => {
   const [state, setState] = createStore({
@@ -22,7 +22,7 @@ export const GlobalModalStore = createRoot(() => {
 
 export const context = createComponentState({
   state: () => ({
-    status: 'closed' as CloseableStatus,
+    status: "closed" as CloseableStatus,
     id: createUniqueId(),
     preventScroll: true,
     closeOnClickMask: false,
@@ -31,17 +31,17 @@ export const context = createComponentState({
 
   methods: {
     setStatus(status: CloseableStatus) {
-      this.actions.setState('status', status);
+      this.actions.setState("status", status);
     },
     setOpen(open: boolean) {
       const { state, actions } = this;
-      if (open && state.status.startsWith('open')) {
+      if (open && state.status.startsWith("open")) {
         return;
       }
-      if (!open && state.status.startsWith('clos')) {
+      if (!open && state.status.startsWith("clos")) {
         return;
       }
-      actions.setStatus(open ? 'opening' : 'closing');
+      actions.setStatus(open ? "opening" : "closing");
     },
     preventBodyScroll(prevent: boolean) {
       const { state } = this;
@@ -51,11 +51,11 @@ export const context = createComponentState({
         if (gs.preventScrollIds.includes(state.id)) {
           return;
         }
-        setState('preventScrollIds', (ids) => [...ids, state.id]);
+        setState("preventScrollIds", (ids) => [...ids, state.id]);
       } else {
         const index = gs.preventScrollIds.indexOf(state.id);
         if (index !== -1) {
-          setState('preventScrollIds', (ids) => {
+          setState("preventScrollIds", (ids) => {
             ids.splice(index, 1);
             return [...ids];
           });

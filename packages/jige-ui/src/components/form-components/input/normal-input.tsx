@@ -1,8 +1,8 @@
-import { InputCore, runSolidEventHandler, undefinedOr } from 'jige-core';
-import { createSignal, type JSX, splitProps } from 'solid-js';
-import { ClearableSuffix } from './clearable-suffix';
-import { InputWrapper } from './input-wrapper';
-import type { JigeInputProps } from './types';
+import { InputCore, runSolidEventHandler, undefinedOr } from "jige-core";
+import { createSignal, type JSX, splitProps } from "solid-js";
+import { ClearableSuffix } from "./clearable-suffix";
+import { InputWrapper } from "./input-wrapper";
+import type { JigeInputProps } from "./types";
 
 export function Suffix(props: { clearable: boolean; suffix?: JSX.Element }) {
   const [state, actions] = InputCore.useContext();
@@ -10,27 +10,27 @@ export function Suffix(props: { clearable: boolean; suffix?: JSX.Element }) {
   return (
     <ClearableSuffix
       onClear={() => {
-        actions.setValue('');
+        actions.setValue("");
       }}
       showClearable={props.clearable && !!state.value}
     />
   );
 }
 
-export function NormalInput(props: Omit<JigeInputProps, 'type'>) {
+export function NormalInput(props: Omit<JigeInputProps, "type">) {
   const [focused, setFocused] = createSignal(false);
   const [localProps, otherProps] = splitProps(props, [
-    'value',
-    'onChange',
-    'disabled',
-    'clearable',
-    'onFocus',
-    'onBlur',
-    'class',
-    'style',
-    'readonly',
-    'suffix',
-    'size',
+    "value",
+    "onChange",
+    "disabled",
+    "clearable",
+    "onFocus",
+    "onBlur",
+    "class",
+    "style",
+    "readonly",
+    "suffix",
+    "size",
   ]);
   return (
     <InputCore
@@ -41,13 +41,13 @@ export function NormalInput(props: Omit<JigeInputProps, 'type'>) {
       <InputWrapper
         focused={focused()}
         readonly={localProps.readonly}
-        size={undefinedOr(localProps.size, 'medium')}
+        size={undefinedOr(localProps.size, "medium")}
         style={localProps.style}
       >
         <InputCore.Native
           {...(otherProps as any)}
           autocomplete="off"
-          class={['jg-input-native', localProps.class].join(' ')}
+          class={["jg-input-native", localProps.class].join(" ")}
           onBlur={(e: any) => {
             setFocused(false);
             runSolidEventHandler(e, localProps.onBlur);

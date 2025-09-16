@@ -1,7 +1,7 @@
-import { children, Show } from 'solid-js';
-import type { JSX } from 'solid-js/jsx-runtime';
-import { createWatch } from 'solid-tiny-utils';
-import { context } from './context';
+import { children, Show } from "solid-js";
+import type { JSX } from "solid-js/jsx-runtime";
+import { createWatch } from "solid-tiny-utils";
+import { context } from "./context";
 
 export function ButtonContent(props: {
   children?: JSX.Element;
@@ -13,7 +13,7 @@ export function ButtonContent(props: {
   const icon = children(() => props.icon);
 
   createWatch([() => props.label, () => child()], ([label, childElement]) => {
-    actions.setState('iconOnly', !(label || childElement));
+    actions.setState("iconOnly", !(label || childElement));
   });
 
   return (
@@ -30,7 +30,7 @@ export function ButtonContent(props: {
               <div
                 class="jg-btn-icon"
                 style={{
-                  'margin-right': props.label ? '0.375em' : '0',
+                  "margin-right": props.label ? "0.375em" : "0",
                 }}
               >
                 {icon()}

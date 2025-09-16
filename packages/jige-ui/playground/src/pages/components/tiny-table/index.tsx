@@ -1,8 +1,8 @@
-import { createResource, createSignal } from 'solid-js';
-import { createStore } from 'solid-js/store';
-import { random, sleep, uid } from 'solid-tiny-utils';
-import { Button, createColumnHelper, Form, Input, TinyTable } from '~/build';
-import { Playground } from '../../../components/playground';
+import { createResource, createSignal } from "solid-js";
+import { createStore } from "solid-js/store";
+import { random, sleep, uid } from "solid-tiny-utils";
+import { Button, createColumnHelper, Form, Input, TinyTable } from "~/build";
+import { Playground } from "../../../components/playground";
 
 type Person = {
   firstName: string;
@@ -16,7 +16,7 @@ type Person = {
 const columnHelper = createColumnHelper<Person>();
 const defaultColumns = [
   columnHelper.display({
-    header: 'Actions',
+    header: "Actions",
     cell: () => (
       <Button
         label="edit"
@@ -35,10 +35,10 @@ const defaultColumns = [
     },
   }),
   {
-    header: 'Name',
+    header: "Name",
     columns: [
       {
-        accessorKey: 'firstName',
+        accessorKey: "firstName",
         meta: {
           width: 200,
           editable: () => {
@@ -52,7 +52,7 @@ const defaultColumns = [
       },
       {
         accessorFn: (row: any) => row.lastName,
-        id: 'lastName',
+        id: "lastName",
         header: () => <span>Last Name</span>,
         meta: {
           width: 200,
@@ -66,29 +66,29 @@ const defaultColumns = [
     ],
   },
   {
-    header: 'Info',
+    header: "Info",
     columns: [
       {
-        accessorKey: 'age',
-        header: () => 'Age',
+        accessorKey: "age",
+        header: () => "Age",
         meta: {
           width: 100,
         },
       },
       {
-        header: 'More Info',
+        header: "More Info",
         columns: [
           {
-            accessorKey: 'visits',
+            accessorKey: "visits",
             header: () => <span>Visits</span>,
           },
           {
-            accessorKey: 'status',
-            header: 'Status',
+            accessorKey: "status",
+            header: "Status",
           },
           {
-            accessorKey: 'progress',
-            header: 'Profile Progress',
+            accessorKey: "progress",
+            header: "Profile Progress",
           },
         ],
       },
@@ -96,7 +96,7 @@ const defaultColumns = [
   },
 ];
 
-const status = ['In Relationship', 'Single', 'Complicated'];
+const status = ["In Relationship", "Single", "Complicated"];
 
 function genData(count: number): Person[] {
   const data: Person[] = [];
@@ -115,7 +115,7 @@ function genData(count: number): Person[] {
 
 export default function Demo() {
   const [p, setP] = createStore({
-    size: 'medium' as const,
+    size: "medium" as const,
     bordered: false,
     empty: false,
   });
@@ -153,7 +153,7 @@ export default function Demo() {
               },
               currPage: currPage(),
             }}
-            rowClass={(row) => (row === showItem() ? 'bg-blue-100' : '')}
+            rowClass={(row) => (row === showItem() ? "bg-blue-100" : "")}
             size={p.size}
           />
         </div>
@@ -162,7 +162,7 @@ export default function Demo() {
         onChange={setP}
         properties={p}
         typeDeclaration={{
-          size: ['small', 'medium', 'large', 50],
+          size: ["small", "medium", "large", 50],
         }}
       />
     </Playground>

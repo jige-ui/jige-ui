@@ -1,5 +1,5 @@
 {
-  "$schema": "https://biomejs.dev/schemas/2.1.2/schema.json",
+  "$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
   "extends": ["ultracite"],
   "linter": {
     "rules": {
@@ -7,16 +7,22 @@
         "noExplicitAny": "warn",
         "noConsole": "warn",
         "useGuardForIn": "off",
-        "noEmptyBlockStatements": "off"
+        "noEmptyBlockStatements": "off",
+        "noUnassignedVariables": "off"
       },
       "a11y": {
         "noStaticElementInteractions": "off",
         "useKeyWithClickEvents": "off",
-        "useSemanticElements": "off"
+        "useSemanticElements": "off",
+        "noNoninteractiveElementInteractions": "off"
       },
       "nursery": "off",
       "style": {
-        "noNonNullAssertion": "off"
+        "noNonNullAssertion": "off",
+        "noMagicNumbers": "off"
+      },
+      "performance": {
+        "noBarrelFile": "off"
       }
     }
   },

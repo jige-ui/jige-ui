@@ -1,14 +1,14 @@
-import { callMaybeCallableChild, FormCore } from 'jige-core';
+import { callMaybeCallableChild, FormCore } from "jige-core";
 import {
   createMemo,
   createUniqueId,
   type JSX,
   Show,
   splitProps,
-} from 'solid-js';
-import { createWatch } from 'solid-tiny-utils';
-import { dataIf } from '~/common/dataset';
-import { fieldContext } from './context';
+} from "solid-js";
+import { createWatch } from "solid-tiny-utils";
+import { dataIf } from "~/common/dataset";
+import { fieldContext } from "./context";
 
 function ErrorOrDescription(props: { description?: string }) {
   const [fieldState] = FormCore.useField();
@@ -17,7 +17,7 @@ function ErrorOrDescription(props: { description?: string }) {
   const errors = createMemo(() => fieldState.errors.map((e) => e.message));
 
   createWatch([errors, () => props.description], ([e, d]) => {
-    actions.setState('hasDescription', e.length > 0 || !!d);
+    actions.setState("hasDescription", e.length > 0 || !!d);
   });
 
   return (
@@ -28,7 +28,7 @@ function ErrorOrDescription(props: { description?: string }) {
         id={state.descriptionID}
       >
         <Show fallback={props.description} when={errors()?.length > 0}>
-          {errors().join(',')}
+          {errors().join(",")}
         </Show>
       </div>
     </Show>
@@ -60,13 +60,13 @@ export function Field(
   }
 ) {
   const [localProps, otherProps] = splitProps(props, [
-    'description',
-    'children',
-    'label',
-    'class',
-    'style',
-    'required',
-    'validators',
+    "description",
+    "children",
+    "label",
+    "class",
+    "style",
+    "required",
+    "validators",
   ]);
   const id = createUniqueId();
   const Context = fieldContext.initial({
@@ -85,7 +85,7 @@ export function Field(
               localProps.required &&
               (!v?.toString().trim() || Number.isNaN(v))
             ) {
-              return '必填项！';
+              return "必填项！";
             }
           },
           ...(localProps.validators || []),
@@ -93,7 +93,7 @@ export function Field(
       >
         {(state, actions) => (
           <div
-            class={`jg-form-field ${localProps.class || ''}`}
+            class={`jg-form-field ${localProps.class || ""}`}
             data-invalid={dataIf(state.errors.length)}
             data-required={dataIf(localProps.required)}
             style={localProps.style}

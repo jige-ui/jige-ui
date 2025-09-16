@@ -1,11 +1,11 @@
-import { FormCore } from 'jige-core';
-import type { JigeInputProps } from '~/components/form-components/input/types';
-import { Input } from '../../form-components';
+import { FormCore } from "jige-core";
+import type { JigeInputProps } from "~/components/form-components/input/types";
+import { Input } from "../../form-components";
 
 /**
  * Input component which is already bind with form.
  */
-export function FormInput(props: Omit<JigeInputProps, 'onChange' | 'value'>) {
+export function FormInput(props: Omit<JigeInputProps, "onChange" | "value">) {
   const [fieldState, fieldActs] = FormCore.useField();
 
   return (

@@ -10,10 +10,10 @@ import {
   type SizeOptions,
   shift,
   size,
-} from '@floating-ui/dom';
-import { batch } from 'solid-js';
-import { createComponentState } from 'solid-tiny-context';
-import type { CloseableStatus } from '@/common/types';
+} from "@floating-ui/dom";
+import { batch } from "solid-js";
+import { createComponentState } from "solid-tiny-context";
+import type { CloseableStatus } from "@/common/types";
 
 const context = createComponentState({
   state: () => ({
@@ -21,10 +21,10 @@ const context = createComponentState({
     y: 0,
     clientX: 0,
     clientY: 0,
-    placement: 'bottom-start' as Placement,
+    placement: "bottom-start" as Placement,
     triggerEl: null as HTMLElement | null,
     contentEl: null as HTMLDivElement | null,
-    status: 'closed' as CloseableStatus,
+    status: "closed" as CloseableStatus,
     middlewareData: {
       shift: {
         x: 0,
@@ -41,13 +41,13 @@ const context = createComponentState({
   methods: {
     setOpen(open: boolean) {
       const { state, actions } = this;
-      if (open && state.status.startsWith('open')) {
+      if (open && state.status.startsWith("open")) {
         return;
       }
-      if (!open && state.status.startsWith('clos')) {
+      if (!open && state.status.startsWith("clos")) {
         return;
       }
-      actions.setState('status', open ? 'opening' : 'closing');
+      actions.setState("status", open ? "opening" : "closing");
     },
     async updatePos() {
       const { clientX, clientY, contentEl, plugin } = this.state;
@@ -92,7 +92,7 @@ const context = createComponentState({
         {
           placement: this.state.placement,
           middleware,
-          strategy: 'fixed',
+          strategy: "fixed",
         }
       );
 
@@ -102,7 +102,7 @@ const context = createComponentState({
           y,
           placement,
         });
-        this.actions.setState('middlewareData', middlewareData);
+        this.actions.setState("middlewareData", middlewareData);
       });
     },
   },

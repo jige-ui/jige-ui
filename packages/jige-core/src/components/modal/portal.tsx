@@ -1,7 +1,7 @@
-import { Show } from 'solid-js';
-import type { JSX } from 'solid-js/jsx-runtime';
-import { Portal as P } from 'solid-js/web';
-import { context } from './context';
+import { Show } from "solid-js";
+import type { JSX } from "solid-js/jsx-runtime";
+import { Portal as P } from "solid-js/web";
+import { context } from "./context";
 
 export function Portal(props: {
   mount?: Node;
@@ -10,7 +10,7 @@ export function Portal(props: {
 }) {
   const [state] = context.useContext();
   return (
-    <Show when={state.status !== 'closed'}>
+    <Show when={state.status !== "closed"}>
       <P mount={props.mount} ref={props.ref}>
         {props.children}
       </P>

@@ -1,16 +1,16 @@
-import { createSignal } from 'solid-js';
-import { createStore } from 'solid-js/store';
-import { DatePicker } from '~/build';
-import { Playground } from '../../../components/playground';
+import { createSignal } from "solid-js";
+import { createStore } from "solid-js/store";
+import { DatePicker } from "~/build";
+import { Playground } from "../../../components/playground";
 
 export default function Demo() {
   const [p, setP] = createStore({
     disabled: false,
-    type: 'date' as const,
-    size: 'medium' as 'small' | 'medium' | 'large',
+    type: "date" as const,
+    size: "medium" as "small" | "medium" | "large",
   });
 
-  const [value, setValue] = createSignal('');
+  const [value, setValue] = createSignal("");
 
   return (
     <Playground>
@@ -32,8 +32,8 @@ export default function Demo() {
         onChange={setP}
         properties={p}
         typeDeclaration={{
-          type: ['date', 'month', 'hour', 'minute', 'second'],
-          size: ['small', 'medium', 'large'],
+          type: ["date", "month", "hour", "minute", "second"],
+          size: ["small", "medium", "large"],
         }}
       />
     </Playground>

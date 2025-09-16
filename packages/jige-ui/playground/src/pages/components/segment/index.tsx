@@ -1,10 +1,10 @@
-import { createSignal } from 'solid-js';
-import { createStore } from 'solid-js/store';
-import { Segment } from '~/build';
-import { Playground } from '../../../components/playground';
+import { createSignal } from "solid-js";
+import { createStore } from "solid-js/store";
+import { Segment } from "~/build";
+import { Playground } from "../../../components/playground";
 
 export default function Demo() {
-  const [value, setValue] = createSignal('Apple');
+  const [value, setValue] = createSignal("Apple");
   const [s, setS] = createStore({
     disabled: false,
   });
@@ -21,7 +21,7 @@ export default function Demo() {
           <Segment
             disabled={s.disabled}
             onChange={setValue}
-            options={['Apple', 'Banana', 'Watermelon', 'Orange', 'Pineapple']}
+            options={["Apple", "Banana", "Watermelon", "Orange", "Pineapple"]}
             value={value()}
           />
         </div>

@@ -1,11 +1,11 @@
-import { mergeRefs } from '@solid-primitives/refs';
-import type { JSX } from 'solid-js';
-import { splitProps } from 'solid-js';
-import { combineStyle } from '@/common/dom';
-import type { PropsWithContextChild } from '@/common/props';
-import { callMaybeContextChild } from '@/common/props';
-import { runSolidEventHandler } from '@/common/solidjs';
-import context from './context';
+import { mergeRefs } from "@solid-primitives/refs";
+import type { JSX } from "solid-js";
+import { splitProps } from "solid-js";
+import { combineStyle } from "@/common/dom";
+import type { PropsWithContextChild } from "@/common/props";
+import { callMaybeContextChild } from "@/common/props";
+import { runSolidEventHandler } from "@/common/solidjs";
+import context from "./context";
 
 export default function Track(
   props: PropsWithContextChild<
@@ -14,10 +14,10 @@ export default function Track(
   >
 ) {
   const [localProps, otherProps] = splitProps(props, [
-    'ref',
-    'onClick',
-    'style',
-    'children',
+    "ref",
+    "onClick",
+    "style",
+    "children",
   ]);
   const [state, actions] = context.useContext();
   let ref!: HTMLDivElement;
@@ -47,7 +47,7 @@ export default function Track(
       ref={mergeRefs(localProps.ref, (r) => {
         ref = r;
       })}
-      style={combineStyle({ position: 'relative' }, localProps.style)}
+      style={combineStyle({ position: "relative" }, localProps.style)}
     >
       {callMaybeContextChild(context.useContext(), localProps.children)}
     </div>

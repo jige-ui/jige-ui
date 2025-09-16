@@ -1,7 +1,7 @@
 export interface DialogInst {
   id: string;
   title: string;
-  type: 'success' | 'warning' | 'error' | 'info';
+  type: "success" | "warning" | "error" | "info";
   content: string;
   positiveText?: string;
   negativeText?: string;
@@ -10,12 +10,12 @@ export interface DialogInst {
 }
 
 export interface DialogFactory {
-  error: ((conf: Omit<DialogInst, 'type' | 'id'>) => void) &
+  error: ((conf: Omit<DialogInst, "type" | "id">) => void) &
     ((content: string) => void);
-  success: ((conf: Omit<DialogInst, 'type' | 'id'>) => void) &
+  success: ((conf: Omit<DialogInst, "type" | "id">) => void) &
     ((content: string) => void);
-  warning: ((conf: Omit<DialogInst, 'type' | 'id'>) => void) &
+  warning: ((conf: Omit<DialogInst, "type" | "id">) => void) &
     ((content: string) => void);
-  info: ((conf: Omit<DialogInst, 'type' | 'id'>) => void) &
+  info: ((conf: Omit<DialogInst, "type" | "id">) => void) &
     ((content: string) => void);
 }

@@ -1,6 +1,6 @@
 // @refresh reload
 /** biome-ignore-all lint/style/noHeadElement: This is entry */
-import { createHandler, StartServer } from '@solidjs/start/server';
+import { createHandler, StartServer } from "@solidjs/start/server";
 
 export default createHandler(() => (
   <StartServer

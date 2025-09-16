@@ -5,20 +5,20 @@ import type {
   Placement,
   ShiftOptions,
   SizeOptions,
-} from '@floating-ui/dom';
-import { computePosition, flip, offset, shift, size } from '@floating-ui/dom';
-import { batch } from 'solid-js';
-import { createComponentState } from 'solid-tiny-context';
-import type { CloseableStatus } from '@/common/types';
+} from "@floating-ui/dom";
+import { computePosition, flip, offset, shift, size } from "@floating-ui/dom";
+import { batch } from "solid-js";
+import { createComponentState } from "solid-tiny-context";
+import type { CloseableStatus } from "@/common/types";
 
 export const context = createComponentState({
   state: () => ({
     x: 0,
     y: 0,
-    originalPlacement: 'top' as Placement,
-    placement: 'top' as Placement,
-    status: 'closed' as CloseableStatus,
-    trigger: 'hover' as 'hover' | 'click' | 'manual',
+    originalPlacement: "top" as Placement,
+    placement: "top" as Placement,
+    status: "closed" as CloseableStatus,
+    trigger: "hover" as "hover" | "click" | "manual",
     refContent: null as HTMLDivElement | null,
     refTrigger: null as HTMLElement | null,
     canHoverContent: true,
@@ -43,7 +43,7 @@ export const context = createComponentState({
   }),
   methods: {
     setStatus(status: CloseableStatus) {
-      this.actions.setState('status', status);
+      this.actions.setState("status", status);
     },
     /* only for hover */
     setTimerOpen(open: boolean) {
@@ -59,7 +59,7 @@ export const context = createComponentState({
       }
 
       actions.setState(
-        'timer',
+        "timer",
         setTimeout(() => {
           actions.setOpen(open);
         }, duration)
@@ -70,13 +70,13 @@ export const context = createComponentState({
       if (open && state.disabled) {
         return;
       }
-      if (open && state.status.startsWith('open')) {
+      if (open && state.status.startsWith("open")) {
         return;
       }
-      if (!open && state.status.startsWith('clos')) {
+      if (!open && state.status.startsWith("clos")) {
         return;
       }
-      actions.setStatus(open ? 'opening' : 'closing');
+      actions.setStatus(open ? "opening" : "closing");
     },
     async updatePos() {
       const { state, actions } = this;
@@ -113,7 +113,7 @@ export const context = createComponentState({
         {
           placement: state.originalPlacement,
           middleware,
-          strategy: 'fixed',
+          strategy: "fixed",
         }
       );
 
@@ -123,8 +123,8 @@ export const context = createComponentState({
           y,
           placement,
         });
-        actions.setState('middlewareData', middlewareData);
-        actions.setState('initialized', true);
+        actions.setState("middlewareData", middlewareData);
+        actions.setState("initialized", true);
       });
     },
   },

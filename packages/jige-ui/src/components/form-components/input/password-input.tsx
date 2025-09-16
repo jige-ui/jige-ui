@@ -3,12 +3,12 @@ import {
   InputCore,
   runSolidEventHandler,
   undefinedOr,
-} from 'jige-core';
-import { createSignal, Show, splitProps } from 'solid-js';
-import { IconFluentEye24Regular } from '~/components/icons/fluent-eye-24-regular';
-import { IconFluentEyeOff24Filled } from '~/components/icons/fluent-eye-off-24-filled';
-import { InputWrapper } from './input-wrapper';
-import type { JigeInputProps } from './types';
+} from "jige-core";
+import { createSignal, Show, splitProps } from "solid-js";
+import { IconFluentEye24Regular } from "~/components/icons/fluent-eye-24-regular";
+import { IconFluentEyeOff24Filled } from "~/components/icons/fluent-eye-off-24-filled";
+import { InputWrapper } from "./input-wrapper";
+import type { JigeInputProps } from "./types";
 
 function VisibleSwitcher(props: {
   visible: boolean;
@@ -40,23 +40,23 @@ function VisibleSwitcher(props: {
   );
 }
 
-export function PasswordInput(props: Omit<JigeInputProps, 'type'>) {
+export function PasswordInput(props: Omit<JigeInputProps, "type">) {
   const [showPass, setShowPass] = createSignal(false);
   const [focused, setFocused] = createSignal(false);
 
   const [, fieldCoreActs] = FormCore.useField();
 
   const [localProps, otherProps] = splitProps(props, [
-    'value',
-    'onChange',
-    'disabled',
-    'clearable',
-    'onFocus',
-    'onBlur',
-    'class',
-    'style',
-    'readonly',
-    'size',
+    "value",
+    "onChange",
+    "disabled",
+    "clearable",
+    "onFocus",
+    "onBlur",
+    "class",
+    "style",
+    "readonly",
+    "size",
   ]);
 
   return (
@@ -68,12 +68,12 @@ export function PasswordInput(props: Omit<JigeInputProps, 'type'>) {
       <InputWrapper
         focused={focused()}
         readonly={localProps.readonly}
-        size={undefinedOr(localProps.size, 'medium')}
+        size={undefinedOr(localProps.size, "medium")}
       >
         <InputCore.Native
           {...(otherProps as any)}
           autocomplete="off"
-          class={['jg-input-native', localProps.class].join(' ')}
+          class={["jg-input-native", localProps.class].join(" ")}
           onBlur={(e: any) => {
             setFocused(false);
             fieldCoreActs.handleBlur?.();
@@ -84,7 +84,7 @@ export function PasswordInput(props: Omit<JigeInputProps, 'type'>) {
             runSolidEventHandler(e, localProps.onFocus);
           }}
           readonly={localProps.readonly}
-          type={showPass() ? 'text' : 'password'}
+          type={showPass() ? "text" : "password"}
         />
         <VisibleSwitcher onVisibleChange={setShowPass} visible={showPass()} />
       </InputWrapper>

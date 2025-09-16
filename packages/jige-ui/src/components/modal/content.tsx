@@ -3,19 +3,19 @@ import {
   combineStyle,
   ModalCore,
   undefinedOr,
-} from 'jige-core';
-import { createSignal } from 'solid-js';
-import type { JSX } from 'solid-js/jsx-runtime';
-import { createWatch } from 'solid-tiny-utils';
-import { RootContext } from '../root/context';
-import { Scrollbar } from '../scrollbar';
-import { context } from './context';
+} from "jige-core";
+import { createSignal } from "solid-js";
+import type { JSX } from "solid-js/jsx-runtime";
+import { createWatch } from "solid-tiny-utils";
+import { RootContext } from "../root/context";
+import { Scrollbar } from "../scrollbar";
+import { context } from "./context";
 
 function calcOrigin(triggerRef: HTMLElement, contentRef: HTMLElement) {
-  contentRef.style.animationName = 'none';
+  contentRef.style.animationName = "none";
   const triggerRect = triggerRef.getBoundingClientRect();
   const contentRect = contentRef.getBoundingClientRect();
-  contentRef.style.animationName = '';
+  contentRef.style.animationName = "";
 
   const getCenter = (rect: DOMRect) => ({
     x: rect.left + (rect.right - rect.left) / 2,
@@ -32,7 +32,7 @@ function calcOrigin(triggerRef: HTMLElement, contentRef: HTMLElement) {
 }
 
 export function Content(props: {
-  children: Parameters<typeof ModalCore.Content>['0']['children'];
+  children: Parameters<typeof ModalCore.Content>["0"]["children"];
   dynamicTransformOrigin?: boolean;
   style?: string | JSX.CSSProperties;
   zIndex?: number;
@@ -45,32 +45,32 @@ export function Content(props: {
       <ModalCore.Mask
         class="jg-modal-mask"
         style={{
-          'z-index': undefinedOr(props.zIndex, rs.zIndexConfig.modal),
+          "z-index": undefinedOr(props.zIndex, rs.zIndexConfig.modal),
         }}
       />
       <ModalCore.Content
         class="jg-modal-content-wrapper"
         style={{
-          'z-index': undefinedOr(props.zIndex, rs.zIndexConfig.modal),
+          "z-index": undefinedOr(props.zIndex, rs.zIndexConfig.modal),
         }}
       >
         {(stat, acts, staticData) => {
-          const [transformOrigin, setTransformOrigin] = createSignal('');
+          const [transformOrigin, setTransformOrigin] = createSignal("");
           createWatch(
             () => stat.status,
             (status) => {
               if (
-                status === 'opened' ||
-                status === 'closed' ||
+                status === "opened" ||
+                status === "closed" ||
                 props.dynamicTransformOrigin === false
               ) {
-                setTransformOrigin('center center');
+                setTransformOrigin("center center");
                 return;
               }
               const { triggerRef, contentRef } = state;
 
               if (!(triggerRef?.isConnected && contentRef)) {
-                setTransformOrigin('center center');
+                setTransformOrigin("center center");
                 return;
               }
               const [originX, originY] = calcOrigin(triggerRef, contentRef);
@@ -84,14 +84,14 @@ export function Content(props: {
                 class="jg-modal-content"
                 data-modal-status={stat.status}
                 ref={(el) => {
-                  actions.setState('contentRef', el);
+                  actions.setState("contentRef", el);
                 }}
                 style={combineStyle(
                   {
-                    'transform-origin': transformOrigin(),
-                    width: props.width || '520px',
-                    top: '100px',
-                    position: 'relative',
+                    "transform-origin": transformOrigin(),
+                    width: props.width || "520px",
+                    top: "100px",
+                    position: "relative",
                   },
                   props.style
                 )}

@@ -1,9 +1,9 @@
-import css from 'sass:./combo-box.scss';
-import { FloatingUiCore } from 'jige-core';
-import { batch } from 'solid-js';
-import type { JSX } from 'solid-js/jsx-runtime';
-import { createWatch, mountStyle } from 'solid-tiny-utils';
-import { context } from './context';
+import css from "sass:./combo-box.scss";
+import { FloatingUiCore } from "jige-core";
+import { batch } from "solid-js";
+import type { JSX } from "solid-js/jsx-runtime";
+import { createWatch, mountStyle } from "solid-tiny-utils";
+import { context } from "./context";
 
 export function Root<T>(props: {
   value?: T;
@@ -14,7 +14,7 @@ export function Root<T>(props: {
   children: JSX.Element;
   editable?: boolean;
 }) {
-  mountStyle(css, 'jige-ui-combo-box');
+  mountStyle(css, "jige-ui-combo-box");
 
   const Context = context.initial({
     disabled: () => props.disabled,
@@ -37,9 +37,9 @@ export function Root<T>(props: {
     ([editable, valueLabel]) => {
       if (editable) {
         batch(() => {
-          actions.setState('editableValue', valueLabel);
-          actions.setState('offset', 0);
-          actions.setState('originY', 0);
+          actions.setState("editableValue", valueLabel);
+          actions.setState("offset", 0);
+          actions.setState("originY", 0);
         });
       }
     }
@@ -51,13 +51,13 @@ export function Root<T>(props: {
       if (!state.editable || v === state.valueLabel) {
         return;
       }
-      if (v === '') {
-        actions.setState('value', undefined);
+      if (v === "") {
+        actions.setState("value", undefined);
         return;
       }
       const index = state.options.findIndex((item) => item.label === v);
       if (index !== -1) {
-        actions.setState('value', state.options[index].value);
+        actions.setState("value", state.options[index].value);
       }
     }
   );

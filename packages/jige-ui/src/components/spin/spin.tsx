@@ -1,7 +1,7 @@
-import styles from 'sass:./spin.scss';
-import { For, mergeProps, Show } from 'solid-js';
-import type { JSX } from 'solid-js/jsx-runtime';
-import { list, mountStyle } from 'solid-tiny-utils';
+import styles from "sass:./spin.scss";
+import { For, mergeProps, Show } from "solid-js";
+import type { JSX } from "solid-js/jsx-runtime";
+import { list, mountStyle } from "solid-tiny-utils";
 
 function NormalRotateSpin(props: { size?: number }) {
   const realProps = mergeProps({ size: 12 }, props);
@@ -34,23 +34,23 @@ export function Spin(props: {
   children?: JSX.Element;
   size?: number;
 }) {
-  mountStyle(styles, 'jige-ui-spin');
+  mountStyle(styles, "jige-ui-spin");
 
   return (
     <div
       style={{
-        position: 'relative',
+        position: "relative",
       }}
     >
       <Show when={props.spinning}>
         <div
           style={{
-            position: 'absolute',
-            display: 'flex',
-            'align-items': 'center',
-            'justify-content': 'center',
+            position: "absolute",
+            display: "flex",
+            "align-items": "center",
+            "justify-content": "center",
             inset: 0,
-            'z-index': 1000,
+            "z-index": 1000,
           }}
         >
           <NormalRotateSpin size={props.size} />
@@ -58,10 +58,10 @@ export function Spin(props: {
       </Show>
       <div
         classList={{
-          'jg-spin-is-spinning': props.spinning,
+          "jg-spin-is-spinning": props.spinning,
         }}
         style={{
-          transition: 'opacity 0.3s',
+          transition: "opacity 0.3s",
         }}
       >
         {props.children}

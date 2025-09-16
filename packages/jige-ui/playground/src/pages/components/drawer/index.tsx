@@ -1,10 +1,10 @@
-import { createStore } from 'solid-js/store';
-import { Button, Drawer, Modal } from '~/build';
-import { Playground } from '../../../components/playground';
+import { createStore } from "solid-js/store";
+import { Button, Drawer, Modal } from "~/build";
+import { Playground } from "../../../components/playground";
 
 export default function Demo() {
   const [s, setS] = createStore({
-    position: 'right' as 'left' | 'right' | 'top' | 'bottom',
+    position: "right" as "left" | "right" | "top" | "bottom",
     width: 258,
   });
 
@@ -42,7 +42,7 @@ export default function Demo() {
         onChange={setS}
         properties={s}
         typeDeclaration={{
-          position: ['left', 'right', 'top', 'bottom'],
+          position: ["left", "right", "top", "bottom"],
         }}
       />
     </Playground>

@@ -1,13 +1,13 @@
-import { InputCore } from 'jige-core';
-import type { JSX } from 'solid-js';
-import { dataIf } from '~/common/dataset';
+import { InputCore } from "jige-core";
+import type { JSX } from "solid-js";
+import { dataIf } from "~/common/dataset";
 
 export function InputWrapper(props: {
   children: any;
   focused: boolean;
   readonly?: boolean;
   style?: string | JSX.CSSProperties;
-  size: 'small' | 'medium' | 'large';
+  size: "small" | "medium" | "large";
 }) {
   const [state] = InputCore.useContext();
   return (

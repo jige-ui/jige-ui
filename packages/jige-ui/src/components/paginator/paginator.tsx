@@ -1,14 +1,14 @@
-import css from 'sass:./paginator.scss';
-import { PaginatorCore } from 'jige-core';
-import { createMemo, createSignal, Match, Show, Switch } from 'solid-js';
-import { isNumber, mountStyle } from 'solid-tiny-utils';
-import { dataIf } from '~/common/dataset';
-import { isDef } from '~/common/types';
-import { IconFluentChevronDoubleLeft16Filled } from '../icons/fluent-chevron-double-left-16-filled';
-import { IconFluentChevronDoubleRight16Filled } from '../icons/fluent-chevron-double-right-16-filled';
-import { IconFluentChevronLeft24Filled } from '../icons/fluent-chevron-left-24-filled';
-import { IconFluentChevronRight24Filled } from '../icons/fluent-chevron-right-24-filled';
-import { IconFluentMoreHorizontal24Filled } from '../icons/fluent-more-horizontal-24-filled';
+import css from "sass:./paginator.scss";
+import { PaginatorCore } from "jige-core";
+import { createMemo, createSignal, Match, Show, Switch } from "solid-js";
+import { isNumber, mountStyle } from "solid-tiny-utils";
+import { dataIf } from "~/common/dataset";
+import { isDef } from "~/common/types";
+import { IconFluentChevronDoubleLeft16Filled } from "../icons/fluent-chevron-double-left-16-filled";
+import { IconFluentChevronDoubleRight16Filled } from "../icons/fluent-chevron-double-right-16-filled";
+import { IconFluentChevronLeft24Filled } from "../icons/fluent-chevron-left-24-filled";
+import { IconFluentChevronRight24Filled } from "../icons/fluent-chevron-right-24-filled";
+import { IconFluentMoreHorizontal24Filled } from "../icons/fluent-more-horizontal-24-filled";
 
 function Pager(props: {
   page: number;
@@ -55,7 +55,7 @@ function PageArrow(props: {
         }
       }}
       style={{
-        color: 'var(--jg-fg3)',
+        color: "var(--jg-fg3)",
       }}
     >
       <Show fallback={<IconFluentChevronRight24Filled />} when={props.isLeft}>
@@ -108,7 +108,7 @@ export function Paginator(props: {
   hideOnSinglePage?: boolean;
   disabled?: boolean;
 }) {
-  mountStyle(css, 'jige-ui-paginator');
+  mountStyle(css, "jige-ui-paginator");
   const shouldHide = createMemo(() => {
     const total = props.total;
     const pageSize = props.pageSize;
@@ -139,7 +139,7 @@ export function Paginator(props: {
       class="jg-paginator"
       style={{
         opacity: opacity(),
-        'pointer-events': props.disabled ? 'none' : 'auto',
+        "pointer-events": props.disabled ? "none" : "auto",
       }}
     >
       <PaginatorCore {...props}>
@@ -151,7 +151,7 @@ export function Paginator(props: {
                 fallback={
                   <PagerBlank
                     currPage={props.currPage}
-                    left={page === 'space-left'}
+                    left={page === "space-left"}
                     onPageClick={props.onPageClick}
                   />
                 }

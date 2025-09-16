@@ -1,6 +1,6 @@
-import type { JSX } from 'solid-js/jsx-runtime';
-import { createWatch } from 'solid-tiny-utils';
-import context from './context';
+import type { JSX } from "solid-js/jsx-runtime";
+import { createWatch } from "solid-tiny-utils";
+import context from "./context";
 
 export function Root<TValue = string | number>(props: {
   children: JSX.Element;

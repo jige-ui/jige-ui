@@ -1,6 +1,6 @@
-import { RadioGroupCore } from 'jige-core';
-import { createMemo } from 'solid-js';
-import type { RadioOption } from './types';
+import { RadioGroupCore } from "jige-core";
+import { createMemo } from "solid-js";
+import type { RadioOption } from "./types";
 
 export function Thumb(props: {
   options: Exclude<RadioOption, string>[];

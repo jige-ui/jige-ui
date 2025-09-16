@@ -1,4 +1,4 @@
-import type { JSX } from 'solid-js/jsx-runtime';
+import type { JSX } from "solid-js/jsx-runtime";
 
 export function getElementHeight(el: HTMLElement) {
   if (!el) {
@@ -8,9 +8,9 @@ export function getElementHeight(el: HTMLElement) {
   const oldMaxHeight = el.style.maxHeight;
   const oldAnimationName = el.style.animationName;
 
-  el.style.transitionDuration = '0s !important';
-  el.style.maxHeight = '';
-  el.style.animationName = 'none';
+  el.style.transitionDuration = "0s !important";
+  el.style.maxHeight = "";
+  el.style.animationName = "none";
 
   const height = el.offsetHeight;
 
@@ -22,10 +22,10 @@ export function getElementHeight(el: HTMLElement) {
 }
 
 export const hiddenStyle =
-  'border: 0px;clip: rect(0px, 0px, 0px, 0px);clip-path: inset(50%);height: 1px;margin: 0px -1px -1px 0px;overflow: hidden;padding: 0px;position: absolute;width: 1px;white-space: nowrap;';
+  "border: 0px;clip: rect(0px, 0px, 0px, 0px);clip-path: inset(50%);height: 1px;margin: 0px -1px -1px 0px;overflow: hidden;padding: 0px;position: absolute;width: 1px;white-space: nowrap;";
 
 export function hasAnimation(el: HTMLElement) {
-  return getComputedStyle(el).animationName !== 'none';
+  return getComputedStyle(el).animationName !== "none";
 }
 
 export function uiRefreshDo(cb: () => void) {
@@ -49,7 +49,7 @@ export function combineStyle(
   a: JSX.CSSProperties,
   b: JSX.CSSProperties | string | undefined
 ): JSX.CSSProperties | string {
-  const bb = typeof b === 'string' ? stringStyleToObject(b) : b;
+  const bb = typeof b === "string" ? stringStyleToObject(b) : b;
   return { ...a, ...bb };
 }
 
@@ -57,12 +57,12 @@ export function preventBodyScroll(enable: boolean) {
   const $body = document.body.style;
   const paddingRight = window.innerWidth - document.documentElement.clientWidth;
   if (enable) {
-    $body.overflow = 'hidden';
-    $body.pointerEvents = 'none';
+    $body.overflow = "hidden";
+    $body.pointerEvents = "none";
     $body.paddingRight = `${paddingRight}px`;
   } else {
-    $body.overflow = '';
-    $body.pointerEvents = '';
-    $body.paddingRight = '';
+    $body.overflow = "";
+    $body.pointerEvents = "";
+    $body.paddingRight = "";
   }
 }

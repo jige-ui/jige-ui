@@ -1,4 +1,4 @@
-import { createComponentState } from 'solid-tiny-context';
+import { createComponentState } from "solid-tiny-context";
 
 const context = createComponentState({
   state: () => ({
@@ -10,7 +10,7 @@ const context = createComponentState({
     isDragging: false,
     vertical: false,
     reverse: false,
-    name: '',
+    name: "",
     focused: false,
     $nativeEl: null as HTMLInputElement | null,
   }),
@@ -31,7 +31,7 @@ const context = createComponentState({
             this.state.step
         ) * this.state.step;
 
-      !this.state.disabled && this.actions.setState('value', fixedValue);
+      !this.state.disabled && this.actions.setState("value", fixedValue);
     },
 
     setRatio(ratio: number) {

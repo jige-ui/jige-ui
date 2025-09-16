@@ -1,8 +1,8 @@
-import { splitProps } from 'solid-js';
-import type { JSX } from 'solid-js/jsx-runtime';
-import { createWatch } from 'solid-tiny-utils';
-import { runSolidEventHandler } from '@/common/solidjs';
-import type { createForm } from './create-form';
+import { splitProps } from "solid-js";
+import type { JSX } from "solid-js/jsx-runtime";
+import { createWatch } from "solid-tiny-utils";
+import { runSolidEventHandler } from "@/common/solidjs";
+import type { createForm } from "./create-form";
 
 export function JigeFormCore<T extends {}>(
   props: {
@@ -11,17 +11,17 @@ export function JigeFormCore<T extends {}>(
   } & JSX.FormHTMLAttributes<HTMLFormElement>
 ) {
   const [localProps, otherProps] = splitProps(props, [
-    'staticFormInstance',
-    'onSubmit',
-    'onReset',
-    'disabled',
+    "staticFormInstance",
+    "onSubmit",
+    "onReset",
+    "disabled",
   ]);
   const [, actions] = localProps.staticFormInstance.context;
 
   createWatch(
     () => localProps.disabled,
     (d) => {
-      actions.setState('disabled', d ?? false);
+      actions.setState("disabled", d ?? false);
     }
   );
 

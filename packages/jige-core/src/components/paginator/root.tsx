@@ -1,6 +1,6 @@
-import { createEffect } from 'solid-js';
-import type { JSX } from 'solid-js/jsx-runtime';
-import context from './context';
+import { createEffect } from "solid-js";
+import type { JSX } from "solid-js/jsx-runtime";
+import context from "./context";
 
 export function Root(props: {
   children: JSX.Element;

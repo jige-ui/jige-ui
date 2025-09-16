@@ -1,6 +1,6 @@
-import { createMemo, For, Show } from 'solid-js';
-import { list } from 'solid-tiny-utils';
-import { Node } from './node';
+import { createMemo, For, Show } from "solid-js";
+import { list } from "solid-tiny-utils";
+import { Node } from "./node";
 
 export function Text(props: {
   rows?: number;
@@ -12,10 +12,10 @@ export function Text(props: {
   return (
     <div
       style={{
-        display: 'flex',
-        'flex-direction': 'column',
-        gap: '8px',
-        width: props.width || '100%',
+        display: "flex",
+        "flex-direction": "column",
+        gap: "8px",
+        width: props.width || "100%",
       }}
     >
       <Show when={rows() > 1}>

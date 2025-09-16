@@ -1,12 +1,12 @@
-import type { EsDay } from 'esday';
-import { batch, For, onCleanup, onMount } from 'solid-js';
-import { createWatch } from 'solid-tiny-utils';
-import { Button } from '~/components/button';
-import { IconFluentCheckmark24Regular } from '~/components/icons/fluent-checkmark-24-regular';
-import { IconFluentDismiss24Regular } from '~/components/icons/fluent-dismiss-24-regular';
-import { DatePickerMainPanel } from '../date-picker';
-import { TimePicker } from '../time-picker';
-import { context } from './context';
+import type { EsDay } from "esday";
+import { batch, For, onCleanup, onMount } from "solid-js";
+import { createWatch } from "solid-tiny-utils";
+import { Button } from "~/components/button";
+import { IconFluentCheckmark24Regular } from "~/components/icons/fluent-checkmark-24-regular";
+import { IconFluentDismiss24Regular } from "~/components/icons/fluent-dismiss-24-regular";
+import { DatePickerMainPanel } from "../date-picker";
+import { TimePicker } from "../time-picker";
+import { context } from "./context";
 
 export function Panel(props: {
   presets?: {
@@ -18,56 +18,56 @@ export function Panel(props: {
 }) {
   const [state, actions] = context.useContext();
   const commonProps = {
-    dateRange: ['1800-01-01', '2200-01-01'] as [string, string],
+    dateRange: ["1800-01-01", "2200-01-01"] as [string, string],
     highlightYears: [] as number[],
     highlightMonths: [] as string[],
     highlightDates: [] as string[],
     disabledDates: [] as string[],
-    type: 'date' as const,
+    type: "date" as const,
     multiple: true,
   };
 
   onMount(() => {
     actions.updateCurrYearMonthData();
-    actions.setState('previewMode', true);
+    actions.setState("previewMode", true);
   });
 
   onCleanup(() => {
-    actions.setState('previewMode', false);
+    actions.setState("previewMode", false);
   });
 
   const setCurrYearMonthData = (
     key: keyof typeof state.currYearMonthData,
     value: number
   ) => {
-    actions.setState('currYearMonthData', key, value);
+    actions.setState("currYearMonthData", key, value);
   };
 
   const handleFromPanel = (currYear: number, currMonth: number) => {
-    setCurrYearMonthData('fromYear', currYear);
-    setCurrYearMonthData('fromMonth', currMonth);
+    setCurrYearMonthData("fromYear", currYear);
+    setCurrYearMonthData("fromMonth", currMonth);
     if (state.currYearMonthData.toYear < currYear) {
-      setCurrYearMonthData('toYear', currYear);
+      setCurrYearMonthData("toYear", currYear);
     }
     if (
       state.currYearMonthData.toYear === currYear &&
       state.currYearMonthData.toMonth <= currMonth
     ) {
-      setCurrYearMonthData('toMonth', currMonth + 1);
+      setCurrYearMonthData("toMonth", currMonth + 1);
     }
   };
 
   const handleToPanel = (currYear: number, currMonth: number) => {
-    setCurrYearMonthData('toYear', currYear);
-    setCurrYearMonthData('toMonth', currMonth);
+    setCurrYearMonthData("toYear", currYear);
+    setCurrYearMonthData("toMonth", currMonth);
     if (state.currYearMonthData.fromYear > currYear) {
-      setCurrYearMonthData('fromYear', currYear);
+      setCurrYearMonthData("fromYear", currYear);
     }
     if (
       state.currYearMonthData.fromYear === currYear &&
       state.currYearMonthData.fromMonth >= currMonth
     ) {
-      setCurrYearMonthData('fromMonth', currMonth - 1);
+      setCurrYearMonthData("fromMonth", currMonth - 1);
     }
   };
 
@@ -90,7 +90,7 @@ export function Panel(props: {
     const to = state.toInst;
     const isInRange = day > from && day < to;
 
-    return isInRange ? 'jg-dp-cell-in-range' : '';
+    return isInRange ? "jg-dp-cell-in-range" : "";
   };
 
   createWatch(
@@ -114,7 +114,7 @@ export function Panel(props: {
               ? () => (
                   <TimePicker
                     onChange={(v) => {
-                      actions.setState('timeValue', 0, v);
+                      actions.setState("timeValue", 0, v);
                     }}
                     size="small"
                     value={state.timeValue[0]}
@@ -145,7 +145,7 @@ export function Panel(props: {
               ? () => (
                   <TimePicker
                     onChange={(v) => {
-                      actions.setState('timeValue', 1, v);
+                      actions.setState("timeValue", 1, v);
                     }}
                     size="small"
                     value={state.timeValue[1]}
@@ -170,16 +170,16 @@ export function Panel(props: {
       </div>
       <div
         style={{
-          display: 'flex',
-          'justify-content': 'space-between',
-          padding: '4px',
-          'border-top': '1px solid var(--jg-t-border)',
+          display: "flex",
+          "justify-content": "space-between",
+          padding: "4px",
+          "border-top": "1px solid var(--jg-t-border)",
         }}
       >
         <div
           style={{
-            display: 'flex',
-            'align-items': 'center',
+            display: "flex",
+            "align-items": "center",
           }}
         >
           <For each={props.presets}>
@@ -197,9 +197,9 @@ export function Panel(props: {
         </div>
         <div
           style={{
-            display: 'flex',
-            'align-items': 'center',
-            width: '128px',
+            display: "flex",
+            "align-items": "center",
+            width: "128px",
           }}
         >
           <Button
@@ -208,7 +208,7 @@ export function Panel(props: {
               actions.syncPreviewToValue();
               actions.blurTrigger();
             }}
-            style={{ width: '100%', 'flex-shrink': 1 }}
+            style={{ width: "100%", "flex-shrink": 1 }}
             variant="text"
           />
           <Button
@@ -216,7 +216,7 @@ export function Panel(props: {
             onClick={() => {
               actions.blurTrigger();
             }}
-            style={{ width: '100%', 'flex-shrink': 1 }}
+            style={{ width: "100%", "flex-shrink": 1 }}
             variant="text"
           />
         </div>

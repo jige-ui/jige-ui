@@ -1,13 +1,13 @@
-import css from 'sass:./tiny-table.scss';
-import { TableCore } from 'jige-core';
-import { createMemo, createSignal, For, type JSX, Show } from 'solid-js';
-import { type ColumnDef, createTable, type RowData } from 'solid-tiny-table';
-import { createWatch, mountStyle } from 'solid-tiny-utils';
-import { IconFluentBoxDismiss24Regular } from '../icons/fluent-box-dismiss-24-regular';
-import { Paginator } from '../paginator';
-import { Table } from '../table';
+import css from "sass:./tiny-table.scss";
+import { TableCore } from "jige-core";
+import { createMemo, createSignal, For, type JSX, Show } from "solid-js";
+import { type ColumnDef, createTable, type RowData } from "solid-tiny-table";
+import { createWatch, mountStyle } from "solid-tiny-utils";
+import { IconFluentBoxDismiss24Regular } from "../icons/fluent-box-dismiss-24-regular";
+import { Paginator } from "../paginator";
+import { Table } from "../table";
 
-declare module 'solid-tiny-table' {
+declare module "solid-tiny-table" {
   // biome-ignore lint/correctness/noUnusedVariables: e
   interface ColumnMeta<TData extends RowData, TValue> {
     width?: number;
@@ -20,9 +20,9 @@ function Empty() {
   return (
     <Table.Row>
       <Table.Cell
-        colSpan={'100%'}
+        colSpan={"100%"}
         style={{
-          padding: '0',
+          padding: "0",
         }}
       >
         <div
@@ -46,7 +46,7 @@ export function TinyTable<T extends RowData>(props: {
   height?: string;
   maxHeight?: string;
   rowClass?: (row: T) => string;
-  size?: 'small' | 'medium' | 'large' | number;
+  size?: "small" | "medium" | "large" | number;
   bordered?: boolean;
   onRowClick?: (row: T, index: number) => void;
   onRowDbClick?: (row: T, index: number) => void;
@@ -58,7 +58,7 @@ export function TinyTable<T extends RowData>(props: {
   };
   footer?: JSX.Element;
 }) {
-  mountStyle(css, 'jige-ui-tanstack-table');
+  mountStyle(css, "jige-ui-tanstack-table");
 
   const [scrollRef, setScrollRef] = createSignal<HTMLDivElement>();
 
@@ -70,19 +70,19 @@ export function TinyTable<T extends RowData>(props: {
   const fontSize = createMemo(() => {
     const size = props.size;
 
-    if (typeof size === 'number') {
+    if (typeof size === "number") {
       return `${size / 4 + 6}px`;
     }
 
     switch (size) {
-      case 'small':
-        return '13px';
-      case 'large':
-        return '16px';
-      case 'medium':
-        return '14px';
+      case "small":
+        return "13px";
+      case "large":
+        return "16px";
+      case "medium":
+        return "14px";
       default:
-        return '14px';
+        return "14px";
     }
   });
 
@@ -90,7 +90,7 @@ export function TinyTable<T extends RowData>(props: {
     scrollRef()?.scrollTo({
       top: 0,
       left: 0,
-      behavior: 'instant',
+      behavior: "instant",
     });
   });
 
@@ -100,7 +100,7 @@ export function TinyTable<T extends RowData>(props: {
       height={props.height}
       loading={props.loading}
       maxHeight={props.maxHeight}
-      style={{ 'font-size': fontSize() }}
+      style={{ "font-size": fontSize() }}
     >
       <Table.Header>
         <For each={table.headers()}>
@@ -149,7 +149,7 @@ export function TinyTable<T extends RowData>(props: {
 
       <Show when={props.pagination || props.footer}>
         <Table.Footer>
-          <div>{props.footer || ''}</div>
+          <div>{props.footer || ""}</div>
           <Show when={props.pagination}>
             <Paginator {...props.pagination!} />
           </Show>

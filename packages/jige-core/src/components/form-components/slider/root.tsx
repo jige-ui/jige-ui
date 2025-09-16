@@ -1,6 +1,6 @@
-import type { JSX } from 'solid-js';
-import { createWatch } from 'solid-tiny-utils';
-import context from './context';
+import type { JSX } from "solid-js";
+import { createWatch } from "solid-tiny-utils";
+import context from "./context";
 
 export default function Root(props: {
   children: JSX.Element;

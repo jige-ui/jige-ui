@@ -1,50 +1,50 @@
-import scrollCss from 'sass:./scrollbar.scss';
-import { runSolidEventHandler, ScrollbarCore } from 'jige-core';
-import type { JSX } from 'solid-js';
-import { createMemo, createSignal, Show } from 'solid-js';
-import { mountStyle } from 'solid-tiny-utils';
+import scrollCss from "sass:./scrollbar.scss";
+import { runSolidEventHandler, ScrollbarCore } from "jige-core";
+import type { JSX } from "solid-js";
+import { createMemo, createSignal, Show } from "solid-js";
+import { mountStyle } from "solid-tiny-utils";
 
 function GmScrollBar(props: {
-  type: 'vertical' | 'horizontal';
+  type: "vertical" | "horizontal";
   hidden: boolean;
   position?: {
     top?: string;
     left?: string;
     right?: string;
     bottom?: string;
-    'z-index'?: number;
+    "z-index"?: number;
   };
   color?: string;
 }) {
   const state = ScrollbarCore.useContext()[0];
-  const isVertical = createMemo(() => props.type === 'vertical');
+  const isVertical = createMemo(() => props.type === "vertical");
   const classes = createMemo(() => {
-    const base = ['jg-scrollbar'];
+    const base = ["jg-scrollbar"];
     if (isVertical()) {
-      base.push('jg-scrollbar-vertical');
+      base.push("jg-scrollbar-vertical");
     } else {
-      base.push('jg-scrollbar-horizontal');
+      base.push("jg-scrollbar-horizontal");
     }
 
     if (props.hidden) {
-      base.push('is-hidden');
+      base.push("is-hidden");
     }
     if (state.isDragging) {
-      base.push('is-dragging');
+      base.push("is-dragging");
     }
-    return base.join(' ');
+    return base.join(" ");
   });
   const pos = createMemo(() => {
     if (isVertical()) {
-      return { top: '2px', right: '2px', bottom: '2px', ...props.position };
+      return { top: "2px", right: "2px", bottom: "2px", ...props.position };
     }
-    return { left: '2px', right: '12px', bottom: '2px', ...props.position };
+    return { left: "2px", right: "12px", bottom: "2px", ...props.position };
   });
   return (
     <ScrollbarCore.Bar class={classes()} style={pos()} type={props.type}>
       <ScrollbarCore.Thumb
         class="jg-scrollbar-thumb"
-        style={{ background: props.color || 'var(--jg-t-hl-lighter)' }}
+        style={{ background: props.color || "var(--jg-t-hl-lighter)" }}
         type={props.type}
       />
     </ScrollbarCore.Bar>
@@ -60,14 +60,14 @@ export function Scrollbar(props: {
     left?: string;
     right?: string;
     bottom?: string;
-    'z-index'?: number;
+    "z-index"?: number;
   };
   horizontalPos?: {
     top?: string;
     left?: string;
     right?: string;
     bottom?: string;
-    'z-index'?: number;
+    "z-index"?: number;
   };
   hideHorizontal?: boolean;
   class?: string;
@@ -79,7 +79,7 @@ export function Scrollbar(props: {
   contentStyle?: string | JSX.CSSProperties;
   scrollRef?: (val: HTMLDivElement) => void;
 }) {
-  mountStyle(scrollCss, 'jige-ui-scrollbar');
+  mountStyle(scrollCss, "jige-ui-scrollbar");
   const [hidden, setHidden] = createSignal(true);
 
   return (

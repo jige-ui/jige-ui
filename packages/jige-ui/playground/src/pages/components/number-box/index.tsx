@@ -1,7 +1,7 @@
-import { createSignal } from 'solid-js';
-import { createStore } from 'solid-js/store';
-import { NumberBox } from '~/build';
-import { Playground } from '../../../components/playground';
+import { createSignal } from "solid-js";
+import { createStore } from "solid-js/store";
+import { NumberBox } from "~/build";
+import { Playground } from "../../../components/playground";
 
 export default function Demo() {
   const [value, setValue] = createSignal(1);
@@ -9,7 +9,7 @@ export default function Demo() {
     disabled: false,
     max: 100,
     min: 0,
-    size: 'medium' as 'small' | 'medium' | 'large',
+    size: "medium" as "small" | "medium" | "large",
   });
   return (
     <Playground>
@@ -28,7 +28,7 @@ export default function Demo() {
         onChange={setS}
         properties={s}
         typeDeclaration={{
-          size: ['small', 'medium', 'large'],
+          size: ["small", "medium", "large"],
         }}
       />
     </Playground>

@@ -1,9 +1,9 @@
-import { FloatingUiCore } from 'jige-core';
-import { Popover } from '~/components/popover';
-import { context } from './context';
-import { Root } from './root';
-import { TimePanel } from './time-panel';
-import { Trigger } from './trigger';
+import { FloatingUiCore } from "jige-core";
+import { Popover } from "~/components/popover";
+import { context } from "./context";
+import { Root } from "./root";
+import { TimePanel } from "./time-panel";
+import { Trigger } from "./trigger";
 
 function FloatingContent() {
   const [state, actions] = context.useContext();
@@ -36,8 +36,8 @@ function FloatingContent() {
 
 export function TimePicker(props: {
   disabled?: boolean;
-  type?: 'hour' | 'minute' | 'second';
-  size?: 'small' | 'medium';
+  type?: "hour" | "minute" | "second";
+  size?: "small" | "medium";
   value?: string;
   onChange?: (value: string) => void;
 }) {

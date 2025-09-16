@@ -1,6 +1,6 @@
-import { createStore } from 'solid-js/store';
-import { Slider } from '~/build';
-import { Playground } from '../../../components/playground';
+import { createStore } from "solid-js/store";
+import { Slider } from "~/build";
+import { Playground } from "../../../components/playground";
 
 export default function Demo() {
   const [s, setS] = createStore({

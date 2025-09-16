@@ -1,12 +1,12 @@
-import { Ref } from '@solid-primitives/refs';
-import { createMemo, onCleanup, onMount, splitProps } from 'solid-js';
-import type { JSX } from 'solid-js/jsx-runtime';
-import { createWatch, makeEventListener } from 'solid-tiny-utils';
-import { combineStyle, hasAnimation } from '@/common/dom';
-import type { PropsWithContextChild } from '@/common/props';
-import { callMaybeContextChild } from '@/common/props';
-import type { CloseableStatus } from '@/common/types';
-import { context, GlobalModalStore } from './context';
+import { Ref } from "@solid-primitives/refs";
+import { createMemo, onCleanup, onMount, splitProps } from "solid-js";
+import type { JSX } from "solid-js/jsx-runtime";
+import { createWatch, makeEventListener } from "solid-tiny-utils";
+import { combineStyle, hasAnimation } from "@/common/dom";
+import type { PropsWithContextChild } from "@/common/props";
+import { callMaybeContextChild } from "@/common/props";
+import type { CloseableStatus } from "@/common/types";
+import { context, GlobalModalStore } from "./context";
 
 export function Content(
   props: PropsWithContextChild<
@@ -14,7 +14,7 @@ export function Content(
     JSX.HTMLAttributes<HTMLDivElement>
   >
 ) {
-  const [localProps, otherProps] = splitProps(props, ['children', 'style']);
+  const [localProps, otherProps] = splitProps(props, ["children", "style"]);
   let ref!: HTMLElement;
   let wrapperRef!: HTMLDivElement;
   const [state, actions] = context.useContext();
@@ -23,23 +23,23 @@ export function Content(
   const isActive = createMemo(() => gs.stack.at(-1) === state.id);
 
   onMount(() => {
-    setGs('stack', (stack) => {
+    setGs("stack", (stack) => {
       stack.push(state.id);
       return [...stack];
     });
 
-    ref.style.pointerEvents = 'auto';
+    ref.style.pointerEvents = "auto";
 
     wrapperRef.tabIndex = 0;
     wrapperRef.focus();
     wrapperRef.tabIndex = -1;
 
-    makeEventListener(ref, 'animationend', () => {
-      actions.setStatus(state.status.replace('ing', 'ed') as CloseableStatus);
+    makeEventListener(ref, "animationend", () => {
+      actions.setStatus(state.status.replace("ing", "ed") as CloseableStatus);
     });
 
-    makeEventListener(document, 'keydown', (e) => {
-      if (e.key === 'Escape' && isActive() && state.closeOnEsc) {
+    makeEventListener(document, "keydown", (e) => {
+      if (e.key === "Escape" && isActive() && state.closeOnEsc) {
         actions.setOpen(false);
       }
     });
@@ -47,8 +47,8 @@ export function Content(
     createWatch(
       () => state.status,
       (status) => {
-        if (status.endsWith('ing') && !hasAnimation(ref)) {
-          actions.setStatus(status.replace('ing', 'ed') as CloseableStatus);
+        if (status.endsWith("ing") && !hasAnimation(ref)) {
+          actions.setStatus(status.replace("ing", "ed") as CloseableStatus);
         }
       }
     );
@@ -56,7 +56,7 @@ export function Content(
 
   onCleanup(() => {
     actions.preventBodyScroll(false);
-    setGs('stack', (stack) => {
+    setGs("stack", (stack) => {
       const index = stack.indexOf(state.id);
       if (index !== -1) {
         stack.splice(index, 1);
@@ -69,7 +69,7 @@ export function Content(
       ref={wrapperRef}
       style={combineStyle(
         {
-          position: 'fixed',
+          position: "fixed",
           inset: 0,
         },
         localProps.style

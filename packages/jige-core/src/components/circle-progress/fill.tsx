@@ -1,5 +1,5 @@
-import { createWatch } from 'solid-tiny-utils';
-import context from './context';
+import { createWatch } from "solid-tiny-utils";
+import context from "./context";
 
 export function Fill(props: {
   radius: number;
@@ -14,7 +14,7 @@ export function Fill(props: {
   createWatch(
     () => props.strokeWidth,
     () => {
-      actions.setState('fillWidth', props.strokeWidth);
+      actions.setState("fillWidth", props.strokeWidth);
     }
   );
   return (

@@ -1,4 +1,4 @@
-import { combineStyle, dataIf, uiRefreshDo } from 'jige-core';
+import { combineStyle, dataIf, uiRefreshDo } from "jige-core";
 import {
   createMemo,
   createSignal,
@@ -6,8 +6,8 @@ import {
   type JSX,
   mergeProps,
   onMount,
-} from 'solid-js';
-import { createWatch } from 'solid-tiny-utils';
+} from "solid-js";
+import { createWatch } from "solid-tiny-utils";
 
 export function FakeScrollArea<TValue extends string | number>(props: {
   value: TValue;
@@ -116,16 +116,16 @@ export function FakeScrollArea<TValue extends string | number>(props: {
   const checkPos = () => {
     if (currIndex() < 0 || currIndex() >= realProps.items.length) {
       setCurrIndex(realIndex());
-      ref.style.transition = 'none';
+      ref.style.transition = "none";
       uiRefreshDo(() => {
-        ref.style.transition = 'transform 0.2s ease';
+        ref.style.transition = "transform 0.2s ease";
       });
     }
   };
 
   onMount(() => {
     uiRefreshDo(() => {
-      ref.style.transition = 'transform 0.2s ease';
+      ref.style.transition = "transform 0.2s ease";
     });
   });
 
@@ -149,7 +149,7 @@ export function FakeScrollArea<TValue extends string | number>(props: {
       style={combineStyle(
         {
           height: `${realProps.itemHeight * realProps.visibleItems}px`,
-          width: '100%',
+          width: "100%",
         },
         realProps.style
       )}
@@ -157,13 +157,13 @@ export function FakeScrollArea<TValue extends string | number>(props: {
       <div
         style={combineStyle(
           {
-            position: 'absolute',
+            position: "absolute",
             height: `${realProps.itemHeight}px`,
             left: 0,
             right: 0,
             top: `${Math.floor(realProps.visibleItems / 2) * realProps.itemHeight}px`,
-            'pointer-events': 'none',
-            background: 'var(--jg-t-hl)',
+            "pointer-events": "none",
+            background: "var(--jg-t-hl)",
           },
           realProps.thumbStyle
         )}

@@ -1,5 +1,5 @@
-import type { JSX } from 'solid-js/jsx-runtime';
-import { Popover } from '../../popover';
+import type { JSX } from "solid-js/jsx-runtime";
+import { Popover } from "../../popover";
 
 export function Wrapper(props: { children: JSX.Element }) {
   return (
@@ -9,7 +9,7 @@ export function Wrapper(props: { children: JSX.Element }) {
       }}
       style={{
         padding: 0,
-        border: '1px solid var(--jg-t-border)',
+        border: "1px solid var(--jg-t-border)",
       }}
     >
       {props.children}

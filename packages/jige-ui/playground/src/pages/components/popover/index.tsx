@@ -1,15 +1,15 @@
-import { createSignal } from 'solid-js';
-import { createStore } from 'solid-js/store';
-import { list } from 'solid-tiny-utils';
-import { Button, Listbox, Popover } from '~/build';
-import { Playground } from '../../../components/playground';
+import { createSignal } from "solid-js";
+import { createStore } from "solid-js/store";
+import { list } from "solid-tiny-utils";
+import { Button, Listbox, Popover } from "~/build";
+import { Playground } from "../../../components/playground";
 
 export default function Demo() {
   const [p, setP] = createStore({
     disabled: false,
     arrow: true,
-    trigger: 'click' as const,
-    placement: 'top' as const,
+    trigger: "click" as const,
+    placement: "top" as const,
   });
 
   const [selected, setSelected] = createSignal([1]);
@@ -48,7 +48,7 @@ export default function Demo() {
                 {(item) => (
                   <div
                     style={{
-                      width: '100px',
+                      width: "100px",
                     }}
                   >
                     {item}
@@ -63,20 +63,20 @@ export default function Demo() {
         onChange={setP}
         properties={p}
         typeDeclaration={{
-          trigger: ['hover', 'click', 'manual'],
+          trigger: ["hover", "click", "manual"],
           placement: [
-            'top',
-            'right',
-            'bottom',
-            'left',
-            'top-start',
-            'top-end',
-            'right-start',
-            'right-end',
-            'bottom-start',
-            'bottom-end',
-            'left-start',
-            'left-end',
+            "top",
+            "right",
+            "bottom",
+            "left",
+            "top-start",
+            "top-end",
+            "right-start",
+            "right-end",
+            "bottom-start",
+            "bottom-end",
+            "left-start",
+            "left-end",
           ],
         }}
       />

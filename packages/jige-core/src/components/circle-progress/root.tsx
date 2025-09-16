@@ -1,6 +1,6 @@
-import type { JSX } from 'solid-js/jsx-runtime';
-import { createWatch } from 'solid-tiny-utils';
-import context from './context';
+import type { JSX } from "solid-js/jsx-runtime";
+import { createWatch } from "solid-tiny-utils";
+import context from "./context";
 
 export function Root(props: {
   children: JSX.Element;
@@ -13,7 +13,7 @@ export function Root(props: {
   createWatch(
     () => props.gapDegree,
     () => {
-      actions.setState('gapDegree', props.gapDegree || 0);
+      actions.setState("gapDegree", props.gapDegree || 0);
     }
   );
 

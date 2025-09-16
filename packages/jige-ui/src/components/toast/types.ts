@@ -1,4 +1,4 @@
-export type ToastType = 'success' | 'warning' | 'error' | 'info';
+export type ToastType = "success" | "warning" | "error" | "info";
 
 export interface ToastInst {
   id: string;
@@ -9,12 +9,12 @@ export interface ToastInst {
 }
 
 export interface ToastFactory {
-  error: ((conf: Omit<ToastInst, 'type' | 'id'>) => void) &
+  error: ((conf: Omit<ToastInst, "type" | "id">) => void) &
     ((content: string) => void);
-  success: ((conf: Omit<ToastInst, 'type' | 'id'>) => void) &
+  success: ((conf: Omit<ToastInst, "type" | "id">) => void) &
     ((content: string) => void);
-  warning: ((conf: Omit<ToastInst, 'type' | 'id'>) => void) &
+  warning: ((conf: Omit<ToastInst, "type" | "id">) => void) &
     ((content: string) => void);
-  info: ((conf: Omit<ToastInst, 'type' | 'id'>) => void) &
+  info: ((conf: Omit<ToastInst, "type" | "id">) => void) &
     ((content: string) => void);
 }

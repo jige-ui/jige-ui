@@ -1,6 +1,6 @@
-import { Show } from 'solid-js';
-import { Button, JigeRootContext, Popover, Slider } from '~/build';
-import { useAppState } from '../state/app-state';
+import { Show } from "solid-js";
+import { Button, JigeRootContext, Popover, Slider } from "~/build";
+import { useAppState } from "../state/app-state";
 
 export function Header() {
   const [state, actions] = useAppState();
@@ -21,7 +21,7 @@ export function Header() {
             </Show>
           }
           onClick={() => {
-            actions.setState('isDark', !state.isDark);
+            actions.setState("isDark", !state.isDark);
           }}
           variant="text"
         />

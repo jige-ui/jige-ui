@@ -1,8 +1,8 @@
-import styles from 'sass:./progress.scss';
-import { CircleProgressCore } from 'jige-core';
-import { mergeProps } from 'solid-js';
-import type { JSX } from 'solid-js/jsx-runtime';
-import { mountStyle } from 'solid-tiny-utils';
+import styles from "sass:./progress.scss";
+import { CircleProgressCore } from "jige-core";
+import { mergeProps } from "solid-js";
+import type { JSX } from "solid-js/jsx-runtime";
+import { mountStyle } from "solid-tiny-utils";
 
 export function CircleProgress(props: {
   percent: number;
@@ -18,7 +18,7 @@ export function CircleProgress(props: {
   fillColor?: string;
   injectSVG?: JSX.Element;
 }) {
-  mountStyle(styles, 'jige-ui-progress');
+  mountStyle(styles, "jige-ui-progress");
   const realProps = mergeProps(
     {
       radius: 50,
@@ -27,9 +27,9 @@ export function CircleProgress(props: {
       gapOffsetDegree: 0,
       gapDegree: 0,
       offsetDegree: 0,
-      size: '100px',
-      railColor: 'var(--jg-t-bg3)',
-      fillColor: 'var(--jg-t-hl)',
+      size: "100px",
+      railColor: "var(--jg-t-bg3)",
+      fillColor: "var(--jg-t-hl)",
     },
     props
   );

@@ -1,6 +1,6 @@
-import type { JSX } from 'solid-js';
-import { createVirtualList } from '~/common/create-virtual-list';
-import { CommonScrollWrapper } from './common-scroll-wrapper';
+import type { JSX } from "solid-js";
+import { createVirtualList } from "~/common/create-virtual-list";
+import { CommonScrollWrapper } from "./common-scroll-wrapper";
 
 export function VirtualInner(props: {
   items: any[];
@@ -11,7 +11,7 @@ export function VirtualInner(props: {
   children: (item: any, index: number) => JSX.Element;
   onSelect: (item: any, index: number) => void;
   selectIndex: number[];
-  selectTrigger: 'click' | 'arrow';
+  selectTrigger: "click" | "arrow";
   class?: string;
   itemClass?: string;
   scrollToSelected: boolean;
@@ -31,7 +31,7 @@ export function VirtualInner(props: {
       class={props.class}
       contentStyle={{
         height: `${containerHeight()}px`,
-        position: 'relative',
+        position: "relative",
       }}
       fallback={props.fallback}
       itemClass={props.itemClass}
@@ -46,7 +46,7 @@ export function VirtualInner(props: {
       selectIndex={props.selectIndex}
       selectTrigger={props.selectTrigger}
       ulStyle={{
-        position: 'absolute',
+        position: "absolute",
         top: `${viewerTop()}px`,
         left: 0,
         right: 0,

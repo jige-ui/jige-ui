@@ -1,9 +1,9 @@
-import globalStyles from 'sass:../../styles/global.scss';
-import type { JSX } from 'solid-js';
-import { createWatch, mountStyle } from 'solid-tiny-utils';
-import { RootContext } from './context';
-import type { ThemeVars } from './gen-vars';
-import { defaultThemeColors, genVars } from './gen-vars';
+import globalStyles from "sass:../../styles/global.scss";
+import type { JSX } from "solid-js";
+import { createWatch, mountStyle } from "solid-tiny-utils";
+import { RootContext } from "./context";
+import type { ThemeVars } from "./gen-vars";
+import { defaultThemeColors, genVars } from "./gen-vars";
 
 export function Provider(props: {
   children: JSX.Element;
@@ -25,14 +25,14 @@ export function Provider(props: {
     }),
   });
 
-  mountStyle(globalStyles, 'jige-ui-global');
+  mountStyle(globalStyles, "jige-ui-global");
 
   const [state] = Context.value;
 
   createWatch(
     () => state.hue,
     (hue) => {
-      mountStyle(genVars(hue, state.themeColors), 'jige-ui-vars', true);
+      mountStyle(genVars(hue, state.themeColors), "jige-ui-vars", true);
     }
   );
 

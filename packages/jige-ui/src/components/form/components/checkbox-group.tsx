@@ -1,12 +1,12 @@
-import { FormCore } from 'jige-core';
-import type { ComponentProps } from 'solid-js';
-import { CheckboxGroup } from '../../form-components';
+import { FormCore } from "jige-core";
+import type { ComponentProps } from "solid-js";
+import { CheckboxGroup } from "../../form-components";
 
 /**
  * Checkbox group component which is already bind with form.
  */
 function Root(
-  props: Omit<ComponentProps<typeof CheckboxGroup>, 'onChange' | 'value'>
+  props: Omit<ComponentProps<typeof CheckboxGroup>, "onChange" | "value">
 ) {
   const [fieldState, fieldActs] = FormCore.useField();
   return (

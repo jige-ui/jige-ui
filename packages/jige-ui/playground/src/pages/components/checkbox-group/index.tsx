@@ -1,13 +1,13 @@
-import { createSignal } from 'solid-js';
-import { createStore } from 'solid-js/store';
-import { CheckboxGroup } from '~/build';
-import { Playground } from '../../../components/playground';
+import { createSignal } from "solid-js";
+import { createStore } from "solid-js/store";
+import { CheckboxGroup } from "~/build";
+import { Playground } from "../../../components/playground";
 
 export default function Demo() {
   const [value, setValue] = createSignal([1]);
   const [s, setS] = createStore({
     disabled: false,
-    size: 'medium' as 'small' | 'medium' | 'large',
+    size: "medium" as "small" | "medium" | "large",
   });
   return (
     <Playground>
@@ -54,7 +54,7 @@ export default function Demo() {
         onChange={setS}
         properties={s}
         typeDeclaration={{
-          size: ['small', 'medium', 'large'],
+          size: ["small", "medium", "large"],
         }}
       />
     </Playground>

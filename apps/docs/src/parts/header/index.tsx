@@ -1,5 +1,5 @@
-import { Button } from 'jige-ui';
-import { useAppState } from '~/states/app-state';
+import { Button } from "jige-ui";
+import { useAppState } from "~/states/app-state";
 
 export function Header() {
   const [, appActs] = useAppState();
@@ -8,7 +8,7 @@ export function Header() {
       <nav class="flex gap-1">
         <Button
           class="text-lg font-bold"
-          href={'/'}
+          href={"/"}
           label="Home"
           variant="text"
         />
@@ -17,7 +17,7 @@ export function Header() {
         <Button
           icon={<div class="i-fluent:dark-theme-24-regular" />}
           onClick={() => {
-            appActs.setState('isDark', (prev) => !prev);
+            appActs.setState("isDark", (prev) => !prev);
           }}
           variant="text"
         />

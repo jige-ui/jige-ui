@@ -1,11 +1,11 @@
-import { useLocation } from '@solidjs/router';
-import { Scrollbar } from 'jige-ui';
-import { For } from 'solid-js';
+import { useLocation } from "@solidjs/router";
+import { Scrollbar } from "jige-ui";
+import { For } from "solid-js";
 
 export interface SideLink {
   title: string;
   href: string;
-  status?: 'new' | 'updated' | 'unreleased';
+  status?: "new" | "updated" | "unreleased";
 }
 
 export interface SideSection {
@@ -19,18 +19,18 @@ export function Sidebar(props: { sections: SideSection[] }) {
   const isActive = (href: string) => {
     return (
       location.pathname === href ||
-      (href !== '/' && location.pathname.startsWith(href))
+      (href !== "/" && location.pathname.startsWith(href))
     );
   };
 
   const getStatusClasses = (status: string) => {
-    if (status === 'new') {
-      return 'bg-green-100 text-green-700 dark:bg-green-900 dark:text-green-300';
+    if (status === "new") {
+      return "bg-green-100 text-green-700 dark:bg-green-900 dark:text-green-300";
     }
-    if (status === 'updated') {
-      return 'bg-blue-100 text-blue-700 dark:bg-blue-900 dark:text-blue-300';
+    if (status === "updated") {
+      return "bg-blue-100 text-blue-700 dark:bg-blue-900 dark:text-blue-300";
     }
-    return 'bg-orange-100 text-orange-700 dark:bg-orange-900 dark:text-orange-300';
+    return "bg-orange-100 text-orange-700 dark:bg-orange-900 dark:text-orange-300";
   };
 
   return (
@@ -54,8 +54,8 @@ export function Sidebar(props: { sections: SideSection[] }) {
                             hover:bg-t-bg3 hover:text-fg1
                             ${
                               isActive(link.href)
-                                ? 'bg-t-bg3 text-fg1 font-medium'
-                                : 'text-fg3'
+                                ? "bg-t-bg3 text-fg1 font-medium"
+                                : "text-fg3"
                             }
                           `}
                             href={link.href}
@@ -91,56 +91,56 @@ export function Sidebar(props: { sections: SideSection[] }) {
 // Default sections for the documentation
 export const defaultSections: SideSection[] = [
   {
-    title: 'Getting Started',
+    title: "Getting Started",
     links: [
-      { title: 'Overview', href: '/' },
-      { title: 'Installation', href: '/installation' },
-      { title: 'Quick Start', href: '/quick-start' },
+      { title: "Overview", href: "/" },
+      { title: "Installation", href: "/installation" },
+      { title: "Quick Start", href: "/quick-start" },
     ],
   },
   {
-    title: 'Components',
+    title: "Components",
     links: [
-      { title: 'Button', href: '/components/button' },
-      { title: 'Collapse', href: '/components/collapse' },
-      { title: 'Dialog', href: '/components/dialog' },
-      { title: 'Drawer', href: '/components/drawer' },
-      { title: 'Form', href: '/components/form' },
-      { title: 'Form Components', href: '/components/form-components' },
-      { title: 'Listbox', href: '/components/listbox' },
-      { title: 'Modal', href: '/components/modal' },
-      { title: 'Paginator', href: '/components/paginator' },
-      { title: 'Pop Confirm', href: '/components/pop-confirm' },
-      { title: 'Popover', href: '/components/popover' },
-      { title: 'Progress', href: '/components/progress' },
-      { title: 'Scrollbar', href: '/components/scrollbar' },
-      { title: 'Skeleton', href: '/components/skeleton' },
-      { title: 'Spin', href: '/components/spin' },
-      { title: 'Table', href: '/components/table' },
-      { title: 'Tabs', href: '/components/tabs' },
+      { title: "Button", href: "/components/button" },
+      { title: "Collapse", href: "/components/collapse" },
+      { title: "Dialog", href: "/components/dialog" },
+      { title: "Drawer", href: "/components/drawer" },
+      { title: "Form", href: "/components/form" },
+      { title: "Form Components", href: "/components/form-components" },
+      { title: "Listbox", href: "/components/listbox" },
+      { title: "Modal", href: "/components/modal" },
+      { title: "Paginator", href: "/components/paginator" },
+      { title: "Pop Confirm", href: "/components/pop-confirm" },
+      { title: "Popover", href: "/components/popover" },
+      { title: "Progress", href: "/components/progress" },
+      { title: "Scrollbar", href: "/components/scrollbar" },
+      { title: "Skeleton", href: "/components/skeleton" },
+      { title: "Spin", href: "/components/spin" },
+      { title: "Table", href: "/components/table" },
+      { title: "Tabs", href: "/components/tabs" },
       {
-        title: 'TanStack Table',
-        href: '/components/tanstack-table',
-        status: 'new',
+        title: "TanStack Table",
+        href: "/components/tanstack-table",
+        status: "new",
       },
-      { title: 'Toast', href: '/components/toast' },
-      { title: 'Tooltip', href: '/components/tooltip' },
+      { title: "Toast", href: "/components/toast" },
+      { title: "Tooltip", href: "/components/tooltip" },
     ],
   },
   {
-    title: 'Advanced',
+    title: "Advanced",
     links: [
-      { title: 'Theming', href: '/theming' },
-      { title: 'Customization', href: '/customization' },
-      { title: 'TypeScript', href: '/typescript' },
+      { title: "Theming", href: "/theming" },
+      { title: "Customization", href: "/customization" },
+      { title: "TypeScript", href: "/typescript" },
     ],
   },
   {
-    title: 'Resources',
+    title: "Resources",
     links: [
-      { title: 'Migration Guide', href: '/migration' },
-      { title: 'Contributing', href: '/contributing' },
-      { title: 'About', href: '/about' },
+      { title: "Migration Guide", href: "/migration" },
+      { title: "Contributing", href: "/contributing" },
+      { title: "About", href: "/about" },
     ],
   },
 ];

@@ -1,10 +1,10 @@
-import { createSignal } from 'solid-js';
-import { createStore } from 'solid-js/store';
-import { RadioGroup } from '~/build';
-import { Playground } from '../../../components/playground';
+import { createSignal } from "solid-js";
+import { createStore } from "solid-js/store";
+import { RadioGroup } from "~/build";
+import { Playground } from "../../../components/playground";
 
 export default function Demo() {
-  const [value, setValue] = createSignal('1');
+  const [value, setValue] = createSignal("1");
   const [s, setS] = createStore({
     disabled: false,
   });

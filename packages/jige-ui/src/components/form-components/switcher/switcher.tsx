@@ -1,21 +1,21 @@
-import styles from 'sass:./switcher.scss';
-import { SwitcherCore } from 'jige-core';
-import { createUniqueId, type JSX } from 'solid-js';
-import { mountStyle } from 'solid-tiny-utils';
-import { dataIf } from '~/common/dataset';
+import styles from "sass:./switcher.scss";
+import { SwitcherCore } from "jige-core";
+import { createUniqueId, type JSX } from "solid-js";
+import { mountStyle } from "solid-tiny-utils";
+import { dataIf } from "~/common/dataset";
 
 export function Switcher(props: {
   onChange?: (checked: boolean) => void;
   value?: boolean;
   disabled?: boolean;
   children?: JSX.Element;
-  size?: 'small' | 'medium' | 'large';
+  size?: "small" | "medium" | "large";
 }) {
-  mountStyle(styles, 'jige-ui-switcher');
+  mountStyle(styles, "jige-ui-switcher");
   const labelFor = `switcher-${createUniqueId()}`;
 
   return (
-    <div class="jg-switcher" data-size={props.size || 'medium'}>
+    <div class="jg-switcher" data-size={props.size || "medium"}>
       <SwitcherCore
         checked={props.value}
         disabled={props.disabled}
@@ -38,7 +38,7 @@ export function Switcher(props: {
         <label
           for={labelFor}
           style={{
-            'margin-left': '0.5em',
+            "margin-left": "0.5em",
           }}
         >
           {props.children}

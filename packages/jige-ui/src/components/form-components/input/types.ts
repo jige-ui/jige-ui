@@ -1,6 +1,6 @@
-import type { ComponentProps, JSX } from 'solid-js';
+import type { ComponentProps, JSX } from "solid-js";
 
-export type JigeInputType = 'text' | 'textarea' | 'password';
+export type JigeInputType = "text" | "textarea" | "password";
 export type JigeInputProps = {
   type?: JigeInputType;
   value?: string;
@@ -9,5 +9,5 @@ export type JigeInputProps = {
   clearable?: boolean;
   readonly?: boolean;
   suffix?: JSX.Element;
-  size?: 'small' | 'medium' | 'large';
-} & Omit<ComponentProps<'input'>, 'type' | 'value' | 'onChange' | 'disabled'>;
+  size?: "small" | "medium" | "large";
+} & Omit<ComponentProps<"input">, "type" | "value" | "onChange" | "disabled">;

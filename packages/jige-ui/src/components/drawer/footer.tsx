@@ -1,4 +1,4 @@
-import type { JSX } from 'solid-js';
+import type { JSX } from "solid-js";
 
 export function Footer(props: {
   children: JSX.Element;
@@ -7,7 +7,7 @@ export function Footer(props: {
 }) {
   return (
     <div
-      class={['jg-drawer-footer', props.class].join(' ')}
+      class={["jg-drawer-footer", props.class].join(" ")}
       style={props.style}
     >
       {props.children}

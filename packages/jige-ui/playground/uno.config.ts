@@ -1,5 +1,5 @@
-import { presetJigeUI } from '@jige-ui/unocss';
-import { defineConfig, presetIcons, presetWind3 } from 'unocss';
+import { presetJigeUI } from "@jige-ui/unocss";
+import { defineConfig, presetIcons, presetWind3 } from "unocss";
 
 export default defineConfig({
   presets: [presetWind3(), presetIcons(), presetJigeUI()],

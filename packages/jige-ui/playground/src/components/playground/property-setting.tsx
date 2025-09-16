@@ -1,21 +1,21 @@
-import { FormCore } from 'jige-core';
-import { createSignal, For, Match, Switch } from 'solid-js';
-import type { SetStoreFunction } from 'solid-js/store';
-import { createWatch } from 'solid-tiny-utils';
+import { FormCore } from "jige-core";
+import { createSignal, For, Match, Switch } from "solid-js";
+import type { SetStoreFunction } from "solid-js/store";
+import { createWatch } from "solid-tiny-utils";
 import {
   Form,
   FormCheckbox,
   FormComboBox,
   FormInput,
   FormNumberBox,
-} from '~/build';
+} from "~/build";
 
 export function PropertySetting<T extends { [key: string]: unknown }>(props: {
   properties: T;
   onChange: SetStoreFunction<T>;
   typeDeclaration?: Record<
     string,
-    'string' | 'number' | 'boolean' | (string | number)[]
+    "string" | "number" | "boolean" | (string | number)[]
   >;
 }) {
   const checkType = (key: string) => {
@@ -51,15 +51,15 @@ export function PropertySetting<T extends { [key: string]: unknown }>(props: {
             <FormCore.Field name={item}>
               <div class="m-1 flex flex-wrap items-center justify-between">
                 <Switch>
-                  <Match when={checkType(item) === 'boolean'}>
+                  <Match when={checkType(item) === "boolean"}>
                     <div>{item}</div>
                     <FormCheckbox />
                   </Match>
-                  <Match when={checkType(item) === 'string'}>
+                  <Match when={checkType(item) === "string"}>
                     <div>{item}</div>
                     <FormInput />
                   </Match>
-                  <Match when={checkType(item) === 'number'}>
+                  <Match when={checkType(item) === "number"}>
                     <div>{item}</div>
                     <FormNumberBox />
                   </Match>

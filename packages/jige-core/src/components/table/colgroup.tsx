@@ -1,5 +1,5 @@
-import { For } from 'solid-js';
-import context from './context';
+import { For } from "solid-js";
+import context from "./context";
 
 function Col(props: { key: string }) {
   const [state] = context.useContext();

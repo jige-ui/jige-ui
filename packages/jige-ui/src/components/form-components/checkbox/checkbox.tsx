@@ -1,26 +1,26 @@
-import css from 'sass:./checkbox.scss';
-import { SwitcherCore } from 'jige-core';
-import { createUniqueId, type JSX, Show } from 'solid-js';
-import { dataIf, mountStyle } from 'solid-tiny-utils';
-import { IconFluentCheckmark12Filled } from '~/components/icons/fluent-checkmark-12-filled';
-import { IconFluentSquare12Filled } from '~/components/icons/fluent-square-12-filled';
+import css from "sass:./checkbox.scss";
+import { SwitcherCore } from "jige-core";
+import { createUniqueId, type JSX, Show } from "solid-js";
+import { dataIf, mountStyle } from "solid-tiny-utils";
+import { IconFluentCheckmark12Filled } from "~/components/icons/fluent-checkmark-12-filled";
+import { IconFluentSquare12Filled } from "~/components/icons/fluent-square-12-filled";
 
 export type CheckboxProps = {
   checked?: boolean;
   onChange?: (checked: boolean) => void;
   indeterminate?: boolean;
-  size?: 'small' | 'medium' | 'large';
+  size?: "small" | "medium" | "large";
   disabled?: boolean;
   children?: JSX.Element;
   name?: string;
 };
 
 export function Checkbox(props: CheckboxProps) {
-  mountStyle(css, 'jige-ui-checkbox');
+  mountStyle(css, "jige-ui-checkbox");
   const itemID = `checkbox__${createUniqueId()}`;
 
   return (
-    <div class="jg-checkbox" data-size={props.size || 'medium'}>
+    <div class="jg-checkbox" data-size={props.size || "medium"}>
       <SwitcherCore
         checked={props.checked}
         disabled={props.disabled}
@@ -44,7 +44,7 @@ export function Checkbox(props: CheckboxProps) {
                   <i
                     class="jg-checkbox-icon"
                     style={{
-                      color: 'var(--jg-t-bg1)',
+                      color: "var(--jg-t-bg1)",
                     }}
                   >
                     <IconFluentCheckmark12Filled />
@@ -54,7 +54,7 @@ export function Checkbox(props: CheckboxProps) {
                   <i
                     class="jg-checkbox-icon"
                     style={{
-                      color: 'var(--jg-t-hl)',
+                      color: "var(--jg-t-hl)",
                     }}
                   >
                     <IconFluentSquare12Filled />
@@ -64,7 +64,7 @@ export function Checkbox(props: CheckboxProps) {
               <label
                 for={itemID}
                 style={{
-                  'margin-left': '.5em',
+                  "margin-left": ".5em",
                   opacity: state.disabled ? 0.5 : 1,
                 }}
               >
