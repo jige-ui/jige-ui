@@ -74,6 +74,20 @@ export function ButtonWrapper<T = string | undefined>(
     return "initial";
   });
 
+  const color = createMemo(() => {
+    const knownMap = {
+      hl: "var(--jg-t-hl)",
+      success: "var(--jg-fg-success)",
+      info: "var(--jg-fg-info)",
+      warning: "var(--jg-fg-warning)",
+      danger: "var(--jg-fg-danger)",
+    } as Record<string, string>;
+
+    if (state.color) {
+      return knownMap[state.color] || state.color;
+    }
+  });
+
   return (
     <Dynamic
       {...others}
@@ -103,10 +117,10 @@ export function ButtonWrapper<T = string | undefined>(
       }}
       style={combineStyle(
         {
-          "--jg-btn-fg": state.color ? "white" : "var(--jg-fg2)",
-          "--jg-btn-bg": state.color || "var(--jg-t-bg1)",
-          "--jg-btn-link-fg": state.color || "var(--jg-fg-link)",
-          "--jg-btn-text-fg": state.color || "var(--jg-fg2)",
+          "--jg-btn-fg": color() ? "white" : "var(--jg-fg2)",
+          "--jg-btn-bg": color() || "var(--jg-t-bg1)",
+          "--jg-btn-link-fg": color() || "var(--jg-fg-link)",
+          "--jg-btn-text-fg": color() || "var(--jg-fg2)",
           "--jg-height": thisHeight(),
           "--jg-font-size": fontSize(),
         },
