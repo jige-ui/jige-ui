@@ -112,7 +112,7 @@ function ScrollBar(props: {
       >
         <ScrollbarCore.Thumb
           style={{
-            background: "var(--jg-t-hl-lighter)",
+            background: "var(--jg-t-hl)",
             cursor: "pointer",
             "border-radius": "6px",
             transition: "all 30ms",

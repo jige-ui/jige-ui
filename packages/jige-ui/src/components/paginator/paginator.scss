@@ -29,9 +29,9 @@
   }
 
   &[data-checked] {
-    color: funcs.get-var('t-hl-lighter');
+    color: funcs.get-var('t-hl');
     background-color: inherit;
-    border-color: funcs.get-var('t-hl-darker');
+    border-color: funcs.get-var('t-hl');
   }
 
   &[data-disabled] {

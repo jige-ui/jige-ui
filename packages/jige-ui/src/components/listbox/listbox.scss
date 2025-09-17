@@ -27,6 +27,6 @@
   }
 
   &[data-selected] > div {
-    background-color: funcs.get-var('t-hl-lighter');
+    background-color: funcs.get-var('t-hl');
   }
 }
