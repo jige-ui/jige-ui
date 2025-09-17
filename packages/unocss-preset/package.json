@@ -20,6 +20,7 @@
   ],
   "scripts": {
     "build": "tsdown",
+    "bump": "bumpp --no-push -t unocss-preset@ -c \"chore(release): unocss-preset@\"",
     "prepublish": "pnpm build"
   },
   "keywords": [
@@ -38,6 +39,7 @@
     "@types/node": "^24.5.0",
     "tsdown": "catalog:",
     "typescript": "catalog:",
+    "bumpp": "catalog:",
     "unocss": "catalog:"
   },
   "repository": {
