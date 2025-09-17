@@ -14,7 +14,8 @@
         "noStaticElementInteractions": "off",
         "useKeyWithClickEvents": "off",
         "useSemanticElements": "off",
-        "noNoninteractiveElementInteractions": "off"
+        "noNoninteractiveElementInteractions": "off",
+        "noSvgWithoutTitle": "off"
       },
       "nursery": "off",
       "style": {

@@ -11,6 +11,7 @@ export * from "~/components/paginator";
 export * from "~/components/pop-confirm";
 export * from "~/components/popover";
 export * from "~/components/progress";
+export * from "~/components/progress-ring";
 export * from "~/components/root";
 export * from "~/components/scrollbar";
 export * from "~/components/skeleton";

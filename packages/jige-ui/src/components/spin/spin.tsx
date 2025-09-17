@@ -1,32 +1,6 @@
-import styles from "sass:./spin.scss";
-import { For, mergeProps, Show } from "solid-js";
+import { Show } from "solid-js";
 import type { JSX } from "solid-js/jsx-runtime";
-import { list, mountStyle } from "solid-tiny-utils";
-
-function NormalRotateSpin(props: { size?: number }) {
-  const realProps = mergeProps({ size: 12 }, props);
-
-  return (
-    <div
-      class="jg-spin-normal"
-      style={{
-        width: `${realProps.size * 2.5}px`,
-        height: `${realProps.size * 2.5}px`,
-      }}
-    >
-      <For each={list(3)}>
-        {() => (
-          <div
-            style={{
-              width: `${realProps.size}px`,
-              height: `${realProps.size}px`,
-            }}
-          />
-        )}
-      </For>
-    </div>
-  );
-}
+import { SpinRing } from "../progress-ring";
 
 export function Spin(props: {
   spinning?: boolean;
@@ -34,8 +8,6 @@ export function Spin(props: {
   children?: JSX.Element;
   size?: number;
 }) {
-  mountStyle(styles, "jige-ui-spin");
-
   return (
     <div
       style={{
@@ -53,15 +25,13 @@ export function Spin(props: {
             "z-index": 1000,
           }}
         >
-          <NormalRotateSpin size={props.size} />
+          <SpinRing size={props.size} />
         </div>
       </Show>
       <div
-        classList={{
-          "jg-spin-is-spinning": props.spinning,
-        }}
         style={{
           transition: "opacity 0.3s",
+          opacity: props.spinning ? 0.5 : 1,
         }}
       >
         {props.children}
