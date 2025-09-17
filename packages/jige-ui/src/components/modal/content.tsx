@@ -8,7 +8,6 @@ import { createSignal } from "solid-js";
 import type { JSX } from "solid-js/jsx-runtime";
 import { createWatch } from "solid-tiny-utils";
 import { RootContext } from "../root/context";
-import { Scrollbar } from "../scrollbar";
 import { context } from "./context";
 
 function calcOrigin(triggerRef: HTMLElement, contentRef: HTMLElement) {
@@ -49,7 +48,7 @@ export function Content(props: {
         }}
       />
       <ModalCore.Content
-        class="jg-modal-content-wrapper"
+        class="jg-modal-wrap"
         style={{
           "z-index": undefinedOr(props.zIndex, rs.zIndexConfig.modal),
         }}
@@ -79,29 +78,30 @@ export function Content(props: {
           );
 
           return (
-            <Scrollbar>
-              <div
-                class="jg-modal-content"
-                data-modal-status={stat.status}
-                ref={(el) => {
-                  actions.setState("contentRef", el);
-                }}
-                style={combineStyle(
-                  {
-                    "transform-origin": transformOrigin(),
-                    width: props.width || "520px",
-                    top: "100px",
-                    position: "relative",
-                  },
-                  props.style
-                )}
-              >
+            <div
+              class="jg-modal"
+              data-modal-status={stat.status}
+              ref={(el) => {
+                actions.setState("contentRef", el);
+              }}
+              style={combineStyle(
+                {
+                  "transform-origin": transformOrigin(),
+                  width: props.width || "520px",
+                  top: "100px",
+                  position: "relative",
+                  "padding-bottom": "24px",
+                },
+                props.style
+              )}
+            >
+              <div class="jg-modal-content">
                 {callMaybeContextChild(
                   [stat, acts, staticData],
                   props.children
                 )}
               </div>
-            </Scrollbar>
+            </div>
           );
         }}
       </ModalCore.Content>

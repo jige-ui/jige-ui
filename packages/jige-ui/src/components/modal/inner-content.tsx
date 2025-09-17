@@ -1,15 +1,17 @@
-import type { JSX } from "solid-js";
-import { Scrollbar } from "../scrollbar";
+import { type ComponentProps, splitProps } from "solid-js";
+import { combineStyle } from "solid-tiny-utils";
 
-export function InnerContent(props: { children: JSX.Element }) {
+export function InnerContent(props: ComponentProps<"div">) {
+  const [localProps, others] = splitProps(props, ["style"]);
   return (
-    <Scrollbar
-      contentStyle={{
-        padding: "8px",
-      }}
-      height="100%"
-    >
-      {props.children}
-    </Scrollbar>
+    <div
+      {...others}
+      style={combineStyle(
+        {
+          padding: "16px",
+        },
+        localProps.style
+      )}
+    />
   );
 }

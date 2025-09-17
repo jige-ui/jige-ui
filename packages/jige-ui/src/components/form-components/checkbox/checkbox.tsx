@@ -15,7 +15,7 @@ export type CheckboxProps = {
   name?: string;
 };
 
-export function Checkbox(props: CheckboxProps) {
+export function NormalCheckbox(props: CheckboxProps) {
   mountStyle(css, "jige-ui-checkbox");
   const itemID = `checkbox__${createUniqueId()}`;
 

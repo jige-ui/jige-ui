@@ -29,6 +29,8 @@ $colors-light: (
   fg-danger: #fa3131,
   fg-success: #2bcd33,
   fg-warning: #f57c00,
+  darken: rgb(0 0 0 / 6%),
+  smoke: rgb(0 0 0 / 12%),
 );
 $colors-dark: (
   fg1: #fff,
@@ -41,6 +43,8 @@ $colors-dark: (
   fg-danger: #df3c31,
   fg-success: #2ea832,
   fg-warning: #e08f17,
+  darken: rgb(0 0 0 / 10%),
+  smoke: rgb(0 0 0 / 22%),
 );
 $text-ramp: (
   10: (

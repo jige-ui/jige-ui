@@ -109,7 +109,6 @@ export function ButtonWrapper<T = string | undefined>(
           "--jg-btn-text-fg": state.color || "var(--jg-fg2)",
           "--jg-height": thisHeight(),
           "--jg-font-size": fontSize(),
-          "border-radius": ".25em",
         },
         local.style
       )}

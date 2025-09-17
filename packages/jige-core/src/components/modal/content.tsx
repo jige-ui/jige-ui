@@ -1,7 +1,11 @@
 import { Ref } from "@solid-primitives/refs";
 import { createMemo, onCleanup, onMount, splitProps } from "solid-js";
 import type { JSX } from "solid-js/jsx-runtime";
-import { createWatch, makeEventListener } from "solid-tiny-utils";
+import {
+  createClickOutside,
+  createWatch,
+  makeEventListener,
+} from "solid-tiny-utils";
 import { combineStyle, hasAnimation } from "@/common/dom";
 import type { PropsWithContextChild } from "@/common/props";
 import { callMaybeContextChild } from "@/common/props";
@@ -40,6 +44,13 @@ export function Content(
 
     makeEventListener(document, "keydown", (e) => {
       if (e.key === "Escape" && isActive() && state.closeOnEsc) {
+        actions.setOpen(false);
+      }
+    });
+
+    // on click mask/outside
+    createClickOutside(ref, () => {
+      if (isActive() && state.closeOnClickMask) {
         actions.setOpen(false);
       }
     });

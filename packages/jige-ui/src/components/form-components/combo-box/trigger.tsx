@@ -1,7 +1,8 @@
 import { FloatingUiCore, hiddenStyle } from "jige-core";
 import { Show } from "solid-js";
 import type { JSX } from "solid-js/jsx-runtime";
-import { dataIf } from "~/common/dataset";
+import { combineClass, combineStyle } from "solid-tiny-utils";
+import { Button } from "~/components/button";
 import { IconFluentChevronDown24Filled } from "~/components/icons/fluent-chevron-down-24-filled";
 import { Input } from "../input";
 import { context } from "./context";
@@ -44,19 +45,15 @@ export function Trigger(props: {
         </Show>
 
         <Show when={!state.editable}>
-          <button
-            class={["jg-combo-box-trigger", props.class].join(" ")}
-            data-disabled={dataIf(state.disabled)}
-            data-large={dataIf(props.size === "large")}
-            data-medium={dataIf(props.size === "medium")}
-            data-small={dataIf(props.size === "small")}
+          <Button
+            class={combineClass("jg-combo-box-trigger", props.class)}
+            disabled={state.disabled}
             ref={(el) => {
               actions.setState("refTrigger", el);
             }}
-            style={props.style}
-            type="button"
+            size={props.size}
+            style={combineStyle({ width: "100px" }, props.style)}
           >
-            <div class="jg-combo-box-overlay" />
             <i
               class="jg-combo-box-arrow"
               style={{
@@ -76,7 +73,7 @@ export function Trigger(props: {
             >
               <span>{state.valueLabel || state.placeholder}</span>
             </div>
-          </button>
+          </Button>
         </Show>
       </FloatingUiCore.Trigger>
     </div>

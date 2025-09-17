@@ -1,4 +1,4 @@
-import { dataIf, FloatingUiCore } from "jige-core";
+import { FloatingUiCore } from "jige-core";
 import { createWatch, max, min } from "solid-tiny-utils";
 import { RootContext } from "~/components/root/context";
 import { Listbox as LB } from "../../listbox";
@@ -66,9 +66,7 @@ export function ListBox(props: { size: "small" | "medium" | "large" }) {
   return (
     <FloatingUiCore.Content
       class="jg-combo-box-list"
-      data-large={dataIf(props.size === "large")}
-      data-medium={dataIf(props.size === "medium")}
-      data-small={dataIf(props.size === "small")}
+      data-size={props.size}
       style={{
         "--jg-combo-box-list-transform-origin": `center ${state.originY - floatState.middlewareData.shift.y}px`,
         width: `${state.listItemWidth}px`,

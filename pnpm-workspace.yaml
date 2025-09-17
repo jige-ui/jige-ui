@@ -10,7 +10,7 @@ catalog:
   rolldown-plugin-solid: ^0.2.1
   solid-js: ^1.9.7
   solid-tiny-context: ^0.2.3
-  solid-tiny-utils: ^0.6.0
+  solid-tiny-utils: ^0.7.1
   tsdown: ^0.15.1
   typescript: ^5.9.2
   vitest: ^3.2.4

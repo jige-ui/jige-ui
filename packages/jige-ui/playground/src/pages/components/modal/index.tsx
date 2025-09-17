@@ -1,11 +1,14 @@
 import { createStore } from "solid-js/store";
-import { Button, Modal } from "~/build";
+import { Button, Checkbox, Modal } from "~/build";
 import { Playground } from "../../../components/playground";
 
 export default function Demo() {
   const [s, setS] = createStore({
-    position: "right" as "left" | "right" | "top" | "bottom",
-    width: 258,
+    width: 658,
+  });
+
+  const [config, setConfig] = createStore({
+    longContent: false,
   });
 
   return (
@@ -14,37 +17,58 @@ export default function Demo() {
         <div>
           <Modal closeOnClickMask closeOnEsc>
             <Modal.Trigger>
-              <Button label="Open Drawer" />
+              <Button label="Open Modal" />
             </Modal.Trigger>
             <Modal.Content width={`${s.width}px`}>
-              <Modal.Header title="Drawer Header">
-                <Button label="HEllo" />
-              </Modal.Header>
-              <Modal.InnerContent>
-                <div class="h-3000px">Content</div>
-                <Modal closeOnClickMask closeOnEsc>
-                  <Modal.Trigger>
-                    <Button label="Open Modal" />
-                  </Modal.Trigger>
-                  <Modal.Content>
-                    <div>Modal Content</div>
-                  </Modal.Content>
-                </Modal>
-              </Modal.InnerContent>
-              <Modal.Footer>
-                <Button label="Footer Button" />
-              </Modal.Footer>
+              {(_state, actions) => {
+                return (
+                  <>
+                    <Modal.Header
+                      description="Modal Description"
+                      title="Modal Header"
+                    />
+                    <Modal.InnerContent class="flex flex-col gap-2">
+                      <Checkbox.Button
+                        checked={config.longContent}
+                        class="w-full"
+                        label="启用长内容"
+                        onChange={(v) => {
+                          setConfig("longContent", v);
+                        }}
+                      />
+                      <Modal closeOnClickMask closeOnEsc>
+                        <Modal.Trigger>
+                          <Button class="w-full" label="Open a new modal" />
+                        </Modal.Trigger>
+                        <Modal.Content>
+                          <div>Modal Content</div>
+                        </Modal.Content>
+                      </Modal>
+                      <div
+                        style={{
+                          height: config.longContent ? "3000px" : "0",
+                        }}
+                      />
+                    </Modal.InnerContent>
+                    <Modal.Footer>
+                      <Button
+                        color="var(--jg-t-hl)"
+                        label="确认"
+                        onClick={() => actions.setOpen(false)}
+                      />
+                      <Button
+                        label="取消"
+                        onClick={() => actions.setOpen(false)}
+                      />
+                    </Modal.Footer>
+                  </>
+                );
+              }}
             </Modal.Content>
           </Modal>
         </div>
       </Playground.MainArea>
-      <Playground.PropertySetting
-        onChange={setS}
-        properties={s}
-        typeDeclaration={{
-          position: ["left", "right", "top", "bottom"],
-        }}
-      />
+      <Playground.PropertySetting onChange={setS} properties={s} />
     </Playground>
   );
 }

@@ -78,6 +78,21 @@
     border-radius: 0.25em;
   }
 
+  &::after {
+    content: "";
+    pointer-events: none;
+    position: absolute;
+    height: 100%;
+    width: 40%;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 0.25em;
+    transition: all 150ms funcs.get-var("bezier");
+    border-bottom-width: 2px;
+    border-color: transparent;
+  }
+
   &[data-size="small"] {
     height: funcs.get-var("h-small");
     font-size: funcs.get-var("fs-12");
@@ -113,8 +128,11 @@
   &[data-focused] {
     &::before {
       background: funcs.get-var("t-bg1");
+    }
+
+    &::after {
       border-bottom-color: funcs.get-var("t-hl");
-      border-bottom-width: 2px;
+      width: 100%;
     }
 
     .jg-input-clear {

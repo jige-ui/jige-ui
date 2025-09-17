@@ -1,36 +1,34 @@
-@use '../../../styles/funcs';
+@use "../../../styles/funcs";
 
 .jg-combo-box-list {
   padding: 4px 0;
   margin: 6px;
-  font-size: funcs.get-var('fs-14');
-  line-height: funcs.get-var('lh-14');
-  background: funcs.get-var('t-bg1');
-  border-radius: .25em;
-  box-shadow: funcs.get-var('shadow8');
+  font-size: funcs.get-var("fs-14");
+  line-height: funcs.get-var("lh-14");
+  background: funcs.get-var("t-bg1");
+  border-radius: 0.25em;
+  box-shadow: funcs.get-var("shadow8");
   animation-duration: 150ms;
-  animation-timing-function: funcs.get-var('bezier');
+  animation-timing-function: funcs.get-var("bezier");
 
-
-  &[data-small] {
-    font-size: funcs.get-var('fs-12');
-    line-height: funcs.get-var('lh-12');
+  &[data-size="small"] {
+    font-size: funcs.get-var("fs-12");
+    line-height: funcs.get-var("lh-12");
   }
 
-  &[data-large] {
-    font-size: funcs.get-var('fs-16');
-    line-height: funcs.get-var('lh-16');
+  &[data-size="large"] {
+    font-size: funcs.get-var("fs-16");
+    line-height: funcs.get-var("lh-16");
   }
-
 
   &[data-floating-status="opening"] {
-    transform-origin: funcs.get-var('combo-box-list-transform-origin');
+    transform-origin: funcs.get-var("combo-box-list-transform-origin");
     animation-name: clip-open;
   }
 }
 
 .dark .jg-combo-box-list {
-  background: funcs.get-var('t-bg2');
+  background: funcs.get-var("t-bg2");
 }
 
 .jg-combo-box-scrollarea {
@@ -44,12 +42,11 @@
   width: 100%;
   height: 50px;
   overflow: hidden;
-
 }
 
 .jg-combo-box-item {
   padding: 2px 0;
-  color: funcs.get-var('fg3');
+  color: funcs.get-var("fg3");
 
   .jg-combo-box-item-inner {
     display: block;
@@ -59,24 +56,24 @@
     white-space: nowrap;
   }
 
-  >div {
+  > div {
     position: relative;
     padding-left: 8px;
     cursor: pointer;
-    border-radius: .2em;
+    border-radius: 0.2em;
   }
 
-  &:hover>div {
-    background: funcs.get-var('t-bg4');
+  &:hover > div {
+    background: funcs.get-var("t-bg4");
   }
 
-  &[data-highlight]>div {
-    background: funcs.get-var('t-bg4');
+  &[data-highlight] > div {
+    background: funcs.get-var("t-bg4");
   }
 
-  &[data-selected]>div {
-    color: funcs.get-var('fg2') !important;
-    background: funcs.get-var('t-bg4') !important;
+  &[data-selected] > div {
+    color: funcs.get-var("fg2") !important;
+    background: funcs.get-var("t-bg4") !important;
 
     &::after {
       position: absolute;
@@ -85,8 +82,8 @@
       left: 0;
       display: block;
       width: 4px;
-      content: '';
-      background: funcs.get-var('t-hl');
+      content: "";
+      background: funcs.get-var("t-hl");
       border-radius: 4px;
     }
   }
@@ -96,98 +93,24 @@
   background: none;
 }
 
-.jg-combo-box-overlay {
-  position: absolute;
-  inset: 0;
-  background: rgb(0 0 0);
-  opacity: 0;
-  transition: opacity 0.2s, background 0.2s, color 0.2s;
-}
-
-
 .jg-combo-box-arrow {
   position: absolute;
   top: 50%;
-  right: 8px;
-  color: funcs.get-var('fg4');
+  right: 0;
+  color: funcs.get-var("fg4");
   transform: translateY(-50%);
   transition: top 100ms;
 }
 
-
 .jg-combo-box-trigger {
-  position: relative;
-  display: inline-flex;
-  flex-shrink: 0;
-  align-items: center;
-  min-width: 7em;
-  height: funcs.get-var('h-medium');
-  padding: .25em .675em;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  font-size: funcs.get-var('fs-14');
-  line-height: funcs.get-var('lh-14');
-  white-space: nowrap;
-  cursor: pointer;
-  background: funcs.get-var('t-bg1');
-  border: 1px solid funcs.get-var('t-border');
-  border-radius: .25em;
-  box-shadow: funcs.get-var('shadow1');
-  transition: border-color 0.2s, opacity 0.2s, color 0.2s;
-
-  &[data-small] {
-    height: funcs.get-var('h-small');
-    font-size: funcs.get-var('fs-12');
-    line-height: funcs.get-var('lh-12');
-  }
-
-  &[data-large] {
-    height: funcs.get-var('h-large');
-    font-size: funcs.get-var('fs-16');
-    line-height: funcs.get-var('lh-16');
-  }
-
-
-  &[data-disabled] {
-    pointer-events: none;
-    opacity: 0.7;
-  }
-
-  &:hover {
-    .jg-combo-box-overlay {
-      opacity: .03;
-    }
+  .jg-btn-content {
+    width: 100%;
+    justify-content: space-between;
   }
 
   &:active {
-    box-shadow: none;
-    opacity: .7;
-
-    .jg-combo-box-overlay {
-      opacity: .08;
-    }
-
     .jg-combo-box-arrow {
-      top: calc(50% + 3px);
-    }
-  }
-}
-
-.dark .jg-combo-box-trigger {
-  .jg-combo-box-overlay {
-    background: rgb(255 255 255);
-    opacity: .02;
-  }
-
-  &:hover {
-    .jg-combo-box-overlay {
-      opacity: .04;
-    }
-  }
-
-  &:active {
-    .jg-combo-box-overlay {
-      opacity: .01;
+      top: 60%;
     }
   }
 }
