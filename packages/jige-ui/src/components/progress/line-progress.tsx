@@ -6,7 +6,6 @@ export function LineProgress(props: {
   percent?: number;
   fillColor?: string;
   railColor?: string;
-  height?: string;
   width?: string;
 }) {
   mountStyle(styles, "jige-ui-progress");
@@ -31,24 +30,37 @@ export function LineProgress(props: {
 
   return (
     <div
-      class="jg-progress-line"
+      aria-valuenow={normalizedPercent()}
+      role="progressbar"
       style={{
-        height: props.height || "8px",
-        width: props.width || "100%",
-        background: props.railColor || "var(--jg-t-bg3)",
+        height: "3px",
         overflow: "hidden",
+        display: "flex",
+        "align-items": "center",
+        "border-radius": "3px",
       }}
     >
       <div
-        class="jg-progress-line-fill"
-        classList={{
-          "jg-progress-line-fill-indeterminate": isIndeterminate(),
-        }}
+        class="jg-progress-line-rail"
         style={{
-          width: `${normalizedPercent()}%`,
-          background: background(),
+          height: "1px",
+          width: props.width || "100%",
+          background: props.railColor || "var(--jg-fg4)",
+          overflow: "visible",
         }}
-      />
+      >
+        <div
+          class="jg-progress-line-fill"
+          classList={{
+            "jg-progress-line-fill-indeterminate": isIndeterminate(),
+          }}
+          style={{
+            width: `${normalizedPercent()}%`,
+            height: "3px",
+            background: background(),
+          }}
+        />
+      </div>
     </div>
   );
 }
