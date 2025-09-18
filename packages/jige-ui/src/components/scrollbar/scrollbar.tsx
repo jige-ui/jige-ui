@@ -44,7 +44,7 @@ function GmScrollBar(props: {
     <ScrollbarCore.Bar class={classes()} style={pos()} type={props.type}>
       <ScrollbarCore.Thumb
         class="jg-scrollbar-thumb"
-        style={{ background: props.color || "var(--jg-t-hl-lighter)" }}
+        style={{ background: props.color || "var(--jg-fg4)" }}
         type={props.type}
       />
     </ScrollbarCore.Bar>
