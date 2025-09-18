@@ -16,6 +16,7 @@ export * from "~/components/root";
 export * from "~/components/scrollbar";
 export * from "~/components/skeleton";
 export * from "~/components/spin";
+export * from "~/components/stepper";
 export * from "~/components/table";
 export * from "~/components/tabs";
 export * from "~/components/tiny-table";
