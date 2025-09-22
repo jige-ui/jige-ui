@@ -25,7 +25,7 @@ export function Spin(props: {
             "z-index": 1000,
           }}
         >
-          <SpinRing size={props.size} />
+          <SpinRing size={props.size || 32} />
         </div>
       </Show>
       <div
