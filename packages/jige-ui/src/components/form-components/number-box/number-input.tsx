@@ -1,9 +1,12 @@
+import { isNumber } from "solid-tiny-utils";
 import { context } from "./context";
 
 export function NumberInput(props: {
   class?: string;
   onFocus?: () => void;
   onBlur?: () => void;
+  onPressEnter?: (e: KeyboardEvent) => void;
+  nullable?: boolean;
 }) {
   const [state, actions] = context.useContext();
 
@@ -15,12 +18,15 @@ export function NumberInput(props: {
       name={state.name}
       onBlur={() => {
         actions.setState("focused", false);
+        if (!(props.nullable || isNumber(state.value))) {
+          actions.setValue(0);
+        }
         props.onBlur?.();
       }}
       onChange={(e) => {
-        e.currentTarget.value = Number.isNaN(state.value)
-          ? ""
-          : String(state.value);
+        e.currentTarget.value = isNumber(state.value)
+          ? String(state.value)
+          : "";
       }}
       onFocus={() => {
         actions.setState("focused", true);
@@ -28,8 +34,8 @@ export function NumberInput(props: {
       }}
       onInput={(e) => {
         const v = e.currentTarget.value;
-        if (v === "") {
-          actions.setValue(Number.NaN);
+        if (v.trim() === "") {
+          actions.setValue(null);
           return;
         }
         const n = Number(v);
@@ -38,9 +44,14 @@ export function NumberInput(props: {
         }
         actions.setValue(n);
       }}
+      onKeyPress={(e) => {
+        if (e.key === "Enter") {
+          props.onPressEnter?.(e);
+        }
+      }}
       placeholder={state.placeholder}
       type="text"
-      value={Number.isNaN(state.value) ? "" : state.value}
+      value={isNumber(state.value) ? state.value : ""}
     />
   );
 }

@@ -9,6 +9,7 @@ export default function Demo() {
     disabled: false,
     max: 100,
     min: 0,
+    nullable: false,
     size: "medium" as "small" | "medium" | "large",
   });
   return (

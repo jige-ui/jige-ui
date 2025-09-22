@@ -1,5 +1,5 @@
 import type { PropsWithContextChild } from "jige-core";
-import { callMaybeContextChild, undefinedOr } from "jige-core";
+import { callMaybeContextChild } from "jige-core";
 import { createWatch } from "solid-tiny-utils";
 import { context } from "./context";
 
@@ -12,7 +12,7 @@ export function Root(
       value?: number;
       disabled?: boolean;
       placeholder?: string;
-      onChange?: (value: number) => void;
+      onChange?: (value: number | null) => void;
     }
   >
 ) {
@@ -27,10 +27,7 @@ export function Root(
 
   createWatch(
     () => state.value,
-    (v, prevV) => {
-      if (Number.isNaN(v) && Number.isNaN(undefinedOr(prevV, 0))) {
-        return;
-      }
+    (v) => {
       v !== props.value && props.onChange?.(v);
     },
     { defer: true }
