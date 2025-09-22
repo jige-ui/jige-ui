@@ -11,6 +11,7 @@ export function ButtonWrapper<T = string | undefined>(
     href: T;
     onClick?: (e: MouseEvent) => void | Promise<void>;
     size: ButtonSize;
+    propLoading: boolean;
   } & ButtonElement<T>
 ) {
   const [local, others] = splitProps(props, [
@@ -18,6 +19,7 @@ export function ButtonWrapper<T = string | undefined>(
     "size",
     "style",
     "class",
+    "propLoading",
   ]);
   const [state, actions] = context.useContext();
   const isAnchor = createMemo(() => {
@@ -109,7 +111,7 @@ export function ButtonWrapper<T = string | undefined>(
                 await local.onClick(e);
               }
             } finally {
-              actions.setState("loading", false);
+              actions.setState("loading", local.propLoading);
             }
           };
           doClick();

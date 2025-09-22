@@ -40,6 +40,7 @@ export function Button<T extends string | undefined = undefined>(
       <ButtonWrapper
         {...others}
         href={local.href}
+        propLoading={local.loading ?? false}
         size={local.size || "medium"}
         type={local.type || "button"}
       >
