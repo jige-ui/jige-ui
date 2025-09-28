@@ -9,7 +9,7 @@ export function Root<T extends SimpleType>(
     disabled?: boolean;
     onChange?: (value: T[]) => void;
     size?: "small" | "medium" | "large";
-  } & ComponentProps<"div">
+  } & Omit<ComponentProps<"div">, "onChange" | "size" | "value" | "disabled">
 ) {
   const [localProps, others] = splitProps(props, [
     "value",
