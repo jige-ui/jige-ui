@@ -2,7 +2,7 @@ import { mergeRefs } from "@solid-primitives/refs";
 import { createSignal, onCleanup, onMount, Show, splitProps } from "solid-js";
 import type { JSX } from "solid-js/jsx-runtime";
 import { createWatch, makeEventListener } from "solid-tiny-utils";
-import { getElementHeight, hasAnimation, uiRefreshDo } from "@/common/dom";
+import { getElementHeight, hasAnimation } from "@/common/dom";
 import type { CloseableStatus } from "@/common/types";
 import context from "./context";
 
@@ -37,8 +37,8 @@ function ContentCore(props: ContentProps) {
       (v) => {
         if (v === localProps.key) {
           setStatus("closing");
-          uiRefreshDo(() => {
-            if (!hasAnimation) {
+          requestAnimationFrame(() => {
+            if (!hasAnimation(ref)) {
               setStatus("closed");
             }
           });
@@ -51,8 +51,8 @@ function ContentCore(props: ContentProps) {
       (v) => {
         if (v === localProps.key) {
           setStatus("opening");
-          uiRefreshDo(() => {
-            if (!hasAnimation) {
+          requestAnimationFrame(() => {
+            if (!hasAnimation(ref)) {
               setStatus("opened");
             }
           });
