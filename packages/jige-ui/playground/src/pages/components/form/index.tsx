@@ -75,6 +75,7 @@ export default function Demo() {
       dateRange: ["2024-01-01", "2024-12-27"],
       checkbox: [1, 2, 3],
       segment: "option1",
+      array: [{ name: "123" }, { name: "456" }],
       slider: 50,
     }),
     onSubmit: async (value) => {
@@ -185,6 +186,27 @@ export default function Demo() {
           <Form.Field label={p.noLabel ? undefined : "Slider"} name="slider">
             <FormSlider />
           </Form.Field>
+          <FormCore.FieldArray name="array">
+            {({ items, name }) => (
+              <For each={items}>
+                {(_, index) => (
+                  <Form.Field name={`${name}.${index()}.name`}>
+                    <FormInput placeholder="Name" />{" "}
+                    <Button
+                      label="+"
+                      onClick={() => {
+                        FormCore.methods.arrayInsert(form, name, {
+                          at: index() + 1,
+                          value: { name: "" },
+                        });
+                      }}
+                      variant="text"
+                    />
+                  </Form.Field>
+                )}
+              </For>
+            )}
+          </FormCore.FieldArray>
           <Form.Field name="remember">
             <div class="flex items-center">
               <FormSwitcher>Remember me</FormSwitcher>
