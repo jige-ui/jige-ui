@@ -3,9 +3,11 @@ import { TableCore } from "jige-core";
 import { createMemo, createSignal, For, type JSX, Show } from "solid-js";
 import { type ColumnDef, createTable, type RowData } from "solid-tiny-table";
 import { createWatch, mountStyle } from "solid-tiny-utils";
+import { isDef } from "~/common/types";
 import { IconFluentBoxDismiss24Regular } from "../icons/fluent-box-dismiss-24-regular";
 import { Paginator } from "../paginator";
 import { Table } from "../table";
+import { EXPAND_COLUMN, Expandable } from "./expendable";
 
 declare module "solid-tiny-table" {
   // biome-ignore lint/correctness/noUnusedVariables: e
@@ -57,6 +59,11 @@ export function TinyTable<T extends RowData>(props: {
     currPage: number;
   };
   footer?: JSX.Element;
+  expandable?: {
+    expandedRowRender: (row: T) => JSX.Element;
+    rowExpandable?: (row: T) => boolean;
+  };
+  hideHeader?: boolean;
 }) {
   mountStyle(css, "jige-ui-tanstack-table");
 
@@ -64,7 +71,15 @@ export function TinyTable<T extends RowData>(props: {
 
   const table = createTable({
     data: () => props.data,
-    columns: () => props.columns,
+    columns: () => {
+      if (
+        isDef(props.expandable?.expandedRowRender) &&
+        !props.columns.includes(EXPAND_COLUMN)
+      ) {
+        return [EXPAND_COLUMN, ...props.columns];
+      }
+      return props.columns;
+    },
   });
 
   const fontSize = createMemo(() => {
@@ -102,7 +117,7 @@ export function TinyTable<T extends RowData>(props: {
       maxHeight={props.maxHeight}
       style={{ "font-size": fontSize() }}
     >
-      <Table.Header>
+      <Table.Header hide={props.hideHeader}>
         <For each={table.headers()}>
           {(headerGroup) => (
             <Table.Row>
@@ -127,19 +142,46 @@ export function TinyTable<T extends RowData>(props: {
       <Table.Body scrollRef={setScrollRef}>
         <Show when={table.rows().length > 0}>
           <For each={table.rows()}>
-            {(row, index) => (
-              <Table.Row
-                class={props.rowClass?.(row.original)}
-                onClick={() => props.onRowClick?.(row.original, index())}
-                onDblClick={() => props.onRowDbClick?.(row.original, index())}
-              >
-                <For each={row.getCells()}>
-                  {(cell) => {
-                    return <Table.Cell>{cell.renderCell()}</Table.Cell>;
-                  }}
-                </For>
-              </Table.Row>
-            )}
+            {(row, index) => {
+              const canExpand = createMemo(() => {
+                return props.expandable?.rowExpandable?.(row.original) ?? false;
+              });
+              return (
+                <Expandable>
+                  <Table.Row
+                    class={props.rowClass?.(row.original)}
+                    onClick={() => props.onRowClick?.(row.original, index())}
+                    onDblClick={() =>
+                      props.onRowDbClick?.(row.original, index())
+                    }
+                  >
+                    <For each={row.getCells()}>
+                      {(cell) => {
+                        return (
+                          <Table.Cell>
+                            <Show
+                              fallback={cell.renderCell()}
+                              when={
+                                cell.column.columnDef.id === "expander" &&
+                                canExpand()
+                              }
+                            >
+                              <Expandable.Trigger />
+                            </Show>
+                          </Table.Cell>
+                        );
+                      }}
+                    </For>
+                  </Table.Row>
+                  <Show when={canExpand()}>
+                    <Expandable.Row
+                      expandedRowRender={props.expandable?.expandedRowRender}
+                      row={row.original}
+                    />
+                  </Show>
+                </Expandable>
+              );
+            }}
           </For>
         </Show>
         <Show when={table.rows().length === 0}>

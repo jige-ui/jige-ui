@@ -118,6 +118,7 @@ export default function Demo() {
     size: "medium" as const,
     bordered: false,
     empty: false,
+    hideHeader: false,
   });
 
   const [data, { refetch }] = createResource(
@@ -139,8 +140,17 @@ export default function Demo() {
             bordered={p.bordered}
             columns={defaultColumns}
             data={p.empty ? [] : data.latest}
+            expandable={{
+              expandedRowRender: (row) => (
+                <pre>{JSON.stringify(row, null, 2)}</pre>
+              ),
+              rowExpandable(row) {
+                return row.status !== "Single";
+              },
+            }}
+            hideHeader={p.hideHeader}
             loading={data.loading}
-            maxHeight="355px"
+            maxHeight="655px"
             onRowClick={(row) => {
               setShowItem(row);
             }}
