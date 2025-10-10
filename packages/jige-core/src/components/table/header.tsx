@@ -46,20 +46,16 @@ export function Column(
   });
 
   onCleanup(() => {
-    // biome-ignore lint/style/noNonNullAssertion: SolidJS store setter requires non-null assertion for undefined values
     actions.setState("colsWidth", id, undefined!);
-    // biome-ignore lint/style/noNonNullAssertion: SolidJS store setter requires non-null assertion for undefined values
     actions.setState("colsKeys", id, undefined!);
   });
 
   createWatch([() => local.width, isLeafColumn], ([w, isLeaf]) => {
-    // biome-ignore lint/style/noNonNullAssertion: SolidJS store setter requires non-null assertion for undefined values
     actions.setState("colsWidth", id, (isLeaf ? w || 80 : undefined)!);
     actions.setState("colsKeys", id, isLeaf);
     actions.setState(
       "manualWidths",
       id,
-      // biome-ignore lint/style/noNonNullAssertion: SolidJS store setter requires non-null assertion for undefined values
       (isLeaf ? w || undefined : undefined)!
     );
   });
