@@ -1,4 +1,4 @@
-.jg-data-table-empty {
+.jg-tiny-table-empty {
   position: sticky;
   left: 0;
   display: flex;
@@ -12,4 +12,8 @@
   svg {
     font-size: 35px;
   }
+}
+
+.jg-tiny-table-cell {
+  padding: 0 8px;
 }

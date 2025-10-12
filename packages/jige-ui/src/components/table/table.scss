@@ -9,19 +9,20 @@
 
 .jg-table-head {
   position: relative;
-  padding: .5em .6em;
+  padding: 0.5em 0.6em;
   font-size: 1.05em;
   text-align: left;
   background-color: var(--jg-t-bg3);
   border-bottom: 1px solid var(--jg-t-border);
 
-  &::after,&::before {
+  &::after,
+  &::before {
     position: absolute;
-    top: .75em;
-    bottom: .75em;
+    top: 0.75em;
+    bottom: 0.75em;
     z-index: 1;
     width: 1px;
-    content: '';
+    content: "";
     background-color: var(--jg-t-border);
   }
 
@@ -32,7 +33,6 @@
   &::before {
     left: -1px;
   }
-
 
   &:first-child {
     &::before {
@@ -47,10 +47,9 @@
   }
 }
 
-
 .jg-table-cell {
   position: relative;
-  padding: .24em 1em;
+  padding: 8px 0;
   text-align: left;
   overflow-wrap: break-word;
   border-bottom: 1px solid var(--jg-t-border);
@@ -58,9 +57,10 @@
 
 [data-bordered] {
   .jg-table-head {
-    &::after,&::before {
+    &::after,
+    &::before {
       top: 0;
-      bottom: 0
+      bottom: 0;
     }
   }
 
@@ -70,7 +70,7 @@
 }
 
 .jg-table-body .jg-table-row {
-  transition: background-color .2s ease-in-out;
+  transition: background-color 0.2s ease-in-out;
 
   &:hover {
     background: var(--jg-t-bg4);

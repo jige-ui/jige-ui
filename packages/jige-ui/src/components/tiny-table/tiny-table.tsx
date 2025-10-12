@@ -28,7 +28,7 @@ function Empty() {
         }}
       >
         <div
-          class="jg-data-table-empty"
+          class="jg-tiny-table-empty"
           style={{
             width: `${state.wrapperWidth}px`,
           }}
@@ -65,7 +65,7 @@ export function TinyTable<T extends RowData>(props: {
   };
   hideHeader?: boolean;
 }) {
-  mountStyle(css, "jige-ui-tanstack-table");
+  mountStyle(css, "jige-ui-tiny-table");
 
   const [scrollRef, setScrollRef] = createSignal<HTMLDivElement>();
 
@@ -160,7 +160,18 @@ export function TinyTable<T extends RowData>(props: {
                         return (
                           <Table.Cell>
                             <Show
-                              fallback={cell.renderCell()}
+                              fallback={
+                                <Show
+                                  fallback={
+                                    <div class="jg-tiny-table-cell">
+                                      {cell.renderCell()}
+                                    </div>
+                                  }
+                                  when={cell.column.columnDef.cell}
+                                >
+                                  {cell.renderCell()}
+                                </Show>
+                              }
                               when={
                                 cell.column.columnDef.id === "expander" &&
                                 canExpand()
