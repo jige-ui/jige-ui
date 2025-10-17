@@ -41,31 +41,42 @@ export function Expand(props: {
 export function ExpandableTrigger() {
   const [state, actions] = context.useContext();
   return (
-    <Button
-      icon={
-        <div
-          style={{
-            transition: "transform .3s",
-            transform: state.expanded ? undefined : "rotate(-90deg)",
-          }}
-        >
-          <Show
-            fallback={<IconFluentAddCircle24Regular />}
-            when={state.expanded}
+    <div
+      style={{
+        width: "100%",
+        height: "100%",
+        display: "flex",
+        "align-items": "center",
+        "justify-content": "center",
+      }}
+    >
+      <Button
+        icon={
+          <div
+            style={{
+              transition: "transform .3s",
+              transform: state.expanded ? undefined : "rotate(-90deg)",
+            }}
           >
-            <IconFluentSubtractCircle24Regular />
-          </Show>
-        </div>
-      }
-      onClick={() => actions.setState("expanded", (v) => !v)}
-      size="small"
-      variant="text"
-    />
+            <Show
+              fallback={<IconFluentAddCircle24Regular />}
+              when={state.expanded}
+            >
+              <IconFluentSubtractCircle24Regular />
+            </Show>
+          </div>
+        }
+        onClick={() => actions.setState("expanded", (v) => !v)}
+        size="small"
+        variant="text"
+      />
+    </div>
   );
 }
 
 export const EXPAND_COLUMN: DisplayColumnDef<any> = {
   id: "expander",
+  meta: { width: 48 },
 };
 
 export const Expandable = Object.assign(ExpandableProvider, {
