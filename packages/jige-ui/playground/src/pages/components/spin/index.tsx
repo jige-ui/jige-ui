@@ -5,6 +5,7 @@ import { Playground } from "../../../components/playground";
 export default function Demo() {
   const [s, setS] = createStore({
     size: 32,
+    delay: 200,
     enabled: true,
   });
 
@@ -12,7 +13,7 @@ export default function Demo() {
     <Playground>
       <Playground.MainArea>
         <div>
-          <Spin size={s.size} spinning={s.enabled}>
+          <Spin delay={s.delay} size={s.size} spinning={s.enabled}>
             <div class="h-24 flex items-center justify-center">
               some content here
             </div>
