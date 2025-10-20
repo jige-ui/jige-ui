@@ -49,7 +49,7 @@
 
 .jg-table-cell {
   position: relative;
-  padding: 8px 0;
+  padding: 8px 4px;
   text-align: left;
   overflow-wrap: break-word;
   border-bottom: 1px solid var(--jg-t-border);
@@ -85,10 +85,37 @@
 
 .jg-table-footer {
   display: flex;
+  margin-top: -1px;
+  position: relative;
+  z-index: 2;
   align-items: center;
   justify-content: space-between;
   min-height: 28px;
   padding: 4px;
   background: var(--jg-t-bg3);
   border-top: 1px solid var(--jg-t-border);
+}
+
+.jg-can-scroll-right::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  width: 16px;
+  z-index: 2;
+  pointer-events: none;
+  box-shadow: inset -10px 0 8px -8px var(--jg-fg5);
+}
+
+.jg-can-scroll-left::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 16px;
+  z-index: 2;
+  pointer-events: none;
+  box-shadow: inset 10px 0 8px -8px var(--jg-fg5);
 }

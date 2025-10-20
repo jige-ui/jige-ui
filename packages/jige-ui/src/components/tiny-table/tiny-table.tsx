@@ -7,7 +7,7 @@ import { isDef } from "~/common/types";
 import { IconFluentBoxDismiss24Regular } from "../icons/fluent-box-dismiss-24-regular";
 import { Paginator } from "../paginator";
 import { Table } from "../table";
-import { EXPAND_COLUMN, Expandable } from "./expendable";
+import { EXPAND_COLUMN, ExpandRow, ExpandTrigger } from "./expendable";
 
 declare module "solid-tiny-table" {
   // biome-ignore lint/correctness/noUnusedVariables: e
@@ -48,7 +48,6 @@ export function TinyTable<T extends RowData>(props: {
   height?: string;
   maxHeight?: string;
   rowClass?: (row: T) => string;
-  size?: "small" | "medium" | "large" | number;
   bordered?: boolean;
   onRowClick?: (row: T, index: number) => void;
   onRowDbClick?: (row: T, index: number) => void;
@@ -80,26 +79,12 @@ export function TinyTable<T extends RowData>(props: {
       }
       return props.columns;
     },
+    store: {
+      expandableStore: [] as boolean[],
+    },
   });
 
-  const fontSize = createMemo(() => {
-    const size = props.size;
-
-    if (typeof size === "number") {
-      return `${size / 4 + 6}px`;
-    }
-
-    switch (size) {
-      case "small":
-        return "13px";
-      case "large":
-        return "16px";
-      case "medium":
-        return "14px";
-      default:
-        return "14px";
-    }
-  });
+  const [state, { setState }] = table.ctx;
 
   createWatch(table.rows, () => {
     scrollRef()?.scrollTo({
@@ -107,6 +92,8 @@ export function TinyTable<T extends RowData>(props: {
       left: 0,
       behavior: "instant",
     });
+
+    setState("expandableStore", []);
   });
 
   return (
@@ -115,7 +102,7 @@ export function TinyTable<T extends RowData>(props: {
       height={props.height}
       loading={props.loading}
       maxHeight={props.maxHeight}
-      style={{ "font-size": fontSize() }}
+      style={{ "font-size": "14px" }}
     >
       <Table.Header hide={props.hideHeader}>
         <For each={table.headers()}>
@@ -147,7 +134,7 @@ export function TinyTable<T extends RowData>(props: {
                 return props.expandable?.rowExpandable?.(row.original) ?? false;
               });
               return (
-                <Expandable>
+                <>
                   <Table.Row
                     class={props.rowClass?.(row.original)}
                     onClick={() => props.onRowClick?.(row.original, index())}
@@ -160,24 +147,22 @@ export function TinyTable<T extends RowData>(props: {
                         return (
                           <Table.Cell>
                             <Show
-                              fallback={
-                                <Show
-                                  fallback={
-                                    <div class="jg-tiny-table-cell">
-                                      {cell.renderCell()}
-                                    </div>
-                                  }
-                                  when={cell.column.columnDef.cell}
-                                >
-                                  {cell.renderCell()}
-                                </Show>
-                              }
+                              fallback={cell.renderCell()}
                               when={
                                 cell.column.columnDef.id === "expander" &&
                                 canExpand()
                               }
                             >
-                              <Expandable.Trigger />
+                              <ExpandTrigger
+                                expanded={state.expandableStore[index()]}
+                                onClick={() =>
+                                  setState(
+                                    "expandableStore",
+                                    index(),
+                                    (v) => !v
+                                  )
+                                }
+                              />
                             </Show>
                           </Table.Cell>
                         );
@@ -185,12 +170,11 @@ export function TinyTable<T extends RowData>(props: {
                     </For>
                   </Table.Row>
                   <Show when={canExpand()}>
-                    <Expandable.Row
-                      expandedRowRender={props.expandable?.expandedRowRender}
-                      row={row.original}
-                    />
+                    <ExpandRow expanded={state.expandableStore[index()]}>
+                      {props.expandable?.expandedRowRender(row.original)}
+                    </ExpandRow>
                   </Show>
-                </Expandable>
+                </>
               );
             }}
           </For>

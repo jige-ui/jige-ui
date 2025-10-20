@@ -30,7 +30,9 @@ export default defineConfig(({ env }) => {
       dts: true,
       plugins: [getPlugins(false)],
       inputOptions: {
-        define,
+        transform: {
+          define,
+        },
       },
       outputOptions: {
         chunkFileNames: "chunks/[hash].js",
@@ -41,8 +43,10 @@ export default defineConfig(({ env }) => {
       platform,
       dts: false,
       inputOptions: {
-        jsx: "preserve",
-        define,
+        transform: {
+          jsx: "preserve",
+          define,
+        },
       },
       outputOptions: {
         chunkFileNames: "chunks/[hash].jsx",

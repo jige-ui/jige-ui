@@ -115,7 +115,6 @@ function genData(count: number): Person[] {
 
 export default function Demo() {
   const [p, setP] = createStore({
-    size: "medium" as const,
     bordered: false,
     empty: false,
     hideHeader: false,
@@ -164,7 +163,6 @@ export default function Demo() {
               currPage: currPage(),
             }}
             rowClass={(row) => (row === showItem() ? "bg-blue-100" : "")}
-            size={p.size}
           />
         </div>
       </Playground.MainArea>

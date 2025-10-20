@@ -1,3 +1,4 @@
+import { mergeRefs } from "@solid-primitives/refs";
 import { TableCore } from "jige-core";
 import { type ComponentProps, splitProps } from "solid-js";
 import { Scrollbar } from "../scrollbar";
@@ -8,10 +9,12 @@ export function Body(
     scrollRef?: (val: HTMLDivElement) => void;
   }
 ) {
-  const [state] = context.useContext();
+  const [state, actions] = context.useContext();
   const [localProps, others] = splitProps(props, ["class", "scrollRef"]);
+
   return (
     <Scrollbar
+      color="var(--jg-t-hl)"
       height={state.scrollHeight}
       maxHeight={state.scrollMaxHeight}
       onScroll={(e) => {
@@ -19,7 +22,13 @@ export function Body(
           state.refHeader.scrollLeft = e.target.scrollLeft;
         }
       }}
-      scrollRef={localProps.scrollRef}
+      onScrollBarChange={() => {
+        actions.calcCanScroll();
+      }}
+      scrollRef={mergeRefs(
+        (el) => actions.setState("refScrollBody", el),
+        props.scrollRef
+      )}
     >
       <TableCore.Body
         class={["jg-table-body", localProps.class].join(" ")}

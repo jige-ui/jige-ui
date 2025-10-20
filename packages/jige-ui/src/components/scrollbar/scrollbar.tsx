@@ -78,6 +78,7 @@ export function Scrollbar(props: {
   onClick?: JSX.EventHandlerUnion<HTMLDivElement, MouseEvent>;
   contentStyle?: string | JSX.CSSProperties;
   scrollRef?: (val: HTMLDivElement) => void;
+  onScrollBarChange?: () => void;
 }) {
   mountStyle(scrollCss, "jige-ui-scrollbar");
   const [hidden, setHidden] = createSignal(true);
@@ -87,6 +88,7 @@ export function Scrollbar(props: {
       class={props.class}
       height={props.height}
       maxHeight={props.maxHeight}
+      onBarChange={props.onScrollBarChange}
       onClick={props.onClick}
       onMouseEnter={() => {
         !props.always && setHidden(false);
