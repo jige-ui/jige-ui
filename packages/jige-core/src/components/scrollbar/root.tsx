@@ -1,6 +1,7 @@
 import type { JSX } from "solid-js";
 import { splitProps } from "solid-js";
 import type { DOMElement } from "solid-js/jsx-runtime";
+import { createWatch } from "solid-tiny-utils";
 import context from "./context";
 
 export default function Root(
@@ -8,6 +9,7 @@ export default function Root(
     children: JSX.Element;
     height?: string;
     maxHeight?: string;
+    onBarChange?: () => void;
     onMouseEnter?: (
       e: MouseEvent & {
         currentTarget: HTMLDivElement;
@@ -20,14 +22,22 @@ export default function Root(
     height: () => props.height,
     maxHeight: () => props.maxHeight,
   });
-  const [state, actions] = Context.value;
+  const [state, actions, nowrapData] = Context.value;
   const [local, others] = splitProps(props, [
     "children",
     "height",
     "maxHeight",
     "onScroll",
     "onScrollEnd",
+    "onBarChange",
   ]);
+
+  createWatch(
+    () => local.onBarChange,
+    () => {
+      nowrapData.onBarChange = local.onBarChange || null;
+    }
+  );
 
   return (
     <Context.Provider>

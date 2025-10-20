@@ -26,8 +26,10 @@ export default defineConfig(({ env }) => {
       dts: true,
       plugins: getPlugins(false),
       inputOptions: {
-        define: {
-          IS_DEV: isDev ? "true" : "false",
+        transform: {
+          define: {
+            IS_DEV: isDev ? "true" : "false",
+          },
         },
       },
       outputOptions: {
@@ -39,9 +41,11 @@ export default defineConfig(({ env }) => {
       platform: "browser",
       dts: false,
       inputOptions: {
-        jsx: "preserve",
-        define: {
-          IS_DEV: isDev ? "true" : "false",
+        transform: {
+          define: {
+            IS_DEV: isDev ? "true" : "false",
+          },
+          jsx: "preserve",
         },
       },
       outputOptions: {

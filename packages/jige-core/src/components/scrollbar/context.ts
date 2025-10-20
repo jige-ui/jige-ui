@@ -59,7 +59,7 @@ const context = createComponentState({
         return;
       }
       const refContent = state.refContent;
-      const scollVTop = refContent.scrollTop;
+      const scrollVTop = refContent.scrollTop;
       const scrollVHeight = refContent.scrollHeight - refContent.clientHeight;
 
       batch(() => {
@@ -71,7 +71,7 @@ const context = createComponentState({
         if (scrollVHeight === 0) {
           actions.setState("verticalPer", null);
         } else {
-          const scrollVPercent = (scollVTop / scrollVHeight) * 100;
+          const scrollVPercent = (scrollVTop / scrollVHeight) * 100;
           actions.setState("verticalPer", scrollVPercent);
         }
 
@@ -89,7 +89,14 @@ const context = createComponentState({
           actions.setState("horizontalPer", scrollHPercent);
         }
       });
+
+      this.nowrapData.onBarChange?.();
     },
+  },
+  nowrapData() {
+    return {
+      onBarChange: null as (() => void) | null,
+    };
   },
 });
 
