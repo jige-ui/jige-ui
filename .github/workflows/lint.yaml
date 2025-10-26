@@ -42,7 +42,7 @@ jobs:
         run: pnpm run lint
 
       - name: Build First
-        run: pnpm run build:core
+        run: pnpm -F jige-core build && pnpm -F @jige-ui/unocss build
 
       - name: Typecheck
         run: pnpm run tc
