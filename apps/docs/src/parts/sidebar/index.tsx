@@ -2,16 +2,16 @@ import { useLocation } from "@solidjs/router";
 import { Scrollbar } from "jige-ui";
 import { For } from "solid-js";
 
-export interface SideLink {
+export type SideLink = {
   title: string;
   href: string;
   status?: "new" | "updated" | "unreleased";
-}
+};
 
-export interface SideSection {
+export type SideSection = {
   title: string;
   links: SideLink[];
-}
+};
 
 export function Sidebar(props: { sections: SideSection[] }) {
   const location = useLocation();

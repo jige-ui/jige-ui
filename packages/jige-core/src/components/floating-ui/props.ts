@@ -22,7 +22,7 @@ export type Placement =
   | "left-start"
   | "left-end";
 
-export interface FloatingUiCoreProps {
+export type FloatingUiCoreProps = {
   placement?: Placement;
   trigger?: "hover" | "click" | "manual";
   openDelay?: number;
@@ -35,4 +35,4 @@ export interface FloatingUiCoreProps {
     flip?: FlipOptions | Derivable<FlipOptions> | boolean;
     size?: SizeOptions | Derivable<SizeOptions>;
   };
-}
+};

@@ -11,6 +11,7 @@ import { EXPAND_COLUMN, ExpandRow, ExpandTrigger } from "./expendable";
 
 declare module "solid-tiny-table" {
   // biome-ignore lint/correctness/noUnusedVariables: e
+  // biome-ignore lint/style/useConsistentTypeDefinitions: is required
   interface ColumnMeta<TData extends RowData, TValue> {
     width?: number;
   }

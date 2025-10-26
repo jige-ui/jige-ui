@@ -3,7 +3,6 @@ import type { JSX } from "solid-js";
 import { createWatch, makeEventListener } from "solid-tiny-utils";
 import { context } from "./context";
 
-// this is the trgger component
 export function Trigger(props: {
   ref?: HTMLElement | ((el: HTMLElement) => void);
   children: JSX.Element;
@@ -49,7 +48,7 @@ export function Trigger(props: {
       ref={
         mergeRefs(props.ref, (el) => {
           actions.setState("refTrigger", el);
-        }) as any
+        }) as Ref<Element | undefined>
       }
     >
       {props.children}

@@ -4,10 +4,10 @@ import type { ParentComponent } from "solid-js";
 import { defaultSections, Sidebar, type SideSection } from "./sidebar";
 import "../styles/mdx.css";
 
-interface LayoutProps {
+type LayoutProps = {
   sections?: SideSection[];
   showSidebar?: boolean;
-}
+};
 
 export const Layout: ParentComponent<LayoutProps> = (props) => {
   const location = useLocation();

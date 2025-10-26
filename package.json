@@ -1,32 +1,28 @@
 {
   "name": "monorepo",
   "private": true,
-  "packageManager": "pnpm@10.15.0",
+  "packageManager": "pnpm@10.19.0",
   "license": "MIT",
   "scripts": {
     "preinstall": "npx only-allow pnpm",
-    "build": "pnpm build:core && pnpm build:ui",
     "dev": "pnpm -F jige-core build-dev && pnpm dev:ui",
     "doc": "pnpm -F docs dev",
-    "pub:ui": "pnpm build:core && pnpm build:ui && pnpm -F jige-ui publish -r",
     "dev:ui": "pnpm -F jige-ui dev",
-    "build:ui": "pnpm -F jige-ui build",
-    "build:core": "pnpm -F jige-core build",
     "clean": "pnpm exec rimraf ./packages/**/node_modules ./apps/**/node_modules node_modules pnpm-lock.yaml --glob",
-    "lint": "pnpm dlx ultracite check",
+    "lint": "pnpm dlx ultracite@latest check",
     "lint:error": "pnpm exec biome check --diagnostic-level error",
-    "lint:fix": "pnpm dlx ultracite fix",
+    "lint:fix": "pnpm dlx ultracite@latest fix",
     "tc:core": "pnpm -F jige-core type-check",
     "tc:ui": "pnpm -F jige-ui type-check",
     "tc": "pnpm tc:core && pnpm tc:ui",
     "prepare": "husky"
   },
   "devDependencies": {
-    "@biomejs/biome": "2.2.2",
-    "@commitlint/cli": "^19.8.1",
-    "@commitlint/config-conventional": "^19.8.1",
+    "@biomejs/biome": "2.3.0",
+    "@commitlint/cli": "^20.1.0",
+    "@commitlint/config-conventional": "^20.0.0",
     "@types/node": "^24.3.0",
     "husky": "^9.1.7",
-    "ultracite": "5.3.3"
+    "ultracite": "6.0.1"
   }
 }

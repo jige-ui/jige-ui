@@ -1,4 +1,4 @@
-export interface DialogInst {
+export type DialogInst = {
   id: string;
   title: string;
   type: "success" | "warning" | "error" | "info";
@@ -7,9 +7,9 @@ export interface DialogInst {
   negativeText?: string;
   onPositiveClick?: () => void | Promise<void>;
   onNegativeClick?: () => void | Promise<void>;
-}
+};
 
-export interface DialogFactory {
+export type DialogFactory = {
   error: ((conf: Omit<DialogInst, "type" | "id">) => void) &
     ((content: string) => void);
   success: ((conf: Omit<DialogInst, "type" | "id">) => void) &
@@ -18,4 +18,4 @@ export interface DialogFactory {
     ((content: string) => void);
   info: ((conf: Omit<DialogInst, "type" | "id">) => void) &
     ((content: string) => void);
-}
+};

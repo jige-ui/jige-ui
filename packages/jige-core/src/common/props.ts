@@ -1,12 +1,12 @@
 import type { JSX } from "solid-js/jsx-runtime";
 
-interface Context {
+type Context = {
   useContext: () => [
     Record<string, unknown>,
     Record<string, unknown>,
     Record<string, unknown>,
   ];
-}
+};
 type ContextChild<
   T extends [
     Record<string, unknown>,

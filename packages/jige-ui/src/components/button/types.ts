@@ -13,7 +13,7 @@ export type ButtonElement<THref = string | undefined> = THref extends string
   ? ButtonElementAnchorProps
   : ButtonElementButtonProps;
 
-export interface ButtonProps {
+export type ButtonProps = {
   label?: string;
   icon?: JSX.Element;
   onClick?: (e: MouseEvent) => void | Promise<void>;
@@ -25,4 +25,4 @@ export interface ButtonProps {
   variant?: ButtonVariant;
   color?: string;
   size?: ButtonSize;
-}
+};

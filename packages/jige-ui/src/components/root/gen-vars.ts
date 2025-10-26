@@ -6,17 +6,17 @@ type Light = number;
 type Color = number;
 type Opacity = number;
 
-interface ThemeVar {
+type ThemeVar = {
   l: Light;
   c?: Color;
   cD?: Color;
   lD?: Light;
   a?: Opacity;
-}
+};
 
-export interface ThemeVars {
+export type ThemeVars = {
   [key: string]: ThemeVar;
-}
+};
 
 export const defaultThemeColors: ThemeVars = {
   "t-hl": { l: 78, lD: 65 },

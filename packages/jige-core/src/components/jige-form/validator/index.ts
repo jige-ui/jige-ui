@@ -1,8 +1,8 @@
-export interface JigeFormValidatorCorrectReturn {
+export type JigeFormValidatorCorrectReturn = {
   message: string;
   type: string;
   [key: string]: any;
-}
+};
 export type JigeFormValidatorReturn =
   | {
       message: string;

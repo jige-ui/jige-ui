@@ -1,3 +1,4 @@
+import { isNumber } from "solid-tiny-utils";
 import { IconFluentChevronDown24Filled } from "~/components/icons/fluent-chevron-down-24-filled";
 import { IconFluentChevronUp24Filled } from "~/components/icons/fluent-chevron-up-24-filled";
 import { context } from "./context";
@@ -7,7 +8,7 @@ export function MinusAndPlus(props: { class?: string }) {
   return (
     <div class={props.class}>
       <button
-        disabled={state.value >= state.max}
+        disabled={isNumber(state.value) && state.value >= state.max}
         onClick={() => actions.setValue(state.safeValue + 1)}
         onMouseDown={(e) => e.preventDefault()}
         type="button"
@@ -15,7 +16,7 @@ export function MinusAndPlus(props: { class?: string }) {
         <IconFluentChevronUp24Filled />
       </button>
       <button
-        disabled={state.value <= state.min}
+        disabled={isNumber(state.value) && state.value <= state.min}
         onClick={() => actions.setValue(state.safeValue - 1)}
         onMouseDown={(e) => e.preventDefault()}
         type="button"
