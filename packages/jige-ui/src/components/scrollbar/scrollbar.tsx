@@ -2,6 +2,7 @@ import scrollCss from "sass:./scrollbar.scss";
 import { runSolidEventHandler, ScrollbarCore } from "jige-core";
 import type { JSX } from "solid-js";
 import { createMemo, createSignal, Show } from "solid-js";
+import { createStore } from "solid-js/store";
 import { mountStyle } from "solid-tiny-utils";
 
 function GmScrollBar(props: {
@@ -78,17 +79,56 @@ export function Scrollbar(props: {
   onClick?: JSX.EventHandlerUnion<HTMLDivElement, MouseEvent>;
   contentStyle?: string | JSX.CSSProperties;
   scrollRef?: (val: HTMLDivElement) => void;
-  onScrollBarChange?: () => void;
+  onScrollBarChange?: (scrollEl: HTMLElement) => void;
+  showMask?: boolean;
 }) {
   mountStyle(scrollCss, "jige-ui-scrollbar");
   const [hidden, setHidden] = createSignal(true);
+
+  const [maskFade, setMaskFade] = createStore({
+    top: false,
+    bottom: false,
+  });
+
+  const handleMask = (scrollEl: HTMLElement) => {
+    const { scrollTop, scrollHeight, clientHeight } = scrollEl;
+    if (scrollTop > 0) {
+      setMaskFade("top", true);
+    } else {
+      setMaskFade("top", false);
+    }
+    if (scrollTop + clientHeight < scrollHeight) {
+      setMaskFade("bottom", true);
+    } else {
+      setMaskFade("bottom", false);
+    }
+  };
+
+  const maskFadeType = createMemo(() => {
+    if (!props.showMask) {
+      return undefined;
+    }
+    if (maskFade.top && maskFade.bottom) {
+      return "both";
+    }
+    if (maskFade.top) {
+      return "top";
+    }
+    if (maskFade.bottom) {
+      return "bottom";
+    }
+    return undefined;
+  });
 
   return (
     <ScrollbarCore
       class={props.class}
       height={props.height}
       maxHeight={props.maxHeight}
-      onBarChange={props.onScrollBarChange}
+      onBarChange={(el) => {
+        handleMask(el);
+        props.onScrollBarChange?.(el);
+      }}
       onClick={props.onClick}
       onMouseEnter={() => {
         !props.always && setHidden(false);
@@ -98,6 +138,8 @@ export function Scrollbar(props: {
       }}
     >
       <ScrollbarCore.ScrollArea
+        class="jg-scroll-area"
+        data-mask={maskFadeType()}
         onScroll={(e) => {
           runSolidEventHandler(e, props.onScroll);
         }}

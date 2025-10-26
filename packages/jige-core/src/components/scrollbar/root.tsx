@@ -9,7 +9,7 @@ export default function Root(
     children: JSX.Element;
     height?: string;
     maxHeight?: string;
-    onBarChange?: () => void;
+    onBarChange?: (scrollEl: HTMLElement) => void;
     onMouseEnter?: (
       e: MouseEvent & {
         currentTarget: HTMLDivElement;

@@ -42,3 +42,31 @@
   border-radius: 3px;
   transition: all 30ms;
 }
+
+.jg-scroll-area {
+  &[data-mask="both"] {
+    mask-image: linear-gradient(
+      to bottom,
+      transparent 0%,
+      black 10%,
+      black 90%,
+      transparent 100%
+    );
+  }
+  &[data-mask="top"] {
+    mask-image: linear-gradient(
+      to bottom,
+      transparent 0%,
+      black 10%,
+      black 100%
+    );
+  }
+  &[data-mask="bottom"] {
+    mask-image: linear-gradient(
+      to bottom,
+      black 0%,
+      black 90%,
+      transparent 100%
+    );
+  }
+}

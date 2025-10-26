@@ -90,12 +90,12 @@ const context = createComponentState({
         }
       });
 
-      this.nowrapData.onBarChange?.();
+      this.nowrapData.onBarChange?.(this.state.refContent!);
     },
   },
   nowrapData() {
     return {
-      onBarChange: null as (() => void) | null,
+      onBarChange: null as ((scrollEl: HTMLElement) => void) | null,
     };
   },
 });
