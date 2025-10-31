@@ -14,15 +14,13 @@
     "lint:fix": "pnpm dlx ultracite@latest fix",
     "tc:core": "pnpm -F jige-core type-check",
     "tc:ui": "pnpm -F jige-ui type-check",
-    "tc": "pnpm tc:core && pnpm tc:ui",
-    "prepare": "husky"
+    "tc": "pnpm tc:core && pnpm tc:ui"
   },
   "devDependencies": {
-    "@biomejs/biome": "2.3.0",
+    "@biomejs/biome": "2.3.2",
     "@commitlint/cli": "^20.1.0",
     "@commitlint/config-conventional": "^20.0.0",
     "@types/node": "^24.3.0",
-    "husky": "^9.1.7",
-    "ultracite": "6.0.1"
+    "ultracite": "6.1.0"
   }
 }
