@@ -48,10 +48,11 @@
     "solid-tiny-utils": "catalog:"
   },
   "devDependencies": {
+    "@formkit/auto-animate": "^0.9.0",
     "@iconify-json/fluent": "^1.2.26",
+    "@jige-ui/unocss": "workspace:^",
     "@solidjs/router": "^0.15.2",
     "@types/node": "^22.5.2",
-    "@jige-ui/unocss": "workspace:^",
     "bumpp": "catalog:",
     "rolldown-plugin-solid": "catalog:",
     "rollup-plugin-inline-import": "^0.3.0",
