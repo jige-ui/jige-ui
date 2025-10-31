@@ -1,7 +1,14 @@
-import { createResource, createSignal } from "solid-js";
+import { createResource, createSignal, Show } from "solid-js";
 import { createStore } from "solid-js/store";
 import { random, sleep, uid } from "solid-tiny-utils";
-import { Button, createColumnHelper, Form, Input, TinyTable } from "~/build";
+import {
+  Button,
+  createColumnHelper,
+  Form,
+  Input,
+  Modal,
+  TinyTable,
+} from "~/build";
 import { Playground } from "../../../components/playground";
 
 type Person = {
@@ -118,6 +125,8 @@ export default function Demo() {
     bordered: false,
     empty: false,
     hideHeader: false,
+    expendable: false,
+    selectable: "no-selection" as "checkbox" | "radio" | "no-selection",
   });
 
   const [data, { refetch }] = createResource(
@@ -128,8 +137,8 @@ export default function Demo() {
     { initialValue: [] }
   );
 
-  const [showItem, setShowItem] = createSignal<Person>();
   const [currPage, setCurrPage] = createSignal(1);
+  const [selectRows, setSelectRows] = createSignal<Person[]>([]);
 
   return (
     <Playground>
@@ -139,20 +148,42 @@ export default function Demo() {
             bordered={p.bordered}
             columns={defaultColumns}
             data={p.empty ? [] : data.latest}
-            expandable={{
-              expandedRowRender: (row) => (
-                <pre>{JSON.stringify(row, null, 2)}</pre>
-              ),
-              rowExpandable(row) {
-                return row.status !== "Single";
-              },
-            }}
+            expandable={
+              p.expendable
+                ? {
+                    expandedRowRender: (row) => (
+                      <pre>{JSON.stringify(row, null, 2)}</pre>
+                    ),
+                    rowExpandable(row) {
+                      return row.status !== "Single";
+                    },
+                  }
+                : undefined
+            }
+            footer={
+              <Show when={p.selectable !== "no-selection"}>
+                <Modal>
+                  <Modal.Trigger>
+                    <Button
+                      color="hl"
+                      disabled={selectRows().length === 0}
+                      label={`Show Selected Rows (${selectRows().length})`}
+                      size="small"
+                      variant="text"
+                    />
+                  </Modal.Trigger>
+                  <Modal.Content>
+                    <Modal.Header title="Selected rows" />
+                    <Modal.InnerContent>
+                      <pre>{JSON.stringify(selectRows(), null, 2)}</pre>
+                    </Modal.InnerContent>
+                  </Modal.Content>
+                </Modal>
+              </Show>
+            }
             hideHeader={p.hideHeader}
             loading={data.loading}
             maxHeight="655px"
-            onRowClick={(row) => {
-              setShowItem(row);
-            }}
             pagination={{
               total: 10_000,
               pageSize: 100,
@@ -162,7 +193,16 @@ export default function Demo() {
               },
               currPage: currPage(),
             }}
-            rowClass={(row) => (row === showItem() ? "bg-blue-100" : "")}
+            rowSelection={
+              p.selectable === "no-selection"
+                ? undefined
+                : {
+                    type: p.selectable,
+                    onChange(rows) {
+                      setSelectRows(rows);
+                    },
+                  }
+            }
           />
         </div>
       </Playground.MainArea>
@@ -171,6 +211,7 @@ export default function Demo() {
         properties={p}
         typeDeclaration={{
           size: ["small", "medium", "large", 50],
+          selectable: ["checkbox", "radio", "no-selection"],
         }}
       />
     </Playground>

@@ -59,6 +59,6 @@ export function ExpandTrigger(props: {
 }
 
 export const EXPAND_COLUMN: DisplayColumnDef<any> = {
-  id: "expander",
+  id: "TINY_TABLE_EXPANDER",
   meta: { width: 48 },
 };

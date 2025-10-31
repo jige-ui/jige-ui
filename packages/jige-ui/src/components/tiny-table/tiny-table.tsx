@@ -1,6 +1,14 @@
 import css from "sass:./tiny-table.scss";
 import { TableCore } from "jige-core";
-import { createMemo, createSignal, For, type JSX, Show } from "solid-js";
+import {
+  createMemo,
+  createSignal,
+  For,
+  type JSX,
+  Match,
+  Show,
+  Switch,
+} from "solid-js";
 import { type ColumnDef, createTable, type RowData } from "solid-tiny-table";
 import { createWatch, mountStyle } from "solid-tiny-utils";
 import { isDef } from "~/common/types";
@@ -8,6 +16,7 @@ import { IconFluentBoxDismiss24Regular } from "../icons/fluent-box-dismiss-24-re
 import { Paginator } from "../paginator";
 import { Table } from "../table";
 import { EXPAND_COLUMN, ExpandRow, ExpandTrigger } from "./expendable";
+import { SELECTOR_COLUMN, Selector } from "./selector";
 
 declare module "solid-tiny-table" {
   // biome-ignore lint/correctness/noUnusedVariables: e
@@ -63,6 +72,10 @@ export function TinyTable<T extends RowData>(props: {
     expandedRowRender: (row: T) => JSX.Element;
     rowExpandable?: (row: T) => boolean;
   };
+  rowSelection?: {
+    type?: "checkbox" | "radio";
+    onChange: (selectedRowsIdx: T[]) => void;
+  };
   hideHeader?: boolean;
 }) {
   mountStyle(css, "jige-ui-tiny-table");
@@ -72,16 +85,22 @@ export function TinyTable<T extends RowData>(props: {
   const table = createTable({
     data: () => props.data,
     columns: () => {
+      const columns = [...props.columns];
+      if (isDef(props.rowSelection) && !props.columns.includes(EXPAND_COLUMN)) {
+        columns.unshift(SELECTOR_COLUMN);
+      }
       if (
         isDef(props.expandable?.expandedRowRender) &&
         !props.columns.includes(EXPAND_COLUMN)
       ) {
-        return [EXPAND_COLUMN, ...props.columns];
+        columns.unshift(EXPAND_COLUMN);
       }
-      return props.columns;
+
+      return columns;
     },
     store: {
       expandableStore: [] as boolean[],
+      rowSelectionStore: [] as boolean[],
     },
   });
 
@@ -95,7 +114,32 @@ export function TinyTable<T extends RowData>(props: {
     });
 
     setState("expandableStore", []);
+    setState("rowSelectionStore", []);
   });
+
+  createWatch(
+    () => props.rowSelection?.type,
+    () => {
+      setState("rowSelectionStore", []);
+    },
+    { defer: true }
+  );
+
+  createWatch(
+    () => [...state.rowSelectionStore],
+    (v) => {
+      const selectedRows: T[] = [];
+      const rows = table.rows();
+      for (let i = 0; i < v.length; i++) {
+        const row = rows[i];
+        if (v[i] && row) {
+          selectedRows.push(row.original);
+        }
+      }
+      props.rowSelection?.onChange(selectedRows);
+    },
+    { defer: true }
+  );
 
   return (
     <Table
@@ -147,24 +191,45 @@ export function TinyTable<T extends RowData>(props: {
                       {(cell) => {
                         return (
                           <Table.Cell>
-                            <Show
-                              fallback={cell.renderCell()}
-                              when={
-                                cell.column.columnDef.id === "expander" &&
-                                canExpand()
-                              }
-                            >
-                              <ExpandTrigger
-                                expanded={state.expandableStore[index()]}
-                                onClick={() =>
-                                  setState(
-                                    "expandableStore",
-                                    index(),
-                                    (v) => !v
-                                  )
+                            <Switch fallback={cell.renderCell()}>
+                              <Match
+                                when={
+                                  cell.column.columnDef.id ===
+                                  "TINY_TABLE_SELECTOR"
                                 }
-                              />
-                            </Show>
+                              >
+                                <Selector
+                                  onChange={(v) => {
+                                    if (
+                                      v &&
+                                      props.rowSelection?.type === "radio"
+                                    ) {
+                                      setState("rowSelectionStore", []);
+                                    }
+                                    setState("rowSelectionStore", index(), v);
+                                  }}
+                                  selected={state.rowSelectionStore[index()]}
+                                  type={props.rowSelection?.type ?? "checkbox"}
+                                />
+                              </Match>
+                              <Match
+                                when={
+                                  cell.column.columnDef.id ===
+                                    "TINY_TABLE_EXPANDER" && canExpand()
+                                }
+                              >
+                                <ExpandTrigger
+                                  expanded={state.expandableStore[index()]}
+                                  onClick={() =>
+                                    setState(
+                                      "expandableStore",
+                                      index(),
+                                      (v) => !v
+                                    )
+                                  }
+                                />{" "}
+                              </Match>
+                            </Switch>
                           </Table.Cell>
                         );
                       }}
