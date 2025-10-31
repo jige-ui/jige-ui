@@ -1,17 +1,17 @@
 @use "../../../styles/funcs";
 
-.jg-radio-group-text {
+.jg-radio-text {
   font-size: 0.95em;
   color: funcs.get-var("fg3");
 }
 
-.jg-radio-group-item {
+.jg-radio {
   display: flex;
   align-items: center;
   padding: 2px 4px;
 }
 
-.jg-radio-group-circle {
+.jg-radio-circle {
   position: relative;
   display: flex;
   align-items: center;
@@ -37,25 +37,25 @@
   }
 }
 
-.jg-radio-group-item[data-checked] {
-  .jg-radio-group-circle {
+.jg-radio[data-checked] {
+  .jg-radio-circle {
     background: funcs.get-var("t-hl");
     border-color: funcs.get-var("t-hl");
   }
 
-  .jg-radio-group-circle::after {
+  .jg-radio-circle::after {
     width: 0.725em;
     height: 0.725em;
   }
 }
 
-.jg-radio-group-item[data-disabled] {
+.jg-radio[data-disabled] {
   pointer-events: none;
   opacity: 0.7;
 }
 
-.jg-radio-group-item:not([data-disabled]) {
-  .jg-radio-group-circle:active {
+.jg-radio:not([data-disabled]) {
+  .jg-radio-circle:active {
     &::after {
       width: 0.835em;
       height: 0.835em;
@@ -63,11 +63,11 @@
   }
 
   &:not([data-checked]) {
-    .jg-radio-group-circle:active {
+    .jg-radio-circle:active {
       background: funcs.get-var("t-bg4");
     }
 
-    .jg-radio-group-circle:hover {
+    .jg-radio-circle:hover {
       background: funcs.get-var("t-bg4");
     }
   }

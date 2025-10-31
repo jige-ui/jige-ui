@@ -1,35 +1,25 @@
-import { FormCore, RadioGroupCore } from "jige-core";
 import { createUniqueId } from "solid-js";
-import { dataIf } from "~/common/dataset";
+import { Radio } from "../radio";
+import context from "./context";
 
 export function Item(props: {
   value: string;
   label: string;
   disabled?: boolean;
 }) {
-  const [state] = RadioGroupCore.useContext();
-  const [, fieldCoreActs] = FormCore.useField();
+  const [state, actions] = context.useContext();
   const itemID = `radio_item__${createUniqueId()}`;
   return (
-    <RadioGroupCore.Item disabled={props.disabled} value={props.value}>
-      <RadioGroupCore.ItemNative
-        id={itemID}
-        onBlur={() => {
-          fieldCoreActs.handleBlur?.();
-        }}
-      />
-      <RadioGroupCore.ItemControl>
-        <div
-          class="jg-radio-group-item"
-          data-checked={dataIf(state.value === props.value)}
-          data-disabled={dataIf(state.disabled || props.disabled)}
-        >
-          <button class="jg-radio-group-circle" type="button" />
-          <label class="jg-radio-group-text" for={itemID}>
-            {props.label}
-          </label>
-        </div>
-      </RadioGroupCore.ItemControl>
-    </RadioGroupCore.Item>
+    <Radio
+      checked={state.value === props.value}
+      disabled={state.disabled || props.disabled}
+      id={itemID}
+      label={props.label}
+      onChange={(checked) => {
+        if (checked) {
+          actions.setState("value", props.value);
+        }
+      }}
+    />
   );
 }

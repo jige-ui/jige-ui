@@ -1,5 +1,5 @@
 import css from "sass:./checkbox.scss";
-import { SwitcherCore } from "jige-core";
+import { CheckboxCore } from "jige-core";
 import { createUniqueId } from "solid-js";
 import { mountStyle } from "solid-tiny-utils";
 import { Button } from "~/components/button";
@@ -16,17 +16,17 @@ export function ButtonCheckbox(
 
   return (
     <div class="jg-checkbox" data-size={props.size || "medium"}>
-      <SwitcherCore
+      <CheckboxCore
         checked={props.checked}
         disabled={props.disabled}
         onChange={props.onChange}
       >
-        <SwitcherCore.Native
+        <CheckboxCore.Native
           class="jg-checkbox-native"
           id={itemID}
           name={props.name}
         />
-        <SwitcherCore.Control>
+        <CheckboxCore.Control>
           {(state) => (
             <Button
               class={props.class}
@@ -37,8 +37,8 @@ export function ButtonCheckbox(
               {props.children}
             </Button>
           )}
-        </SwitcherCore.Control>
-      </SwitcherCore>
+        </CheckboxCore.Control>
+      </CheckboxCore>
     </div>
   );
 }

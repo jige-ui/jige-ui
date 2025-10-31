@@ -1,13 +1,12 @@
 import { mergeRefs } from "@solid-primitives/refs";
-import { splitProps } from "solid-js";
-import type { JSX } from "solid-js/jsx-runtime";
+import { type ComponentProps, splitProps } from "solid-js";
 import { hiddenStyle } from "@/common/dom";
 import { runSolidEventHandler } from "@/common/solidjs";
-import context from "./context";
+import { context } from "./context";
 
-export default function Native(
+export function Native(
   props: Omit<
-    JSX.InputHTMLAttributes<HTMLInputElement>,
+    ComponentProps<"input">,
     "style" | "type" | "role" | "value" | "checked" | "disabled"
   >
 ) {
@@ -20,8 +19,9 @@ export default function Native(
   ]);
   return (
     <input
-      aria-checked={state.checked}
+      value="on"
       {...otherProps}
+      aria-checked={state.checked}
       checked={state.checked}
       disabled={state.disabled}
       onBlur={(e) => {
@@ -47,7 +47,6 @@ export default function Native(
       role="switch"
       style={hiddenStyle}
       type="checkbox"
-      value="on"
     />
   );
 }

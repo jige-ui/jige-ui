@@ -1,11 +1,9 @@
 import { createComponentState } from "solid-tiny-context";
 
-const itemContext = createComponentState({
+export const context = createComponentState({
   state: () => ({
-    value: "",
+    checked: false,
     nativeEl: null as HTMLInputElement | null,
     disabled: false,
   }),
 });
-
-export default itemContext;

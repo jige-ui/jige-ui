@@ -1,5 +1,5 @@
 import styles from "sass:./switcher.scss";
-import { SwitcherCore } from "jige-core";
+import { CheckboxCore } from "jige-core";
 import { createUniqueId, type JSX } from "solid-js";
 import { mountStyle } from "solid-tiny-utils";
 import { dataIf } from "~/common/dataset";
@@ -16,13 +16,13 @@ export function Switcher(props: {
 
   return (
     <div class="jg-switcher" data-size={props.size || "medium"}>
-      <SwitcherCore
+      <CheckboxCore
         checked={props.value}
         disabled={props.disabled}
         onChange={props.onChange}
       >
-        <SwitcherCore.Native class="jg-switcher-native" id={labelFor} />
-        <SwitcherCore.Control>
+        <CheckboxCore.Native class="jg-switcher-native" id={labelFor} />
+        <CheckboxCore.Control>
           {(state) => (
             <div
               class="jg-switcher-control"
@@ -34,7 +34,7 @@ export function Switcher(props: {
               />
             </div>
           )}
-        </SwitcherCore.Control>
+        </CheckboxCore.Control>
         <label
           for={labelFor}
           style={{
@@ -43,7 +43,7 @@ export function Switcher(props: {
         >
           {props.children}
         </label>
-      </SwitcherCore>
+      </CheckboxCore>
     </div>
   );
 }

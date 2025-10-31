@@ -1,6 +1,6 @@
 import { createComponentState } from "solid-tiny-context";
 
-const context = createComponentState({
+export const context = createComponentState({
   state: () => ({
     checked: false,
     disabled: false,
@@ -9,5 +9,3 @@ const context = createComponentState({
     $nativeEl: null as HTMLInputElement | null,
   }),
 });
-
-export default context;

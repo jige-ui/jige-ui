@@ -1,25 +1,24 @@
 import type { JSX } from "solid-js/jsx-runtime";
 import { createWatch } from "solid-tiny-utils";
-import context from "./context";
+import { context } from "./context";
 
 export function Root(props: {
   children: JSX.Element;
-  name?: string;
-  value?: string[];
-  onChange?: (v: string[]) => void;
+  checked?: boolean;
   disabled?: boolean;
+  onChange?: (value: boolean) => void;
 }) {
   const Context = context.initial({
+    checked: () => props.checked,
     disabled: () => props.disabled,
-    value: () => props.value,
-    name: () => props.name,
   });
+
   const [state] = Context.value;
 
   createWatch(
-    () => state.value,
-    (v) => {
-      v !== props.value && props.onChange?.(v);
+    () => state.checked,
+    (c) => {
+      props.onChange?.(c);
     },
     { defer: true }
   );
