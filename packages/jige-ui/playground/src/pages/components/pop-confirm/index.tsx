@@ -1,4 +1,5 @@
 import { createStore } from "solid-js/store";
+import { sleep } from "solid-tiny-utils";
 import { Button, PopConfirm, useToast } from "~/build";
 import { Playground } from "../../../components/playground";
 
@@ -16,7 +17,8 @@ export default function Demo() {
       <Playground.MainArea>
         <PopConfirm
           description={p.description}
-          onConfirm={() => {
+          onConfirm={async () => {
+            await sleep(1500);
             $t.success("Confirmed");
           }}
           placement={p.placement}
