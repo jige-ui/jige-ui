@@ -2,10 +2,10 @@ import { mergeRefs } from "@solid-primitives/refs";
 import type { JSX } from "solid-js";
 import { createSignal, onMount, Show, splitProps } from "solid-js";
 import { createWatch } from "solid-tiny-utils";
-import { combineStyle, getElementHeight, hasAnimation } from "@/common/dom";
-import type { PropsWithContextChild } from "@/common/props";
-import { callMaybeContextChild } from "@/common/props";
-import { runSolidEventHandler } from "@/common/solidjs";
+import { combineStyle, getElementHeight, hasAnimation } from "~/common/dom";
+import type { PropsWithContextChild } from "~/common/props";
+import { callMaybeContextChild } from "~/common/props";
+import { runSolidEventHandler } from "~/common/solidjs";
 import context from "./context";
 
 function CollapsibleContentMain(

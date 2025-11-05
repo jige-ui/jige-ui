@@ -1,5 +1,7 @@
+import { Show } from "solid-js";
 import { createStore } from "solid-js/store";
-import { Button, Checkbox, Modal } from "~/build";
+import { list } from "solid-tiny-utils";
+import { Button, Checkbox, Modal, Scrollbar, TinyTable } from "~/build";
 import { Playground } from "../../../components/playground";
 
 export default function Demo() {
@@ -9,6 +11,7 @@ export default function Demo() {
 
   const [config, setConfig] = createStore({
     longContent: false,
+    tinyTable: true,
   });
 
   return (
@@ -19,7 +22,7 @@ export default function Demo() {
             <Modal.Trigger>
               <Button label="Open Modal" />
             </Modal.Trigger>
-            <Modal.Content width={`${s.width}px`}>
+            <Modal.Content width={config.tinyTable ? "80%" : `${s.width}px`}>
               {(_state, actions) => {
                 return (
                   <>
@@ -28,27 +31,61 @@ export default function Demo() {
                       title="Modal Header"
                     />
                     <Modal.InnerContent class="flex flex-col gap-2">
-                      <Checkbox.Button
-                        checked={config.longContent}
-                        class="w-full"
-                        label="启用长内容"
-                        onChange={(v) => {
-                          setConfig("longContent", v);
-                        }}
-                      />
-                      <Modal closeOnClickMask closeOnEsc>
-                        <Modal.Trigger>
-                          <Button class="w-full" label="Open a new modal" />
-                        </Modal.Trigger>
-                        <Modal.Content>
-                          <div>Modal Content</div>
-                        </Modal.Content>
-                      </Modal>
+                      <div class="flex gap-1 items-center">
+                        <Checkbox.Button
+                          checked={config.longContent}
+                          label="启用长内容"
+                          onChange={(v) => {
+                            setConfig("longContent", v);
+                          }}
+                          size="small"
+                        />
+                        <Checkbox.Button
+                          checked={config.tinyTable}
+                          label="启用表格"
+                          onChange={(v) => {
+                            setConfig("tinyTable", v);
+                          }}
+                          size="small"
+                        />
+                        <Modal closeOnClickMask closeOnEsc>
+                          <Modal.Trigger>
+                            <Button label="Open modal" size={"small"} />
+                          </Modal.Trigger>
+                          <Modal.Content>
+                            <Modal.Header title="Inner Modal" />
+                            <Modal.InnerContent>
+                              This is an inner modal content.
+                            </Modal.InnerContent>
+                          </Modal.Content>
+                        </Modal>
+                      </div>
+
+                      <Show when={config.tinyTable}>
+                        <TinyTable
+                          columns={list(5).map((i) => ({
+                            accessorKey: `col_${i}`,
+                            header: `Header ${i}`,
+                            meta: {
+                              width: 80 + i * 10,
+                            },
+                          }))}
+                          data={[]}
+                        />
+                      </Show>
+
                       <div
                         style={{
                           height: config.longContent ? "3000px" : "0",
+                          overflow: "hidden",
                         }}
-                      />
+                      >
+                        <Scrollbar maxHeight="300px">
+                          <div class="h-600px w-2000px bg-gray-200">
+                            This is a long content area.
+                          </div>
+                        </Scrollbar>
+                      </div>
                     </Modal.InnerContent>
                     <Modal.Footer>
                       <Button

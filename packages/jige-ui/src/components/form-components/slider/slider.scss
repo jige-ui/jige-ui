@@ -1,4 +1,4 @@
-@use '../../../styles/funcs';
+@use "../../../styles/funcs";
 
 .jg-slider-track {
   display: flex;
@@ -6,19 +6,19 @@
   min-width: 100px;
   height: 6px;
   cursor: pointer;
-  background: funcs.get-var('t-bg4');
+  background: funcs.get-var("t-bg4");
   border-radius: 6px;
 
   &[data-disabled] {
     pointer-events: none;
-    opacity: .7;
+    opacity: 0.44;
   }
 }
 
 .jg-slider-fill {
   height: 100%;
   pointer-events: none;
-  background: funcs.get-var('t-hl');
+  background: funcs.get-var("t-hl");
   border-radius: 10px;
 }
 
@@ -26,15 +26,14 @@
   position: absolute;
   width: 20px;
   height: 20px;
-  background: funcs.get-var('t-hl');
-  border: 5px solid funcs.get-var('t-bg3');
+  background: funcs.get-var("t-hl");
+  border: 5px solid funcs.get-var("t-bg3");
   border-radius: 50%;
-  box-shadow: funcs.get-var('shadow4');
+  box-shadow: funcs.get-var("shadow4");
   transform: translateX(-50%);
-  transition: border-width .3s;
+  transition: border-width 0.3s;
 }
 
 .jg-slider-tip-content {
-  font-size: .875em;
+  font-size: 0.875em;
 }
-

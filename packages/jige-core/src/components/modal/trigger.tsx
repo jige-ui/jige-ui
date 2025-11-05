@@ -1,8 +1,8 @@
 import { mergeRefs, Ref } from "@solid-primitives/refs";
 import { onMount } from "solid-js";
 import { makeEventListener } from "solid-tiny-utils";
-import type { MaybeContextChild } from "@/common/props";
-import { callMaybeContextChild } from "@/common/props";
+import type { MaybeContextChild } from "~/common/props";
+import { callMaybeContextChild } from "~/common/props";
 import { context } from "./context";
 
 export function Trigger(props: {

@@ -18,6 +18,7 @@ const context = createComponentState({
       if (!this.state.refContent) {
         return;
       }
+
       const ratio = Math.min(1, Math.max(0, scrollTopPer / 100));
       const scrollPx =
         ratio *
@@ -37,6 +38,7 @@ const context = createComponentState({
       if (!this.state.refContent) {
         return;
       }
+
       const ratio = Math.min(1, Math.max(0, scrollLeftPer / 100));
       const scrollPx =
         ratio *

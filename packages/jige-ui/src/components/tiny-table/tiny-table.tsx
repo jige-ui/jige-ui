@@ -253,9 +253,15 @@ export function TinyTable<T extends RowData>(props: {
       <Show when={props.pagination || props.footer}>
         <Table.Footer>
           <div>{props.footer || ""}</div>
-          <Show when={props.pagination}>
-            <Paginator {...props.pagination!} />
-          </Show>
+          <div
+            style={{
+              padding: "4px",
+            }}
+          >
+            <Show when={props.pagination}>
+              <Paginator {...props.pagination!} />
+            </Show>
+          </div>
         </Table.Footer>
       </Show>
     </Table>

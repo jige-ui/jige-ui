@@ -1,6 +1,6 @@
 import type { JSX } from "solid-js/jsx-runtime";
 import { createWatch } from "solid-tiny-utils";
-import { isUndefined } from "@/common/types";
+import { isUndefined } from "~/common/types";
 import { context, GlobalModalStore } from "./context";
 
 export function Root(props: {

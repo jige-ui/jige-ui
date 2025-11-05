@@ -1,5 +1,5 @@
 import { type ComponentProps, splitProps } from "solid-js";
-import { combineStyle } from "@/common/dom";
+import { combineStyle } from "~/common/dom";
 import context from "./context";
 
 export function NormalTable(props: ComponentProps<"table">) {

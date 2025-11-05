@@ -6,10 +6,10 @@ import {
   createWatch,
   makeEventListener,
 } from "solid-tiny-utils";
-import { combineStyle, hasAnimation } from "@/common/dom";
-import type { PropsWithContextChild } from "@/common/props";
-import { callMaybeContextChild } from "@/common/props";
-import type { CloseableStatus } from "@/common/types";
+import { combineStyle, hasAnimation } from "~/common/dom";
+import type { PropsWithContextChild } from "~/common/props";
+import { callMaybeContextChild } from "~/common/props";
+import type { CloseableStatus } from "~/common/types";
 import { context, GlobalModalStore } from "./context";
 
 export function Content(

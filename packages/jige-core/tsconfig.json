@@ -7,7 +7,7 @@
     "module": "ESNext",
     "moduleResolution": "node",
     "paths": {
-      "@/*": ["src/*"]
+      "~/*": ["src/*"]
     },
     "strict": true,
     "noEmit": true,
@@ -15,6 +15,5 @@
     "esModuleInterop": true,
     "isolatedModules": true
   },
-  "include": ["./src/**/*", "env.d.ts"],
   "exclude": ["dist"]
 }

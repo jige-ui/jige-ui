@@ -34,14 +34,15 @@
   },
   "dependencies": {
     "@floating-ui/dom": "^1.6.13",
-    "@solid-primitives/bounds": "catalog:",
     "@solid-primitives/refs": "catalog:",
+    "@solid-primitives/resize-observer": "catalog:",
     "@solid-primitives/scheduled": "catalog:",
     "solid-tiny-context": "catalog:",
     "solid-tiny-utils": "catalog:"
   },
   "devDependencies": {
     "@floating-ui/core": "^1.6.13",
+    "@solidjs/router": "^0.15.2",
     "bumpp": "catalog:",
     "rolldown-plugin-solid": "catalog:",
     "rollup-plugin-inline-import": "^0.3.0",

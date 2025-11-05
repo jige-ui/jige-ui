@@ -1,7 +1,7 @@
 import { mergeRefs } from "@solid-primitives/refs";
 import { splitProps } from "solid-js";
 import type { JSX } from "solid-js/jsx-runtime";
-import { runSolidEventHandler } from "@/common/solidjs";
+import { runSolidEventHandler } from "~/common/solidjs";
 import context from "./context";
 
 export function ScrollArea(props: JSX.HTMLAttributes<HTMLDivElement>) {

@@ -1,4 +1,4 @@
-import type { Maybe, MaybePromise } from "@/common/types";
+import type { Maybe, MaybePromise } from "~/common/types";
 import type { JigeFormValidatorReturn } from "../validator";
 import type { FieldValue, FieldValues } from "./field";
 

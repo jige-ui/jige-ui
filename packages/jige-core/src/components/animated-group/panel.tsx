@@ -2,8 +2,8 @@ import { mergeRefs } from "@solid-primitives/refs";
 import { createSignal, onCleanup, onMount, Show, splitProps } from "solid-js";
 import type { JSX } from "solid-js/jsx-runtime";
 import { createWatch, makeEventListener } from "solid-tiny-utils";
-import { getElementHeight, hasAnimation } from "@/common/dom";
-import type { CloseableStatus } from "@/common/types";
+import { getElementHeight, hasAnimation } from "~/common/dom";
+import type { CloseableStatus } from "~/common/types";
 import context from "./context";
 
 type ContentProps = { key: string } & JSX.HTMLAttributes<HTMLDivElement>;

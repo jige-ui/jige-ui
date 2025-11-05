@@ -1,7 +1,7 @@
 import { mergeRefs } from "@solid-primitives/refs";
 import { type ComponentProps, splitProps } from "solid-js";
-import { hiddenStyle } from "@/common/dom";
-import { runSolidEventHandler } from "@/common/solidjs";
+import { hiddenStyle } from "~/common/dom";
+import { runSolidEventHandler } from "~/common/solidjs";
 import { context } from "./context";
 
 export function Native(

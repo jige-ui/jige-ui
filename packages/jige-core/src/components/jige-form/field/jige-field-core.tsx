@@ -1,6 +1,6 @@
 import { type JSX, mergeProps, onCleanup, onMount } from "solid-js";
 import { createWatch } from "solid-tiny-utils";
-import { callMaybeCallableChild } from "@/common/props";
+import { callMaybeCallableChild } from "~/common/props";
 import { formContext } from "../form/context";
 import { getValueFromPath } from "../utils";
 import type { JigeFormAsyncValidator, JigeFormValidator } from "../validator";

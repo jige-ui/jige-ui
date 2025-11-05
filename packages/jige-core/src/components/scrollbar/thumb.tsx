@@ -1,7 +1,7 @@
 import type { JSX } from "solid-js";
 import { createMemo, createSignal, onMount, splitProps } from "solid-js";
 import { makeEventListener } from "solid-tiny-utils";
-import { combineStyle } from "@/build";
+import { combineStyle } from "~/build";
 import context from "./context";
 
 export default function Thumb(
@@ -97,6 +97,7 @@ export default function Thumb(
           transform: `translate${isVertical() ? "Y" : "X"}(${transforms()}%)`,
           height: `${isVertical() ? `${length()}px` : "100%"}`,
           width: `${isVertical() ? "100%" : `${length()}px`}`,
+          "will-change": "transform",
         },
         local.style
       )}

@@ -1,20 +1,25 @@
-import { createElementBounds } from "@solid-primitives/bounds";
-import { type ComponentProps, createSignal, splitProps } from "solid-js";
-import { createWatch } from "solid-tiny-utils";
+import { createResizeObserver } from "@solid-primitives/resize-observer";
+import {
+  type ComponentProps,
+  createSignal,
+  onMount,
+  splitProps,
+} from "solid-js";
 import { context } from "./context";
 
 export function Footer(props: ComponentProps<"div">) {
   const [localProps, others] = splitProps(props, ["class"]);
-  const [, acts] = context.useContext();
+  const [state, acts] = context.useContext();
   const [ref, setRef] = createSignal<HTMLDivElement | null>(null);
-  const bounds = createElementBounds(ref);
 
-  createWatch(
-    () => bounds.height,
-    (h) => {
-      acts.setState("footerHeight", h || 0);
-    }
-  );
+  onMount(() => {
+    createResizeObserver(ref, (_, el) => {
+      const h = el.getBoundingClientRect().height;
+      if (h !== state.footerHeight) {
+        acts.setState("footerHeight", h);
+      }
+    });
+  });
 
   return (
     <div

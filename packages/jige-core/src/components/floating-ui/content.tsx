@@ -1,17 +1,16 @@
-import { createElementBounds } from "@solid-primitives/bounds";
+import { autoUpdate } from "@floating-ui/dom";
 import { mergeRefs } from "@solid-primitives/refs";
-import { throttle } from "@solid-primitives/scheduled";
 import type { JSX } from "solid-js";
-import { onMount, Show, splitProps } from "solid-js";
+import { onCleanup, onMount, Show, splitProps } from "solid-js";
 import { Portal } from "solid-js/web";
 import {
   createClickOutside,
   createVisibilityObserver,
   createWatch,
-  makeEventListener,
+  noop,
 } from "solid-tiny-utils";
-import { hasAnimation } from "@/common/dom";
-import { runSolidEventHandler } from "@/common/solidjs";
+import { hasAnimation } from "~/common/dom";
+import { runSolidEventHandler } from "~/common/solidjs";
 import { context } from "./context";
 
 function FloatingContentCore(
@@ -30,11 +29,6 @@ function FloatingContentCore(
   ]);
 
   let rootContent!: HTMLDivElement;
-
-  const targetBounds = createElementBounds(() => state.refTrigger);
-  const contentBounds = createElementBounds(() => state.refContent);
-
-  const throttleUpdate = throttle(actions.updatePos, 16);
 
   createClickOutside(
     () => state.refContent,
@@ -56,13 +50,18 @@ function FloatingContentCore(
     }
   });
 
-  onMount(() => {
-    makeEventListener("resize", throttleUpdate);
+  let cleanup = noop;
 
+  onMount(() => {
     createWatch(
-      () => [{ ...targetBounds }, { ...contentBounds }],
-      () => {
-        actions.updatePos();
+      () => [state.refTrigger, state.refContent],
+      ([refTrigger, refContent]) => {
+        if (refTrigger && refContent) {
+          cleanup();
+          cleanup = autoUpdate(refTrigger, refContent, () => {
+            actions.updatePos();
+          });
+        }
       }
     );
 
@@ -83,6 +82,10 @@ function FloatingContentCore(
         }
       }
     );
+  });
+
+  onCleanup(() => {
+    cleanup();
   });
 
   return (

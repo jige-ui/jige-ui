@@ -1,7 +1,7 @@
 import { mergeRefs } from "@solid-primitives/refs";
 import { splitProps } from "solid-js";
 import type { JSX } from "solid-js/jsx-runtime";
-import { combineStyle } from "@/common/dom";
+import { combineStyle } from "~/common/dom";
 import { context } from "./context";
 
 export function Content(props: JSX.HTMLAttributes<HTMLDivElement>) {

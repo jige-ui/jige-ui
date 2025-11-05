@@ -66,8 +66,3 @@
     opacity: 0.6;
   }
 }
-
-.jg-checkbox-native:focus-visible + .jg-checkbox-control {
-  outline: 1px solid funcs.get-var("t-hl");
-  outline-offset: 1px;
-}

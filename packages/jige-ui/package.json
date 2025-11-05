@@ -39,7 +39,7 @@
   },
   "peerDependenciesMeta": {},
   "dependencies": {
-    "@solid-primitives/bounds": "catalog:",
+    "@solid-primitives/resize-observer": "catalog:",
     "@solid-primitives/refs": "catalog:",
     "@solid-primitives/scheduled": "catalog:",
     "esday": "^0.5.0",

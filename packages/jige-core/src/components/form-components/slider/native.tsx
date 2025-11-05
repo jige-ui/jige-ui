@@ -1,7 +1,7 @@
 import { splitProps } from "solid-js";
 import type { JSX } from "solid-js/jsx-runtime";
-import { hiddenStyle } from "@/common/dom";
-import { runSolidEventHandler } from "@/common/solidjs";
+import { hiddenStyle } from "~/common/dom";
+import { runSolidEventHandler } from "~/common/solidjs";
 import context from "./context";
 
 export default function Native(

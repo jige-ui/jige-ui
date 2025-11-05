@@ -1,4 +1,4 @@
-@use '../../../styles/funcs';
+@use "../../../styles/funcs";
 
 .jg-time-picker-overlay {
   position: absolute;
@@ -13,29 +13,29 @@
   display: inline-flex;
   font-size: 14px;
   cursor: pointer;
-  background: funcs.get-var('t-bg1');
-  border: 1px solid funcs.get-var('t-border');
-  border-radius: .25em;
-  box-shadow: funcs.get-var('shadow1');
-  transition:  border-color 0.2s, opacity 0.2s, color 0.2s;
+  background: funcs.get-var("t-bg1");
+  border: 1px solid funcs.get-var("t-border");
+  border-radius: 0.25em;
+  box-shadow: funcs.get-var("shadow1");
+  transition: border-color 0.2s, opacity 0.2s, color 0.2s;
 
   &[data-disabled] {
     pointer-events: none;
-    opacity: 0.7;
+    opacity: 0.44;
   }
 
   &:hover {
-    .jg-time-picker-overlay  {
-      opacity: .03;
+    .jg-time-picker-overlay {
+      opacity: 0.03;
     }
   }
 
   &:active {
     box-shadow: none;
-    opacity: .7;
+    opacity: 0.7;
 
-    .jg-time-picker-overlay  {
-      opacity: .08;
+    .jg-time-picker-overlay {
+      opacity: 0.08;
     }
   }
 }
@@ -43,18 +43,18 @@
 .dark .jg-time-picker-trigger {
   .jg-time-picker-overlay {
     background: rgb(255 255 255);
-    opacity: .02;
+    opacity: 0.02;
   }
 
   &:hover {
     .jg-time-picker-overlay {
-      opacity: .04;
+      opacity: 0.04;
     }
   }
 
   &:active {
-    .jg-time-picker-overlay  {
-      opacity: .01;
+    .jg-time-picker-overlay {
+      opacity: 0.01;
     }
   }
 }
@@ -76,7 +76,7 @@
       display: flex;
       align-items: center;
       width: 2px;
-      content: ':';
+      content: ":";
     }
   }
 }
@@ -85,11 +85,11 @@
   padding: 0;
   margin: 6px;
   font-size: 14px;
-  background: funcs.get-var('t-bg1');
-  border-radius: .25em;
-  box-shadow: funcs.get-var('shadow8');
+  background: funcs.get-var("t-bg1");
+  border-radius: 0.25em;
+  box-shadow: funcs.get-var("shadow8");
   animation-duration: 150ms;
-  animation-timing-function: funcs.get-var('bezier');
+  animation-timing-function: funcs.get-var("bezier");
 
   &[data-floating-status="opening"] {
     transform-origin: center center;
@@ -98,7 +98,7 @@
 }
 
 .dark .jg-time-picker-panel {
-  background: funcs.get-var('t-bg2');
+  background: funcs.get-var("t-bg2");
 }
 
 @keyframes time-picker-clip-open {

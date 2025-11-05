@@ -1,6 +1,6 @@
 import { createWatch } from "solid-tiny-utils";
-import type { PropsWithContextChild } from "@/common/props";
-import { callMaybeContextChild } from "@/common/props";
+import type { PropsWithContextChild } from "~/common/props";
+import { callMaybeContextChild } from "~/common/props";
 import { context } from "./context";
 
 export function Root(

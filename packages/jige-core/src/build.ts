@@ -5,7 +5,6 @@ export * from "./common/solidjs";
 export * from "./components/animated-group";
 export * from "./components/circle-progress";
 export * from "./components/collapsible";
-export * from "./components/context-menu";
 export * from "./components/draggable";
 export * from "./components/floating-ui";
 export * from "./components/form-components";

@@ -1,5 +1,5 @@
 import { createComponentState } from "solid-tiny-context";
-import { isUndefined } from "@/common/types";
+import { isUndefined } from "~/common/types";
 import type { DraggableStatus } from "./types";
 
 export const context = createComponentState({

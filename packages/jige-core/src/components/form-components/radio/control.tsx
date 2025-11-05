@@ -1,7 +1,7 @@
 import { Ref } from "@solid-primitives/refs";
 import { onMount } from "solid-js";
 import { makeEventListener } from "solid-tiny-utils";
-import { callMaybeContextChild, type MaybeContextChild } from "@/common/props";
+import { callMaybeContextChild, type MaybeContextChild } from "~/common/props";
 import { context } from "./context";
 
 export function Control(props: {

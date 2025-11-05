@@ -2,8 +2,8 @@ import { createRoot, createUniqueId } from "solid-js";
 import { createStore } from "solid-js/store";
 import { createComponentState } from "solid-tiny-context";
 import { createWatch } from "solid-tiny-utils";
-import { preventBodyScroll } from "@/common/dom";
-import type { CloseableStatus } from "@/common/types";
+import { preventBodyScroll } from "~/common/dom";
+import type { CloseableStatus } from "~/common/types";
 
 export const GlobalModalStore = createRoot(() => {
   const [state, setState] = createStore({

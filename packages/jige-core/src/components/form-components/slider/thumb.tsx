@@ -2,7 +2,7 @@ import { mergeRefs } from "@solid-primitives/refs";
 import type { JSX } from "solid-js";
 import { onMount, splitProps } from "solid-js";
 import { makeEventListener } from "solid-tiny-utils";
-import { runSolidEventHandler } from "@/common/solidjs";
+import { runSolidEventHandler } from "~/common/solidjs";
 import context from "./context";
 
 export default function Thumb(props: JSX.HTMLAttributes<HTMLDivElement>) {

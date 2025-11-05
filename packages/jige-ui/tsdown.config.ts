@@ -1,6 +1,6 @@
 import solid from "rolldown-plugin-solid";
 import inlinePlugin from "rollup-plugin-inline-import";
-import { defineConfig, type UserConfig } from "tsdown";
+import { defineConfig } from "tsdown";
 
 // biome-ignore lint/suspicious/noExplicitAny: rollup plugins have complex types
 const getPlugins = (jsx: boolean): any[] => {
@@ -56,5 +56,5 @@ export default defineConfig(({ env }) => {
         js: ".jsx",
       }),
     },
-  ] satisfies UserConfig;
+  ]
 });

@@ -1,7 +1,6 @@
-import { createElementBounds } from "@solid-primitives/bounds";
+import { createResizeObserver } from "@solid-primitives/resize-observer";
 import { TableCore } from "jige-core";
-import { type ComponentProps, createMemo } from "solid-js";
-import { createWatch } from "solid-tiny-utils";
+import { type ComponentProps, createMemo, onMount } from "solid-js";
 import { context } from "./context";
 
 export function Header(
@@ -11,14 +10,17 @@ export function Header(
 ) {
   const [state, acts] = context.useContext();
 
-  const bounds = createElementBounds(() => state.refHeader);
-
-  createWatch(
-    () => bounds.height,
-    (h) => {
-      acts.setState("headerHeight", h || 0);
-    }
-  );
+  onMount(() => {
+    createResizeObserver(
+      () => state.refHeader,
+      (_, el) => {
+        const h = el.getBoundingClientRect().height;
+        if (h !== state.headerHeight) {
+          acts.setState("headerHeight", h);
+        }
+      }
+    );
+  });
 
   const scrollbarClass = createMemo(() => {
     const classList: string[] = [];

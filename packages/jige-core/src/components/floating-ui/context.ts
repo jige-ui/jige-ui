@@ -9,7 +9,7 @@ import type {
 import { computePosition, flip, offset, shift, size } from "@floating-ui/dom";
 import { batch } from "solid-js";
 import { createComponentState } from "solid-tiny-context";
-import type { CloseableStatus } from "@/common/types";
+import type { CloseableStatus } from "~/common/types";
 
 export const context = createComponentState({
   state: () => ({

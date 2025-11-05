@@ -1,5 +1,5 @@
 import { splitProps } from "solid-js";
-import { runSolidEventHandler } from "@/common/solidjs";
+import { runSolidEventHandler } from "~/common/solidjs";
 import context from "./context";
 import type { InputProps } from "./types";
 

@@ -1,6 +1,6 @@
 import solid from "rolldown-plugin-solid";
 import inlinePlugin from "rollup-plugin-inline-import";
-import { defineConfig, type UserConfig } from "tsdown";
+import { defineConfig } from "tsdown";
 
 const getPlugins = (jsx: boolean) => {
   const plugins: any[] = [];
@@ -56,5 +56,5 @@ export default defineConfig(({ env }) => {
         js: ".jsx",
       }),
     },
-  ] satisfies UserConfig;
+  ];
 });
