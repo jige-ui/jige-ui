@@ -124,6 +124,7 @@ export default function Demo() {
   const [p, setP] = createStore({
     bordered: false,
     empty: false,
+    oneLine: false,
     hideHeader: false,
     expendable: false,
     selectable: "no-selection" as "checkbox" | "radio" | "no-selection",
@@ -147,7 +148,15 @@ export default function Demo() {
           <TinyTable
             bordered={p.bordered}
             columns={defaultColumns}
-            data={p.empty ? [] : data.latest}
+            data={(() => {
+              if (p.empty) {
+                return [];
+              }
+              if (p.oneLine) {
+                return data.latest.slice(0, 1);
+              }
+              return data.latest;
+            })()}
             expandable={
               p.expendable
                 ? {

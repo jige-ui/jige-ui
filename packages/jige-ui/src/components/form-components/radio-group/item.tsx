@@ -14,12 +14,13 @@ export function Item(props: {
       checked={state.value === props.value}
       disabled={state.disabled || props.disabled}
       id={itemID}
-      label={props.label}
       onChange={(checked) => {
         if (checked) {
           actions.setState("value", props.value);
         }
       }}
-    />
+    >
+      {props.label}
+    </Radio>
   );
 }

@@ -22,11 +22,7 @@ export function Selector(props: {
           <Checkbox checked={props.selected} onChange={props.onChange} />
         </Match>
         <Match when={props.type === "radio"}>
-          <Radio
-            checked={props.selected}
-            label=""
-            onChange={(v) => props.onChange(v)}
-          />
+          <Radio checked={props.selected} onChange={(v) => props.onChange(v)} />
         </Match>
       </Switch>
     </div>
