@@ -1,7 +1,7 @@
 {
   "name": "jige-core",
   "type": "module",
-  "version": "0.46.0",
+  "version": "0.47.0",
   "description": "jige-ui's core primitives",
   "license": "MIT",
   "sideEffects": false,
