@@ -5,6 +5,7 @@ export * from "./date-picker";
 export * from "./date-range-picker";
 export * from "./input";
 export * from "./number-box";
+export * from "./radio";
 export * from "./radio-group";
 export * from "./segment";
 export * from "./slider";

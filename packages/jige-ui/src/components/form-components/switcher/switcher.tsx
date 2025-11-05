@@ -1,6 +1,6 @@
 import styles from "sass:./switcher.scss";
 import { CheckboxCore } from "jige-core";
-import { createUniqueId, type JSX } from "solid-js";
+import { createUniqueId, type JSX, Show } from "solid-js";
 import { mountStyle } from "solid-tiny-utils";
 import { dataIf } from "~/common/dataset";
 
@@ -35,14 +35,16 @@ export function Switcher(props: {
             </div>
           )}
         </CheckboxCore.Control>
-        <label
-          for={labelFor}
-          style={{
-            "margin-left": "0.5em",
-          }}
-        >
-          {props.children}
-        </label>
+        <Show when={props.children}>
+          <label
+            for={labelFor}
+            style={{
+              "margin-left": "0.5em",
+            }}
+          >
+            {props.children}
+          </label>
+        </Show>
       </CheckboxCore>
     </div>
   );

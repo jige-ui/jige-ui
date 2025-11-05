@@ -1,11 +1,11 @@
 import css from "sass:./radio.scss";
 import { RadioCore } from "jige-core";
-import { Show } from "solid-js";
+import { type JSX, Show } from "solid-js";
 import { dataIf, mountStyle } from "solid-tiny-utils";
 
 export function Radio(props: {
   checked?: boolean;
-  label?: string;
+  children?: JSX.Element;
   disabled?: boolean;
   id?: string;
   name?: string;
@@ -27,9 +27,9 @@ export function Radio(props: {
             data-disabled={dataIf(state.disabled)}
           >
             <button class="jg-radio-circle" type="button" />
-            <Show when={props.label}>
+            <Show when={props.children}>
               <label class="jg-radio-text" for={props.id}>
-                {props.label}
+                {props.children}
               </label>
             </Show>
           </div>

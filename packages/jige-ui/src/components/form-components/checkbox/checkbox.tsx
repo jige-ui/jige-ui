@@ -61,15 +61,17 @@ export function NormalCheckbox(props: CheckboxProps) {
                   </i>
                 </Show>
               </div>
-              <label
-                for={itemID}
-                style={{
-                  "margin-left": ".5em",
-                  opacity: state.disabled ? 0.5 : 1,
-                }}
-              >
-                {props.children}
-              </label>
+              <Show when={props.children}>
+                <label
+                  for={itemID}
+                  style={{
+                    "margin-left": ".5em",
+                    opacity: state.disabled ? 0.5 : 1,
+                  }}
+                >
+                  {props.children}
+                </label>
+              </Show>
             </>
           )}
         </CheckboxCore.Control>
