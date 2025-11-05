@@ -56,5 +56,5 @@ export default defineConfig(({ env }) => {
         js: ".jsx",
       }),
     },
-  ]
+  ];
 });
