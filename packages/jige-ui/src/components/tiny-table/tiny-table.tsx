@@ -74,7 +74,7 @@ export function TinyTable<T extends RowData>(props: {
   };
   rowSelection?: {
     type?: "checkbox" | "radio";
-    onChange: (selectedRowsIdx: T[]) => void;
+    onChange: (selectedRows: T[]) => void;
   };
   hideHeader?: boolean;
 }) {
