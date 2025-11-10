@@ -43,7 +43,7 @@ export function Panel(props: {
     actions.setState("currYearMonthData", key, value);
   };
 
-  const handleFromPanel = (currYear: number, currMonth: number) => {
+  const handleLeftPanel = (currYear: number, currMonth: number) => {
     setCurrYearMonthData("leftYear", currYear);
     setCurrYearMonthData("leftMonth", currMonth);
     if (state.currYearMonthData.rightYear < currYear) {
@@ -57,9 +57,9 @@ export function Panel(props: {
     }
   };
 
-  const handleToPanel = (currYear: number, currMonth: number) => {
-    setCurrYearMonthData("leftYear", currYear);
-    setCurrYearMonthData("leftMonth", currMonth);
+  const handleRightPanel = (currYear: number, currMonth: number) => {
+    setCurrYearMonthData("rightYear", currYear);
+    setCurrYearMonthData("rightMonth", currMonth);
     if (state.currYearMonthData.leftYear > currYear) {
       setCurrYearMonthData("leftYear", currYear);
     }
@@ -78,9 +78,9 @@ export function Panel(props: {
   ) => {
     batch(() => {
       if (isFromPanel) {
-        handleFromPanel(currYear, currMonth);
+        handleLeftPanel(currYear, currMonth);
       } else {
-        handleToPanel(currYear, currMonth);
+        handleRightPanel(currYear, currMonth);
       }
     });
   };

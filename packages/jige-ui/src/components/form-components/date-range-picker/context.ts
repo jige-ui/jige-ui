@@ -80,38 +80,34 @@ export const context = createComponentState({
     setPreviewDate(date: string) {
       const leftDate = this.state.previewDateStrs[0];
       const rightDate = this.state.previewDateStrs[1];
-      let newDate = date;
       batch(() => {
         if (leftDate === "") {
-          if (this.state.isDateTime) {
-            newDate = `${date} ${this.state.previewTimeStrs[0]}`;
-          }
-          this.actions.setState("previewValues", 0, newDate);
+          this.actions.setPreviewDateAt(0, date);
           return;
         }
         if (rightDate === "") {
           if (getTimestamp(leftDate) > getTimestamp(date)) {
-            this.actions.setState(
-              "previewValues",
-              1,
-              this.state.previewValues[0]
-            );
-            if (this.state.isDateTime) {
-              newDate = `${date} ${this.state.previewTimeStrs[0]}`;
-            }
-            this.actions.setState("previewValues", 0, newDate);
+            this.actions.setPreviewDateAt(1, this.state.previewValues[0]);
+            this.actions.setPreviewDateAt(0, date);
           } else {
-            if (this.state.isDateTime) {
-              newDate = `${date} ${this.state.previewTimeStrs[1]}`;
-            }
-            this.actions.setState("previewValues", 1, newDate);
+            this.actions.setPreviewDateAt(1, date);
           }
           return;
         }
 
-        this.actions.setState("previewValues", ["", ""]);
+        this.actions.setState("previewValues", 1, "");
+        this.actions.setPreviewDateAt(0, date);
       });
     },
+
+    setPreviewDateAt(at: 0 | 1, date: string) {
+      let newDate = date;
+      if (this.state.type === "datetime") {
+        newDate = `${date} ${this.state.previewTimeStrs[at]}`;
+      }
+      this.actions.setState("previewValues", at, newDate);
+    },
+
     setPreviewValue(value: [string, string]) {
       this.actions.setState("previewValues", value);
     },
@@ -155,12 +151,13 @@ export const context = createComponentState({
       );
     },
     updateCurrYearMonthData() {
-      let [leftDate, rightDate] = this.state.timestamps;
+      let [leftDate, rightDate] = this.state.previewDateStrs.map(getTimestamp);
 
-      if (leftDate === null) {
+      if (Number.isNaN(leftDate)) {
         leftDate = Date.now();
       }
-      if (rightDate === null) {
+
+      if (Number.isNaN(rightDate)) {
         rightDate = Date.now();
       }
 
