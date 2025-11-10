@@ -1,30 +1,35 @@
 import { debounce } from "@solid-primitives/scheduled";
-import type { EsDay } from "esday";
 import { createMemo, createSignal, For } from "solid-js";
 import { createWatch, isFn, list } from "solid-tiny-utils";
+import {
+  type DateArgs,
+  formatToDateTime,
+  getDay,
+  getMonth,
+  isSameDate,
+  isToday,
+} from "time-core";
 import { dataIf } from "~/common/dataset";
-import { dayes } from "~/common/dayes";
 import type { MaybePromise } from "~/common/types";
-import type { DateTypes } from "../types";
-import { genCalendarDays, NumberToChinese } from "../utils";
+import { formatToDateStr, genCalendarDays, NumberToChinese } from "../utils";
 import { panelContext } from "./context";
 
 export function DayPanel(props: {
-  cellClass: string | ((day: EsDay) => string);
+  cellClass: string | ((date: string) => string);
   highlightDates:
-    | DateTypes[]
+    | DateArgs[]
     | ((
         year: number,
         month: number,
         dates: string[]
-      ) => MaybePromise<DateTypes[]>);
+      ) => MaybePromise<DateArgs[]>);
   disabledDates:
-    | DateTypes[]
+    | DateArgs[]
     | ((
         year: number,
         month: number,
         dates: string[]
-      ) => MaybePromise<DateTypes[]>);
+      ) => MaybePromise<DateArgs[]>);
 }) {
   const [state, actions] = panelContext.useContext();
   const dates = createMemo(() =>
@@ -38,18 +43,18 @@ export function DayPanel(props: {
       const highlightDates = await getHls(
         y,
         m,
-        dates().map((d) => d.format("YYYY-MM-DD"))
+        dates().map((d) => formatToDateTime(d).split(" ")[0])
       );
       if (y === state.currYear && m === state.currMonth) {
         actions.setState(
           "hlDates",
-          highlightDates.map((d) => dayes(d).format("YYYY-MM-DD"))
+          highlightDates.map((d) => formatToDateTime(d).split(" ")[0])
         );
       }
     } else {
       actions.setState(
         "hlDates",
-        getHls.map((d) => dayes(d).format("YYYY-MM-DD"))
+        getHls.map((d) => formatToDateTime(d).split(" ")[0])
       );
     }
   }, 200);
@@ -63,19 +68,19 @@ export function DayPanel(props: {
       const disabledDates = await getDs(
         y,
         m,
-        dates().map((d) => d.format("YYYY-MM-DD"))
+        dates().map((d) => formatToDateTime(d).split(" ")[0])
       );
       if (y === state.currYear && m === state.currMonth) {
         actions.setState(
           "dsDates",
-          disabledDates.map((d) => dayes(d).format("YYYY-MM-DD"))
+          disabledDates.map((d) => formatToDateTime(d).split(" ")[0])
         );
       }
       setIsLoadingDsDates(false);
     } else {
       actions.setState(
         "dsDates",
-        getDs.map((d) => dayes(d).format("YYYY-MM-DD"))
+        getDs.map((d) => formatToDateTime(d).split(" ")[0])
       );
     }
   }, 200);
@@ -99,25 +104,25 @@ export function DayPanel(props: {
     }
   );
 
-  const isDsDay = (day: EsDay) => {
+  const isDsDay = (day: string) => {
     return (
       !actions.isInDateRange(day) ||
-      state.dsDates.includes(day.format("YYYY-MM-DD")) ||
+      state.dsDates.includes(day) ||
       isLoadingDsDates()
     );
   };
 
-  const cellClass = (day: EsDay) => {
+  const cellClass = (day: string) => {
     const classList = ["jg-dp-day-panel-cell"];
-    if (day.isToday()) {
+    if (isToday(day)) {
       classList.push("jg-dp-is-today");
     }
-    if (day.month() !== state.currMonth) {
+    if (getMonth(day) !== state.currMonth) {
       classList.push("jg-dp-is-not-curr-month");
     }
     if (
-      state.hlDates.includes(day.format("YYYY-MM-DD")) &&
-      !day.isSame(state.value, "day")
+      state.hlDates.includes(formatToDateTime(day).split(" ")[0]) &&
+      !isSameDate(state.value[0], "day")
     ) {
       classList.push("jg-dp-day-panel-day-hl");
     }
@@ -141,37 +146,32 @@ export function DayPanel(props: {
       <For each={dates()}>
         {(day) => (
           <div
-            class={cellClass(day)}
-            data-disabled={dataIf(isDsDay(day))}
+            class={cellClass(formatToDateStr(day))}
+            data-disabled={dataIf(isDsDay(formatToDateStr(day)))}
             data-selected={dataIf(
-              state.value.includes(day.format("YYYY-MM-DD")) &&
-                day.month() === state.currMonth
+              state.value.includes(formatToDateStr(day)) &&
+                getMonth(day) === state.currMonth
             )}
           >
             <div
               class="jg-dp-day-panel-day"
               onClick={() => {
                 if (state.multiple) {
-                  if (day.isSame(state.value, "day")) {
+                  if (state.value.includes(formatToDateStr(day))) {
                     actions.setValue(
-                      state.value
-                        .filter((d) => !day.isSame(dayes(d), "day"))
-                        .map((d) => d)
+                      state.value.filter((d) => !isSameDate(d, day))
                     );
                   } else {
-                    actions.setValue([
-                      ...state.value,
-                      day.format("YYYY-MM-DD"),
-                    ]);
+                    actions.setValue([...state.value, formatToDateStr(day)]);
                   }
                 } else {
-                  actions.setValue([day.format("YYYY-MM-DD")]);
+                  actions.setValue([formatToDateStr(day)]);
                 }
               }}
               onKeyDown={() => {}}
-              title={day.format("YYYY-MM-DD")}
+              title={formatToDateStr(day)}
             >
-              {day.date()}
+              {getDay(day)}
             </div>
           </div>
         )}

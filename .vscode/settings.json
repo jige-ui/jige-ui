@@ -15,7 +15,7 @@
   "[typescriptreact]": {
     "editor.defaultFormatter": "biomejs.biome"
   },
-  "cSpell.words": ["dayes", "funcs"],
+  "cSpell.words": ["funcs"],
   "[jsonc]": {
     "editor.defaultFormatter": "biomejs.biome"
   },

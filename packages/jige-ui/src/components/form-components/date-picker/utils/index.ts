@@ -1,31 +1,38 @@
-import type { EsDay } from "esday";
-import { dayes } from "~/common/dayes";
+import {
+  addDays,
+  type DateArgs,
+  endOfMonth,
+  formatToDateTime,
+  getDay,
+  getWeekday,
+  parseDate,
+} from "time-core";
 
 /**
  * Generate the days of the year and the month
  * It generates 42 days to make sure it is a 7 * 6 grid, which is the common calendar layout
  */
-export function genCalendarDays(year: number, month: number): EsDay[] {
-  const days: EsDay[] = [];
+export function genCalendarDays(year: number, month: number): Date[] {
+  const days: Date[] = [];
 
-  const firstDay = dayes(`${year}-${month + 1}-01`);
-  const lastDay = firstDay.endOf("month");
-  const firstDayWeekday = firstDay.day();
-  const lastDayWeekday = lastDay.day();
+  const firstDay = parseDate(`${year}-${month}-01`);
+  const lastDay = endOfMonth(firstDay);
+  const firstDayWeekday = getWeekday(firstDay);
+  const lastDayWeekday = getWeekday(lastDay);
 
   // fill the days before the first day of the month
   for (let i = firstDayWeekday; i > 0; i--) {
-    days.push(firstDay.add(-i, "day"));
+    days.push(addDays(firstDay, -i));
   }
 
   // fill the days of the month
-  for (let i = 0; i < lastDay.date(); i++) {
-    days.push(firstDay.add(i, "day"));
+  for (let i = 0; i < getDay(lastDay); i++) {
+    days.push(addDays(firstDay, i));
   }
 
   // fill the days after the last day of the month
   for (let i = 1; i <= 6 - lastDayWeekday; i++) {
-    days.push(lastDay.add(i, "day"));
+    days.push(addDays(lastDay, i));
   }
 
   // make sure it is a 7 * 6 grid
@@ -34,7 +41,7 @@ export function genCalendarDays(year: number, month: number): EsDay[] {
 
     const lastDayjs = days.at(-1);
     for (let i = 1; i <= 42 - len; i++) {
-      lastDayjs && days.push(lastDayjs.add(i, "day"));
+      lastDayjs && days.push(addDays(lastDayjs, i));
     }
   }
 
@@ -95,19 +102,10 @@ export function checkTimeValue(
   return timeRegex.test(value);
 }
 
-const dateRegex = /^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])$/;
-const monthRegex = /^\d{4}-(0[1-9]|1[0-2])$/;
-export function valiDateStr(value: string, type: "date" | "month" = "date") {
-  return type === "date" ? dateRegex.test(value) : monthRegex.test(value);
+export function formatToDateStr(date: DateArgs) {
+  return formatToDateTime(date).split(" ")[0];
 }
 
-export function parseDateStr(value: string) {
-  const vals = value.split(" ");
-  const dateValue = vals[0];
-  const timeValue = checkTimeValue(vals[1]) ? vals[1] : "";
-  const inst = dayes(dateValue);
-  if (inst.isValid()) {
-    return [dateValue, timeValue] as [string, string];
-  }
-  return ["", ""] as [string, string];
+export function pad(n: number, width = 2) {
+  return n.toString().padStart(width, "0");
 }

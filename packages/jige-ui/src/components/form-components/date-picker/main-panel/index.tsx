@@ -1,9 +1,8 @@
-import type { EsDay } from "esday";
 import { AnimatedGroup } from "jige-core";
 import { batch, type ComponentProps, createSignal } from "solid-js";
 import { createWatch } from "solid-tiny-utils";
-import type { MaybePromise } from "~/common/types";
-import type { DateTypes } from "../types";
+import { type DateArgs, getTimestamp } from "time-core";
+import { isDef, type MaybePromise } from "~/common/types";
 import { panelContext } from "./context";
 import { DayPanel } from "./day-panel";
 import { HeadTools } from "./head-tools";
@@ -12,25 +11,25 @@ import { YearPanel } from "./year-panel";
 
 function AnimatedPanel(props: {
   width: number;
-  cellClass: string | ((day: EsDay) => string);
+  cellClass: string | ((day: string) => string);
   highlightYears:
     | number[]
     | ((visibleYearRange: [number, number]) => MaybePromise<number[]>);
   highlightMonths: string[] | ((visibleYear: number) => MaybePromise<string[]>);
   highlightDates:
-    | DateTypes[]
+    | DateArgs[]
     | ((
         visibleYear: number,
         visibleMonth: number,
         visibleDates: string[]
-      ) => MaybePromise<DateTypes[]>);
+      ) => MaybePromise<DateArgs[]>);
   disabledDates:
-    | DateTypes[]
+    | DateArgs[]
     | ((
         visibleYear: number,
         visibleMonth: number,
         visibleDates: string[]
-      ) => MaybePromise<DateTypes[]>);
+      ) => MaybePromise<DateArgs[]>);
 }) {
   const [state] = panelContext.useContext();
   const [className, setClassName] = createSignal("");
@@ -78,34 +77,37 @@ export function MainPanel(props: {
   type: "date" | "month";
   currYear: number;
   currMonth: number;
-  dateRange: [DateTypes, DateTypes];
-  cellClass: string | ((day: EsDay) => string);
+  dateRange: [DateArgs, DateArgs];
+  cellClass: string | ((day: string) => string);
   highlightYears:
     | number[]
     | ((visibleYearRange: [number, number]) => MaybePromise<number[]>);
   highlightMonths: string[] | ((visibleYear: number) => MaybePromise<string[]>);
   multiple: boolean;
   highlightDates:
-    | DateTypes[]
+    | DateArgs[]
     | ((
         visibleYear: number,
         visibleMonth: number,
         visibleDates: string[]
-      ) => MaybePromise<DateTypes[]>);
+      ) => MaybePromise<DateArgs[]>);
   disabledDates:
-    | DateTypes[]
+    | DateArgs[]
     | ((
         visibleYear: number,
         visibleMonth: number,
         visibleDates: string[]
-      ) => MaybePromise<DateTypes[]>);
+      ) => MaybePromise<DateArgs[]>);
 }) {
   const Context = panelContext.initial({
     value: () => props.value,
-    dateRange: () => props.dateRange,
+    dateRange: () => {
+      if (isDef(props.dateRange)) {
+        return props.dateRange.map(getTimestamp) as [number, number];
+      }
+    },
     disabled: () => props.disabled,
     currYear: () => props.currYear,
-    type: () => props.type,
     multiple: () => props.multiple,
     activePanel: () => {
       switch (props.type) {
@@ -130,11 +132,11 @@ export function MainPanel(props: {
     () => props.currMonth,
     (m) => {
       batch(() => {
-        if (m > 11) {
-          actions.setCurrMonth(0);
+        if (m > 12) {
+          actions.setCurrMonth(1);
           actions.setCurrYear(state.currYear + 1);
-        } else if (m < 0) {
-          actions.setCurrMonth(11);
+        } else if (m < 1) {
+          actions.setCurrMonth(12);
           actions.setCurrYear(state.currYear - 1);
         } else {
           actions.setCurrMonth(m);

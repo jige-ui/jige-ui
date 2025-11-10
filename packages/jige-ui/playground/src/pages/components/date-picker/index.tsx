@@ -1,6 +1,7 @@
 import { createSignal } from "solid-js";
 import { createStore } from "solid-js/store";
 import { DatePicker } from "~/build";
+import type { DatePickerToValueFunc } from "~/components/form-components/date-picker/types";
 import { Playground } from "../../../components/playground";
 
 export default function Demo() {
@@ -8,9 +9,18 @@ export default function Demo() {
     disabled: false,
     type: "date" as const,
     size: "medium" as "small" | "medium" | "large",
+    customValue: false,
   });
 
-  const [value, setValue] = createSignal("");
+  const [value, setValue] = createSignal<string | number | null>("");
+
+  const customToVal: DatePickerToValueFunc<number | null> = (timestamp) => {
+    if (timestamp === null) {
+      return null;
+    }
+
+    return timestamp;
+  };
 
   return (
     <Playground>
@@ -23,8 +33,9 @@ export default function Demo() {
             onChange={setValue}
             onFocus={() => {}}
             size={p.size}
+            toValue={p.customValue ? customToVal : undefined}
             type={p.type}
-            value={value()}
+            value={""}
           />
         </div>
       </Playground.MainArea>
@@ -32,7 +43,7 @@ export default function Demo() {
         onChange={setP}
         properties={p}
         typeDeclaration={{
-          type: ["date", "month", "hour", "minute", "second"],
+          type: ["date", "datetime"],
           size: ["small", "medium", "large"],
         }}
       />

@@ -160,9 +160,6 @@ importers:
       '@solid-primitives/scheduled':
         specifier: 'catalog:'
         version: 1.5.2(solid-js@1.9.9)
-      esday:
-        specifier: ^0.5.0
-        version: 0.5.0
       jige-core:
         specifier: workspace:^
         version: link:../jige-core
@@ -178,6 +175,9 @@ importers:
       solid-tiny-utils:
         specifier: 'catalog:'
         version: 0.7.1(solid-js@1.9.9)
+      time-core:
+        specifier: ^0.1.0
+        version: 0.1.0
     devDependencies:
       '@formkit/auto-animate':
         specifier: ^0.9.0
@@ -2255,9 +2255,6 @@ packages:
     resolution: {integrity: sha512-/veY75JbMK4j1yjvuUxuVsiS/hr/4iHs9FTT6cgTexxdE0Ly/glccBAkloH/DofkjRbZU3bnoj38mOmhkZ0lHw==}
     engines: {node: '>=12'}
 
-  esday@0.5.0:
-    resolution: {integrity: sha512-AS7X4+g48pnooAbe+GooAKf2rh5Z2XWQ7JoqewkgVNNfJmlOS2R7Nwd5335sIbXVLobXwKZAbEV51PttMEElBQ==}
-
   esprima@4.0.1:
     resolution: {integrity: sha512-eGuFFw7Upda+g4p+QHvnW0RyTX/SVeJBDM/gCtMARO0cLuT2HcEKnTPvhjV6aGeqrCB/sbNop0Kszm0jsaWU4A==}
     engines: {node: '>=4'}
@@ -3852,6 +3849,9 @@ packages:
 
   through@2.3.8:
     resolution: {integrity: sha512-w89qg7PI8wAdvX60bMDP+bFoD5Dvhm9oLheFp5O4a2QF0cSBGsBX4qZmadPMvVqlLJBBci+WqGGOAPvcDeNSVg==}
+
+  time-core@0.1.0:
+    resolution: {integrity: sha512-EVmbeKANGi+RmQUr87i4nFeyepiHTAWPF5M2LN5+u2TUIh/mKD7LVaEPNRgtqhBATU5dUHwyOS3ETW3m5ZMmHQ==}
 
   tiny-invariant@1.3.3:
     resolution: {integrity: sha512-+FbBPE1o9QAYvviau/qC5SE3caw21q3xkvWKBtja5vgqOWIHHJ3ioaq1VPfn/Szqctz2bU/oYeKd9/z5BL+PVg==}
@@ -6394,8 +6394,6 @@ snapshots:
 
   escape-string-regexp@5.0.0: {}
 
-  esday@0.5.0: {}
-
   esprima@4.0.1: {}
 
   estree-util-attach-comments@2.1.1:
@@ -8292,6 +8290,8 @@ snapshots:
   text-extensions@2.4.0: {}
 
   through@2.3.8: {}
+
+  time-core@0.1.0: {}
 
   tiny-invariant@1.3.3: {}
 

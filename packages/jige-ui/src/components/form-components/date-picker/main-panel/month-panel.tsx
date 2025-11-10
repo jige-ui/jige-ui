@@ -1,11 +1,10 @@
 import { debounce } from "@solid-primitives/scheduled";
-import { esday } from "esday";
 import { For } from "solid-js";
 import { createWatch, isFn, list } from "solid-tiny-utils";
+import { endOfMonth, getMonth, getYear, startOfMonth } from "time-core";
 import { dataIf } from "~/common/dataset";
-import { dayes } from "~/common/dayes";
 import type { MaybePromise } from "~/common/types";
-import { NumberToChinese } from "../utils";
+import { NumberToChinese, pad } from "../utils";
 import { panelContext } from "./context";
 
 export function MonthPanel(props: {
@@ -23,49 +22,47 @@ export function MonthPanel(props: {
   }, 200);
 
   const isHl = (m: number) => {
-    const inst = esday().year(state.currYear).month(m);
-
-    return state.hlMonths.includes(inst.format("YYYY-MM"));
+    return state.hlMonths.includes(`${state.currYear}-${pad(m)}`);
   };
 
   const checkMonth = (month: number) => {
-    const year = state.currYear;
-    const inst = esday().year(year).month(month);
-    return inst >= state.fromInst && inst <= state.toInst;
+    const date = `${state.currYear}-${pad(month)}-01`;
+
+    return (
+      actions.isInDateRange(startOfMonth(date)) ||
+      actions.isInDateRange(endOfMonth(date))
+    );
   };
 
   createWatch(() => state.currYear, debounceSetHlMonths);
   return (
     <div class="jg-dp-month-panel">
-      <For each={list(11)}>
-        {(month) => (
-          <div
-            class="jg-dp-month-panel-month"
-            classList={{
-              "jg-dp-month-panel-month-hl": isHl(month),
-            }}
-            data-disabled={dataIf(!checkMonth(month))}
-            data-selected={dataIf(
-              dayes(state.value).month() === month &&
-                dayes(state.value).year() === state.currYear
-            )}
-            onClick={() => {
-              if (!checkMonth(month)) {
-                return;
-              }
-              actions.setCurrMonth(month);
-              actions.setActivePanel(state.defaultPanel);
-              if (state.defaultPanel === "month") {
-                actions.setValue([
-                  dayes([state.currYear, month, 1]).format("YYYY-MM-DD"),
-                ]);
-              }
-            }}
-            onKeyDown={() => {}}
-          >
-            {NumberToChinese(month + 1)}月
-          </div>
-        )}
+      <For each={list(1, 12)}>
+        {(month) => {
+          return (
+            <div
+              class="jg-dp-month-panel-month"
+              classList={{
+                "jg-dp-month-panel-month-hl": isHl(month),
+              }}
+              data-disabled={dataIf(!checkMonth(month))}
+              data-selected={dataIf(
+                getMonth(state.value[0]) === month &&
+                  getYear(state.value[0]) === state.currYear
+              )}
+              onClick={() => {
+                if (!checkMonth(month)) {
+                  return;
+                }
+                actions.setCurrMonth(month);
+                actions.setActivePanel(state.defaultPanel);
+              }}
+              onKeyDown={() => {}}
+            >
+              {NumberToChinese(month)}月
+            </div>
+          );
+        }}
       </For>
     </div>
   );

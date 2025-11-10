@@ -1,26 +1,57 @@
-import { esday } from "esday";
 import { batch } from "solid-js";
 import { createComponentState } from "solid-tiny-context";
-import { dayes } from "~/common/dayes";
 import {
-  checkTimeValue,
-  parseDateStr,
-  valiDateStr,
-} from "../date-picker/utils";
+  type DateArgs,
+  formatToDateTime,
+  getMonth,
+  getTimestamp,
+  getYear,
+} from "time-core";
 
+function stampToString(timestamp: number, type: "datetime" | "date") {
+  const datetime = formatToDateTime(timestamp);
+  if (type === "datetime") {
+    return datetime;
+  }
+
+  return datetime.split(" ")[0];
+}
+
+function toPreviews(
+  timestamps: [number | null, number | null],
+  type: "datetime" | "date"
+): [string, string] {
+  const previews = timestamps.map((v) => {
+    if (v === null || Number.isNaN(v)) {
+      return "";
+    }
+    return stampToString(v, type);
+  }) as [string, string];
+
+  return previews;
+}
+
+function previewToValues(previews: [string, string]) {
+  return previews.map((v) => {
+    const time = getTimestamp(v);
+    if (Number.isNaN(time)) {
+      return null;
+    }
+    return getTimestamp(v);
+  }) as [number | null, number | null];
+}
 export const context = createComponentState({
   state: () => ({
-    value: ["", ""] as [string, string],
-    dateValue: ["", ""] as [string, string],
-    timeValue: ["00:00:00", "00:00:00"] as [string, string],
+    timestamps: [null, null] as [number | null, number | null],
+    previewValues: ["", ""] as [string, string],
     previewMode: false,
     disabled: false,
     placeholder: ["开始日期", "结束日期"] as [string, string],
     currYearMonthData: {
-      fromYear: 0,
-      fromMonth: 0,
-      toYear: 0,
-      toMonth: 0,
+      leftYear: 0,
+      leftMonth: 0,
+      rightYear: 0,
+      rightMonth: 0,
     },
     name: "",
     type: "date" as "datetime" | "date",
@@ -31,109 +62,122 @@ export const context = createComponentState({
     focused: false,
   }),
   getters: {
-    fromInst() {
-      return dayes(this.state.dateValue[0]);
-    },
-    toInst() {
-      return dayes(this.state.dateValue[1]);
-    },
-    safeFromInst() {
-      return this.state.fromInst.isValid() ? this.state.fromInst : dayes();
-    },
-    safeToInst() {
-      return this.state.toInst.isValid() ? this.state.toInst : dayes();
-    },
     isDateTime() {
       return this.state.type === "datetime";
     },
-    previewValue() {
-      let fromValue = "";
-      if (this.state.fromInst.isValid()) {
-        fromValue = this.state.fromInst.format("YYYY-MM-DD");
-        if (this.state.isDateTime) {
-          fromValue += ` ${this.state.timeValue[0]}`;
-        }
+    previewTimeStrs() {
+      if (this.state.isDateTime) {
+        return this.state.previewValues.map((v) => v.split(" ")[1]);
       }
-      let toValue = "";
-      if (this.state.toInst.isValid()) {
-        toValue = this.state.toInst.format("YYYY-MM-DD");
-        if (this.state.isDateTime) {
-          toValue += ` ${this.state.timeValue[1]}`;
-        }
-      }
-      return [fromValue, toValue] as [string, string];
+
+      return ["00:00:00", "00:00:00"];
     },
-    isEmpty() {
-      return this.state.value[0] === "" && this.state.value[1] === "";
+    previewDateStrs() {
+      return this.state.previewValues.map((v) => v.split(" ")[0]);
     },
   },
   methods: {
-    setDateValue(lastValue: string) {
-      const fromInst = this.state.fromInst;
-      const toInst = this.state.toInst;
+    setPreviewDate(date: string) {
+      const leftDate = this.state.previewDateStrs[0];
+      const rightDate = this.state.previewDateStrs[1];
+      let newDate = date;
       batch(() => {
-        if (!fromInst.isValid()) {
-          this.actions.setState("dateValue", 0, lastValue);
+        if (leftDate === "") {
+          if (this.state.isDateTime) {
+            newDate = `${date} ${this.state.previewTimeStrs[0]}`;
+          }
+          this.actions.setState("previewValues", 0, newDate);
           return;
         }
-        if (!toInst.isValid()) {
-          this.actions.setState("dateValue", 1, lastValue);
-          if (this.state.fromInst > this.state.toInst) {
+        if (rightDate === "") {
+          if (getTimestamp(leftDate) > getTimestamp(date)) {
             this.actions.setState(
-              "dateValue",
+              "previewValues",
               1,
-              this.state.fromInst.format("YYYY-MM-DD")
+              this.state.previewValues[0]
             );
-            this.actions.setState("dateValue", 0, lastValue);
+            if (this.state.isDateTime) {
+              newDate = `${date} ${this.state.previewTimeStrs[0]}`;
+            }
+            this.actions.setState("previewValues", 0, newDate);
+          } else {
+            if (this.state.isDateTime) {
+              newDate = `${date} ${this.state.previewTimeStrs[1]}`;
+            }
+            this.actions.setState("previewValues", 1, newDate);
           }
           return;
         }
 
-        this.actions.setState("dateValue", ["", ""]);
-        this.actions.setState("dateValue", 0, lastValue);
+        this.actions.setState("previewValues", ["", ""]);
       });
     },
     setPreviewValue(value: [string, string]) {
-      const fromVals = parseDateStr(value[0]);
-      const toVals = parseDateStr(value[1]);
-      batch(() => {
-        this.actions.setState("dateValue", 0, fromVals[0]);
-        this.actions.setState("timeValue", 0, fromVals[1] || "00:00:00");
-        this.actions.setState("dateValue", 1, toVals[0]);
-        this.actions.setState("timeValue", 1, toVals[1] || "00:00:00");
-      });
+      this.actions.setState("previewValues", value);
     },
-    setValue(value: [string, string]) {
-      let realValue = [...value] as [string, string];
-      if (esday(value[0]) > esday(value[1])) {
-        realValue = [value[1], value[0]];
+
+    setValue(value: [DateArgs, DateArgs]) {
+      const [leftVal, rightVal] = value
+        .map((v) => {
+          const time = getTimestamp(v);
+          if (Number.isNaN(time)) {
+            return null;
+          }
+          return time;
+        })
+        .sort();
+
+      if (
+        this.state.timestamps[0] === leftVal &&
+        this.state.timestamps[1] === rightVal
+      ) {
+        return;
       }
+
       batch(() => {
-        this.actions.setPreviewValue(realValue);
+        this.actions.setPreviewValue(
+          toPreviews([leftVal, rightVal] as [number, number], this.state.type)
+        );
         this.actions.syncPreviewToValue();
       });
     },
+
     syncValueToPreview() {
-      const fromVals = parseDateStr(this.state.value[0]);
-      const toVals = parseDateStr(this.state.value[1]);
-      batch(() => {
-        this.actions.setState("dateValue", 0, fromVals[0]);
-        this.actions.setState("timeValue", 0, fromVals[1] || "00:00:00");
-        this.actions.setState("dateValue", 1, toVals[0]);
-        this.actions.setState("timeValue", 1, toVals[1] || "00:00:00");
-      });
+      this.actions.setState(
+        "previewValues",
+        toPreviews(this.state.timestamps, this.state.type)
+      );
     },
     syncPreviewToValue() {
-      this.actions.setState("value", this.state.previewValue);
+      this.actions.setState(
+        "timestamps",
+        previewToValues(this.state.previewValues)
+      );
     },
     updateCurrYearMonthData() {
+      let [leftDate, rightDate] = this.state.timestamps;
+
+      if (leftDate === null) {
+        leftDate = Date.now();
+      }
+      if (rightDate === null) {
+        rightDate = Date.now();
+      }
+
+      if (leftDate > rightDate) {
+        const a = leftDate;
+        leftDate = rightDate;
+        rightDate = a;
+      }
+
       this.actions.setState("currYearMonthData", {
-        fromYear: this.state.safeFromInst.year(),
-        fromMonth: this.state.safeFromInst.month(),
-        toYear: this.state.safeToInst.year(),
-        toMonth: this.state.safeToInst.isSame(this.state.safeFromInst, "month")
-          ? this.state.safeFromInst.month() + 1
-          : this.state.safeToInst.month(),
+        leftYear: getYear(leftDate),
+        leftMonth: getMonth(leftDate),
+        rightYear: getYear(rightDate),
+        rightMonth:
+          getMonth(rightDate) === getMonth(leftDate)
+            ? getMonth(leftDate) + 1
+            : getMonth(rightDate),
       });
     },
     blurTrigger() {
@@ -141,14 +185,6 @@ export const context = createComponentState({
 
       ref1?.blur();
       ref2?.blur();
-    },
-    checkDateStr(value: string) {
-      const isDate = valiDateStr(value.split(" ")[0]);
-      if (isDate && this.state.isDateTime) {
-        const timeValue = value.split(" ")[1];
-        return checkTimeValue(timeValue, "second");
-      }
-      return isDate;
     },
     clear() {
       this.actions.setValue(["", ""]);

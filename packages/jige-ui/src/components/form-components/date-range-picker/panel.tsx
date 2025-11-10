@@ -1,6 +1,6 @@
-import type { EsDay } from "esday";
 import { batch, For, onCleanup, onMount } from "solid-js";
 import { createWatch } from "solid-tiny-utils";
+import { getTimestamp } from "time-core";
 import { Button } from "~/components/button";
 import { IconFluentCheckmark24Regular } from "~/components/icons/fluent-checkmark-24-regular";
 import { IconFluentDismiss24Regular } from "~/components/icons/fluent-dismiss-24-regular";
@@ -44,30 +44,30 @@ export function Panel(props: {
   };
 
   const handleFromPanel = (currYear: number, currMonth: number) => {
-    setCurrYearMonthData("fromYear", currYear);
-    setCurrYearMonthData("fromMonth", currMonth);
-    if (state.currYearMonthData.toYear < currYear) {
-      setCurrYearMonthData("toYear", currYear);
+    setCurrYearMonthData("leftYear", currYear);
+    setCurrYearMonthData("leftMonth", currMonth);
+    if (state.currYearMonthData.rightYear < currYear) {
+      setCurrYearMonthData("rightYear", currYear);
     }
     if (
-      state.currYearMonthData.toYear === currYear &&
-      state.currYearMonthData.toMonth <= currMonth
+      state.currYearMonthData.rightYear === currYear &&
+      state.currYearMonthData.rightMonth <= currMonth
     ) {
-      setCurrYearMonthData("toMonth", currMonth + 1);
+      setCurrYearMonthData("rightMonth", currMonth + 1);
     }
   };
 
   const handleToPanel = (currYear: number, currMonth: number) => {
-    setCurrYearMonthData("toYear", currYear);
-    setCurrYearMonthData("toMonth", currMonth);
-    if (state.currYearMonthData.fromYear > currYear) {
-      setCurrYearMonthData("fromYear", currYear);
+    setCurrYearMonthData("leftYear", currYear);
+    setCurrYearMonthData("leftMonth", currMonth);
+    if (state.currYearMonthData.leftYear > currYear) {
+      setCurrYearMonthData("leftYear", currYear);
     }
     if (
-      state.currYearMonthData.fromYear === currYear &&
-      state.currYearMonthData.fromMonth >= currMonth
+      state.currYearMonthData.leftYear === currYear &&
+      state.currYearMonthData.leftMonth >= currMonth
     ) {
-      setCurrYearMonthData("fromMonth", currMonth - 1);
+      setCurrYearMonthData("leftMonth", currMonth - 1);
     }
   };
 
@@ -85,17 +85,20 @@ export function Panel(props: {
     });
   };
 
-  const cellClass = (day: EsDay) => {
-    const from = state.fromInst;
-    const to = state.toInst;
-    const isInRange = day > from && day < to;
+  const cellClass = (day: string) => {
+    const from = getTimestamp(state.previewDateStrs[0]);
+    const to = getTimestamp(state.previewDateStrs[1]);
+    const value = getTimestamp(day);
+    const isInRange = value > from && value < to;
 
     return isInRange ? "jg-dp-cell-in-range" : "";
   };
 
   createWatch(
-    () => [state.value[0], state.value[1]],
+    () => [state.previewDateStrs[0], state.previewDateStrs[1]],
     () => {
+      console.log(state.previewDateStrs[0], state.previewDateStrs[1]);
+
       actions.updateCurrYearMonthData();
     },
     { defer: true }
@@ -106,65 +109,81 @@ export function Panel(props: {
       <div class="jg-dp-range-panel">
         <DatePickerMainPanel
           cellClass={cellClass}
-          currMonth={state.currYearMonthData.fromMonth}
-          currYear={state.currYearMonthData.fromYear}
+          currMonth={state.currYearMonthData.leftMonth}
+          currYear={state.currYearMonthData.leftYear}
           disabled={state.disabled}
           headerRight={
             state.isDateTime
               ? () => (
                   <TimePicker
                     onChange={(v) => {
-                      actions.setState("timeValue", 0, v);
+                      const dateStr = state.previewDateStrs[0];
+                      if (!dateStr) {
+                        return;
+                      }
+                      const newDate = `${dateStr} ${v}`;
+                      actions.setState("previewValues", 0, newDate);
                     }}
                     size="small"
-                    value={state.timeValue[0]}
+                    value={state.previewTimeStrs[0]}
                   />
                 )
               : undefined
           }
           onChange={(v) => {
             const length = v.length;
-            const from = v[length - 2];
-            const to = v[length - 1];
-            if (state.dateValue[0] !== from || state.dateValue[1] !== to) {
-              actions.setDateValue(to);
+            const left = v[length - 2];
+            const right = v[length - 1];
+            if (
+              state.previewDateStrs[0] !== left ||
+              state.previewDateStrs[1] !== right
+            ) {
+              actions.setPreviewDate(right);
             }
           }}
           onCurrYearMonthChange={updateCurrYearMonthData}
-          value={[...state.dateValue]}
+          value={[...state.previewDateStrs]}
           {...commonProps}
         />
         <div class="jg-dp-divider" />
         <DatePickerMainPanel
           cellClass={cellClass}
-          currMonth={state.currYearMonthData.toMonth}
-          currYear={state.currYearMonthData.toYear}
+          currMonth={state.currYearMonthData.rightMonth}
+          currYear={state.currYearMonthData.rightYear}
           disabled={state.disabled}
           headerRight={
             state.isDateTime
               ? () => (
                   <TimePicker
                     onChange={(v) => {
-                      actions.setState("timeValue", 1, v);
+                      const dateStr = state.previewDateStrs[1];
+                      if (!dateStr) {
+                        return;
+                      }
+                      const newDate = `${dateStr} ${v}`;
+                      actions.setState("previewValues", 1, newDate);
                     }}
                     size="small"
-                    value={state.timeValue[1]}
+                    value={state.previewTimeStrs[1]}
                   />
                 )
               : undefined
           }
           onChange={(v) => {
             const length = v.length;
-            const from = v[length - 2];
-            const to = v[length - 1];
-            if (state.dateValue[0] !== from || state.dateValue[1] !== to) {
-              actions.setDateValue(to);
+            const left = v[length - 2];
+            const right = v[length - 1];
+            if (
+              state.previewDateStrs[0] !== left ||
+              state.previewDateStrs[1] !== right
+            ) {
+              actions.setPreviewDate(right);
             }
           }}
           onCurrYearMonthChange={(currYear, currMonth) => {
             updateCurrYearMonthData(currYear, currMonth, false);
           }}
-          value={[...state.dateValue]}
+          value={[...state.previewDateStrs]}
           {...commonProps}
         />
       </div>
@@ -205,8 +224,8 @@ export function Panel(props: {
           <Button
             icon={<IconFluentCheckmark24Regular />}
             onClick={() => {
-              actions.syncPreviewToValue();
               actions.blurTrigger();
+              actions.syncPreviewToValue();
             }}
             style={{ width: "100%", "flex-shrink": 1 }}
             variant="text"
@@ -215,6 +234,7 @@ export function Panel(props: {
             icon={<IconFluentDismiss24Regular />}
             onClick={() => {
               actions.blurTrigger();
+              actions.syncValueToPreview();
             }}
             style={{ width: "100%", "flex-shrink": 1 }}
             variant="text"

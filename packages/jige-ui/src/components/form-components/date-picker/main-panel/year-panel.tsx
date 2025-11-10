@@ -1,8 +1,8 @@
 import { debounce, throttle } from "@solid-primitives/scheduled";
 import { createSignal, For } from "solid-js";
-import { createWatch, isArray } from "solid-tiny-utils";
+import { createWatch, inRange, isArray } from "solid-tiny-utils";
+import { getYear } from "time-core";
 import { dataIf } from "~/common/dataset";
-import { dayes } from "~/common/dayes";
 import type { MaybePromise } from "~/common/types";
 import { genYears } from "../utils";
 import { panelContext } from "./context";
@@ -16,8 +16,8 @@ export function YearPanel(props: {
   const [years, setYears] = createSignal<number[]>(genYears(state.currYear));
   // eslint-disable-next-line solid/reactivity
   const throttleYear = throttle((e: WheelEvent) => {
-    const maxYear = state.toInst.year();
-    const minYear = state.fromInst.year();
+    const maxYear = getYear(state.dateRange[1]);
+    const minYear = getYear(state.dateRange[0]);
     const firstYear = years()[0];
     const lastYear = years()[years().length - 1];
 
@@ -39,7 +39,9 @@ export function YearPanel(props: {
   }, 200);
 
   const checkYear = (year: number) => {
-    return year >= state.fromInst.year() && year <= state.toInst.year();
+    const maxYear = getYear(state.dateRange[1]);
+    const minYear = getYear(state.dateRange[0]);
+    return inRange(year, minYear, maxYear);
   };
 
   createWatch(years, debounceSetHlYears);
@@ -59,7 +61,7 @@ export function YearPanel(props: {
               "jg-dp-year-panel-year-hl": state.hlYears.includes(year),
             }}
             data-disabled={dataIf(!checkYear(year))}
-            data-selected={dataIf(dayes(state.value).year() === year)}
+            data-selected={dataIf(getYear(state.value[0]) === year)}
             onClick={() => {
               if (!checkYear(year)) {
                 return;

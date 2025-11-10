@@ -1,5 +1,5 @@
 import { throttle } from "@solid-primitives/scheduled";
-import { createMemo, type JSX, Show } from "solid-js";
+import { type JSX, Show } from "solid-js";
 import { Button } from "~/components/button";
 import { IconFluentCaretDown24Filled } from "~/components/icons/fluent-caret-down-24-filled";
 import { IconFluentCaretUp24Filled } from "~/components/icons/fluent-caret-up-24-filled";
@@ -19,9 +19,7 @@ export function HeadTools(props: {
   const throttleYear = throttle((e: WheelEvent) => {
     actions.setCurrYear(e.deltaY > 0 ? state.currYear + 1 : state.currYear - 1);
   }, 60);
-  const monthMode = createMemo(() => {
-    return state.defaultPanel === "month";
-  });
+
   return (
     <div class="jg-dp-head-tools">
       <div>
@@ -41,25 +39,23 @@ export function HeadTools(props: {
           style={{ "font-size": "15px", padding: "0 4px" }}
           variant="text"
         />
-        <Show when={!monthMode()}>
-          <Button
-            onClick={() => {
-              actions.setState(
-                "activePanel",
-                state.activePanel === "month" ? state.defaultPanel : "month"
-              );
-            }}
-            onWheel={(e) => {
-              e.preventDefault();
-              throttleMonth(e);
-            }}
-            size={26}
-            style={{ "font-size": "14px", padding: "0 4px" }}
-            variant="text"
-          >
-            {NumberToChinese(state.currMonth + 1)}月
-          </Button>
-        </Show>
+        <Button
+          onClick={() => {
+            actions.setState(
+              "activePanel",
+              state.activePanel === "month" ? state.defaultPanel : "month"
+            );
+          }}
+          onWheel={(e) => {
+            e.preventDefault();
+            throttleMonth(e);
+          }}
+          size={26}
+          style={{ "font-size": "14px", padding: "0 4px" }}
+          variant="text"
+        >
+          {NumberToChinese(state.currMonth)}月
+        </Button>
       </div>
       <div class="jg-dp-head-tools-caret">
         <Show
@@ -69,9 +65,7 @@ export function HeadTools(props: {
           <Button
             icon={<IconFluentCaretUp24Filled />}
             onClick={() => {
-              monthMode()
-                ? actions.setCurrYear(state.currYear + 1)
-                : actions.monthHandle(1);
+              actions.monthHandle(1);
             }}
             style={{ "font-size": "12px" }}
             variant="text"
@@ -79,9 +73,7 @@ export function HeadTools(props: {
           <Button
             icon={<IconFluentCaretDown24Filled />}
             onClick={() => {
-              monthMode()
-                ? actions.setCurrYear(state.currYear - 1)
-                : actions.monthHandle(-1);
+              actions.monthHandle(-1);
             }}
             style={{ "font-size": "12px" }}
             variant="text"

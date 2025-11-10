@@ -1,9 +1,9 @@
 import routes from "virtual:pages";
 import { Router, useCurrentMatches } from "@solidjs/router";
-import { esday } from "esday";
 import type { JSX } from "solid-js";
 import { createMemo, onMount, Suspense } from "solid-js";
 import { createWatch, makeEventListener } from "solid-tiny-utils";
+import { formatToDateTime } from "time-core";
 import { Scrollbar } from "~/build";
 import { Aside } from "./parts/aside";
 import { Header } from "./parts/header";
@@ -23,7 +23,7 @@ function RouteWrapper(props: { children: JSX.Element }) {
       <div class="fw-bold text-2xl">{info().title}</div>
       <div class="flex items-center gap-1 text-sm">
         <span>updated:</span>
-        <span>{esday(info().updated).format("YYYY-MM-DD")}</span>
+        <span>{formatToDateTime(info().updated)}</span>
       </div>
       <div class="p-2">{props.children}</div>
     </div>

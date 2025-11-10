@@ -3,6 +3,8 @@ import dpCss from "sass:../date-picker/date-picker.scss";
 import inputCss from "sass:../input/input.scss";
 import { undefinedOr } from "jige-core";
 import { createWatch, mountStyle } from "solid-tiny-utils";
+import { type DateArgs, formatToIsoZulu } from "time-core";
+import { isDef } from "~/common/types";
 import { Popover } from "~/components/popover";
 import { context } from "./context";
 import { Panel } from "./panel";
@@ -10,7 +12,7 @@ import { Trigger } from "./trigger";
 
 export function DateRangePicker(props: {
   disabled?: boolean;
-  value?: [string, string];
+  value?: [DateArgs, DateArgs];
   onChange?: (value: [string, string]) => void;
   onBlur?: () => void;
   onFocus?: () => void;
@@ -39,18 +41,37 @@ export function DateRangePicker(props: {
   const [state, actions] = Context.value;
 
   createWatch(
-    () => [...state.value],
+    () => [...state.timestamps],
     (v) => {
-      props.onChange?.(v as [string, string]);
+      props.onChange?.(
+        v.map((v) => {
+          if (v === null || Number.isNaN(v)) {
+            return "";
+          }
+          return formatToIsoZulu(v);
+        }) as [string, string]
+      );
     },
     { defer: true }
   );
 
   createWatch(
-    () => props.value,
+    () => [...state.timestamps],
+    () => {
+      actions.syncValueToPreview();
+    }
+  );
+
+  createWatch(
+    () => {
+      if (isDef(props.value)) {
+        return [...props.value];
+      }
+      return undefined;
+    },
     (v) => {
-      if (v && v[0] !== state.value[0] && v[1] !== state.value[1]) {
-        actions.setValue(v);
+      if (v) {
+        actions.setValue(v as [DateArgs, DateArgs]);
       }
     }
   );

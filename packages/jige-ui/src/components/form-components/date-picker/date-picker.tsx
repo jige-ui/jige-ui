@@ -1,6 +1,6 @@
 import { undefinedOr } from "jige-core";
 import { onCleanup, onMount } from "solid-js";
-import { dayes } from "~/common/dayes";
+import { type DateArgs, getTimestamp } from "time-core";
 import type { MaybePromise } from "~/common/types";
 import { Button } from "~/components/button";
 import { IconFluentCheckmark24Regular } from "~/components/icons/fluent-checkmark-24-regular";
@@ -10,7 +10,7 @@ import { context } from "./context";
 import { MainPanel } from "./main-panel";
 import { Root } from "./root";
 import { Trigger } from "./trigger";
-import type { DatePickerType, DateTypes } from "./types";
+import type { DatePickerToValueFunc, DatePickerType } from "./types";
 import { Wrapper } from "./wrapper";
 
 function WrapperMainPanel(props: {
@@ -19,20 +19,20 @@ function WrapperMainPanel(props: {
     | ((visibleYearRange: [number, number]) => MaybePromise<number[]>);
   highlightMonths: string[] | ((visibleYear: number) => MaybePromise<string[]>);
   highlightDates:
-    | DateTypes[]
+    | DateArgs[]
     | ((
         visibleYear: number,
         visibleMonth: number,
         visibleDates: string[]
-      ) => MaybePromise<DateTypes[]>);
+      ) => MaybePromise<DateArgs[]>);
   disabledDates:
-    | DateTypes[]
+    | DateArgs[]
     | ((
         visibleYear: number,
         visibleMonth: number,
         visibleDates: string[]
-      ) => MaybePromise<DateTypes[]>);
-  cellClass: string | ((day: DateTypes) => string);
+      ) => MaybePromise<DateArgs[]>);
+  cellClass: string | ((date: string) => string);
 }) {
   const [state, actions] = context.useContext();
 
@@ -42,6 +42,7 @@ function WrapperMainPanel(props: {
 
   onCleanup(() => {
     actions.setState("previewMode", false);
+    actions.syncValueToPreview();
   });
 
   return (
@@ -56,31 +57,30 @@ function WrapperMainPanel(props: {
             ? () => (
                 <TimePicker
                   onChange={(v) => {
-                    if (v === state.timeValue) {
+                    const time = state.previewTimestamp;
+                    if (time === null) {
                       return;
                     }
-                    actions.setState("timeValue", v);
+                    const newDatetime = `${state.previewDateStr} ${v}`;
+                    actions.setPreviewValue(getTimestamp(newDatetime));
                   }}
                   size="small"
-                  type={state.type as any}
-                  value={state.timeValue}
+                  type={"second"}
+                  value={state.previewTimeStr}
                 />
               )
             : undefined
         }
         multiple={false}
         onChange={(v) => {
-          if (v[0] === state.dateValue) {
+          if (v[0] === state.previewDateStr) {
             return;
           }
-          if (state.type === "month") {
-            actions.setState("dateValue", dayes(v[0]).format("YYYY-MM"));
-            return;
-          }
-          actions.setState("dateValue", v[0]);
+          const newDatetime = `${v} ${state.previewTimeStr}`;
+          actions.setPreviewValue(getTimestamp(newDatetime));
         }}
         type={state.type as any}
-        value={[state.dateValue]}
+        value={[state.previewDateStr]}
         width={256}
         {...props}
       />
@@ -95,8 +95,8 @@ function WrapperMainPanel(props: {
         <Button
           icon={<IconFluentCheckmark24Regular />}
           onClick={() => {
-            actions.syncPreviewToValue();
             state.triggerRef?.blur();
+            actions.syncPreviewToValue();
           }}
           size={30}
           style={{ width: "100%", "flex-shrink": 1 }}
@@ -106,6 +106,7 @@ function WrapperMainPanel(props: {
           icon={<IconFluentDismiss24Regular />}
           onClick={() => {
             state.triggerRef?.blur();
+            actions.syncValueToPreview();
           }}
           size={30}
           style={{ width: "100%", "flex-shrink": 1 }}
@@ -116,9 +117,9 @@ function WrapperMainPanel(props: {
   );
 }
 
-export function DatePicker(props: {
+export function DatePicker<T = string>(props: {
   value?: string;
-  onChange?: (value: string) => void;
+  onChange?: (value: NoInfer<T>) => void;
   onFocus?: () => void;
   onBlur?: () => void;
   size?: "small" | "medium" | "large";
@@ -126,8 +127,9 @@ export function DatePicker(props: {
   placeholder?: string;
   type?: DatePickerType;
   clearable?: boolean;
-  dateRange?: [DateTypes, DateTypes];
-  cellClass?: string | ((day: DateTypes) => string);
+  dateRange?: [DateArgs, DateArgs];
+  cellClass?: string | ((date: string) => string);
+  toValue?: DatePickerToValueFunc<T>;
   highlightYears?:
     | number[]
     | ((visibleYearRange: [number, number]) => MaybePromise<number[]>);
@@ -135,19 +137,19 @@ export function DatePicker(props: {
     | string[]
     | ((visibleYear: number) => MaybePromise<string[]>);
   highlightDates?:
-    | DateTypes[]
+    | DateArgs[]
     | ((
         visibleYear: number,
         visibleMonth: number,
         visibleDates: string[]
-      ) => MaybePromise<DateTypes[]>);
+      ) => MaybePromise<DateArgs[]>);
   disabledDates?:
-    | DateTypes[]
+    | DateArgs[]
     | ((
         visibleYear: number,
         visibleMonth: number,
         visibleDates: string[]
-      ) => MaybePromise<DateTypes[]>);
+      ) => MaybePromise<DateArgs[]>);
 }) {
   return (
     <Root
@@ -157,6 +159,7 @@ export function DatePicker(props: {
       onChange={props.onChange}
       onFocus={props.onFocus}
       placeholder={props.placeholder}
+      toValue={props.toValue}
       type={props.type}
       value={props.value}
     >

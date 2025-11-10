@@ -30,15 +30,6 @@ export function Trigger(props: {
       if (s === "opened") {
         actions.setState("focused", true);
       }
-      if (s === "closing") {
-        const [ref1, ref2] = state.triggerRefs;
-        if (ref1) {
-          ref1.value = state.value[0];
-        }
-        if (ref2) {
-          ref2.value = state.value[1];
-        }
-      }
     },
     { defer: true }
   );
@@ -65,19 +56,17 @@ export function Trigger(props: {
           onInput={(e) => {
             const value = e.currentTarget.value;
             if (value.trim() === "") {
-              actions.setValue(["", state.previewValue[1]]);
+              actions.setPreviewValue(["", state.previewValues[1]]);
               return;
             }
-            if (actions.checkDateStr(value)) {
-              actions.setValue([value, state.previewValue[1]]);
-            }
+            actions.setPreviewValue([value, state.previewValues[1]]);
           }}
           placeholder={state.placeholder[0]}
           ref={(el) => {
             actions.setState("triggerRefs", 0, el);
           }}
           type="text"
-          value={state.previewValue[0]}
+          value={state.previewValues[0]}
         />
         <div
           style={{
@@ -98,25 +87,25 @@ export function Trigger(props: {
           onInput={(e) => {
             const value = e.currentTarget.value;
             if (value.trim() === "") {
-              actions.setValue([state.previewValue[0], ""]);
+              actions.setPreviewValue([state.previewValues[0], ""]);
               return;
             }
-            if (actions.checkDateStr(value)) {
-              actions.setValue([state.previewValue[0], value]);
-            }
+            actions.setPreviewValue([state.previewValues[0], value]);
           }}
           placeholder={state.placeholder[1]}
           ref={(el) => {
             actions.setState("triggerRefs", 1, el);
           }}
           type="text"
-          value={state.previewValue[1]}
+          value={state.previewValues[1]}
         />
         <ClearableSuffix
           onClear={() => {
             actions.clear();
           }}
-          showClearable={props.clearable && !state.isEmpty}
+          showClearable={
+            props.clearable && state.previewValues.every((v) => v.trim() !== "")
+          }
           suffix={<IconFluentCalendar24Regular />}
         />
       </div>

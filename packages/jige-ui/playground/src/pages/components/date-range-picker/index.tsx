@@ -1,6 +1,6 @@
-import { esday } from "esday";
 import { createSignal } from "solid-js";
 import { createStore } from "solid-js/store";
+import { formatToDateTime, setWeekday } from "time-core";
 import { DateRangePicker } from "~/build";
 import { Playground } from "../../../components/playground";
 
@@ -28,8 +28,8 @@ export default function Demo() {
               {
                 label: "本周",
                 value: () => [
-                  esday().startOf("week").format("YYYY-MM-DD HH:mm:ss"),
-                  esday().endOf("week").format("YYYY-MM-DD HH:mm:ss"),
+                  formatToDateTime(setWeekday(Date.now(), 1)),
+                  formatToDateTime(setWeekday(Date.now(), 7)),
                 ],
               },
             ]}

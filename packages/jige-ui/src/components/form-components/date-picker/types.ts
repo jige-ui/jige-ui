@@ -1,4 +1,8 @@
-import type { EsDay } from "esday";
+export type DatePickerType = "date" | "datetime";
 
-export type DateTypes = string | EsDay | Date | number;
-export type DatePickerType = "date" | "month" | "hour" | "minute" | "second";
+export type DatePickerPreviewer = {
+  toPreview: (timestamp: number | null, type: DatePickerType) => string;
+  toTimestamp: (preview: string, type: DatePickerType) => number | null;
+};
+
+export type DatePickerToValueFunc<T> = (timestamp: number | null) => T;

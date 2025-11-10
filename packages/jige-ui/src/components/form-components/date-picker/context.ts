@@ -1,26 +1,61 @@
-import type { EsDay } from "esday";
-import { batch } from "solid-js";
 import { createComponentState } from "solid-tiny-context";
-import { dayes } from "~/common/dayes";
-import type { DateTypes } from "./types";
-import { checkTimeValue, parseDateStr, valiDateStr } from "./utils";
+import { inRange } from "solid-tiny-utils";
+import {
+  type DateArgs,
+  formatToDateTime,
+  formatToIsoZulu,
+  getMonth,
+  getTimestamp,
+  getYear,
+} from "time-core";
+import type {
+  DatePickerPreviewer,
+  DatePickerToValueFunc,
+  DatePickerType,
+} from "./types";
 
-const today = dayes();
+const today = Date.now();
+
+const defaultToPreview = (
+  timestamp: number | null,
+  type: DatePickerType
+): string => {
+  if (timestamp === null) {
+    return "";
+  }
+  const datetime = formatToDateTime(timestamp);
+  if (type === "datetime") {
+    return datetime;
+  }
+  return datetime.split(" ")[0];
+};
+
+// NAN for invalid date
+const defaultToTimestamp = (
+  preview: string,
+  _type: DatePickerType
+): number | null => {
+  if (preview === "") {
+    return null;
+  }
+  return getTimestamp(preview);
+};
 
 export const context = createComponentState({
   state: () => ({
-    value: "",
-    dateValue: "",
-    timeValue: "00:00:00",
+    timestamp: null as number | null,
     previewMode: false,
-    valueFormat: "YYYY-MM-DD",
+    previewValue: "",
     name: "",
     placeholder: "",
-    currYear: today.year(),
-    currMonth: today.month(),
+    currYear: getYear(today),
+    currMonth: getMonth(today),
     activePanel: "day",
-    type: "date",
-    dateRange: ["1800-01-01", "2200-01-01"] as [DateTypes, DateTypes],
+    type: "date" as DatePickerType,
+    dateRange: [
+      getTimestamp("1800-01-01T00:00:00.000Z"),
+      getTimestamp("2200-01-01T23:59:59.999Z"),
+    ] as [number, number],
     hlDates: [] as string[],
     dsDates: [] as string[],
     hlYears: [] as number[],
@@ -30,83 +65,87 @@ export const context = createComponentState({
     focused: false,
   }),
   getters: {
-    inst() {
-      return dayes(this.state.dateValue);
-    },
-    fromInst() {
-      return dayes(this.state.dateRange[0]);
-    },
-    toInst() {
-      return dayes(this.state.dateRange[1]);
-    },
     defaultPanel() {
-      switch (this.state.type) {
-        case "month":
-          return "month";
-        case "year":
-          return "year";
-        default:
-          return "day";
-      }
+      return "day";
     },
     isDateTime() {
-      return ["hour", "minute", "second"].includes(this.state.type);
+      return this.state.type === "datetime";
     },
-    previewValue() {
-      if (!this.state.dateValue) {
+    previewTimestamp() {
+      return this.nowrapData.previewer.toTimestamp(
+        this.state.previewValue,
+        this.state.type
+      );
+    },
+    previewDateStr() {
+      const time = this.state.previewTimestamp;
+      if (time === null || Number.isNaN(time)) {
         return "";
       }
-
-      if (this.state.isDateTime) {
-        return `${this.state.dateValue} ${this.state.timeValue}`;
+      const datetime = formatToDateTime(time);
+      return datetime.split(" ")[0];
+    },
+    previewTimeStr() {
+      const time = this.state.previewTimestamp;
+      if (time === null || Number.isNaN(time)) {
+        return "";
       }
-      return this.state.dateValue;
+      const datetime = formatToDateTime(time);
+      return datetime.split(" ")[1];
     },
   },
   methods: {
     syncPreviewToValue() {
-      this.actions.setState("value", this.state.previewValue);
-    },
+      const time = this.nowrapData.previewer.toTimestamp(
+        this.state.previewValue,
+        this.state.type
+      );
 
-    syncValueToPreview() {
-      const [date, time] = parseDateStr(this.state.value);
-      this.actions.setState({
-        dateValue: date,
-        timeValue: time || "00:00:00",
-      });
-    },
-
-    setValue(value: string) {
-      if (!value.trim()) {
-        batch(() => {
-          this.actions.setState({
-            dateValue: "",
-            timeValue: "00:00:00",
-          });
-          this.actions.syncPreviewToValue();
-        });
-      }
-
-      if (!this.actions.isInDateRange(dayes(value))) {
+      if (time !== null && !this.actions.isInDateRange(time)) {
         return;
       }
 
-      const [date, time] = parseDateStr(value);
+      this.actions.setState("timestamp", time);
+    },
 
-      batch(() => {
-        this.actions.setState({
-          dateValue: date,
-          timeValue: time || "00:00:00",
-        });
-        this.actions.syncPreviewToValue();
-      });
+    syncValueToPreview() {
+      this.actions.setState(
+        "previewValue",
+        this.nowrapData.previewer.toPreview(
+          this.state.timestamp,
+          this.state.type
+        )
+      );
+    },
+
+    setPreviewValue(value: number | null) {
+      if (Number.isNaN(value)) {
+        return;
+      }
+
+      this.actions.setState(
+        "previewValue",
+        this.nowrapData.previewer.toPreview(value, this.state.type)
+      );
+    },
+
+    setTimestamp(value: DateArgs | null) {
+      if (value === null) {
+        this.actions.setState("timestamp", null);
+        return;
+      }
+      const stamp = getTimestamp(value);
+      if (Number.isNaN(stamp)) {
+        return;
+      }
+      this.actions.setState("timestamp", stamp);
     },
 
     setCurrYear(year: number) {
-      if (
-        year >= this.state.fromInst.year() &&
-        year <= this.state.toInst.year()
-      ) {
+      const minYear = getYear(this.state.dateRange[0]);
+      const maxYear = getYear(this.state.dateRange[1]);
+
+      if (inRange(year, minYear, maxYear)) {
         this.actions.setState("currYear", year);
         return true;
       }
@@ -115,19 +154,17 @@ export const context = createComponentState({
     },
 
     setCurrMonth(month: number) {
-      if (month >= 0 && month <= 11) {
+      if (month >= 1 && month <= 12) {
         this.actions.setState("currMonth", month);
         return true;
       }
       return false;
     },
 
-    isInDateRange(value: EsDay) {
-      return value >= this.state.fromInst && value <= this.state.toInst;
-    },
-
-    parseDate(value: DateTypes) {
-      return dayes(value, this.state.valueFormat);
+    isInDateRange(value: DateArgs) {
+      const minTimestamp = getTimestamp(this.state.dateRange[0]);
+      const maxTimestamp = getTimestamp(this.state.dateRange[1]);
+      return inRange(getTimestamp(value), minTimestamp, maxTimestamp);
     },
 
     setName(name: string) {
@@ -146,23 +183,20 @@ export const context = createComponentState({
       this.actions.setState("previewMode", mode);
     },
 
-    checkDateStr(value: string) {
-      const isDate = valiDateStr(
-        value.split(" ")[0],
-        this.state.type === "month" ? "month" : "date"
-      );
-      if (isDate && this.state.isDateTime) {
-        const timeStr = value.split(" ")[1];
-        return checkTimeValue(
-          timeStr,
-          this.state.type as "hour" | "minute" | "second"
-        );
-      }
-      return isDate;
-    },
-
     clear() {
-      this.actions.setValue("");
+      this.actions.setState("timestamp", null);
     },
   },
+  nowrapData: () => ({
+    previewer: {
+      toTimestamp: defaultToTimestamp,
+      toPreview: defaultToPreview,
+    } as DatePickerPreviewer,
+    toValue: ((timestamp: number | null) => {
+      if (timestamp === null) {
+        return "";
+      }
+      return formatToIsoZulu(timestamp);
+    }) as DatePickerToValueFunc<any>,
+  }),
 });
