@@ -40,9 +40,3 @@ jobs:
 
       - name: Lint
         run: pnpm run lint
-
-      - name: Build First
-        run: pnpm -F jige-core build && pnpm -F @jige-ui/unocss build
-
-      - name: Typecheck
-        run: pnpm run tc

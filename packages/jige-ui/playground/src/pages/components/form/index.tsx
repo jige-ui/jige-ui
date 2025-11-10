@@ -153,7 +153,7 @@ export default function Demo() {
             </FormRadioGroup>
           </Form.Field>
           <Form.Field label={p.noLabel ? undefined : "date"} name="date">
-            <FormDatePicker type="second" />
+            <FormDatePicker type="datetime" />
           </Form.Field>
           <Form.Field
             label={p.noLabel ? undefined : "dateRange"}
