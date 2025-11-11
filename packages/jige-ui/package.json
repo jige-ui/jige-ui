@@ -1,7 +1,7 @@
 {
   "name": "jige-ui",
   "type": "module",
-  "version": "0.48.1",
+  "version": "0.49.0",
   "private": false,
   "description": "a solidjs component library",
   "license": "MIT",
