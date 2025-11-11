@@ -1,6 +1,6 @@
 import { undefinedOr } from "jige-core";
 import { onCleanup, onMount } from "solid-js";
-import { type DateArgs, getTimestamp } from "time-core";
+import type { DateArgs } from "time-core";
 import type { MaybePromise } from "~/common/types";
 import { Button } from "~/components/button";
 import { IconFluentCheckmark24Regular } from "~/components/icons/fluent-checkmark-24-regular";
@@ -57,30 +57,24 @@ function WrapperMainPanel(props: {
             ? () => (
                 <TimePicker
                   onChange={(v) => {
-                    const time = state.previewTimestamp;
-                    if (time === null) {
-                      return;
-                    }
-                    const newDatetime = `${state.previewDateStr} ${v}`;
-                    actions.setPreviewValue(getTimestamp(newDatetime));
+                    actions.setState("previewTime", v);
                   }}
                   size="small"
                   type={"second"}
-                  value={state.previewTimeStr}
+                  value={state.previewTime}
                 />
               )
             : undefined
         }
         multiple={false}
         onChange={(v) => {
-          if (v[0] === state.previewDateStr) {
+          if (v[0] === state.previewDate) {
             return;
           }
-          const newDatetime = `${v} ${state.previewTimeStr}`;
-          actions.setPreviewValue(getTimestamp(newDatetime));
+          actions.setState("previewDate", v[0]);
         }}
         type={state.type as any}
-        value={[state.previewDateStr]}
+        value={[state.previewDate]}
         width={256}
         {...props}
       />
@@ -124,6 +118,7 @@ export function DatePicker<T = string>(props: {
   onBlur?: () => void;
   size?: "small" | "medium" | "large";
   disabled?: boolean;
+  name?: string;
   placeholder?: string;
   type?: DatePickerType;
   clearable?: boolean;
@@ -155,6 +150,7 @@ export function DatePicker<T = string>(props: {
     <Root
       dateRange={props.dateRange}
       disabled={props.disabled}
+      name={props.name}
       onBlur={props.onBlur}
       onChange={props.onChange}
       onFocus={props.onFocus}

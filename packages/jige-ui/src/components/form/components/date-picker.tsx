@@ -12,6 +12,7 @@ export function FormDatePicker(
   return (
     <DatePicker
       disabled={fieldState.isDisabled}
+      onBlur={fieldActs.handleBlur}
       onChange={fieldActs.handleChange}
       value={fieldState.value}
       {...props}

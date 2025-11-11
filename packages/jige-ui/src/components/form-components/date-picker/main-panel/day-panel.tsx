@@ -1,11 +1,12 @@
 import { debounce } from "@solid-primitives/scheduled";
-import { createMemo, createSignal, For } from "solid-js";
+import { batch, createMemo, createSignal, For } from "solid-js";
 import { createWatch, isFn, list } from "solid-tiny-utils";
 import {
   type DateArgs,
   formatToDateTime,
   getDay,
   getMonth,
+  getYear,
   isSameDate,
   isToday,
 } from "time-core";
@@ -15,7 +16,9 @@ import { formatToDateStr, genCalendarDays, NumberToChinese } from "../utils";
 import { panelContext } from "./context";
 
 export function DayPanel(props: {
-  cellClass: string | ((date: string) => string);
+  cellClass:
+    | string
+    | ((date: string, currYear: number, currMonth: number) => string);
   highlightDates:
     | DateArgs[]
     | ((
@@ -36,7 +39,6 @@ export function DayPanel(props: {
     genCalendarDays(state.currYear, state.currMonth)
   );
 
-  // eslint-disable-next-line solid/reactivity
   const debounceSetHlDates = debounce(async (y: number, m: number) => {
     const getHls = props.highlightDates;
     if (isFn(getHls)) {
@@ -60,7 +62,6 @@ export function DayPanel(props: {
   }, 200);
 
   const [isLoadingDsDates, setIsLoadingDsDates] = createSignal(false);
-  // eslint-disable-next-line solid/reactivity
   const debounceSetDsDates = debounce(async (y: number, m: number) => {
     const getDs = props.disabledDates;
     if (isFn(getDs)) {
@@ -112,7 +113,7 @@ export function DayPanel(props: {
     );
   };
 
-  const cellClass = (day: string) => {
+  const cellClass = (day: string, currYear: number, currMonth: number) => {
     const classList = ["jg-dp-day-panel-cell"];
     if (isToday(day)) {
       classList.push("jg-dp-is-today");
@@ -128,7 +129,7 @@ export function DayPanel(props: {
     }
 
     if (isFn(props.cellClass)) {
-      const cls = props.cellClass(day);
+      const cls = props.cellClass(day, currYear, currMonth);
       if (cls) {
         classList.push(cls);
       }
@@ -146,7 +147,11 @@ export function DayPanel(props: {
       <For each={dates()}>
         {(day) => (
           <div
-            class={cellClass(formatToDateStr(day))}
+            class={cellClass(
+              formatToDateStr(day),
+              state.currYear,
+              state.currMonth
+            )}
             data-disabled={dataIf(isDsDay(formatToDateStr(day)))}
             data-selected={dataIf(
               state.value.includes(formatToDateStr(day)) &&
@@ -156,17 +161,24 @@ export function DayPanel(props: {
             <div
               class="jg-dp-day-panel-day"
               onClick={() => {
-                if (state.multiple) {
-                  if (state.value.includes(formatToDateStr(day))) {
-                    actions.setValue(
-                      state.value.filter((d) => !isSameDate(d, day))
-                    );
-                  } else {
-                    actions.setValue([...state.value, formatToDateStr(day)]);
+                batch(() => {
+                  if (getMonth(day) !== state.currMonth) {
+                    actions.setCurrYear(getYear(day));
+                    actions.setCurrMonth(getMonth(day));
                   }
-                } else {
-                  actions.setValue([formatToDateStr(day)]);
-                }
+
+                  if (state.multiple) {
+                    if (state.value.includes(formatToDateStr(day))) {
+                      actions.setValue(
+                        state.value.filter((d) => !isSameDate(d, day))
+                      );
+                    } else {
+                      actions.setValue([...state.value, formatToDateStr(day)]);
+                    }
+                  } else {
+                    actions.setValue([formatToDateStr(day)]);
+                  }
+                });
               }}
               onKeyDown={() => {}}
               title={formatToDateStr(day)}

@@ -3,6 +3,7 @@ import { createComponentState } from "solid-tiny-context";
 import {
   type DateArgs,
   formatToDateTime,
+  formatToIsoZulu,
   getMonth,
   getTimestamp,
   getYear,
@@ -31,19 +32,23 @@ function toPreviews(
   return previews;
 }
 
-function previewToValues(previews: [string, string]) {
-  return previews.map((v) => {
-    const time = getTimestamp(v);
-    if (Number.isNaN(time)) {
-      return null;
-    }
-    return getTimestamp(v);
-  }) as [number | null, number | null];
+export function previewToVal(previewStr: string) {
+  const time = getTimestamp(previewStr);
+  if (Number.isNaN(time)) {
+    return null;
+  }
+  return time;
 }
+
+function previewToValues(previews: [string, string]) {
+  return previews.map(previewToVal) as [number | null, number | null];
+}
+
 export const context = createComponentState({
   state: () => ({
     timestamps: [null, null] as [number | null, number | null],
-    previewValues: ["", ""] as [string, string],
+    previewDates: ["", ""] as [string, string],
+    previewTimes: ["", ""] as [string, string],
     previewMode: false,
     disabled: false,
     placeholder: ["开始日期", "结束日期"] as [string, string],
@@ -65,51 +70,64 @@ export const context = createComponentState({
     isDateTime() {
       return this.state.type === "datetime";
     },
-    previewTimeStrs() {
-      if (this.state.isDateTime) {
-        return this.state.previewValues.map((v) => v.split(" ")[1]);
-      }
-
-      return ["00:00:00", "00:00:00"];
+    previewTimestamps() {
+      return this.state.previewDates.map((date, i) => {
+        if (!date) {
+          return null;
+        }
+        const datetime = `${date} ${this.state.previewTimes[i]}`;
+        return getTimestamp(datetime.trim());
+      }) as [number | null, number | null];
     },
-    previewDateStrs() {
-      return this.state.previewValues.map((v) => v.split(" ")[0]);
+    previewStrings(): [string, string] {
+      return toPreviews(this.state.previewTimestamps, this.state.type);
     },
   },
   methods: {
     setPreviewDate(date: string) {
-      const leftDate = this.state.previewDateStrs[0];
-      const rightDate = this.state.previewDateStrs[1];
+      const [leftDate, rightDate] = this.state.previewDates;
       batch(() => {
         if (leftDate === "") {
-          this.actions.setPreviewDateAt(0, date);
+          this.actions.setState("previewDates", 0, date);
           return;
         }
         if (rightDate === "") {
           if (getTimestamp(leftDate) > getTimestamp(date)) {
-            this.actions.setPreviewDateAt(1, this.state.previewValues[0]);
-            this.actions.setPreviewDateAt(0, date);
+            this.actions.setState("previewDates", 1, leftDate);
+            this.actions.setState("previewDates", 0, date);
           } else {
-            this.actions.setPreviewDateAt(1, date);
+            this.actions.setState("previewDates", 1, date || leftDate);
           }
           return;
         }
+        this.actions.setState("previewDates", 1, "");
 
-        this.actions.setState("previewValues", 1, "");
-        this.actions.setPreviewDateAt(0, date);
+        if (date === leftDate) {
+          this.actions.setState("previewDates", 0, rightDate);
+        }
+
+        if (date === rightDate) {
+          this.actions.setState("previewDates", 0, leftDate);
+        }
+
+        if (![leftDate, rightDate].includes(date)) {
+          this.actions.setState("previewDates", 0, date);
+        }
       });
     },
 
-    setPreviewDateAt(at: 0 | 1, date: string) {
-      let newDate = date;
-      if (this.state.type === "datetime") {
-        newDate = `${date} ${this.state.previewTimeStrs[at]}`;
-      }
-      this.actions.setState("previewValues", at, newDate);
-    },
-
-    setPreviewValue(value: [string, string]) {
-      this.actions.setState("previewValues", value);
+    setPreviewValue(at: 0 | 1, timestamp: number | null) {
+      const time = timestamp;
+      batch(() => {
+        if (time === null || Number.isNaN(timestamp)) {
+          this.actions.setState("previewDates", at, "");
+          this.actions.setState("previewTimes", at, "00:00:00");
+        } else {
+          const datetime = formatToDateTime(time);
+          this.actions.setState("previewDates", at, datetime.split(" ")[0]);
+          this.actions.setState("previewTimes", at, datetime.split(" ")[1]);
+        }
+      });
     },
 
     setValue(value: [DateArgs, DateArgs]) {
@@ -131,33 +149,32 @@ export const context = createComponentState({
       }
 
       batch(() => {
-        this.actions.setPreviewValue(
-          toPreviews([leftVal, rightVal] as [number, number], this.state.type)
-        );
+        this.actions.setPreviewValue(0, leftVal);
+        this.actions.setPreviewValue(1, rightVal);
         this.actions.syncPreviewToValue();
       });
     },
 
     syncValueToPreview() {
-      this.actions.setState(
-        "previewValues",
-        toPreviews(this.state.timestamps, this.state.type)
-      );
+      batch(() => {
+        this.actions.setPreviewValue(0, this.state.timestamps[0]);
+        this.actions.setPreviewValue(1, this.state.timestamps[1]);
+      });
     },
     syncPreviewToValue() {
       this.actions.setState(
         "timestamps",
-        previewToValues(this.state.previewValues)
+        previewToValues(this.state.previewStrings)
       );
     },
     updateCurrYearMonthData() {
-      let [leftDate, rightDate] = this.state.previewDateStrs.map(getTimestamp);
+      let [leftDate, rightDate] = this.state.previewTimestamps;
 
-      if (Number.isNaN(leftDate)) {
+      if (Number.isNaN(leftDate) || leftDate === null) {
         leftDate = Date.now();
       }
 
-      if (Number.isNaN(rightDate)) {
+      if (Number.isNaN(rightDate) || rightDate === null) {
         rightDate = Date.now();
       }
 
@@ -187,4 +204,14 @@ export const context = createComponentState({
       this.actions.setValue(["", ""]);
     },
   },
+  nowrapData: () => ({
+    toValues: (timestamps: [number | null, number | null]) => {
+      return timestamps.map((t) => {
+        if (t === null || Number.isNaN(t)) {
+          return "";
+        }
+        return formatToIsoZulu(t);
+      }) as [any, any];
+    },
+  }),
 });

@@ -3,20 +3,21 @@ import dpCss from "sass:../date-picker/date-picker.scss";
 import inputCss from "sass:../input/input.scss";
 import { undefinedOr } from "jige-core";
 import { createWatch, mountStyle } from "solid-tiny-utils";
-import { type DateArgs, formatToIsoZulu } from "time-core";
+import type { DateArgs } from "time-core";
 import { isDef } from "~/common/types";
 import { Popover } from "~/components/popover";
 import { context } from "./context";
 import { Panel } from "./panel";
 import { Trigger } from "./trigger";
 
-export function DateRangePicker(props: {
+export function DateRangePicker<T>(props: {
   disabled?: boolean;
   value?: [DateArgs, DateArgs];
-  onChange?: (value: [string, string]) => void;
+  onChange?: (value: [NoInfer<T>, NoInfer<T>]) => void;
   onBlur?: () => void;
   onFocus?: () => void;
   placeholder?: [string, string];
+  toValues?: (timestamps: [number | null, number | null]) => [T, T];
   clearable?: boolean;
   size?: "small" | "medium" | "large";
   type?: "datetime" | "date";
@@ -38,19 +39,24 @@ export function DateRangePicker(props: {
     type: () => props.type,
   });
 
-  const [state, actions] = Context.value;
+  const [state, actions, staticData] = Context.value;
+  const defaultToValues = staticData.toValues;
 
   createWatch(
-    () => [...state.timestamps],
+    () => props.toValues,
+    (toVals) => {
+      if (isDef(toVals)) {
+        staticData.toValues = toVals;
+      } else {
+        staticData.toValues = defaultToValues;
+      }
+    }
+  );
+
+  createWatch(
+    () => [...state.timestamps] as [number | null, number | null],
     (v) => {
-      props.onChange?.(
-        v.map((v) => {
-          if (v === null || Number.isNaN(v)) {
-            return "";
-          }
-          return formatToIsoZulu(v);
-        }) as [string, string]
-      );
+      props.onChange?.(staticData.toValues(v));
     },
     { defer: true }
   );

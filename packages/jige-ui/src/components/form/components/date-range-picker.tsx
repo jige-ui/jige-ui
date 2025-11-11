@@ -13,6 +13,7 @@ export function FormDateRangePicker(
   return (
     <DateRangePicker
       disabled={fieldState.isDisabled}
+      onBlur={fieldActs.handleBlur}
       onChange={fieldActs.handleChange}
       value={fieldState.value}
       {...props}

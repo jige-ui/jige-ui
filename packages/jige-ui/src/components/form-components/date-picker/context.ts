@@ -1,3 +1,4 @@
+import { batch } from "solid-js";
 import { createComponentState } from "solid-tiny-context";
 import { inRange } from "solid-tiny-utils";
 import {
@@ -45,7 +46,8 @@ export const context = createComponentState({
   state: () => ({
     timestamp: null as number | null,
     previewMode: false,
-    previewValue: "",
+    previewDate: "",
+    previewTime: "",
     name: "",
     placeholder: "",
     currYear: getYear(today),
@@ -71,33 +73,25 @@ export const context = createComponentState({
     isDateTime() {
       return this.state.type === "datetime";
     },
-    previewTimestamp() {
-      return this.nowrapData.previewer.toTimestamp(
-        this.state.previewValue,
+    previewTimestamp(): number | null {
+      if (!this.state.previewDate) {
+        return null;
+      }
+      const dateStr = `${this.state.previewDate} ${this.state.previewTime}`;
+      const time = getTimestamp(dateStr);
+      return Number.isNaN(time) ? null : time;
+    },
+    previewStr() {
+      return this.nowrapData.previewer.toPreview(
+        this.state.previewTimestamp,
         this.state.type
       );
-    },
-    previewDateStr() {
-      const time = this.state.previewTimestamp;
-      if (time === null || Number.isNaN(time)) {
-        return "";
-      }
-      const datetime = formatToDateTime(time);
-      return datetime.split(" ")[0];
-    },
-    previewTimeStr() {
-      const time = this.state.previewTimestamp;
-      if (time === null || Number.isNaN(time)) {
-        return "";
-      }
-      const datetime = formatToDateTime(time);
-      return datetime.split(" ")[1];
     },
   },
   methods: {
     syncPreviewToValue() {
       const time = this.nowrapData.previewer.toTimestamp(
-        this.state.previewValue,
+        this.state.previewStr,
         this.state.type
       );
 
@@ -109,24 +103,23 @@ export const context = createComponentState({
     },
 
     syncValueToPreview() {
-      this.actions.setState(
-        "previewValue",
-        this.nowrapData.previewer.toPreview(
-          this.state.timestamp,
-          this.state.type
-        )
-      );
+      this.actions.setPreviewValue(this.state.timestamp);
     },
 
-    setPreviewValue(value: number | null) {
-      if (Number.isNaN(value)) {
+    setPreviewValue(timestamp: number | null) {
+      if (Number.isNaN(timestamp)) {
         return;
       }
-
-      this.actions.setState(
-        "previewValue",
-        this.nowrapData.previewer.toPreview(value, this.state.type)
-      );
+      batch(() => {
+        if (timestamp === null) {
+          this.actions.setState("previewDate", "");
+          this.actions.setState("previewTime", "00:00:00");
+          return;
+        }
+        const datetime = formatToDateTime(timestamp);
+        this.actions.setState("previewDate", datetime.split(" ")[0]);
+        this.actions.setState("previewTime", datetime.split(" ")[1]);
+      });
     },
 
     setTimestamp(value: DateArgs | null) {

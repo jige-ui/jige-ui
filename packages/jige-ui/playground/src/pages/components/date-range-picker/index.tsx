@@ -9,9 +9,17 @@ export default function Demo() {
     disabled: false,
     type: "date" as "datetime" | "date",
     size: "medium" as "small" | "medium" | "large",
+    customValues: false,
   });
 
-  const [value, setValue] = createSignal<[string, string]>(["", ""]);
+  const [value, setValue] = createSignal<[string | number, string | number]>([
+    "",
+    "",
+  ]);
+
+  const customToVals = (timestamps: [number | null, number | null]) => {
+    return timestamps;
+  };
 
   return (
     <Playground>
@@ -34,8 +42,8 @@ export default function Demo() {
               },
             ]}
             size={p.size}
+            toValues={p.customValues ? customToVals : undefined}
             type={p.type}
-            value={value()}
           />
         </div>
       </Playground.MainArea>

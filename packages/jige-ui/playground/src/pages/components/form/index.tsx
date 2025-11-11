@@ -1,7 +1,7 @@
 import { FormCore } from "jige-core";
 import { For } from "solid-js";
 import { createStore } from "solid-js/store";
-import { createWatch, sleep } from "solid-tiny-utils";
+import { sleep } from "solid-tiny-utils";
 // biome-ignore lint/performance/noNamespaceImport: valibot exports many schemas
 import * as v from "valibot";
 import {
@@ -86,13 +86,6 @@ export default function Demo() {
   });
 
   const [formState] = form.context;
-
-  createWatch(
-    () => formState.canSubmit,
-    () => {
-      console.log(formState.canSubmit);
-    }
-  );
 
   return (
     <Playground>

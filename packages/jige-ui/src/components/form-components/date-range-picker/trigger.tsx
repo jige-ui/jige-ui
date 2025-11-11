@@ -6,7 +6,7 @@ import { IconFluentArrowRight24Filled } from "~/components/icons/fluent-arrow-ri
 import { IconFluentCalendar24Regular } from "~/components/icons/fluent-calendar-24-regular";
 import { Popover } from "~/components/popover";
 import { ClearableSuffix } from "../input/clearable-suffix";
-import { context } from "./context";
+import { context, previewToVal } from "./context";
 
 export function Trigger(props: {
   clearable: boolean;
@@ -55,18 +55,14 @@ export function Trigger(props: {
           }}
           onInput={(e) => {
             const value = e.currentTarget.value;
-            if (value.trim() === "") {
-              actions.setPreviewValue(["", state.previewValues[1]]);
-              return;
-            }
-            actions.setPreviewValue([value, state.previewValues[1]]);
+            actions.setPreviewValue(0, previewToVal(value));
           }}
           placeholder={state.placeholder[0]}
           ref={(el) => {
             actions.setState("triggerRefs", 0, el);
           }}
           type="text"
-          value={state.previewValues[0]}
+          value={state.previewStrings[0]}
         />
         <div
           style={{
@@ -86,25 +82,22 @@ export function Trigger(props: {
           }}
           onInput={(e) => {
             const value = e.currentTarget.value;
-            if (value.trim() === "") {
-              actions.setPreviewValue([state.previewValues[0], ""]);
-              return;
-            }
-            actions.setPreviewValue([state.previewValues[0], value]);
+            actions.setPreviewValue(1, previewToVal(value));
           }}
           placeholder={state.placeholder[1]}
           ref={(el) => {
             actions.setState("triggerRefs", 1, el);
           }}
           type="text"
-          value={state.previewValues[1]}
+          value={state.previewStrings[1]}
         />
         <ClearableSuffix
           onClear={() => {
             actions.clear();
           }}
           showClearable={
-            props.clearable && state.previewValues.every((v) => v.trim() !== "")
+            props.clearable &&
+            state.previewStrings.every((v) => v.trim() !== "")
           }
           suffix={<IconFluentCalendar24Regular />}
         />

@@ -1,6 +1,6 @@
 import { batch, For, onCleanup, onMount } from "solid-js";
 import { createWatch } from "solid-tiny-utils";
-import { getTimestamp } from "time-core";
+import { getMonth, getTimestamp } from "time-core";
 import { Button } from "~/components/button";
 import { IconFluentCheckmark24Regular } from "~/components/icons/fluent-checkmark-24-regular";
 import { IconFluentDismiss24Regular } from "~/components/icons/fluent-dismiss-24-regular";
@@ -85,9 +85,14 @@ export function Panel(props: {
     });
   };
 
-  const cellClass = (day: string) => {
-    const from = getTimestamp(state.previewDateStrs[0]);
-    const to = getTimestamp(state.previewDateStrs[1]);
+  const cellClass = (day: string, _currYear: number, currMonth: number) => {
+    const from = getTimestamp(state.previewDates[0]);
+    const to = getTimestamp(state.previewDates[1]);
+
+    if (![getMonth(from), getMonth(to)].includes(currMonth)) {
+      return "";
+    }
+
     const value = getTimestamp(day);
     const isInRange = value > from && value < to;
 
@@ -95,10 +100,8 @@ export function Panel(props: {
   };
 
   createWatch(
-    () => [state.previewDateStrs[0], state.previewDateStrs[1]],
+    () => [...state.timestamps],
     () => {
-      console.log(state.previewDateStrs[0], state.previewDateStrs[1]);
-
       actions.updateCurrYearMonthData();
     },
     { defer: true }
@@ -117,32 +120,21 @@ export function Panel(props: {
               ? () => (
                   <TimePicker
                     onChange={(v) => {
-                      const dateStr = state.previewDateStrs[0];
-                      if (!dateStr) {
-                        return;
-                      }
-                      const newDate = `${dateStr} ${v}`;
-                      actions.setState("previewValues", 0, newDate);
+                      actions.setState("previewTimes", 0, v);
                     }}
                     size="small"
-                    value={state.previewTimeStrs[0]}
+                    value={state.previewTimes[0]}
                   />
                 )
               : undefined
           }
           onChange={(v) => {
             const length = v.length;
-            const left = v[length - 2];
-            const right = v[length - 1];
-            if (
-              state.previewDateStrs[0] !== left ||
-              state.previewDateStrs[1] !== right
-            ) {
-              actions.setPreviewDate(right);
-            }
+            const right = v[length - 1] || "";
+            actions.setPreviewDate(right);
           }}
           onCurrYearMonthChange={updateCurrYearMonthData}
-          value={[...state.previewDateStrs]}
+          value={[...state.previewDates]}
           {...commonProps}
         />
         <div class="jg-dp-divider" />
@@ -156,34 +148,23 @@ export function Panel(props: {
               ? () => (
                   <TimePicker
                     onChange={(v) => {
-                      const dateStr = state.previewDateStrs[1];
-                      if (!dateStr) {
-                        return;
-                      }
-                      const newDate = `${dateStr} ${v}`;
-                      actions.setState("previewValues", 1, newDate);
+                      actions.setState("previewTimes", 1, v);
                     }}
                     size="small"
-                    value={state.previewTimeStrs[1]}
+                    value={state.previewTimes[1]}
                   />
                 )
               : undefined
           }
           onChange={(v) => {
             const length = v.length;
-            const left = v[length - 2];
-            const right = v[length - 1];
-            if (
-              state.previewDateStrs[0] !== left ||
-              state.previewDateStrs[1] !== right
-            ) {
-              actions.setPreviewDate(right);
-            }
+            const right = v[length - 1] || "";
+            actions.setPreviewDate(right);
           }}
           onCurrYearMonthChange={(currYear, currMonth) => {
             updateCurrYearMonthData(currYear, currMonth, false);
           }}
-          value={[...state.previewDateStrs]}
+          value={[...state.previewDates]}
           {...commonProps}
         />
       </div>

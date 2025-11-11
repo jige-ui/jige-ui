@@ -54,7 +54,7 @@ export function Trigger(props: {
           class="jg-input-native"
           name={state.name || "datepicker"}
           onBlur={(e) => {
-            e.currentTarget.value = state.previewValue;
+            e.currentTarget.value = state.previewStr;
             floatActions.setOpen(false);
             setFocused(false);
           }}
@@ -77,13 +77,13 @@ export function Trigger(props: {
             actions.setState("triggerRef", el);
           }}
           type="text"
-          value={state.previewValue}
+          value={state.previewStr}
         />
         <ClearableSuffix
           onClear={() => {
             actions.clear();
           }}
-          showClearable={props.clearable && state.previewValue !== ""}
+          showClearable={props.clearable && state.previewStr !== ""}
           suffix={<IconFluentCalendar24Regular />}
         />
       </div>

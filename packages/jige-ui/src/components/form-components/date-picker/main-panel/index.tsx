@@ -11,7 +11,9 @@ import { YearPanel } from "./year-panel";
 
 function AnimatedPanel(props: {
   width: number;
-  cellClass: string | ((day: string) => string);
+  cellClass:
+    | string
+    | ((day: string, currYear: number, currMonth: number) => string);
   highlightYears:
     | number[]
     | ((visibleYearRange: [number, number]) => MaybePromise<number[]>);
@@ -78,7 +80,9 @@ export function MainPanel(props: {
   currYear: number;
   currMonth: number;
   dateRange: [DateArgs, DateArgs];
-  cellClass: string | ((day: string) => string);
+  cellClass:
+    | string
+    | ((day: string, currYear: number, currMonth: number) => string);
   highlightYears:
     | number[]
     | ((visibleYearRange: [number, number]) => MaybePromise<number[]>);
@@ -124,8 +128,11 @@ export function MainPanel(props: {
   createWatch(
     () => state.value,
     (v) => {
-      props.onChange(v);
-    }
+      if (JSON.stringify(v) !== JSON.stringify(props.value)) {
+        props.onChange(v);
+      }
+    },
+    { defer: true }
   );
 
   createWatch(
@@ -149,7 +156,8 @@ export function MainPanel(props: {
     () => [state.currYear, state.currMonth],
     ([y, m]) => {
       props.onCurrYearMonthChange?.(y, m);
-    }
+    },
+    { defer: true }
   );
 
   return (

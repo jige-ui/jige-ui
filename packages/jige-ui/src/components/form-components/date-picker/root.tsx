@@ -14,6 +14,7 @@ export function Root<T = string>(props: {
   onChange?: (value: T) => void;
   onFocus?: () => void;
   onBlur?: () => void;
+  name?: string;
   dateRange?: [DateArgs, DateArgs];
   disabled?: boolean;
   type?: DatePickerType;
@@ -31,6 +32,7 @@ export function Root<T = string>(props: {
     },
     disabled: () => props.disabled,
     type: () => props.type,
+    name: () => props.name,
     placeholder: () => props.placeholder,
   });
 
@@ -46,9 +48,7 @@ export function Root<T = string>(props: {
       } else {
         staticData.previewer = defaultPreviewer;
       }
-      actions.clear();
-    },
-    { defer: true }
+    }
   );
 
   createWatch(
@@ -59,9 +59,7 @@ export function Root<T = string>(props: {
       } else {
         staticData.toValue = defaultToValue;
       }
-      actions.clear();
-    },
-    { defer: true }
+    }
   );
 
   createWatch(
@@ -95,14 +93,14 @@ export function Root<T = string>(props: {
   );
 
   createWatch(
-    () => state.previewValue,
-    () => {
-      let v = state.previewTimestamp;
-      if (v === null) {
-        v = Date.now();
+    () => state.previewTimestamp,
+    (v) => {
+      let time = v;
+      if (time === null) {
+        time = Date.now();
       }
-      actions.setCurrYear(getYear(v));
-      actions.setCurrMonth(getMonth(v));
+      actions.setCurrYear(getYear(time));
+      actions.setCurrMonth(getMonth(time));
     }
   );
 
