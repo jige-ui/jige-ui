@@ -3,9 +3,20 @@
 @use "sass:list";
 
 :root {
-  @each $name, $text in vars.$text-ramp {
-    #{funcs.$var-prefix}-fs-#{$name}: list.nth($text, 1);
-    #{funcs.$var-prefix}-lh-#{$name}: list.nth($text, 2);
+  @each $name, $size in vars.$fs-ramp {
+    #{funcs.$var-prefix}-fs-#{$name}: $size;
+  }
+
+  @each $name, $size in vars.$lh-ramp {
+    #{funcs.$var-prefix}-lh-#{$name}: $size;
+  }
+
+  @each $name, $size in vars.$spacing-ramp {
+    #{funcs.$var-prefix}-space-#{$name}: $size;
+  }
+
+  @each $name, $radius in vars.$radius-ramp {
+    #{funcs.$var-prefix}-radius-#{$name}: $radius;
   }
 
   @each $name, $height in vars.$height-ramp {

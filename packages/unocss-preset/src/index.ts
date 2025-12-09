@@ -28,6 +28,27 @@ export function presetJigeUI(): Preset {
         "t-bg6": "var(--jg-t-bg6)",
         "t-border": "var(--jg-t-border)",
       },
+      lineHeight: {
+        tight: "var(--jg-lh-tight)",
+        base: "var(--jg-lh-base)",
+        relaxed: "var(--jg-lh-relaxed)",
+      },
+      spacing: {
+        xs: "var(--jg-space-xs)",
+        sm: "var(--jg-space-sm)",
+        md: "var(--jg-space-md)",
+        lg: "var(--jg-space-lg)",
+        xl: "var(--jg-space-xl)",
+        "2xl": "var(--jg-space-2xl)",
+        "3xl": "var(--jg-space-3xl)",
+      },
+      borderRadius: {
+        sm: "var(--jg-radius-sm)",
+        md: "var(--jg-radius-md)",
+        lg: "var(--jg-radius-lg)",
+        xl: "var(--jg-radius-xl)",
+        round: "var(--jg-radius-round)",
+      },
     },
     rules: [
       [
@@ -37,10 +58,19 @@ export function presetJigeUI(): Preset {
         }),
       ],
       [
-        /^typo-(10|12|14|16|20|24|28|32)$/,
-        ([, d]) => ({
-          "font-size": `var(--jg-fs-${d})`,
-          "line-height": `var(--jg-lh-${d})`,
+        /^fs-(xs|sm|md|lg|xl|2xl|3xl|4xl)$/,
+        ([, size]) => ({
+          "font-size": `var(--jg-fs-${size})`,
+        }),
+      ],
+      [
+        /^line-clamp-(\d+)$/,
+        ([, lines]) => ({
+          display: "-webkit-box",
+          "-webkit-box-orient": "vertical",
+          "-webkit-line-clamp": lines,
+          "line-clamp": lines,
+          overflow: "hidden",
         }),
       ],
     ],
