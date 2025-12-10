@@ -64,8 +64,7 @@
   width: 100%;
   min-width: 3em;
   height: funcs.get-var("h-medium");
-  font-size: funcs.get-var("fs-14");
-  line-height: funcs.get-var("lh-14");
+  font-size: funcs.get-var("fs-sm");
   border: 0;
 
   &::before {
@@ -95,14 +94,12 @@
 
   &[data-size="small"] {
     height: funcs.get-var("h-small");
-    font-size: funcs.get-var("fs-12");
-    line-height: funcs.get-var("lh-12");
+    font-size: funcs.get-var("fs-xs");
   }
 
   &[data-size="large"] {
     height: funcs.get-var("h-large");
-    font-size: funcs.get-var("fs-16");
-    line-height: funcs.get-var("lh-16");
+    font-size: funcs.get-var("fs-md");
   }
 
   &:hover {

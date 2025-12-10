@@ -1,13 +1,12 @@
-@use '../../styles/funcs';
+@use "../../styles/funcs";
 
 .jg-paginator {
   display: flex;
   align-items: center;
   justify-content: center;
   height: 28px;
-  font-size: funcs.get-var('fs-12');
+  font-size: funcs.get-var("fs-xs");
   user-select: none;
-
 }
 
 .jg-paginator-pager {
@@ -19,25 +18,25 @@
   padding: 0 2px;
   margin: 0 2px;
   font-size: 13px;
-  color: funcs.get-var('fg2');
+  color: funcs.get-var("fg2");
   cursor: pointer;
   border: 1px solid transparent;
   border-radius: 4px;
 
   &:hover {
-    background-color: funcs.get-var('t-bg4');
+    background-color: funcs.get-var("t-bg4");
   }
 
   &[data-checked] {
-    color: funcs.get-var('t-hl');
+    color: funcs.get-var("t-hl");
     background-color: inherit;
-    border-color: funcs.get-var('t-hl');
+    border-color: funcs.get-var("t-hl");
   }
 
   &[data-disabled] {
-    color: funcs.get-var('fg4');
+    color: funcs.get-var("fg4");
     pointer-events: none;
-    opacity: .8;
+    opacity: 0.8;
   }
 }
 
@@ -48,6 +47,6 @@
   width: 24px;
   height: 24px;
   margin: 0 2px;
-  color: funcs.get-var('fg3');
+  color: funcs.get-var("fg3");
   cursor: pointer;
 }

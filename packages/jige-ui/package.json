@@ -64,8 +64,5 @@
     "vite": "^6.3.5",
     "vite-plugin-solid": "^2.11.8",
     "vite-plugin-solid-pages": "^0.3.5"
-  },
-  "browser": {
-    "./dist/server.js": "./dist/index.js"
   }
 }

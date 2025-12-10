@@ -3,8 +3,7 @@
 .jg-combo-box-list {
   padding: 4px 0;
   margin: 6px;
-  font-size: funcs.get-var("fs-14");
-  line-height: funcs.get-var("lh-14");
+  font-size: funcs.get-var("fs-sm");
   background: funcs.get-var("t-bg1");
   border-radius: 0.25em;
   box-shadow: funcs.get-var("shadow8");
@@ -12,13 +11,11 @@
   animation-timing-function: funcs.get-var("bezier");
 
   &[data-size="small"] {
-    font-size: funcs.get-var("fs-12");
-    line-height: funcs.get-var("lh-12");
+    font-size: funcs.get-var("fs-xs");
   }
 
   &[data-size="large"] {
-    font-size: funcs.get-var("fs-16");
-    line-height: funcs.get-var("lh-16");
+    font-size: funcs.get-var("fs-md");
   }
 
   &[data-floating-status="opening"] {

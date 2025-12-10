@@ -7,15 +7,16 @@ type ValuePath<TKey extends string | number, TValue> = TValue extends string[]
     ? `${TKey}`
     : `${TKey}.${ValuePaths<TValue>}`;
 
-type ValuePaths<TValue> = TValue extends Array<infer TChild>
-  ? IsTuple<TValue> extends true
-    ? {
-        [TKey in TupleKeys<TValue>]-?: ValuePath<TKey & string, TValue[TKey]>;
-      }[TupleKeys<TValue>]
-    : ValuePath<ArrayKey, TChild>
-  : {
-      [TKey in keyof TValue]-?: ValuePath<TKey & string, TValue[TKey]>;
-    }[keyof TValue];
+type ValuePaths<TValue> =
+  TValue extends Array<infer TChild>
+    ? IsTuple<TValue> extends true
+      ? {
+          [TKey in TupleKeys<TValue>]-?: ValuePath<TKey & string, TValue[TKey]>;
+        }[TupleKeys<TValue>]
+      : ValuePath<ArrayKey, TChild>
+    : {
+        [TKey in keyof TValue]-?: ValuePath<TKey & string, TValue[TKey]>;
+      }[keyof TValue];
 
 /**
  * Returns a path of a type that leads to a field array.
@@ -29,15 +30,16 @@ type ArrayPath<TKey extends string | number, Value> = Value extends any[]
 /**
  * Returns all paths of a type that lead to a field array.
  */
-type ArrayPaths<TValue> = TValue extends Array<infer TChild>
-  ? IsTuple<TValue> extends true
-    ? {
-        [TKey in TupleKeys<TValue>]-?: ArrayPath<TKey & string, TValue[TKey]>;
-      }[TupleKeys<TValue>]
-    : ArrayPath<ArrayKey, TChild>
-  : {
-      [TKey in keyof TValue]-?: ArrayPath<TKey & string, TValue[TKey]>;
-    }[keyof TValue];
+type ArrayPaths<TValue> =
+  TValue extends Array<infer TChild>
+    ? IsTuple<TValue> extends true
+      ? {
+          [TKey in TupleKeys<TValue>]-?: ArrayPath<TKey & string, TValue[TKey]>;
+        }[TupleKeys<TValue>]
+      : ArrayPath<ArrayKey, TChild>
+    : {
+        [TKey in keyof TValue]-?: ArrayPath<TKey & string, TValue[TKey]>;
+      }[keyof TValue];
 
 type PathValue<TValue, TPath> = TPath extends `${infer TKey1}.${infer TKey2}`
   ? TKey1 extends keyof TValue
