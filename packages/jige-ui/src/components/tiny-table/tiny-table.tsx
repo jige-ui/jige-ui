@@ -10,7 +10,7 @@ import {
   Switch,
 } from "solid-js";
 import { type ColumnDef, createTable, type RowData } from "solid-tiny-table";
-import { createWatch, mountStyle } from "solid-tiny-utils";
+import { createWatch, list, mountStyle } from "solid-tiny-utils";
 import { isDef } from "~/common/types";
 import { IconFluentBoxDismiss24Regular } from "../icons/fluent-box-dismiss-24-regular";
 import { Paginator } from "../paginator";
@@ -161,7 +161,43 @@ export function TinyTable<T extends RowData>(props: {
                       rowSpan={header.rowSpan || undefined}
                       width={header.column.columnDef.meta?.width}
                     >
-                      {header.renderHeader()}
+                      <Show
+                        fallback={header.renderHeader()}
+                        when={
+                          header.column.columnDef.id ===
+                            "TINY_TABLE_SELECTOR" &&
+                          props.rowSelection?.type === "checkbox"
+                        }
+                      >
+                        <Selector
+                          onChange={(v) => {
+                            console.log(v);
+
+                            if (v) {
+                              setState(
+                                "rowSelectionStore",
+                                list(table.rows().length - 1).map(() => true)
+                              );
+                            } else {
+                              setState("rowSelectionStore", []);
+                            }
+                          }}
+                          selected={(() => {
+                            const selection = state.rowSelectionStore;
+                            const len = table.rows().length;
+                            if (len === 0) {
+                              return false;
+                            }
+                            for (let i = 0; i < len; i++) {
+                              if (!selection[i]) {
+                                return false;
+                              }
+                            }
+                            return true;
+                          })()}
+                          type="checkbox"
+                        />
+                      </Show>
                     </Table.Column>
                   );
                 }}
